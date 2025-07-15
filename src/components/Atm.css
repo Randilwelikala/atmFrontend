@@ -1,0 +1,49 @@
+/* src/Home.css */
+
+.atm-home-container {
+    max-width: 800px;
+    margin: 40px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+  }
+  
+  .atm-columns {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin-top: 30px;
+  }
+  
+  .atm-column {
+    flex: 1;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f7f9fc;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+  }
+  
+  .atm-column h2 {
+    color: #004085;
+    margin-bottom: 20px;
+  }
+  
+  .atm-column button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .atm-column button:hover {
+    background-color: #0056b3;
+  }
+  

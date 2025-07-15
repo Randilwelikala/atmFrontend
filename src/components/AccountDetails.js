@@ -1,0 +1,87 @@
+import React, { useState, useEffect } from 'react';
+import Deposit from './Deposit';
+import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
+
+export default function AccountActions() {
+  const [searchParams] = useSearchParams();
+  const accountNumber = searchParams.get('account');
+
+  const [transaction, setTransaction] = useState(null);
+  const [user, setUser] = useState(null);
+  const [successMsg, setSuccessMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+
+  // Fetch user details once when accountNumber changes
+  useEffect(() => {
+    if (!accountNumber) return;
+    const fetchUserDetails = async () => {
+      try {
+        const res = await axios.get(`http://localhost:3001/user/${accountNumber}`);
+        setUser(res.data);
+        setErrorMsg('');
+      } catch {
+        setErrorMsg('User not found');
+      }
+    };
+    fetchUserDetails();
+  }, [accountNumber]);
+
+  // Just set transaction without refetching user details
+  const handleTransaction = (type, amount) => {
+    setTransaction({ type, amount });
+    setSuccessMsg('');
+    setErrorMsg('');
+  };
+
+  const handleConfirmDeposit = async () => {
+    try {
+      const res = await axios.post('http://localhost:3001/deposit', {
+        accountNumber,
+        amount: Number(transaction.amount),
+      });
+      setSuccessMsg(`✅ Rs.${transaction.amount} deposited. New balance: Rs.${res.data.balance}`);
+      setTransaction(null); // Reset transaction
+      // Optionally refresh user data to show updated balance
+      const updatedUser = await axios.get(`http://localhost:3001/user/${accountNumber}`);
+      setUser(updatedUser.data);
+    } catch {
+      setErrorMsg('❌ Deposit failed');
+    }
+  };
+
+  return (
+    <div style={{ maxWidth: 400, margin: 'auto', marginTop: 40 }}>
+      <h2>Make a Transaction</h2>
+  
+      {/* Show account details first if user is loaded */}
+      {user && (
+        <div style={{ marginBottom: 20 }}>
+          <h3>Account Details</h3>
+          <p><strong>Name:</strong> {user.name}</p>
+          <p><strong>Account Number:</strong> {user.accountNumber}</p>
+          <p><strong>Branch:</strong> {user.branch}</p>
+          <p><strong>Account Type:</strong> {user.accountType}</p>
+          <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
+        </div>
+      )}
+  
+      {!transaction && <Deposit onSubmit={handleTransaction} />}
+  
+      {errorMsg && <p style={{ color: 'red' }}>{errorMsg}</p>}
+      {successMsg && <p style={{ color: 'green' }}>{successMsg}</p>}
+  
+      {transaction && (
+        <div style={{ marginTop: 30 }}>
+          <h3>Confirm Deposit</h3>
+          <p><strong>Amount to Deposit:</strong> Rs. {transaction.amount}</p>
+  
+          <button onClick={handleConfirmDeposit} style={{ marginTop: 10 }}>
+            Confirm Deposit
+          </button>
+        </div>
+      )}
+    </div>
+  );
+  
+}
