@@ -21,11 +21,8 @@ export default function Home({ onActionSelect }) {
           </button>
           <button onClick={() => navigate('/GetCardAccountNumberandPin2')}>
             View Balance            
-          </button>
-          <button onClick={() => onActionSelect('payDebitCard')}>
-            Pay Debit Card
-          </button>
-          <button onClick={() => onActionSelect('changePin')}>
+          </button>          
+          <button onClick={() => navigate('/change-pin')}>
             Change PIN
           </button>
         </div>

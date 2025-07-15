@@ -20,7 +20,7 @@ export default function GetCardAccountNumberandPin2() {
       });
 
       if (res.data.success) {
-        navigate(`/CardViewBalancePin?account=${accountNumber}`);
+        navigate(`/SeeBalance?account=${accountNumber}`);
       } else {
         setError('Invalid account or PIN');
       }

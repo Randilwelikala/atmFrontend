@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 
-export default function Deposit() {
+export default function SeeBalance() {
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
 
@@ -33,7 +33,7 @@ export default function Deposit() {
         accountNumber,
         amount: Number(amount),
       });
-      setMessage(`Deposit successful!`);
+      setMessage(`Deposit successful! New balance: Rs. ${res.data.balance}`);
       setUser(prev => ({ ...prev, balance: res.data.balance }));
       setAmount('');
     } catch {
@@ -51,19 +51,7 @@ export default function Deposit() {
       <p><strong>Account Number:</strong> {user.accountNumber}</p>
       <p><strong>Branch:</strong> {user.branch}</p>
       <p><strong>Account Type:</strong> {user.accountType}</p>
-      <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
-
-      <form onSubmit={handleDeposit} style={{ marginTop: 20 }}>
-        <label>Amount to Deposit:</label><br />
-        <input
-          type="number"
-          value={amount}
-          onChange={e => setAmount(e.target.value)}
-          required
-          min="1"
-        />
-        <button type="submit" style={{ marginTop: 10 }}>Deposit</button>
-      </form>
+      <p><strong>Current Balance:</strong> Rs. {user.balance}</p>      
 
       {message && <p style={{ color: 'green', marginTop: 10 }}>{message}</p>}
     </div>

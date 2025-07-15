@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 // import Login from './components/Login';
-import Home from './components/Home';
-import CheckPin from './components/CheckPin';
-import GetCardAccountNumberandPin from './components/GetCardAccountNumberandPin';
-import GetCardAccountNumberandPin2 from './components/GetCardAccountNumberandPin2';
-// import ViewBalance from './components/ViewBalance';
-import AccountDetails from './components/AccountDetails';
-import CardViewBalancePin from './components/CardViewBalancePin';
-import Deposit from './components/Deposit';
+import Home from './pages/Home';
+import CheckPin from './pages/CheckPin';
+import GetCardAccountNumberandPin from './pages/GetCardAccountNumberandPin';
+import GetCardAccountNumberandPin2 from './pages/GetCardAccountNumberandPin2';
+import AccountDetails from './pages/AccountDetails';
+import CardViewBalancePin from './pages/CardViewBalancePin';
+import Deposit from './pages/Deposit';
+import SeeBalance from './pages/SeeBalance';
+import ChangePin from './pages/ChangePin';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import EnterAccountNumber from './components/EnterAccountNumber';
+import EnterAccountNumber from './pages/EnterAccountNumber';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -27,10 +29,14 @@ export default function App() {
         <Route path="/check-pin" element={<CheckPin />} />
         <Route path="/Deposit" element={<Deposit />} />
         <Route path="/GetCardAccountNumberandPin" element={<GetCardAccountNumberandPin />} />
-        <Route path="/GetCardAccountNumberandPin2" element={<GetCardAccountNumberandPin2 />} />
-        {/* <Route path="/ViewBalance" element={<ViewBalance />} /> */}
+        <Route path="/GetCardAccountNumberandPin2" element={<GetCardAccountNumberandPin2 />} />        
         <Route path="/CardViewBalancePin" element={<CardViewBalancePin />} />
+        <Route path="/SeeBalance" element={<SeeBalance />} />
+        <Route path="/change-pin" element={<ChangePin />} />
       </Routes>
     </Router>
   );
 }
+
+
+<Route path="/change-pin" element={<ChangePin />} />
