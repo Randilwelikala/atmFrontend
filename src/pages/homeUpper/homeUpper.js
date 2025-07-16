@@ -1,8 +1,8 @@
 import React from 'react';
-import './home.css';
+import './homeUpper.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function Home({ onActionSelect }) {
+export default function HomeUpper({ onActionSelect }) {
   const navigate = useNavigate();
   return (
     <div className="atm-home-container">
@@ -17,7 +17,7 @@ export default function Home({ onActionSelect }) {
         <div className="atm-column card">
           <h2>Card Transactions</h2>
           <button onClick={() => navigate('/GetCardAccountNumberandPin')}>
-            Deposit Money
+            Proceed
           </button>
           <button onClick={() => navigate('/GetCardAccountNumberandPin2')}>
             View Balance            

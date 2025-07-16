@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import Login from './components/Login';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/home/home';
 import CheckPin from './pages/checkPin/checkPin';
 import GetCardAccountNumberandPin from './pages/getCardAccountNumberAndPin/getCardAccountNumberandPin';
@@ -7,13 +7,11 @@ import GetCardAccountNumberandPin2 from './pages/getCardAccountNumberAndPin2/get
 import AccountDetails from './pages/accountDetails/accountDetails';
 import CardViewBalancePin from './pages/cardViewBalancePin/cardViewBalancePin';
 import Deposit from './pages/deposit/deposit';
-import AskForReceipt from './askForReceipt/askForReceipt';
+import Ask from './pages/askForReceipt/askForReceipt';
 import SeeBalance from './pages/seeBalance/seeBalance';
 import ChangePin from './pages/changePin/changePin';
-
-
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EnterAccountNumber from './pages/enterAccountNumber/enterAccountNumber';
+import HomeUpper from './pages/homeUpper/homeUpper';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -25,7 +23,7 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/cardless-deposit" element={<EnterAccountNumber />} />
         <Route path="/AccountDetails" element={<AccountDetails />} />
         <Route path="/check-pin" element={<CheckPin />} />
@@ -35,7 +33,9 @@ export default function App() {
         <Route path="/CardViewBalancePin" element={<CardViewBalancePin />} />
         <Route path="/SeeBalance" element={<SeeBalance />} />
         <Route path="/change-pin" element={<ChangePin />} />
-        <Route path="/receipt" element={<AskForReceipt/>}/>
+        <Route path="/ask" element={<Ask />} />
+        <Route path='/' element={<HomeUpper/>}/>
+      
       </Routes>
     </Router>
   );
