@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 export default function Deposit() {
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
-
+  const [depositedAmount, setDepositedAmount] = useState('');
   const [user, setUser] = useState(null);
   const [amount, setAmount] = useState('');
   const [message, setMessage] = useState('');
@@ -35,6 +35,7 @@ export default function Deposit() {
       });
       setMessage(`Deposit successful!`);
       setUser(prev => ({ ...prev, balance: res.data.balance }));
+      setDepositedAmount(amount); 
       setAmount('');
     } catch {
       setError('Deposit failed');
@@ -66,7 +67,23 @@ export default function Deposit() {
         <button type="submit" className="btn">Deposit</button>
       </form>
   
-      {message && <p className="success">{message}</p>}
+      {message && (
+        localStorage.getItem('wantsReceipt') === 'yes' ? (
+          <div className="receipt-box">
+            <h3>🧾 Transaction Receipt</h3>
+            <p><strong>Account:</strong> {user.accountNumber}</p>
+            <p><strong>Name:</strong> {user.name}</p>
+            <p><strong>Branch:</strong> {user.branch}</p>
+            <p><strong>Account Type:</strong> {user.accountType}</p>
+            <p><strong>Deposited Amount:</strong> Rs. {depositedAmount}</p>
+            <p><strong>New Balance:</strong> Rs. {user.balance}</p>
+            <p className="success">✅ Deposit successful!</p>
+          </div>
+        ) : (
+          <p className="success">✅ Deposit successful!</p>
+        )
+      )}
+
       {error && <p className="error">{error}</p>}
     </div>
   );

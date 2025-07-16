@@ -10,13 +10,13 @@ export default function Home({ onActionSelect }) {
       <div className="atm-columns">
         <div className="atm-column cardless">
           <h2>Cardless Transactions</h2>
-          <button onClick={() => navigate('/ask')}>
+          <button onClick={() => navigate('/askCardless')}>
             proceed
           </button>
         </div>
         <div className="atm-column card">
           <h2>Card Transactions</h2>
-          <button onClick={() => navigate('/GetCardAccountNumberandPin')}>
+          <button onClick={() => navigate('/askCard')}>
             Proceed
           </button>         
         </div>

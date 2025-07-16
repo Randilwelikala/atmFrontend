@@ -7,7 +7,8 @@ import GetCardAccountNumberandPin2 from './pages/getCardAccountNumberAndPin2/get
 import AccountDetails from './pages/accountDetails/accountDetails';
 import CardViewBalancePin from './pages/cardViewBalancePin/cardViewBalancePin';
 import Deposit from './pages/deposit/deposit';
-import Ask from './pages/askForReceipt/askForReceipt';
+import AskCardless from './pages/askForReceiptCardlessTransactions/askForReceiptCardlessTransactions';
+import AskCard from './pages/askForReceiptCardTransactions/askForReceiptCardlTransactions';
 import SeeBalance from './pages/seeBalance/seeBalance';
 import ChangePin from './pages/changePin/changePin';
 import EnterAccountNumber from './pages/enterAccountNumber/enterAccountNumber';
@@ -33,13 +34,15 @@ export default function App() {
         <Route path="/CardViewBalancePin" element={<CardViewBalancePin />} />
         <Route path="/SeeBalance" element={<SeeBalance />} />
         <Route path="/change-pin" element={<ChangePin />} />
-        <Route path="/ask" element={<Ask />} />
-        {/* <Route path='/' element={<HomeUpper/>}/> */}
-      
+        <Route path="/askCardless" element={<AskCardless />} />
+        <Route path="/askCard" element={<AskCard />} />
+        
+
+              
       </Routes>
     </Router>
   );
 }
 
 
-<Route path="/change-pin" element={<ChangePin />} />
+
