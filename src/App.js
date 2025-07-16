@@ -12,7 +12,9 @@ import AskCard from './pages/askForReceiptCardTransactions/askForReceiptCardlTra
 import SeeBalance from './pages/seeBalance/seeBalance';
 import ChangePin from './pages/changePin/changePin';
 import EnterAccountNumber from './pages/enterAccountNumber/enterAccountNumber';
-// import HomeUpper from './pages/homeUpper/homeUpper';
+import CardDashboard from './pages/cardDashboard/cardDashboard';
+import AskCardWithdrawalReceipt from './pages/askReceiptForCardWithdrawal/askReceiptForCardWithdrawal';
+import Withdraw from './pages/withdraw/withdraw';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -36,6 +38,9 @@ export default function App() {
         <Route path="/change-pin" element={<ChangePin />} />
         <Route path="/askCardless" element={<AskCardless />} />
         <Route path="/askCard" element={<AskCard />} />
+        <Route path='/cardDashboard' element={<CardDashboard/>}/>
+        <Route path="/askCardWithdrawal" element={<AskCardWithdrawalReceipt />} />
+        <Route path="/Withdraw" element={<Withdraw />} />
         
 
               

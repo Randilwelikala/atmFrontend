@@ -20,7 +20,7 @@ export default function GetCardAccountNumberandPin() {
       });
 
       if (res.data.success) {
-        navigate(`/deposit?account=${accountNumber}`);
+        navigate(`/cardDashboard?account=${accountNumber}`);
       } else {
         setError('Invalid account or PIN');
       }

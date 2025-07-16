@@ -1,15 +1,17 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useSearchParams } from 'react-router-dom';
 
 export default function AskCard() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const accountNumber = searchParams.get('account'); 
 
   const handleChoice = (choice) => {
-    localStorage.setItem('wantsReceipt', choice); // Store 'yes' or 'no'
+    localStorage.setItem('wantsReceipt', choice); 
     if (choice === 'yes') {
-      navigate('/GetCardAccountNumberandPin'); // or whatever your "yes" route is
+      navigate(`/Deposit?account=${accountNumber}`); 
     } else {
-      navigate('/GetCardAccountNumberandPin'); // or "no" route
+      navigate(`/Deposit?account=${accountNumber}`); 
     }
   };
 
