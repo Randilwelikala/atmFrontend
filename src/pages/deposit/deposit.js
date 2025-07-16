@@ -33,7 +33,7 @@ export default function Deposit() {
         accountNumber,
         amount: Number(amount),
       });
-      setMessage(`Deposit successful! New balance: Rs. ${res.data.balance}`);
+      setMessage(`Deposit successful!`);
       setUser(prev => ({ ...prev, balance: res.data.balance }));
       setAmount('');
     } catch {
@@ -45,27 +45,30 @@ export default function Deposit() {
   if (!user) return <p style={{ textAlign: 'center', marginTop: 50 }}>Loading user details...</p>;
 
   return (
-    <div style={{ maxWidth: 400, margin: 'auto', marginTop: 50 }}>
-      <h2>Deposit Money</h2>
+    <div className="container">
+      <h2 className="title">Deposit Money</h2>
       <p><strong>Name:</strong> {user.name}</p>
       <p><strong>Account Number:</strong> {user.accountNumber}</p>
       <p><strong>Branch:</strong> {user.branch}</p>
       <p><strong>Account Type:</strong> {user.accountType}</p>
       <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
-
-      <form onSubmit={handleDeposit} style={{ marginTop: 20 }}>
-        <label>Amount to Deposit:</label><br />
+  
+      <form onSubmit={handleDeposit} className="form">
+        <label className="label">Amount to Deposit:</label>
         <input
           type="number"
           value={amount}
           onChange={e => setAmount(e.target.value)}
           required
           min="1"
+          className="input"
         />
-        <button type="submit" style={{ marginTop: 10 }}>Deposit</button>
+        <button type="submit" className="btn">Deposit</button>
       </form>
-
-      {message && <p style={{ color: 'green', marginTop: 10 }}>{message}</p>}
+  
+      {message && <p className="success">{message}</p>}
+      {error && <p className="error">{error}</p>}
     </div>
   );
+  
 }

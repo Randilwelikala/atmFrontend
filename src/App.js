@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 // import Login from './components/Login';
-import Home from './pages/Home';
-import CheckPin from './pages/CheckPin';
-import GetCardAccountNumberandPin from './pages/GetCardAccountNumberandPin';
-import GetCardAccountNumberandPin2 from './pages/GetCardAccountNumberandPin2';
-import AccountDetails from './pages/AccountDetails';
-import CardViewBalancePin from './pages/CardViewBalancePin';
-import Deposit from './pages/Deposit';
-import SeeBalance from './pages/SeeBalance';
-import ChangePin from './pages/ChangePin';
+import Home from './pages/home/home';
+import CheckPin from './pages/checkPin/checkPin';
+import GetCardAccountNumberandPin from './pages/getCardAccountNumberAndPin/getCardAccountNumberandPin';
+import GetCardAccountNumberandPin2 from './pages/getCardAccountNumberAndPin2/getCardAccountNumberandPin2';
+import AccountDetails from './pages/accountDetails/accountDetails';
+import CardViewBalancePin from './pages/cardViewBalancePin/cardViewBalancePin';
+import Deposit from './pages/deposit/deposit';
+import SeeBalance from './pages/seeBalance/seeBalance';
+import ChangePin from './pages/changePin/changePin';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import EnterAccountNumber from './pages/EnterAccountNumber';
+import EnterAccountNumber from './pages/enterAccountNumber/enterAccountNumber';
 
 export default function App() {
   const [user, setUser] = useState(null);

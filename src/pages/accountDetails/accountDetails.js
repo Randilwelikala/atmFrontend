@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Deposit from './Deposit';
+import Deposit from '../deposit/deposit';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
+import './accountDetails.css';
 
 export default function AccountActions() {
   const [searchParams] = useSearchParams();
@@ -11,8 +12,7 @@ export default function AccountActions() {
   const [user, setUser] = useState(null);
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-
-  // Fetch user details once when accountNumber changes
+ 
   useEffect(() => {
     if (!accountNumber) return;
     const fetchUserDetails = async () => {
@@ -27,7 +27,6 @@ export default function AccountActions() {
     fetchUserDetails();
   }, [accountNumber]);
 
-  // Just set transaction without refetching user details
   const handleTransaction = (type, amount) => {
     setTransaction({ type, amount });
     setSuccessMsg('');
@@ -40,13 +39,12 @@ export default function AccountActions() {
         accountNumber,
         amount: Number(transaction.amount),
       });
-      setSuccessMsg(`✅ Rs.${transaction.amount} deposited. New balance: Rs.${res.data.balance}`);
-      setTransaction(null); // Reset transaction
-      // Optionally refresh user data to show updated balance
+      setSuccessMsg(` Rs.${transaction.amount} deposited. New balance: Rs.${res.data.balance}`);
+      setTransaction(null);       
       const updatedUser = await axios.get(`http://localhost:3001/user/${accountNumber}`);
       setUser(updatedUser.data);
     } catch {
-      setErrorMsg('❌ Deposit failed');
+      setErrorMsg(' Deposit failed');
     }
   };
 
@@ -54,7 +52,7 @@ export default function AccountActions() {
     <div style={{ maxWidth: 400, margin: 'auto', marginTop: 40 }}>
       <h2>Make a Transaction</h2>
   
-      {/* Show account details first if user is loaded */}
+     
       {user && (
         <div style={{ marginBottom: 20 }}>
           <h3>Account Details</h3>

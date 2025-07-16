@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './enterAccountNumber.css';
 
 export default function EnterAccountNumber() {
   const [step, setStep] = useState(1);
@@ -23,7 +24,7 @@ export default function EnterAccountNumber() {
     setError('');
     if (secondInput !== firstInput) {
       setError('Account numbers do not match!');
-      setStep(1); // go back to step 1
+      setStep(1); 
       setFirstInput('');
       setSecondInput('');
       return;
@@ -32,35 +33,38 @@ export default function EnterAccountNumber() {
   };
 
   return (
-    <div style={{ maxWidth: 300, margin: 'auto', marginTop: 50 }}>
-      <h2>Enter Account Number</h2>
+    <div className="container">
+      <h2 className="title">Enter Account Number</h2>
+  
       {step === 1 && (
-        <form onSubmit={handleFirstSubmit}>
+        <form onSubmit={handleFirstSubmit} className="form">
           <input
+            className="input"
             type="text"
             placeholder="Enter account number"
             value={firstInput}
             onChange={e => setFirstInput(e.target.value)}
             required
           />
-          <button type="submit" style={{ marginTop: 10 }}>Next</button>
+          <button type="submit" className="btn">Next</button>
         </form>
       )}
-
+  
       {step === 2 && (
-        <form onSubmit={handleSecondSubmit}>
+        <form onSubmit={handleSecondSubmit} className="form">
           <input
+            className="input"
             type="text"
             placeholder="Re-enter account number"
             value={secondInput}
             onChange={e => setSecondInput(e.target.value)}
             required
           />
-          <button type="submit" style={{ marginTop: 10 }}>Confirm</button>
+          <button type="submit" className="btn">Confirm</button>
         </form>
       )}
-
-      {error && <p style={{ color: 'red', marginTop: 10 }}>{error}</p>}
+  
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }

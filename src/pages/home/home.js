@@ -1,5 +1,5 @@
 import React from 'react';
-import './Atm.css';
+import './home.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function Home({ onActionSelect }) {

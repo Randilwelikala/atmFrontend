@@ -1,4 +1,3 @@
-// src/components/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -30,15 +29,16 @@ export default function GetCardAccountNumberandPin2() {
   };
 
   return (
-    <div style={{ maxWidth: 300, margin: 'auto', marginTop: 50 }}>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+    <div className="login-container">
+      <h2 className="login-title">For View Balance</h2>
+      <form onSubmit={handleLogin} className="login-form">
         <input
           type="text"
           placeholder="Account Number"
           value={accountNumber}
           onChange={e => setAccountNumber(e.target.value)}
           required
+          className="login-input"
         />
         <input
           type="password"
@@ -46,10 +46,11 @@ export default function GetCardAccountNumberandPin2() {
           value={pin}
           onChange={e => setPin(e.target.value)}
           required
+          className="login-input"
         />
-        <button type="submit" style={{ marginTop: 10 }}>Login</button>
+        <button type="submit" className="login-button">Login</button>
       </form>
-      {error && <p style={{ color: 'red', marginTop: 10 }}>{error}</p>}
+      {error && <p className="login-error">{error}</p>}
     </div>
   );
 }

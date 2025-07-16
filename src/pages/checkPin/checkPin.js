@@ -16,8 +16,7 @@ export default function CheckPin() {
     try {
       const res = await axios.post('http://localhost:3001/login', { accountNumber, pin });
       if (res.data.success) {
-        alert(`Login successful! Balance: ${res.data.balance}`);
-        // navigate('/dashboard'); // or wherever you want to go
+        alert(`Login successful! Balance: ${res.data.balance}`);        
       }
     } catch {
       setError('Invalid PIN!');
