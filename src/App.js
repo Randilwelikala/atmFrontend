@@ -7,8 +7,10 @@ import GetCardAccountNumberandPin2 from './pages/getCardAccountNumberAndPin2/get
 import AccountDetails from './pages/accountDetails/accountDetails';
 import CardViewBalancePin from './pages/cardViewBalancePin/cardViewBalancePin';
 import Deposit from './pages/deposit/deposit';
+import AskForReceipt from './askForReceipt/askForReceipt';
 import SeeBalance from './pages/seeBalance/seeBalance';
 import ChangePin from './pages/changePin/changePin';
+
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EnterAccountNumber from './pages/enterAccountNumber/enterAccountNumber';
@@ -33,6 +35,7 @@ export default function App() {
         <Route path="/CardViewBalancePin" element={<CardViewBalancePin />} />
         <Route path="/SeeBalance" element={<SeeBalance />} />
         <Route path="/change-pin" element={<ChangePin />} />
+        <Route path="/receipt" element={<AskForReceipt/>}/>
       </Routes>
     </Router>
   );
