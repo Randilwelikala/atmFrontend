@@ -11,7 +11,7 @@ import Ask from './pages/askForReceipt/askForReceipt';
 import SeeBalance from './pages/seeBalance/seeBalance';
 import ChangePin from './pages/changePin/changePin';
 import EnterAccountNumber from './pages/enterAccountNumber/enterAccountNumber';
-import HomeUpper from './pages/homeUpper/homeUpper';
+// import HomeUpper from './pages/homeUpper/homeUpper';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -23,7 +23,7 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/cardless-deposit" element={<EnterAccountNumber />} />
         <Route path="/AccountDetails" element={<AccountDetails />} />
         <Route path="/check-pin" element={<CheckPin />} />
@@ -34,7 +34,7 @@ export default function App() {
         <Route path="/SeeBalance" element={<SeeBalance />} />
         <Route path="/change-pin" element={<ChangePin />} />
         <Route path="/ask" element={<Ask />} />
-        <Route path='/' element={<HomeUpper/>}/>
+        {/* <Route path='/' element={<HomeUpper/>}/> */}
       
       </Routes>
     </Router>
