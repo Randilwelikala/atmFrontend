@@ -14,6 +14,7 @@ import SeeBalance from './pages/seeBalance/seeBalance';
 import ChangePin from './pages/changePin/changePin';
 import EnterAccountNumber from './pages/enterAccountNumber/enterAccountNumber';
 import CardDashboard from './pages/cardDashboard/cardDashboard';
+import SessionTimeout from './components/sessionTimeout/sessionTimeout';
 import AskCardWithdrawalReceipt from './pages/askReceiptForCardWithdrawal/askReceiptForCardWithdrawal';
 import Withdraw from './pages/withdraw/withdraw';
 import CancelButton from './components/cancelButton/cancelButton';
@@ -49,7 +50,7 @@ export default function App() {
         <Route path="/Withdraw" element={<Withdraw />} />
         <Route path="/cancelButton" element={<CancelButton />} />
         <Route path="/clearButton" element={<ClearButton />} />
-        
+        <Route path='/session' element={<SessionTimeout/>} />
 
               
       </Routes>

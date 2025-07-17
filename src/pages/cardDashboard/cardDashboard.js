@@ -7,15 +7,18 @@ export default function CardDashboard() {
   const accountNumber = searchParams.get('account');
 
   useEffect(() => {
-    // 5-minute timeout (in milliseconds)
-    const timeout = setTimeout(() => {
-      alert('Session expired due to inactivity.');
-      navigate('/');
-    }, 5 * 1000);
+  const timeout = setTimeout(() => {
+    const extend = window.confirm('Session is about to expire. Do you want more time?');
+    if (extend) {
+      // Reset the timer by calling the same useEffect again (refresh the component)
+      window.location.reload(); // quick way to reset session timer for now
+    } else {
+      navigate('/cardLogin'); // or use '/' to go to home
+    }
+  }, 5000); // 5 seconds for testing
 
-    // Clear timeout if user navigates away or component unmounts
-    return () => clearTimeout(timeout);
-  }, [navigate]);
+  return () => clearTimeout(timeout);
+}, [navigate]);
  
   if (!accountNumber) {
     return <p >Loading...</p>;
