@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Home from './pages/home/home';
 import CheckPin from './pages/checkPin/checkPin';
 import GetCardAccountNumberandPin from './pages/getCardAccountNumberAndPin/getCardAccountNumberandPin';
@@ -15,7 +16,8 @@ import EnterAccountNumber from './pages/enterAccountNumber/enterAccountNumber';
 import CardDashboard from './pages/cardDashboard/cardDashboard';
 import AskCardWithdrawalReceipt from './pages/askReceiptForCardWithdrawal/askReceiptForCardWithdrawal';
 import Withdraw from './pages/withdraw/withdraw';
-
+import CancelButton from './components/cancelButton/cancelButton';
+import ClearButton from './components/clearButton/clearButton';
 export default function App() {
   const [user, setUser] = useState(null);
 
@@ -24,7 +26,11 @@ export default function App() {
   // }
 
   return (
+    
+      
+    
     <Router>
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cardless-deposit" element={<EnterAccountNumber />} />
@@ -41,13 +47,16 @@ export default function App() {
         <Route path='/cardDashboard' element={<CardDashboard/>}/>
         <Route path="/askCardWithdrawal" element={<AskCardWithdrawalReceipt />} />
         <Route path="/Withdraw" element={<Withdraw />} />
+        <Route path="/cancelButton" element={<CancelButton />} />
+        <Route path="/clearButton" element={<ClearButton />} />
         
 
               
       </Routes>
+      <CancelButton onClick={() => window.history.back()} />
+        <CancelButton onClick={() => window.location.href = "/"} />
+      <Outlet /> {/* Renders the current route/page */}
     </Router>
+    
   );
 }
-
-
-

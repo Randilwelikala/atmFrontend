@@ -29,7 +29,7 @@ export default function CardViewBalancePin() {
   };
 
   return (
-    <div style={{ maxWidth: 300, margin: 'auto', marginTop: 50 }}>
+    <div >
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <input

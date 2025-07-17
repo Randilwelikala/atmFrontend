@@ -24,7 +24,7 @@ export default function CheckPin() {
   };
 
   return (
-    <div style={{ maxWidth: 300, margin: 'auto', marginTop: 50 }}>
+    <div >
       <h2>Enter PIN for Account {accountNumber}</h2>
       <form onSubmit={handleSubmit}>
         <input

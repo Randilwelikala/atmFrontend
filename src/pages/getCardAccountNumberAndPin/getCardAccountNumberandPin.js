@@ -31,7 +31,7 @@ export default function GetCardAccountNumberandPin() {
 
   return (
     <div className="login-container">
-      <h2 className="login-title">For Deposit Money</h2>
+      <h2 className="login-title">For Continue</h2>
       <form onSubmit={handleLogin} className="login-form">
         <input
           type="text"

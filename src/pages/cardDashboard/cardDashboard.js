@@ -5,10 +5,9 @@ export default function CardDashboard() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
-
-  // Don't render until accountNumber is available
+ 
   if (!accountNumber) {
-    return <p style={{ textAlign: 'center', marginTop: 50 }}>Loading...</p>;
+    return <p >Loading...</p>;
   }
 
   return (

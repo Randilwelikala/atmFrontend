@@ -49,7 +49,7 @@ export default function AccountActions() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: 'auto', marginTop: 40 }}>
+    <div >
       <h2>Make a Transaction</h2>
   
      
@@ -66,8 +66,8 @@ export default function AccountActions() {
   
       {!transaction && <Deposit onSubmit={handleTransaction} />}
   
-      {errorMsg && <p style={{ color: 'red' }}>{errorMsg}</p>}
-      {successMsg && <p style={{ color: 'green' }}>{successMsg}</p>}
+      {errorMsg && <p >{errorMsg}</p>}
+      {successMsg && <p >{successMsg}</p>}
   
       {transaction && (
         <div style={{ marginTop: 30 }}>

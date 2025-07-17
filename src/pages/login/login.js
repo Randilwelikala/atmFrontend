@@ -20,7 +20,7 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <div style={{ maxWidth: 300, margin: 'auto', marginTop: 50 }}>
+    <div >
       <h2>ATM Login</h2>
       <form onSubmit={handleSubmit}>
         <div>

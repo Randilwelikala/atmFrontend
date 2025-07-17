@@ -42,8 +42,8 @@ export default function Withraw() {
     }
   };
 
-  if (error) return <p style={{ color: 'red', textAlign: 'center', marginTop: 50 }}>{error}</p>;
-  if (!user) return <p style={{ textAlign: 'center', marginTop: 50 }}>Loading user details...</p>;
+  if (error) return <p >{error}</p>;
+  if (!user) return <p >Loading user details...</p>;
 
   return (
     <div className="container">
@@ -55,7 +55,7 @@ export default function Withraw() {
       <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
   
       <form onSubmit={handleDeposit} className="form">
-        <label className="label">Amount to Deposit:</label>
+        <label className="label">Amount to Withdraw:</label>
         <input
           type="number"
           value={amount}
@@ -75,7 +75,7 @@ export default function Withraw() {
             <p><strong>Name:</strong> {user.name}</p>
             <p><strong>Branch:</strong> {user.branch}</p>
             <p><strong>Account Type:</strong> {user.accountType}</p>
-            <p><strong>Deposited Amount:</strong> Rs. {depositedAmount}</p>
+            <p><strong>Withdrawed Amount:</strong> Rs. {depositedAmount}</p>
             <p><strong>New Balance:</strong> Rs. {user.balance}</p>
             <p className="success">✅ Withraw successful!</p>
           </div>

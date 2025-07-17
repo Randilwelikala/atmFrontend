@@ -42,8 +42,8 @@ export default function Deposit() {
     }
   };
 
-  if (error) return <p style={{ color: 'red', textAlign: 'center', marginTop: 50 }}>{error}</p>;
-  if (!user) return <p style={{ textAlign: 'center', marginTop: 50 }}>Loading user details...</p>;
+  if (error) return <p >{error}</p>;
+  if (!user) return <p >Loading user details...</p>;
 
   return (
     <div className="container">
