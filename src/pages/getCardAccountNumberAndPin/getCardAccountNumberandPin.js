@@ -13,6 +13,20 @@ export default function GetCardAccountNumberandPin() {
   const handleLogin = async e => {
     e.preventDefault();
     setError('');
+    if (!cardNumber) {
+        setError('Enter a card number');
+        return;
+      }
+
+      if (cardNumber.length !== 16) {
+        setError('Card number must be exactly 16 digits');
+        return;
+      }
+
+      if (!pin) {
+        setError('Enter a PIN');
+        return;
+      }  
 
     try {
       const res = await axios.post('http://localhost:3001/cardLogin', {
@@ -23,12 +37,14 @@ export default function GetCardAccountNumberandPin() {
       if (res.data.success) {
         // const account = res.data.accountNumber;
         navigate(`/cardDashboard?account=${res.data.accountNumber}`);
-      } else {
-        setError('Invalid account or PIN');
+      } 
+    } catch (error) {
+        if (error.response && error.response.data.message) {
+          setError(error.response.data.message);
+        } else {
+          setError('Something went wrong');
+        }
       }
-    } catch {
-      setError('Login failed');
-    }
   };
 
   return (
@@ -39,16 +55,14 @@ export default function GetCardAccountNumberandPin() {
           type="text"
           placeholder="Card Number"
           value={cardNumber}
-          onChange={e => setCardNumber(e.target.value)}
-          required
+          onChange={e => setCardNumber(e.target.value)}          
           className="login-input"
         />
         <input
           type="password"
           placeholder="PIN"
           value={pin}
-          onChange={e => setPin(e.target.value)}
-          required
+          onChange={e => setPin(e.target.value)}          
           className="login-input"
         />
         <button type="submit" className="login-button">Confirm</button>

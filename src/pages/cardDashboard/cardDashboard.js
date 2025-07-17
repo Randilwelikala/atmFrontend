@@ -1,10 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function CardDashboard() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
+
+  useEffect(() => {
+    // 5-minute timeout (in milliseconds)
+    const timeout = setTimeout(() => {
+      alert('Session expired due to inactivity.');
+      navigate('/');
+    }, 5 * 1000);
+
+    // Clear timeout if user navigates away or component unmounts
+    return () => clearTimeout(timeout);
+  }, [navigate]);
  
   if (!accountNumber) {
     return <p >Loading...</p>;

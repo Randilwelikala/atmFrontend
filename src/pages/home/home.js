@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Home({ onActionSelect }) {
   const navigate = useNavigate();
+  
   return (
     <div className="atm-home-container">
       <h1>Welcome</h1>
