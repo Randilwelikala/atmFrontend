@@ -5,6 +5,7 @@ import './getCardAccountNumberAndPin.css';
 
 export default function GetCardAccountNumberandPin() {
   const [accountNumber, setAccountNumber] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
   const [pin, setPin] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -14,13 +15,14 @@ export default function GetCardAccountNumberandPin() {
     setError('');
 
     try {
-      const res = await axios.post('http://localhost:3001/login', {
-        accountNumber,
+      const res = await axios.post('http://localhost:3001/cardLogin', {
+        cardNumber,
         pin
       });
 
       if (res.data.success) {
-        navigate(`/cardDashboard?account=${accountNumber}`);
+        // const account = res.data.accountNumber;
+        navigate(`/cardDashboard?account=${res.data.accountNumber}`);
       } else {
         setError('Invalid account or PIN');
       }
@@ -35,9 +37,9 @@ export default function GetCardAccountNumberandPin() {
       <form onSubmit={handleLogin} className="login-form">
         <input
           type="text"
-          placeholder="Account Number"
-          value={accountNumber}
-          onChange={e => setAccountNumber(e.target.value)}
+          placeholder="Card Number"
+          value={cardNumber}
+          onChange={e => setCardNumber(e.target.value)}
           required
           className="login-input"
         />

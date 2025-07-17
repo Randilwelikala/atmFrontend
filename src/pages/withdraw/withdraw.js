@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 
-export default function Withraw() {
+function Withraw() {
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
   const [depositedAmount, setDepositedAmount] = useState('');
@@ -11,34 +11,31 @@ export default function Withraw() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    if (!accountNumber) return;
+  useEffect(() => {    
     axios.get(`http://localhost:3001/user/${accountNumber}`)
-      .then(res => setUser(res.data))
-      .catch(() => setError('User not found'));
+      .then(res => setUser(res.data))      
   }, [accountNumber]);
 
-  const handleDeposit = async e => {
+  const handleWithdraw = async e => {
     e.preventDefault();
     setMessage('');
-    setError('');
-
-    if (!amount || Number(amount) <= 0) {
-      setError('Enter a valid amount');
-      return;
-    }
+    setError('');    
 
     try {
       const res = await axios.post('http://localhost:3001/withdraw', {
         accountNumber,
         amount: Number(amount),
       });
-      setMessage(`Deposit successful!`);
+      setMessage(`withdraw successful!`);
       setUser(prev => ({ ...prev, balance: res.data.balance }));
       setDepositedAmount(amount); 
       setAmount('');
-    } catch {
-      setError('Deposit failed');
+    } catch (error) {
+        if (error.response && error.response.data.message) {
+          setError(error.response.data.message);
+        } else {
+          setError('Something went wrong');
+        }
     }
   };
 
@@ -54,17 +51,15 @@ export default function Withraw() {
       <p><strong>Account Type:</strong> {user.accountType}</p>
       <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
   
-      <form onSubmit={handleDeposit} className="form">
+      <form onSubmit={handleWithdraw} className="form">
         <label className="label">Amount to Withdraw:</label>
         <input
           type="number"
           value={amount}
-          onChange={e => setAmount(e.target.value)}
-          required
-          min="1"
+          onChange={e => setAmount(e.target.value)}          
           className="input"
         />
-        <button type="submit" className="btn">Deposit</button>
+        <button type="submit" className="btn">Withdraw</button>
       </form>
   
       {message && (
@@ -89,3 +84,4 @@ export default function Withraw() {
   );
   
 }
+export default Withraw;
