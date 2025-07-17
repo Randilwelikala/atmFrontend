@@ -1,8 +1,7 @@
-// In CancelButton.js
 import React from 'react';
 
 const ClearButton = ({ onClick }) => (
-  <button onClick={onClick} className="cancel-btn">
+  <button onClick={onClick} className="clear-btn">
     Clear
   </button>
 );

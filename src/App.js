@@ -53,8 +53,8 @@ export default function App() {
 
               
       </Routes>
-      <CancelButton onClick={() => window.history.back()} />
-        <CancelButton onClick={() => window.location.href = "/"} />
+      <CancelButton onClick={() => window.history.back() } label="Go Back" />
+      <CancelButton onClick={() => window.location.href = "/"} />
       <Outlet /> {/* Renders the current route/page */}
     </Router>
     
