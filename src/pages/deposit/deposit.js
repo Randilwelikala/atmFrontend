@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 
-export default function Deposit() {
+function Deposit() {
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
   const [depositedAmount, setDepositedAmount] = useState('');
@@ -12,10 +12,10 @@ export default function Deposit() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    if (!accountNumber) return;
+    // if (!accountNumber) return;
     axios.get(`http://localhost:3001/user/${accountNumber}`)
       .then(res => setUser(res.data))
-      .catch(() => setError('User not found'));
+    //   .catch(() => setError('User not foundddd'));
   }, [accountNumber]);
 
   const handleDeposit = async e => {
@@ -23,23 +23,23 @@ export default function Deposit() {
     setMessage('');
     setError('');
 
-    if (!amount || Number(amount) <= 0) {
-      setError('Enter a valid amount');
-      return;
-    }
-
     try {
       const res = await axios.post('http://localhost:3001/deposit', {
         accountNumber,
-        amount: Number(amount),
+        amount: parseFloat(amount),
       });
-      setMessage(`Deposit successful!`);
+      setMessage(res.data.message || `Deposit successful!`);
       setUser(prev => ({ ...prev, balance: res.data.balance }));
       setDepositedAmount(amount); 
       setAmount('');
-    } catch {
-      setError('Deposit failed');
-    }
+      } catch (error) {
+        if (error.response && error.response.data.message) {
+          setError(error.response.data.message);
+        } else {
+          setError('Something went wrong');
+        }
+      }
+
   };
 
   if (error) return <p >{error}</p>;
@@ -59,9 +59,7 @@ export default function Deposit() {
         <input
           type="number"
           value={amount}
-          onChange={e => setAmount(e.target.value)}
-          required
-          min="1"
+          onChange={e => setAmount(e.target.value)}                 
           className="input"
         />
         <button type="submit" className="btn">Deposit</button>
@@ -89,3 +87,5 @@ export default function Deposit() {
   );
   
 }
+
+export default Deposit;
