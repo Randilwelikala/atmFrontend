@@ -23,18 +23,34 @@ export default function SessionTimeout({ timeoutDuration = 5000, confirmDuration
 
       // Start confirmation countdown
       confirmTimer.current = setTimeout(() => {
-        handleLogout();
+        // Just hide prompt but DO NOT logout
+        setShowPrompt(false);
+        waitingForResponse.current = false;
+        resetInactivityTimer(); // Give more time silently
       }, confirmDuration);
+
     }, timeoutDuration);
   };
 
-  // Logout function: clear timers and navigate away
-  const handleLogout = () => {
+  // Logout function: clear timers, clear sessionStorage, call backend logout, navigate away
+  const handleLogout = async () => {
+    sessionStorage.removeItem('userSession');
     if (inactivityTimer.current) clearTimeout(inactivityTimer.current);
     if (confirmTimer.current) clearTimeout(confirmTimer.current);
 
     setShowPrompt(false);
     waitingForResponse.current = false;
+
+    // Call backend logout to destroy session server side
+    try {
+      await fetch('http://localhost:3001/logout', {
+        method: 'POST',
+        credentials: 'include' // important to send cookies/session info
+      });
+    } catch (err) {
+      console.error('Logout request failed:', err);
+    }
+
     navigate('/');
   };
 
