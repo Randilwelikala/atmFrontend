@@ -17,6 +17,7 @@ function Deposit() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const [transactionId, setTransactionId] = useState('');
+  const [transactionDate, setTransactionDate] = useState('');
 
 
   // Dropdown state and ref
@@ -50,6 +51,7 @@ function Deposit() {
       head: [['Field', 'Value']],
       body: [
         ['Transaction ID', transactionId],
+        ['Transaction Date', transactionDate],
         ['Account Number', user.accountNumber],
         ['Name', user.name],
         ['Branch', user.branch],
@@ -74,6 +76,7 @@ function Deposit() {
           }),
           new Paragraph({ text: "" }),
           new Paragraph({ text: `Transaction ID: ${transactionId}` }),
+          new Paragraph({ text: `Transaction Date: ${transactionDate}` }),
           new Paragraph({ text: `Account Number: ${user.accountNumber}` }),
           new Paragraph({ text: `Name: ${user.name}` }),
           new Paragraph({ text: `Branch: ${user.branch}` }),
@@ -112,6 +115,8 @@ function Deposit() {
       setAmount('');
       const newTxnId = generateTransactionId();
       setTransactionId(newTxnId);
+      const now = new Date();
+      setTransactionDate(now.toLocaleString()); 
 
     } catch (error) {
       if (error.response && error.response.data.message) {
@@ -151,6 +156,7 @@ function Deposit() {
           <div className="receipt-box">
             <h3>🧾 Transaction Receipt</h3>
             <p><strong>Transaction ID:</strong> {transactionId}</p>
+            <p><strong>Transaction Date:</strong> {transactionDate}</p>
             <p><strong>Account:</strong> {user.accountNumber}</p>
             <p><strong>Name:</strong> {user.name}</p>
             <p><strong>Branch:</strong> {user.branch}</p>
