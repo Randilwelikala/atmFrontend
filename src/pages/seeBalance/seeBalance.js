@@ -23,7 +23,7 @@ export default function SeeBalance() {
   return (
     
     <div className="container">
-      <SessionTimeout timeoutDuration={5000} />
+      <SessionTimeout timeoutDuration={5000000} />
       <h2 className="title">Account Details</h2>
       <p><strong>Name:</strong> {user.name}</p>
       <p><strong>Account Number:</strong> {user.accountNumber}</p>

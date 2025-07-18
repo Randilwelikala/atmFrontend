@@ -17,7 +17,7 @@ export default function AskCard() {
 
   return (
     <div className="atm-column card">
-      <SessionTimeout timeoutDuration={5000} />
+      <SessionTimeout timeoutDuration={5000000} />
       <h2>Do you want a receipt for this Card Withdraw?</h2>
       <button onClick={() => handleChoice('yes')}>Yes</button>
       <button onClick={() => handleChoice('no')}>No</button>

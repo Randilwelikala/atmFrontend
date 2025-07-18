@@ -45,7 +45,7 @@ function Withraw() {
 
   return (
     <div className="container">
-      <SessionTimeout timeoutDuration={5000} />
+      <SessionTimeout timeoutDuration={500000} />
       <h2 className="title">Withdraw Money</h2>
       <p><strong>Name:</strong> {user.name}</p>
       <p><strong>Account Number:</strong> {user.accountNumber}</p>

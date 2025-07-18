@@ -51,7 +51,7 @@ export default function GetCardAccountNumberandPin() {
 
   return (
     <div className="login-container">
-      <SessionTimeout timeoutDuration={5000} />
+      <SessionTimeout timeoutDuration={5000000} />
       <h2 className="login-title">For Continue</h2>
       <form onSubmit={handleLogin} className="login-form">
         <input

@@ -44,7 +44,7 @@ export default function ChangePin() {
 
   return (
     <div className="change-pin-container">
-      <SessionTimeout timeoutDuration={5000} />
+      <SessionTimeout timeoutDuration={5000000} />
       <h2 className="change-pin-title">Change Debit Card PIN</h2>
       <form onSubmit={handleChangePin} className="change-pin-form">
         <div className="form-group">

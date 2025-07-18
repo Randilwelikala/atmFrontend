@@ -36,7 +36,7 @@ export default function EnterAccountNumber() {
 
   return (
     <div className="container">
-      <SessionTimeout timeoutDuration={5000} />
+      <SessionTimeout timeoutDuration={5000000} />
       <h2 className="title">Enter Account Number</h2>
   
       {step === 1 && (

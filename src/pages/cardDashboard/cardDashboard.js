@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
+import LogoutButton from '../../components/logoutButton/logoutButton'; 
 
 export default function CardDashboard() {
   const navigate = useNavigate();
@@ -11,9 +12,14 @@ export default function CardDashboard() {
     return <p >Loading...</p>;
   }
 
+  const handleLogout = () => {
+    navigate('/'); // redirect to home or login page after logout
+  };
+
   return (
     <div className="atm-home-container">   
-      <SessionTimeout timeoutDuration={5000} />              
+      <SessionTimeout timeoutDuration={500000} />              
+      
       <div className="atm-column card">
         <h2>Card Transactions</h2>
         <button onClick={() => navigate(`/AskCard?account=${accountNumber}`)}>
@@ -28,6 +34,7 @@ export default function CardDashboard() {
         <button onClick={() => navigate(`/change-pin?account=${accountNumber}`)}>
           Change PIN
         </button>
+        <LogoutButton onLogout={handleLogout} />
       </div>
     </div>
   );
