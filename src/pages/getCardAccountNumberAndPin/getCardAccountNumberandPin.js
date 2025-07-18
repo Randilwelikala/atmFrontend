@@ -18,6 +18,7 @@ export default function GetCardAccountNumberandPin() {
         setError('Enter a card number');
         return;
       }
+      
 
       if (cardNumber.length !== 16) {
         setError('Card number must be exactly 16 digits');

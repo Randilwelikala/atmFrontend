@@ -19,8 +19,13 @@ import AskCardWithdrawalReceipt from './pages/askReceiptForCardWithdrawal/askRec
 import Withdraw from './pages/withdraw/withdraw';
 import CancelButton from './components/cancelButton/cancelButton';
 import ClearButton from './components/clearButton/clearButton';
+import axios from 'axios';
+
+
+
 export default function App() {
-  const [user, setUser] = useState(null);
+const [user, setUser] = useState(null);
+axios.defaults.withCredentials = true;
 
   // if (!user) {
   //   return <Login onLogin={setUser} />;GetCardAccountNumberandPin
