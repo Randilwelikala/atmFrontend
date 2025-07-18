@@ -34,6 +34,9 @@ export default function CardDashboard() {
         <button onClick={() => navigate(`/change-pin?account=${accountNumber}`)}>
           Change PIN
         </button>
+        <button onClick={() => navigate(`/fundTransfer`)}>
+          Fund Transfer
+        </button>
         <LogoutButton onLogout={handleLogout} />
       </div>
     </div>

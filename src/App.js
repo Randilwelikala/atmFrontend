@@ -24,7 +24,7 @@ import ProtectedRoute from './components/auth/protectedRoute';
 import CardlessWithdrawOTP from './pages/cardlessWithdrawOTP/cardlessWithdrawOTP';
 import CardlessDashboard from './pages/cardlessDashboard/cardlessDashboard';
 import AskCardlessWithdraw from './pages/askReceiptforCardlessWithdraw/askReceiptforCardlessWithdraw';
-
+import FundTransfer from '../src/pages/fundTransfer/fundTransfer'
 export default function App() {
   const [user, setUser] = useState(null);
   axios.defaults.withCredentials = true;
@@ -52,6 +52,7 @@ export default function App() {
         <Route path="/cardDashboard" element={<CardDashboard />} />
         <Route path="/cardlessWithdraw" element={<CardlessWithdrawOTP />} />
         <Route path="/askReceiptforCardlessWithdraw" element={<AskCardlessWithdraw />} />
+        <Route path="/fundTransfer" element={<FundTransfer />} />
         
       </Routes>     
 
