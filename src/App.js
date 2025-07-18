@@ -30,7 +30,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/cardless-deposit" element={<ProtectedRoute><EnterAccountNumber /></ProtectedRoute>} />
+        <Route path="/cardless-deposit" element={<EnterAccountNumber />} />
         <Route path="/AccountDetails" element={<AccountDetails />} />
         <Route path="/check-pin" element={<CheckPin />} />
         <Route path="/Deposit" element={<Deposit />} />
@@ -49,8 +49,8 @@ export default function App() {
         
       </Routes>     
 
-      <CancelButton onClick={() => window.history.back()} label="Go Back" />
-      <CancelButton onClick={() => (window.location.href = '/')} />
+      <CancelButton onClick={() => window.history.back()} />
+      <ClearButton onClick={() => (window.location.href = '/')} />
       
       <Outlet />
     </Router>

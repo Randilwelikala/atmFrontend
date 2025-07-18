@@ -1,16 +1,17 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useSearchParams } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout'
 
 export default function AskCardless() {
   const navigate = useNavigate();
-
+  const [searchParams] = useSearchParams();
+  const accountNumber = searchParams.get('account');
   const handleChoice = (choice) => {
     localStorage.setItem('wantsReceipt', choice); 
     if (choice === 'yes') {
-      navigate('/cardless-deposit'); 
+      navigate(`/cardless-deposit?account=${accountNumber}`); 
     } else {
-      navigate('/cardless-deposit'); 
+      navigate(`/cardless-deposit?account=${accountNumber}`); 
     }
   };
 
