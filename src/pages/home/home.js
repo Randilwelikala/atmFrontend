@@ -15,7 +15,7 @@ export default function Home({ onActionSelect }) {
       <div className="atm-columns">
         <div className="atm-column cardless">
           <h2>Cardless Transactions</h2>
-          <button onClick={() => navigate('/askCardless')}>
+          <button onClick={() => navigate('/cardlessDashboard')}>
             proceed
           </button>
         </div>

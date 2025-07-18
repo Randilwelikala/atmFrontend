@@ -21,6 +21,9 @@ import ClearButton from './components/clearButton/clearButton';
 import axios from 'axios';
 import LogoutButton from './components/logoutButton/logoutButton';
 import ProtectedRoute from './components/auth/protectedRoute';
+import CardlessWithdrawOTP from './pages/cardlessWithdrawOTP/cardlessWithdrawOTP';
+import CardlessDashboard from './pages/cardlessDashboard/cardlessDashboard';
+import AskCardlessWithdraw from './pages/askReceiptforCardlessWithdraw/askReceiptforCardlessWithdraw';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -29,6 +32,7 @@ export default function App() {
   return (
     <Router>
       <Routes>
+        <Route path='/cardlessDashboard' element={<CardlessDashboard/>}/>
         <Route path="/" element={<Home />} />
         <Route path="/cardless-deposit" element={<EnterAccountNumber />} />
         <Route path="/AccountDetails" element={<AccountDetails />} />
@@ -46,6 +50,8 @@ export default function App() {
         <Route path="/clearButton" element={<ClearButton />} />
         <Route path="/session" element={<SessionTimeout />} />
         <Route path="/cardDashboard" element={<CardDashboard />} />
+        <Route path="/cardlessWithdraw" element={<CardlessWithdrawOTP />} />
+        <Route path="/askReceiptforCardlessWithdraw" element={<AskCardlessWithdraw />} />
         
       </Routes>     
 
