@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
 import './home.css';
 import { useNavigate } from 'react-router-dom';
-import SessionTimeout from '../components/sessionTimeout/SessionTimeout';
-
+import SessionTimeout from '../../components/sessionTimeout/sessionTimeout'
 
 export default function Home({ onActionSelect }) {
   const navigate = useNavigate();
@@ -11,7 +10,7 @@ export default function Home({ onActionSelect }) {
   return (
     
     <div className="atm-home-container">
-      <SessionTimeout timeoutDuration={10000} />
+      <SessionTimeout timeoutDuration={5000} />
       <h1>Welcome</h1>
       <div className="atm-columns">
         <div className="atm-column cardless">

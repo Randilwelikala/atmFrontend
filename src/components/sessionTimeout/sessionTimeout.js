@@ -1,47 +1,54 @@
-// SessionTimeout.js
-import React, { useEffect, useState } from 'react';
+// src/components/sessionTimeout/SessionTimeout.js
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const SessionTimeout = ({ timeoutDuration = 5 * 60 * 1000 }) => {
+export default function SessionTimeout({ timeoutDuration = 5 * 60 * 1000, confirmDuration = 10000 }) {
   const navigate = useNavigate();
   const [showPrompt, setShowPrompt] = useState(false);
+  const [promptTimer, setPromptTimer] = useState(null);
+
 
   useEffect(() => {
-    const sessionTimer = setTimeout(() => {
-      setShowPrompt(true);
-    }, timeoutDuration); // default 5 mins
-
-    return () => clearTimeout(sessionTimer);
-  }, [timeoutDuration]);
-
-  useEffect(() => {
+    let timeout;
+    const activityEvents = ['click', 'keypress', 'mousemove', 'scroll', 'touchstart'];
     let promptTimeout;
-    if (showPrompt) {
-      promptTimeout = setTimeout(() => {
-        navigate('/cardLogin');
-      }, 10000); // 10 seconds to respond
-    }
-    return () => clearTimeout(promptTimeout);
-  }, [showPrompt, navigate]);
 
-  const handleExtend = () => {
+    const resetTimer = () => {
+      clearTimeout(timeout);
+      setShowPrompt(false);
+      if (promptTimer) clearTimeout(promptTimer);
+
+      timeout = setTimeout(() => {
+        setShowPrompt(true);
+
+        // Auto-close after confirmDuration if user doesn't respond
+        const autoClose = setTimeout(() => {
+          navigate('/');
+        }, confirmDuration);
+        setPromptTimer(autoClose);
+      }, timeoutDuration);
+    };
+
+
+    // Listen to user activity
+    activityEvents.forEach(event => window.addEventListener(event, resetTimer));
+
+    resetTimer(); // Start timer initially
+
+    return () => {
+      clearTimeout(timeout);
+      if (promptTimer) clearTimeout(promptTimer);
+      activityEvents.forEach(event => window.removeEventListener(event, resetTimer));
+    };
+  }, [navigate, timeoutDuration, confirmDuration]);
+
+  const handleUserResponse = (response) => {
+    if (promptTimer) clearTimeout(promptTimer);
     setShowPrompt(false);
-    window.location.reload(); // or reset timer logic if needed
+    if (response === 'yes') {
+      // Extend session
+    } else {
+      navigate('/');
+    }
   };
 
-  const handleEnd = () => {
-    navigate('/cardLogin');
-  };
-
-  return showPrompt ? (
-    <div className="session-modal">
-      <div className="session-modal-content">
-        <p>Your session is about to expire. Do you want more time?</p>
-        <button onClick={handleExtend}>Yes</button>
-        <button onClick={handleEnd}>No</button>
-      </div>
-    </div>
-  ) : null;
-};
-
-export default SessionTimeout;
