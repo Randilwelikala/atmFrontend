@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
-
+import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 export default function SeeBalance() {
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
@@ -21,7 +21,9 @@ export default function SeeBalance() {
   if (!user) return <p >Loading user details...</p>;
 
   return (
+    
     <div className="container">
+      <SessionTimeout timeoutDuration={5000} />
       <h2 className="title">Account Details</h2>
       <p><strong>Name:</strong> {user.name}</p>
       <p><strong>Account Number:</strong> {user.accountNumber}</p>

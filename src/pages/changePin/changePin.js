@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './changePin.css';
-
+import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 export default function ChangePin() {
   const [accountNumber, setAccountNumber] = useState('');
   const [oldPin, setOldPin] = useState('');
@@ -38,6 +38,7 @@ export default function ChangePin() {
 
   return (
     <div className="change-pin-container">
+      <SessionTimeout timeoutDuration={5000} />
       <h2 className="change-pin-title">Change Debit Card PIN</h2>
       <form onSubmit={handleChangePin} className="change-pin-form">
         <div className="form-group">

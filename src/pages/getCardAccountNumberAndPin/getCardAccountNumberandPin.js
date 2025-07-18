@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './getCardAccountNumberAndPin.css';
+import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 
 export default function GetCardAccountNumberandPin() {
   const [accountNumber, setAccountNumber] = useState('');
@@ -49,6 +50,7 @@ export default function GetCardAccountNumberandPin() {
 
   return (
     <div className="login-container">
+      <SessionTimeout timeoutDuration={5000} />
       <h2 className="login-title">For Continue</h2>
       <form onSubmit={handleLogin} className="login-form">
         <input

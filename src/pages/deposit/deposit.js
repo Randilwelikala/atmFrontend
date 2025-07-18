@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
+import SessionTimeout from '../../components/sessionTimeout/sessionTimeout'
 
 function Deposit() {
   const [searchParams] = useSearchParams();
@@ -47,6 +48,7 @@ function Deposit() {
 
   return (
     <div className="container">
+      <SessionTimeout timeoutDuration={5000} />
       <h2 className="title">Deposit Money</h2>
       <p><strong>Name:</strong> {user.name}</p>
       <p><strong>Account Number:</strong> {user.accountNumber}</p>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './enterAccountNumber.css';
+import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
+
 
 export default function EnterAccountNumber() {
   const [step, setStep] = useState(1);
@@ -34,6 +36,7 @@ export default function EnterAccountNumber() {
 
   return (
     <div className="container">
+      <SessionTimeout timeoutDuration={5000} />
       <h2 className="title">Enter Account Number</h2>
   
       {step === 1 && (

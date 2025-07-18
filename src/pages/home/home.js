@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './home.css';
 import { useNavigate } from 'react-router-dom';
-import SessionTimeout from '../../components/sessionTimeout/sessionTimeout'
+import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 
 export default function Home({ onActionSelect }) {
   const navigate = useNavigate();

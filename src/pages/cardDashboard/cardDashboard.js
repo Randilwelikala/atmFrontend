@@ -1,31 +1,19 @@
 import React, {useEffect} from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 
 export default function CardDashboard() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
-
-  useEffect(() => {
-  const timeout = setTimeout(() => {
-    const extend = window.confirm('Session is about to expire. Do you want more time?');
-    if (extend) {
-      // Reset the timer by calling the same useEffect again (refresh the component)
-      window.location.reload(); // quick way to reset session timer for now
-    } else {
-      navigate('/cardLogin'); // or use '/' to go to home
-    }
-  }, 5000); // 5 seconds for testing
-
-  return () => clearTimeout(timeout);
-}, [navigate]);
  
   if (!accountNumber) {
     return <p >Loading...</p>;
   }
 
   return (
-    <div className="atm-home-container">                 
+    <div className="atm-home-container">   
+      <SessionTimeout timeoutDuration={5000} />              
       <div className="atm-column card">
         <h2>Card Transactions</h2>
         <button onClick={() => navigate(`/AskCard?account=${accountNumber}`)}>
