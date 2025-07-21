@@ -28,6 +28,7 @@ import FundTransfer from '../src/pages/fundTransfer/fundTransfer'
 import CardlessSideNavbar from './components/cardlessSideNavbar/cardlessSideNavbar';
 import CardlessDeposit from './pages/cardlessDepositMoney/cardlessDepositMoney';
 import CardlessWithdraw from './pages/cardlessWithdraw/cardlessWithdraw';
+import './translate/i18n';
 
 
 

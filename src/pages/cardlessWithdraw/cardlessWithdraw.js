@@ -8,6 +8,7 @@ import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
 import './cardlessWithdraw.css';
 import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
+import { useTranslation } from 'react-i18next';
 
 
 function CardlessWithdraw() {
@@ -24,6 +25,12 @@ function CardlessWithdraw() {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const [breakdown, setBreakdown] = useState({});
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
 
 
   useEffect(() => {
@@ -137,12 +144,12 @@ function CardlessWithdraw() {
         <h2 className="withdraw-title">Withdraw Money</h2>
 
         <div className="withdraw-user-details">
-          <p><strong>Name:</strong> {user.name}</p>
-          <p><strong>Account Number:</strong> {user.accountNumber}</p>
-          <p><strong>Branch:</strong> {user.branch}</p>
-          <p><strong>Account Type:</strong> {user.accountType}</p>
-          <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
-          <p><strong>New Balance:</strong> Rs. {user.balance}</p>
+          <p><strong>{t('Name')}:</strong> {user.name}</p>
+          <p><strong>{t('Account Number')}:</strong> {user.accountNumber}</p>
+          <p><strong>{t('Branch')}:</strong> {user.branch}</p>
+          <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
+          <p><strong>{t('New Balance')}:</strong> Rs. {user.balance}</p>
+          {/* <p><strong>{t('New Balance')}:</strong> Rs. {user.balance}</p> */}
           {Object.keys(breakdown).length > 0 && (
             <>
                 <h4>Dispensed Cash Breakdown:</h4>
@@ -201,6 +208,8 @@ function CardlessWithdraw() {
 
         {error && <p className="withdraw-error">{error}</p>}
       </div>
+       <button onClick={() => changeLanguage('en')}>English</button>
+      <button onClick={() => changeLanguage('si')}>සිංහල</button>
     </>
   );
 }
