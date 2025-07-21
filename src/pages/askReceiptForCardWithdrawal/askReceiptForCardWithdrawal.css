@@ -1,0 +1,54 @@
+.askcard-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px 30px;
+  background: #f0f4ff;
+  border-radius: 12px;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.askcard-title {
+  font-size: 22px;
+  margin-bottom: 25px;
+  color: #223366;
+  font-weight: 600;
+}
+
+.askcard-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.askcard-btn {
+  padding: 12px 30px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  user-select: none;
+}
+
+.yes-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.yes-btn:hover {
+  background-color: #3a9d38;
+  transform: scale(1.05);
+}
+
+.no-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.no-btn:hover {
+  background-color: #b33027;
+  transform: scale(1.05);
+}

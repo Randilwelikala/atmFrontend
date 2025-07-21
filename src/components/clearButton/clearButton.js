@@ -5,7 +5,7 @@ import React from 'react';
 
 const ClearButton = ({ onClick }) => (
   <button onClick={onClick} className="clear-btn">
-    Clear
+    Home
   </button>
 );
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './changePin.css';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
+
 export default function ChangePin() {
   const [accountNumber, setAccountNumber] = useState('');
   const [oldPin, setOldPin] = useState('');
@@ -19,11 +20,9 @@ export default function ChangePin() {
       setError('New PINs do not match');
       return;
     }
-    if (newPin.length <= 4 ) {
-      setNewPin(newPin);
-      setError('');
-    } else {
+    if (newPin.length !== 4) {
       setError('New PIN must be exactly 4 numbers');
+      return;
     }
 
     try {
@@ -72,20 +71,20 @@ export default function ChangePin() {
         <div className="form-group">
           <label>New PIN:</label>
           <input
-              type="password"
-              value={newPin}
-              onChange={e => {
-                const value = e.target.value;
-                if (/^\d{0,4}$/.test(value)) {
-                  setNewPin(value);
-                  setError('');
-                } else {
-                  setError('New PIN must be exactly 4 digits');
-                }
-              }}
-              
-  className="change-pin-input"
-/>
+            type="password"
+            value={newPin}
+            onChange={e => {
+              const value = e.target.value;
+              if (/^\d{0,4}$/.test(value)) {
+                setNewPin(value);
+                setError('');
+              } else {
+                setError('New PIN must be exactly 4 digits');
+              }
+            }}
+            className="change-pin-input"
+            maxLength={4}
+          />
         </div>
 
         <div className="form-group">
@@ -95,7 +94,8 @@ export default function ChangePin() {
             value={confirmPin}
             onChange={e => setConfirmPin(e.target.value)}
             required
-            className="change-pin-input"            
+            className="change-pin-input"
+            maxLength={4}
           />
         </div>
 

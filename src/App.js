@@ -18,8 +18,8 @@ import AskCardWithdrawalReceipt from './pages/askReceiptForCardWithdrawal/askRec
 import Withdraw from './pages/withdraw/withdraw';
 import CancelButton from './components/cancelButton/cancelButton';
 import ClearButton from './components/clearButton/clearButton';
-import axios from 'axios';
 import LogoutButton from './components/logoutButton/logoutButton';
+import axios from 'axios';
 import ProtectedRoute from './components/auth/protectedRoute';
 import CardlessWithdrawOTP from './pages/cardlessWithdrawOTP/cardlessWithdrawOTP';
 import CardlessDashboard from './pages/cardlessDashboard/cardlessDashboard';
@@ -31,6 +31,7 @@ export default function App() {
 
   return (
     <Router>
+      <LogoutButton onClick={()=>(window.location.href = '/')}/>
       <Routes>
         <Route path='/cardlessDashboard' element={<CardlessDashboard/>}/>
         <Route path="/" element={<Home />} />
@@ -48,6 +49,7 @@ export default function App() {
         <Route path="/Withdraw" element={<Withdraw />} />
         <Route path="/cancelButton" element={<CancelButton />} />
         <Route path="/clearButton" element={<ClearButton />} />
+        <Route path="/logoutButton" element={<LogoutButton/>} />
         <Route path="/session" element={<SessionTimeout />} />
         <Route path="/cardDashboard" element={<CardDashboard />} />
         <Route path="/cardlessWithdraw" element={<CardlessWithdrawOTP />} />
@@ -58,6 +60,7 @@ export default function App() {
 
       <CancelButton onClick={() => window.history.back()} />
       <ClearButton onClick={() => (window.location.href = '/')} />
+      
       
       <Outlet />
     </Router>

@@ -37,7 +37,7 @@ export default function CardDashboard() {
         <button onClick={() => navigate(`/fundTransfer`)} className="dashboard-btn">
           Fund Transfer
         </button>
-        <LogoutButton onLogout={handleLogout} />
+        
       </div>
     </div>
   );

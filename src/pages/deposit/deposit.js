@@ -6,6 +6,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
+import './deposit.css';
 
 function Deposit() {
   const [searchParams] = useSearchParams();
@@ -19,8 +20,6 @@ function Deposit() {
   const [transactionId, setTransactionId] = useState('');
   const [transactionDate, setTransactionDate] = useState('');
 
-
-  // Dropdown state and ref
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -30,7 +29,6 @@ function Deposit() {
       .catch(() => setError('User not found'));
   }, [accountNumber]);
 
-  // Close dropdown if clicked outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -43,7 +41,6 @@ function Deposit() {
 
   const toggleDropdown = () => setOpen(prev => !prev);
 
-  // PDF download
   const downloadPDF = () => {
     setOpen(false);
     const doc = new jsPDF();
@@ -63,7 +60,6 @@ function Deposit() {
     doc.save('transaction_receipt.pdf');
   };
 
-  // DOCX download
   const downloadDOCX = async () => {
     setOpen(false);
     const doc = new Document({
@@ -90,11 +86,8 @@ function Deposit() {
     saveAs(blob, "transaction_receipt.docx");
   };
 
-  const generateTransactionId = () => {
-    return `TXN${Date.now()}${Math.floor(1000 + Math.random() * 9000)}`;
-  };
+  const generateTransactionId = () => `TXN${Date.now()}${Math.floor(1000 + Math.random() * 9000)}`;
 
-  // Skip receipt
   const handleSkip = () => {
     navigate('/cardDashboard?account=' + accountNumber);
   };
@@ -113,47 +106,44 @@ function Deposit() {
       setUser(prev => ({ ...prev, balance: res.data.balance }));
       setDepositedAmount(amount);
       setAmount('');
-      const newTxnId = generateTransactionId();
-      setTransactionId(newTxnId);
-      const now = new Date();
-      setTransactionDate(now.toLocaleString()); 
-
+      setTransactionId(generateTransactionId());
+      setTransactionDate(new Date().toLocaleString());
     } catch (error) {
-      if (error.response && error.response.data.message) {
-        setError(error.response.data.message);
-      } else {
-        setError('Something went wrong');
-      }
+      setError(error.response?.data?.message || 'Something went wrong');
     }
   };
 
-  if (error) return <p>{error}</p>;
-  if (!user) return <p>Loading user details...</p>;
+  if (error) return <p className="deposit-error">{error}</p>;
+  if (!user) return <p className="deposit-loading">Loading user details...</p>;
 
   return (
-    <div className="container">
+    <div className="deposit-container" id="deposit-page">
       <SessionTimeout timeoutDuration={50000000} />
-      <h2 className="title">Deposit Money</h2>
+      <h2 className="deposit-title">Deposit Money</h2>
       <p><strong>Name:</strong> {user.name}</p>
       <p><strong>Account Number:</strong> {user.accountNumber}</p>
       <p><strong>Branch:</strong> {user.branch}</p>
       <p><strong>Account Type:</strong> {user.accountType}</p>
       <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
 
-      <form onSubmit={handleDeposit} className="form">
-        <label className="label">Amount to Deposit:</label>
+      <form onSubmit={handleDeposit} className="deposit-form">
+        <label htmlFor="amount" className="deposit-label">Amount to Deposit:</label>
         <input
           type="number"
+          id="amount"
           value={amount}
           onChange={e => setAmount(e.target.value)}
-          className="input"
+          className="deposit-input"
+          min="0"
+          step="0.01"
+          required
         />
-        <button type="submit" className="btn">Deposit</button>
+        <button type="submit" className="deposit-btn">Deposit</button>
       </form>
 
       {message && (
         localStorage.getItem('wantsReceipt') === 'yes' ? (
-          <div className="receipt-box">
+          <div className="deposit-receipt-box">
             <h3>🧾 Transaction Receipt</h3>
             <p><strong>Transaction ID:</strong> {transactionId}</p>
             <p><strong>Transaction Date:</strong> {transactionDate}</p>
@@ -163,56 +153,33 @@ function Deposit() {
             <p><strong>Account Type:</strong> {user.accountType}</p>
             <p><strong>Deposited Amount:</strong> Rs. {depositedAmount}</p>
             <p><strong>New Balance:</strong> Rs. {user.balance}</p>
-            <p className="success">✅ Deposit successful!</p>
+            <p className="deposit-success">✅ Deposit successful!</p>
 
-            <div style={{ marginTop: '10px' }}>
-              <div style={{ position: 'relative', display: 'inline-block' }} ref={dropdownRef}>
-                <button onClick={toggleDropdown} className="btn">
-                  Download ▼
-                </button>
-                {open && (
-                  <div style={{
-                    position: 'absolute',
-                    top: '100%',
-                    left: 0,
-                    background: 'white',
-                    border: '1px solid #ccc',
-                    borderRadius: 4,
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                    zIndex: 1000,
-                    minWidth: 150,
-                  }}>
-                    <button onClick={downloadPDF} style={dropdownBtnStyle}>
-                      Download as PDF
-                    </button>
-                    <button onClick={downloadDOCX} style={dropdownBtnStyle}>
-                      Download as DOCX
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              <button onClick={handleSkip} className="btn" style={{ marginLeft: '10px' }}>Skip</button>
+            <div className="deposit-dropdown-wrapper" ref={dropdownRef}>
+              <button onClick={toggleDropdown} className="deposit-btn download-btn">
+                Download ▼
+              </button>
+              {open && (
+                <div className="deposit-dropdown-menu">
+                  <button onClick={downloadPDF} className="deposit-dropdown-btn">
+                    Download as PDF
+                  </button>
+                  <button onClick={downloadDOCX} className="deposit-dropdown-btn">
+                    Download as DOCX
+                  </button>
+                </div>
+              )}
+              <button onClick={handleSkip} className="deposit-btn skip-btn">Skip</button>
             </div>
           </div>
         ) : (
-          <p className="success">✅ Deposit successful!</p>
+          <p className="deposit-success">✅ Deposit successful!</p>
         )
       )}
 
-      {error && <p className="error">{error}</p>}
+      {error && <p className="deposit-error">{error}</p>}
     </div>
   );
 }
-
-const dropdownBtnStyle = {
-  display: 'block',
-  width: '100%',
-  padding: '8px',
-  background: 'none',
-  border: 'none',
-  textAlign: 'left',
-  cursor: 'pointer',
-};
 
 export default Deposit;

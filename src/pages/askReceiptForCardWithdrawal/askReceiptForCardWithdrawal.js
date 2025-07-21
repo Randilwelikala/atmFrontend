@@ -1,26 +1,26 @@
 import React from 'react';
-import { useNavigate,useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
+import './askReceiptForCardWithdrawal.css';
+
 export default function AskCard() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const accountNumber = searchParams.get('account'); 
+  const accountNumber = searchParams.get('account');
 
   const handleChoice = (choice) => {
-    localStorage.setItem('wantsReceipt', choice); 
-    if (choice === 'yes') {
-      navigate(`/withdraw?account=${accountNumber}`); 
-    } else {
-      navigate(`/withdraw?account=${accountNumber}`); 
-    }
+    localStorage.setItem('wantsReceipt', choice);
+    navigate(`/withdraw?account=${accountNumber}`);
   };
 
   return (
-    <div className="atm-column card">
+    <div className="askcard-container">
       <SessionTimeout timeoutDuration={5000000} />
-      <h2>Do you want a receipt for this Card Withdraw?</h2>
-      <button onClick={() => handleChoice('yes')}>Yes</button>
-      <button onClick={() => handleChoice('no')}>No</button>
+      <h2 className="askcard-title">Do you want a receipt for this Card Withdraw?</h2>
+      <div className="askcard-buttons">
+        <button onClick={() => handleChoice('yes')} className="askcard-btn yes-btn">Yes</button>
+        <button onClick={() => handleChoice('no')} className="askcard-btn no-btn">No</button>
+      </div>
     </div>
   );
 }

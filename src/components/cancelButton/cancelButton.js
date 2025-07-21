@@ -4,7 +4,7 @@ import './cancelButton.css';
 
 const CancelButton = ({ onClick }) => (
   <button onClick={onClick} className="cancel-btn">
-    Cancel
+    Back
   </button>
 );
 

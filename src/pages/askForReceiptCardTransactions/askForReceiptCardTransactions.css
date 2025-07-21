@@ -1,0 +1,54 @@
+/* AskCard.css */
+
+.ask-card-container {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 30px 25px;
+  background: #fefefe;
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  animation: fadeInUp 0.5s ease;
+}
+
+.ask-card-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #2d3a63;
+}
+
+.ask-card-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.ask-card-btn {
+  background-color: #4c6ef5;
+  color: #fff;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+  user-select: none;
+}
+
+.ask-card-btn:hover {
+  background-color: #3751db;
+  transform: scale(1.1);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  } to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

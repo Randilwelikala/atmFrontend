@@ -4,12 +4,13 @@ import { jsPDF } from "jspdf";
 import { Document, Packer, Paragraph } from "docx";
 import { saveAs } from "file-saver";
 import { useNavigate } from 'react-router-dom';
+import './fundTransfer.css';
 
 function FundTransfer() {
   const [sender, setSender] = useState('');
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
-  const [transferType, setTransferType] = useState('same-bank'); // transfer type state
+  const [transferType, setTransferType] = useState('same-bank');
   const [receipt, setReceipt] = useState(null);
   const [error, setError] = useState('');
   const [recipientError, setRecipientError] = useState('');
@@ -89,12 +90,11 @@ function FundTransfer() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-4 shadow-lg rounded-xl bg-white">
-      <h2 className="text-xl font-bold mb-4 text-center">Fund Transfer</h2>
+    <div className="fund-transfer-container">
+      <h2 className="fund-transfer-title">Fund Transfer</h2>
 
-      {/* Transfer type radio buttons */}
-      <div className="mb-4 flex justify-center gap-6">
-        <label className="flex items-center space-x-2">
+      <div className="transfer-type-group">
+        <label className="transfer-type-label">
           <input
             type="radio"
             name="transferType"
@@ -104,7 +104,7 @@ function FundTransfer() {
           />
           <span>Same Bank Transfer</span>
         </label>
-        <label className="flex items-center space-x-2">
+        <label className="transfer-type-label">
           <input
             type="radio"
             name="transferType"
@@ -116,17 +116,19 @@ function FundTransfer() {
         </label>
       </div>
 
-      <form onSubmit={handleTransfer} className="space-y-4">
+      <form onSubmit={handleTransfer} className="fund-transfer-form">
         <input
+          id="sender-account"
           type="text"
           placeholder="Your Account Number"
           value={sender}
           onChange={(e) => setSender(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="fund-transfer-input"
           required
           maxLength={12}
         />
         <input
+          id="recipient-account"
           type="text"
           placeholder="Recipient Account Number"
           value={recipient}
@@ -139,58 +141,47 @@ function FundTransfer() {
               setRecipientError('');
             }
           }}
-          className="w-full p-2 border rounded"
+          className="fund-transfer-input"
           required
           maxLength={12}
         />
         {recipientError && (
-          <p className="text-red-500 text-sm mt-1">{recipientError}</p>
+          <p className="error-message">{recipientError}</p>
         )}
         <input
+          id="transfer-amount"
           type="number"
           placeholder="Amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="fund-transfer-input"
           required
           min={1}
         />
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-        >
+        <button type="submit" className="fund-transfer-button">
           Transfer
         </button>
       </form>
 
-      {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
+      {error && <p className="error-message">{error}</p>}
 
       {receipt && (
-        <div className="mt-6 p-4 border rounded bg-gray-50">
-          <h3 className="font-bold mb-2">Transfer Receipt</h3>
-          <p>From: {receipt.from}</p>
-          <p>To: {receipt.to}</p>
-          <p>Amount: Rs. {receipt.transferred}</p>
-          <p>Type: {receipt.bank}</p>
-          <p>Remaining Balance: Rs. {receipt.senderNewBalance}</p>
+        <div className="receipt-box">
+          <h3 className="receipt-title">Transfer Receipt</h3>
+          <p><strong>From:</strong> {receipt.from}</p>
+          <p><strong>To:</strong> {receipt.to}</p>
+          <p><strong>Amount:</strong> Rs. {receipt.transferred}</p>
+          <p><strong>Type:</strong> {receipt.bank}</p>
+          <p><strong>Remaining Balance:</strong> Rs. {receipt.senderNewBalance}</p>
 
-          <div className="flex gap-3 mt-4">
-            <button
-              onClick={handleDownloadPDF}
-              className="flex-1 bg-red-600 text-white py-2 rounded hover:bg-red-700"
-            >
+          <div className="receipt-buttons">
+            <button onClick={handleDownloadPDF} className="btn pdf-btn">
               Download PDF
             </button>
-            <button
-              onClick={handleDownloadDOCX}
-              className="flex-1 bg-green-600 text-white py-2 rounded hover:bg-green-700"
-            >
+            <button onClick={handleDownloadDOCX} className="btn docx-btn">
               Download DOCX
             </button>
-            <button
-              onClick={handleSkip}
-              className="flex-1 bg-gray-600 text-white py-2 rounded hover:bg-gray-700"
-            >
+            <button onClick={handleSkip} className="btn skip-btn">
               Skip
             </button>
           </div>
