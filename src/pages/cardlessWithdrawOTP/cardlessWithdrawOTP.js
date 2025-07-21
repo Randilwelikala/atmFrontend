@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './cardlessWithdrawOTP.css'; // ✅ Add this line
 
 export default function CardlessWithdrawOTP() {
   const [mobile, setMobile] = useState('');
@@ -36,7 +37,6 @@ export default function CardlessWithdrawOTP() {
     try {
       const res = await axios.post('http://localhost:3001/verify-otp', { mobile, otp });
       setMessage('OTP verified! Redirecting...');
-      // Redirect to withdraw page with account number as query param
       navigate(`/Withdraw?account=${res.data.accountNumber}`);
     } catch (err) {
       setError(err.response?.data?.message || 'OTP verification failed');
@@ -44,37 +44,39 @@ export default function CardlessWithdrawOTP() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: 'auto', padding: 20 }}>
-      <h2>Cardless Withdraw - OTP Verification</h2>
+    <div className="otp-container" id="cardless-otp-page">
+      <h2 className="otp-title">Cardless Withdraw - OTP Verification</h2>
+      
       {!otpSent ? (
-        <>
-          <label>Enter Mobile Number:</label>
+        <div className="otp-step">
+          <label className="otp-label">Enter Mobile Number:</label>
           <input
             type="text"
             value={mobile}
             onChange={e => setMobile(e.target.value)}
             placeholder="07XXXXXXXX"
             maxLength={10}
-            style={{ width: '100%', padding: 8, marginBottom: 10 }}
+            className="otp-input"
           />
-          <button onClick={sendOtp} style={{ padding: '10px 20px' }}>Send OTP</button>
-        </>
+          <button onClick={sendOtp} className="otp-button">Send OTP</button>
+        </div>
       ) : (
-        <>
-          <p>{message}</p>
-          <label>Enter OTP:</label>
+        <div className="otp-step">
+          <p className="otp-message">{message}</p>
+          <label className="otp-label">Enter OTP:</label>
           <input
             type="text"
             value={otp}
             onChange={e => setOtp(e.target.value)}
             maxLength={4}
             placeholder="1234"
-            style={{ width: '100%', padding: 8, marginBottom: 10 }}
+            className="otp-input"
           />
-          <button onClick={verifyOtp} style={{ padding: '10px 20px' }}>Verify OTP</button>
-        </>
+          <button onClick={verifyOtp} className="otp-button">Verify OTP</button>
+        </div>
       )}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      
+      {error && <p className="otp-error">{error}</p>}
     </div>
   );
 }

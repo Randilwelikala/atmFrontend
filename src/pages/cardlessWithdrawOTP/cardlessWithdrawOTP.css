@@ -1,0 +1,84 @@
+/* CardlessWithdrawOTP.css */
+
+.otp-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.5s ease;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.otp-title {
+  text-align: center;
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.otp-step {
+  display: flex;
+  flex-direction: column;
+}
+
+.otp-label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.otp-input {
+  padding: 10px 12px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  transition: border-color 0.2s ease;
+}
+
+.otp-input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.otp-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.otp-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.otp-message {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.otp-error {
+  margin-top: 15px;
+  color: #e74c3c;
+  font-size: 14px;
+  text-align: center;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
