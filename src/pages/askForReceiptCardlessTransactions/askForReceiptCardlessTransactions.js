@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import './askForReceiptCardlessTransactions.css'; // Import the CSS file
+import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 
 export default function AskCardless() {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ export default function AskCardless() {
   };
 
   return (
+    <>
+    <CardlessSideNavbar/>
     <div className="ask-cardless-container">
       <SessionTimeout timeoutDuration={500000} />
       <h2 className="ask-cardless-heading">
@@ -28,5 +31,6 @@ export default function AskCardless() {
         <button className="ask-btn" onClick={() => handleChoice('no')}>No</button>
       </div>
     </div>
+    </>
   );
 }

@@ -35,6 +35,7 @@ export default function App() {
     <Router>
       <LogoutButton onClick={()=>(window.location.href = '/')}/>        
       <Routes>
+        <>
         <Route path='/cardlessDashboard' element={<CardlessDashboard/>}/>
         <Route path="/" element={<Home />} />
         <Route path="/cardless-deposit" element={<EnterAccountNumber />} />
@@ -59,13 +60,14 @@ export default function App() {
         <Route path="/fundTransfer" element={<FundTransfer />} />
         <Route path='/cardlessSideNavbar' element={<CardlessSideNavbar/>}/>
         <Route path='/cardSideNavbar' element={<CardSideNavbar/>}/>
-        
+        </>
         
             
       </Routes>     
-
-      <CancelButton onClick={() => window.history.back()} />        
+      
       <ClearButton onClick={() => (window.location.href = '/')} />
+      <CancelButton onClick={() => window.history.back()} />        
+      
       
       
       <Outlet />

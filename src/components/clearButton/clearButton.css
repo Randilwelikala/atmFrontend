@@ -9,20 +9,15 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   animation: fadeIn 0.4s ease;
+
+  position: fixed;
+  bottom: 20px;
+  left:50px;
+  
+  transform: translateX(-50%);
+  z-index: 1000;
 }
 
 .clear-btn:hover {
-  background-color: #fa8c16;
-  transform: scale(1.05);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  background-color: #fa8c16;  
 }

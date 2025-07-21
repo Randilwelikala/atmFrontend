@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './enterAccountNumber.css';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
+import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 
 
 export default function EnterAccountNumber() {
@@ -35,6 +36,8 @@ export default function EnterAccountNumber() {
   };
 
   return (
+    <>
+    <CardlessSideNavbar/>
     <div className="container">
       <SessionTimeout timeoutDuration={5000000} />
       <h2 className="title">Enter Account Number</h2>
@@ -69,5 +72,6 @@ export default function EnterAccountNumber() {
   
       {error && <p className="error">{error}</p>}
     </div>
+    </>
   );
 }

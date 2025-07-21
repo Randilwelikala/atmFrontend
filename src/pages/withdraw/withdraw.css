@@ -4,7 +4,7 @@
   max-width: 600px;
   margin: 50px auto;
   padding: 30px;
-  background-color: #fff;
+ background: linear-gradient(to left, #fffbe6, #e6f7ff);
   border-radius: 14px;
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', sans-serif;

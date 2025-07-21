@@ -19,7 +19,7 @@ export default function AskCardlessWithdraw() {
     <>
     <CardlessSideNavbar/>
     <div className="ask-cardless-container" id="ask-cardless-receipt">
-      <SessionTimeout timeoutDuration={5000} />
+      <SessionTimeout timeoutDuration={5000000} />
       <h2 className="ask-cardless-title">
         Do you want a receipt for this Cardless transaction?
       </h2>

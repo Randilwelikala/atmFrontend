@@ -1,9 +1,9 @@
 /* CardlessDashboard.css */
 
 .cardless-dashboard-container {
-  padding: 40px;
-  min-height: 100vh;
-  background: linear-gradient(to left, #fffbe6, #e6f7ff);
+  padding: 10px;
+  min-height: 90vh;
+  background: linear-gradient(to right, #fffbe6, #e6f7ff);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@
 }
 
 .cardless-dashboard-content {
-  background-color: white;
+ background: linear-gradient(to right, #e6f0ff, #fef9e7);
   padding: 40px 50px;
   border-radius: 14px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);

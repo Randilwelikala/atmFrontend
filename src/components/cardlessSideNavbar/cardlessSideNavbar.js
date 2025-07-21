@@ -43,18 +43,21 @@ export default function CardlessSideNavbar() {
   return (
     <>
       <button className="hamburger-btn" onClick={toggleSidebar}>
-        ☰
+        ☰       
       </button>
-
+      
       <nav
         ref={sidebarRef}
         className={`side-navbar ${open ? 'open' : 'closed'}`}
       >
+        
         <ul>
+          
           <li>
+            
             <NavLink
-              to={`./askReceiptforCardlessWithdraw`}
-              className={({ isActive }) => (isActive ? 'active' : '')}
+              to={`/askReceiptforCardlessWithdraw`}
+              // className={({ isActive }) => (isActive ? 'active' : '')}
               onClick={handleLinkClick}
             >
               Cardless Withdraw
@@ -66,45 +69,11 @@ export default function CardlessSideNavbar() {
               className={({ isActive }) => (isActive ? 'active' : '')}
               onClick={handleLinkClick}
             >
-              Deposit Money
+              Cardless Deposit 
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to={`/askCardWithdrawal?account=${accountNumber}`}
-              className={({ isActive }) => (isActive ? 'active' : '')}
-              onClick={handleLinkClick}
-            >
-              Withdraw Money
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={`/SeeBalance?account=${accountNumber}`}
-              className={({ isActive }) => (isActive ? 'active' : '')}
-              onClick={handleLinkClick}
-            >
-              View Balance
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={`/change-pin?account=${accountNumber}`}
-              className={({ isActive }) => (isActive ? 'active' : '')}
-              onClick={handleLinkClick}
-            >
-              Change PIN
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={`/fundTransfer?account=${accountNumber}`}
-              className={({ isActive }) => (isActive ? 'active' : '')}
-              onClick={handleLinkClick}
-            >
-              Fund Transfer
-            </NavLink>
-          </li>
+          
+          
         </ul>
       </nav>
     </>

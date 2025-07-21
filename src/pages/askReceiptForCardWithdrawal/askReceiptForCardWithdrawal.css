@@ -2,7 +2,7 @@
   max-width: 400px;
   margin: 50px auto;
   padding: 20px 30px;
-  background: #f0f4ff;
+  background: linear-gradient(to left, #fffbe6, #e6f7ff);
   border-radius: 12px;
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

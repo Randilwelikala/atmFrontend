@@ -4,7 +4,7 @@
   max-width: 480px;
   margin: 60px auto;
   padding: 30px 30px;
-  background: linear-gradient(135deg, #e7f0ff, #c2d7ff);
+ background: linear-gradient(to left, #fffbe6, #e6f7ff);
   border-radius: 14px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -65,7 +65,7 @@
 }
 
 .deposit-receipt-box {
-  background: white;
+  background: linear-gradient(to left, #fffbe6, #e6f7ff);
   border-radius: 12px;
   padding: 20px 25px;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
