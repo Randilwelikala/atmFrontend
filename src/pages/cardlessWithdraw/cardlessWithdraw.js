@@ -23,6 +23,8 @@ function CardlessWithdraw() {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const [breakdown, setBreakdown] = useState({});
+
 
   useEffect(() => {
     axios.get(`http://localhost:3001/user/${accountNumber}`)
@@ -106,6 +108,7 @@ function CardlessWithdraw() {
         amount: parseFloat(amount),
       });
       setMessage(res.data.message || `Withdraw successful!`);
+      setBreakdown(res.data.breakdown || {});
       setUser(prev => ({ ...prev, balance: res.data.balance }));
       setDepositedAmount(amount);
       setAmount('');
@@ -139,6 +142,19 @@ function CardlessWithdraw() {
           <p><strong>Branch:</strong> {user.branch}</p>
           <p><strong>Account Type:</strong> {user.accountType}</p>
           <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
+          <p><strong>New Balance:</strong> Rs. {user.balance}</p>
+          {Object.keys(breakdown).length > 0 && (
+            <>
+                <h4>Dispensed Cash Breakdown:</h4>
+                <ul>
+                {Object.entries(breakdown).map(([note, count]) => (
+                    <li key={note}><strong>Rs. {note} * </strong> {count}</li>
+                ))}
+                </ul>
+            </>
+            )}
+
+
         </div>
 
         <form onSubmit={handleWithdraw} className="withdraw-form">

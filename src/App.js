@@ -31,12 +31,6 @@ import CardlessWithdraw from './pages/cardlessWithdraw/cardlessWithdraw';
 
 
 
-
-
-
-
-
-
 export default function App() {
   const [user, setUser] = useState(null);
   axios.defaults.withCredentials = true;
