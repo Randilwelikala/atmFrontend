@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './getCardAccountNumberAndPin.css';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
+import './getCardAccountNumberAndPin.css';
 
 export default function GetCardAccountNumberandPin() {
-  const [accountNumber, setAccountNumber] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const [pin, setPin] = useState('');
   const [error, setError] = useState('');
@@ -14,21 +13,21 @@ export default function GetCardAccountNumberandPin() {
   const handleLogin = async e => {
     e.preventDefault();
     setError('');
+
     if (!cardNumber) {
-        setError('Enter a card number');
-        return;
-      }
-      
+      setError('Enter a card number');
+      return;
+    }
 
-      if (cardNumber.length !== 16) {
-        setError('Card number must be exactly 16 digits');
-        return;
-      }
+    if (cardNumber.length !== 16) {
+      setError('Card number must be exactly 16 digits');
+      return;
+    }
 
-      if (!pin) {
-        setError('Enter a PIN');
-        return;
-      }  
+    if (!pin) {
+      setError('Enter a PIN');
+      return;
+    }
 
     try {
       const res = await axios.post('http://localhost:3001/cardLogin', {
@@ -37,40 +36,47 @@ export default function GetCardAccountNumberandPin() {
       });
 
       if (res.data.success) {
-        // const account = res.data.accountNumber;
         navigate(`/cardDashboard?account=${res.data.accountNumber}`);
-      } 
-    } catch (error) {
-        if (error.response && error.response.data.message) {
-          setError(error.response.data.message);
-        } else {
-          setError('Something went wrong');
-        }
       }
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError('Something went wrong');
+      }
+    }
   };
 
   return (
-    <div className="login-container">
+    <div className="card-login-container" id="card-login-page">
       <SessionTimeout timeoutDuration={5000000} />
-      <h2 className="login-title">For Continue</h2>
-      <form onSubmit={handleLogin} className="login-form">
+      <h2 className="card-login-title">For Continue</h2>
+      <form onSubmit={handleLogin} className="card-login-form">
         <input
           type="text"
           placeholder="Card Number"
           value={cardNumber}
-          onChange={e => setCardNumber(e.target.value)}          
-          className="login-input"
+          onChange={e => setCardNumber(e.target.value)}
+          className="card-login-input"
+          maxLength={16}
+          inputMode="numeric"
+          pattern="\d{16}"
+          title="Enter 16 digit card number"
         />
         <input
           type="password"
           placeholder="PIN"
           value={pin}
-          onChange={e => setPin(e.target.value)}          
-          className="login-input"
+          onChange={e => setPin(e.target.value)}
+          className="card-login-input"
+          maxLength={6}
+          inputMode="numeric"
+          pattern="\d+"
+          title="Enter your PIN"
         />
-        <button type="submit" className="login-button">Confirm</button>
+        <button type="submit" className="card-login-button">Confirm</button>
       </form>
-      {error && <p className="login-error">{error}</p>}
+      {error && <p className="card-login-error">{error}</p>}
     </div>
   );
 }
