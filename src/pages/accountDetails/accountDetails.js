@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Deposit from '../deposit/deposit';
+import Deposit from '../cardDepositMoney/cardDepositMoney';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 import './accountDetails.css';

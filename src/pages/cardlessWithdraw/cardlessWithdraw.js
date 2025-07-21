@@ -6,11 +6,11 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
-import './withdraw.css';
+import './cardlessWithdraw.css';
 import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 
 
-function Withdraw() {
+function CardlessWithdraw() {
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
   const [depositedAmount, setDepositedAmount] = useState('');
@@ -92,7 +92,7 @@ function Withdraw() {
   };
 
   const handleSkip = () => {
-    navigate('/cardDashboard?account=' + accountNumber);
+    navigate('/cardlessDashboard');
   };
 
   const handleWithdraw = async e => {
@@ -189,4 +189,4 @@ function Withdraw() {
   );
 }
 
-export default Withdraw;
+export default CardlessWithdraw;

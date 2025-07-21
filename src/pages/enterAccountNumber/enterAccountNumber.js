@@ -32,7 +32,7 @@ export default function EnterAccountNumber() {
       setSecondInput('');
       return;
     }
-    navigate(`/Deposit?account=${firstInput}`);
+    navigate(`/cardlessDeposit?account=${firstInput}`);
   };
 
   return (

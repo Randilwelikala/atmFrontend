@@ -65,8 +65,8 @@ export default function CardlessSideNavbar() {
           </li>
           <li>
             <NavLink
-              to={`/AskCard?account=${accountNumber}`}
-              className={({ isActive }) => (isActive ? 'active' : '')}
+              to={`/cardless-deposit`}
+              // className={({ isActive }) => (isActive ? 'active' : '')}
               onClick={handleLinkClick}
             >
               Cardless Deposit 

@@ -8,6 +8,9 @@
   cursor: pointer;
   font-weight: 600;
   transition: background-color 0.3s ease;
+  position: fixed;
+  top:10px ;
+  z-index: 1000;
 }
 
 .logout-button:hover {

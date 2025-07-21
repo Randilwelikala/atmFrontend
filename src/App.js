@@ -6,7 +6,7 @@ import CheckPin from './pages/checkPin/checkPin';
 import GetCardAccountNumberandPin from './pages/getCardAccountNumberAndPin/getCardAccountNumberandPin';
 import AccountDetails from './pages/accountDetails/accountDetails';
 import CardViewBalancePin from './pages/cardViewBalancePin/cardViewBalancePin';
-import Deposit from './pages/deposit/deposit';
+import Deposit from './pages/cardDepositMoney/cardDepositMoney';
 import AskCardless from './pages/askForReceiptCardlessTransactions/askForReceiptCardlessTransactions';
 import AskCard from './pages/askForReceiptCardTransactions/askForReceiptCardlTransactions';
 import SeeBalance from './pages/seeBalance/seeBalance';
@@ -19,7 +19,6 @@ import Withdraw from './pages/withdraw/withdraw';
 import CancelButton from './components/cancelButton/cancelButton';
 import ClearButton from './components/clearButton/clearButton';
 import LogoutButton from './components/logoutButton/logoutButton';
-import CardlessideNavbar from './components/cardlessSideNavbar/cardlessSideNavbar';
 import CardSideNavbar from './components/cardSideNavbar/cardSideNavbar';
 import axios from 'axios';
 import CardlessWithdrawOTP from './pages/cardlessWithdrawOTP/cardlessWithdrawOTP';
@@ -27,6 +26,17 @@ import CardlessDashboard from './pages/cardlessDashboard/cardlessDashboard';
 import AskCardlessWithdraw from './pages/askReceiptforCardlessWithdraw/askReceiptforCardlessWithdraw';
 import FundTransfer from '../src/pages/fundTransfer/fundTransfer'
 import CardlessSideNavbar from './components/cardlessSideNavbar/cardlessSideNavbar';
+import CardlessDeposit from './pages/cardlessDepositMoney/cardlessDepositMoney';
+import CardlessWithdraw from './pages/cardlessWithdraw/cardlessWithdraw';
+
+
+
+
+
+
+
+
+
 export default function App() {
   const [user, setUser] = useState(null);
   axios.defaults.withCredentials = true;
@@ -60,6 +70,8 @@ export default function App() {
         <Route path="/fundTransfer" element={<FundTransfer />} />
         <Route path='/cardlessSideNavbar' element={<CardlessSideNavbar/>}/>
         <Route path='/cardSideNavbar' element={<CardSideNavbar/>}/>
+        <Route path='/cardlessDeposit' element={<CardlessDeposit/>}/>
+        <Route path='/cardlessWithdrawto' element={<CardlessWithdraw/>}/>
         </>
         
             

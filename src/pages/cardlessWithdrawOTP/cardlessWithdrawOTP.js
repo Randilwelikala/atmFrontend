@@ -37,7 +37,7 @@ export default function CardlessWithdrawOTP() {
     try {
       const res = await axios.post('http://localhost:3001/verify-otp', { mobile, otp });
       setMessage('OTP verified! Redirecting...');
-      navigate(`/Withdraw?account=${res.data.accountNumber}`);
+      navigate(`/cardlessWithdrawto?account=${res.data.accountNumber}`);
     } catch (err) {
       setError(err.response?.data?.message || 'OTP verification failed');
     }

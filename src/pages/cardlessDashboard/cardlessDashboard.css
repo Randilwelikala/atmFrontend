@@ -25,7 +25,7 @@
   color: #333;
 }
 
-.cardless-btn {
+.cardless-withdraw-btn  {
   padding: 12px 28px;
   margin: 10px;
   font-size: 16px;
@@ -37,20 +37,30 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.cardless-btn:hover {
+.cardless-withdraw-btn:hover {
   background-color: #008f72;
   transform: scale(1.05);
 }
 
-.withdraw-btn {
-  background-color: #ff6b6b;
+.cardless-deposit-btn {
+  padding: 12px 28px;
+  margin: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: #00b894;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.withdraw-btn:hover {
-  background-color: #e54848;
+.cardless-deposit-btn:hover {
+  background-color: #008f72;
+  transform: scale(1.05);
 }
 
 .deposit-btn {
+  
   background-color: #54a0ff;
 }
 

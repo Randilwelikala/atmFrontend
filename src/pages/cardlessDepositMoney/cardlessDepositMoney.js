@@ -6,9 +6,9 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
-import './deposit.css';
+import './cardlessDepositMoney.css';
 
-function Deposit() {
+function CardlessDeposit() {
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
   const [depositedAmount, setDepositedAmount] = useState('');
@@ -89,7 +89,7 @@ function Deposit() {
   const generateTransactionId = () => `TXN${Date.now()}${Math.floor(1000 + Math.random() * 9000)}`;
 
   const handleSkip = () => {
-    navigate('/cardDashboard?account=' + accountNumber);
+    navigate('/cardlessDashboard');
   };
 
   const handleDeposit = async e => {
@@ -182,4 +182,4 @@ function Deposit() {
   );
 }
 
-export default Deposit;
+export default CardlessDeposit;

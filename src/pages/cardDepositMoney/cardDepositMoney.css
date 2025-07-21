@@ -143,6 +143,7 @@
 .skip-btn {
   background-color: #9aa3b8;
   transition: background-color 0.3s ease;
+  padding: 15px 50px;
 }
 
 .skip-btn:hover {
