@@ -14,6 +14,7 @@ const resources = {
       "Amount to Withdraw:": "Amount to Withdraw:",
       "Withdraw successful!": "Withdraw successful!",
       "Withdraw Receipt": "Withdraw Receipt",
+      "Homagama":"Homagama",
       // Add all text keys you want to translate
     }
   },
@@ -28,6 +29,7 @@ const resources = {
       "Amount to Withdraw:": "ඉවත් කිරීමට ඇති මුදල:",
       "Withdraw successful!": "ඉවත් කිරීම සාර්ථකයි!",
       "Withdraw Receipt": "ඉවත් කිරීමේ ලිපිනය",
+    //   "Homagama"
       // Add all Sinhala translations similarly
     }
   },
