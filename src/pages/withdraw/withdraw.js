@@ -7,6 +7,8 @@ import autoTable from 'jspdf-autotable';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
 import './withdraw.css';
+import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
+
 
 function Withdraw() {
   const [searchParams] = useSearchParams();
@@ -124,61 +126,65 @@ function Withdraw() {
   if (!user) return <p>Loading user details...</p>;
 
   return (
-    <div className="withdraw-container" id="withdraw-page">
-      <SessionTimeout timeoutDuration={50000000} />
-      <h2 className="withdraw-title">Withdraw Money</h2>
+    <>
+    <SideNavbar/>
+      
+      <div className="withdraw-container" id="withdraw-page">
+        <SessionTimeout timeoutDuration={50000000} />      
+        <h2 className="withdraw-title">Withdraw Money</h2>
 
-      <div className="withdraw-user-details">
-        <p><strong>Name:</strong> {user.name}</p>
-        <p><strong>Account Number:</strong> {user.accountNumber}</p>
-        <p><strong>Branch:</strong> {user.branch}</p>
-        <p><strong>Account Type:</strong> {user.accountType}</p>
-        <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
-      </div>
+        <div className="withdraw-user-details">
+          <p><strong>Name:</strong> {user.name}</p>
+          <p><strong>Account Number:</strong> {user.accountNumber}</p>
+          <p><strong>Branch:</strong> {user.branch}</p>
+          <p><strong>Account Type:</strong> {user.accountType}</p>
+          <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
+        </div>
 
-      <form onSubmit={handleWithdraw} className="withdraw-form">
-        <label className="withdraw-label">Amount to Withdraw:</label>
-        <input
-          type="number"
-          value={amount}
-          onChange={e => setAmount(e.target.value)}
-          className="withdraw-input"
-        />
-        <button type="submit" className="withdraw-btn">Withdraw</button>
-      </form>
+        <form onSubmit={handleWithdraw} className="withdraw-form">
+          <label className="withdraw-label">Amount to Withdraw:</label>
+          <input
+            type="number"
+            value={amount}
+            onChange={e => setAmount(e.target.value)}
+            className="withdraw-input"
+          />
+          <button type="submit" className="withdraw-btn">Withdraw</button>
+        </form>
 
-      {message && (
-        localStorage.getItem('wantsReceipt') === 'yes' ? (
-          <div className="withdraw-receipt">
-            <h3>🧾 Withdraw Receipt</h3>
-            <p><strong>Withdraw ID:</strong> {transactionId}</p>
-            <p><strong>Withdraw Date:</strong> {transactionDate}</p>
-            <p><strong>Account:</strong> {user.accountNumber}</p>
-            <p><strong>Name:</strong> {user.name}</p>
-            <p><strong>Branch:</strong> {user.branch}</p>
-            <p><strong>Account Type:</strong> {user.accountType}</p>
-            <p><strong>Withdrawed Amount:</strong> Rs. {depositedAmount}</p>
-            <p><strong>New Balance:</strong> Rs. {user.balance}</p>
-            <p className="withdraw-success">✅ Withdraw successful!</p>
+        {message && (
+          localStorage.getItem('wantsReceipt') === 'yes' ? (
+            <div className="withdraw-receipt">
+              <h3>🧾 Withdraw Receipt</h3>
+              <p><strong>Withdraw ID:</strong> {transactionId}</p>
+              <p><strong>Withdraw Date:</strong> {transactionDate}</p>
+              <p><strong>Account:</strong> {user.accountNumber}</p>
+              <p><strong>Name:</strong> {user.name}</p>
+              <p><strong>Branch:</strong> {user.branch}</p>
+              <p><strong>Account Type:</strong> {user.accountType}</p>
+              <p><strong>Withdrawed Amount:</strong> Rs. {depositedAmount}</p>
+              <p><strong>New Balance:</strong> Rs. {user.balance}</p>
+              <p className="withdraw-success">✅ Withdraw successful!</p>
 
-            <div className="withdraw-download-group" ref={dropdownRef}>
-              <button onClick={toggleDropdown} className="withdraw-btn">Download ▼</button>
-              {open && (
-                <div className="withdraw-dropdown">
-                  <button onClick={downloadPDF} className="withdraw-dropdown-btn">Download as PDF</button>
-                  <button onClick={downloadDOCX} className="withdraw-dropdown-btn">Download as DOCX</button>
-                </div>
-              )}
-              <button onClick={handleSkip} className="withdraw-btn secondary">Skip</button>
+              <div className="withdraw-download-group" ref={dropdownRef}>
+                <button onClick={toggleDropdown} className="withdraw-btn">Download ▼</button>
+                {open && (
+                  <div className="withdraw-dropdown">
+                    <button onClick={downloadPDF} className="withdraw-dropdown-btn">Download as PDF</button>
+                    <button onClick={downloadDOCX} className="withdraw-dropdown-btn">Download as DOCX</button>
+                  </div>
+                )}
+                <button onClick={handleSkip} className="withdraw-btn secondary">Skip</button>
+              </div>
             </div>
-          </div>
-        ) : (
-          <p className="withdraw-success">✅ Withdraw successful!</p>
-        )
-      )}
+          ) : (
+            <p className="withdraw-success">✅ Withdraw successful!</p>
+          )
+        )}
 
-      {error && <p className="withdraw-error">{error}</p>}
-    </div>
+        {error && <p className="withdraw-error">{error}</p>}
+      </div>
+    </>
   );
 }
 

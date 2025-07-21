@@ -8,7 +8,7 @@ export default function Home({ onActionSelect }) {
 
   return (
     <div className="home-page-container" id="home-page">
-      <SessionTimeout timeoutDuration={5000000} />
+      <SessionTimeout timeoutDuration={5000000*2} />
       <h1 className="home-title">Welcome</h1>
       <div className="home-option-columns">
         <div className="home-option-card cardless-option" id="cardless-section">

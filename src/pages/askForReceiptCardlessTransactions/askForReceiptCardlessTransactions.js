@@ -1,11 +1,13 @@
 import React from 'react';
-import { useNavigate,useSearchParams } from 'react-router-dom';
-import SessionTimeout from '../../components/sessionTimeout/sessionTimeout'
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
+import './askForReceiptCardlessTransactions.css'; // Import the CSS file
 
 export default function AskCardless() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
+
   const handleChoice = (choice) => {
     localStorage.setItem('wantsReceipt', choice); 
     if (choice === 'yes') {
@@ -16,11 +18,15 @@ export default function AskCardless() {
   };
 
   return (
-    <div className="atm-column card">
+    <div className="ask-cardless-container">
       <SessionTimeout timeoutDuration={500000} />
-      <h2>Do you want a receipt for this Cardless transaction?</h2>
-      <button onClick={() => handleChoice('yes')}>Yes</button>
-      <button onClick={() => handleChoice('no')}>No</button>
+      <h2 className="ask-cardless-heading">
+        Do you want a receipt for this Cardless transaction?
+      </h2>
+      <div className="ask-cardless-buttons">
+        <button className="ask-btn" onClick={() => handleChoice('yes')}>Yes</button>
+        <button className="ask-btn" onClick={() => handleChoice('no')}>No</button>
+      </div>
     </div>
   );
 }

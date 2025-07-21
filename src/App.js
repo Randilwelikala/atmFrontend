@@ -19,19 +19,21 @@ import Withdraw from './pages/withdraw/withdraw';
 import CancelButton from './components/cancelButton/cancelButton';
 import ClearButton from './components/clearButton/clearButton';
 import LogoutButton from './components/logoutButton/logoutButton';
+import CardlessideNavbar from './components/cardlessSideNavbar/cardlessSideNavbar';
+import CardSideNavbar from './components/cardNavbar/cardNavbar';
 import axios from 'axios';
-import ProtectedRoute from './components/auth/protectedRoute';
 import CardlessWithdrawOTP from './pages/cardlessWithdrawOTP/cardlessWithdrawOTP';
 import CardlessDashboard from './pages/cardlessDashboard/cardlessDashboard';
 import AskCardlessWithdraw from './pages/askReceiptforCardlessWithdraw/askReceiptforCardlessWithdraw';
 import FundTransfer from '../src/pages/fundTransfer/fundTransfer'
+import CardlessSideNavbar from './components/cardlessSideNavbar/cardlessSideNavbar';
 export default function App() {
   const [user, setUser] = useState(null);
   axios.defaults.withCredentials = true;
 
   return (
     <Router>
-      <LogoutButton onClick={()=>(window.location.href = '/')}/>
+      <LogoutButton onClick={()=>(window.location.href = '/')}/>        
       <Routes>
         <Route path='/cardlessDashboard' element={<CardlessDashboard/>}/>
         <Route path="/" element={<Home />} />
@@ -55,10 +57,14 @@ export default function App() {
         <Route path="/cardlessWithdraw" element={<CardlessWithdrawOTP />} />
         <Route path="/askReceiptforCardlessWithdraw" element={<AskCardlessWithdraw />} />
         <Route path="/fundTransfer" element={<FundTransfer />} />
+        <Route path='/cardlessSideNavbar' element={<CardlessSideNavbar/>}/>
+        <Route path='/cardSideNavbar' element={<CardSideNavbar/>}/>
         
+        
+            
       </Routes>     
 
-      <CancelButton onClick={() => window.history.back()} />
+      <CancelButton onClick={() => window.history.back()} />        
       <ClearButton onClick={() => (window.location.href = '/')} />
       
       

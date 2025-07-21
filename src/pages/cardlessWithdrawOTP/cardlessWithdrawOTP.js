@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './cardlessWithdrawOTP.css'; // ✅ Add this line
-
+import './cardlessWithdrawOTP.css'; 
+import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 export default function CardlessWithdrawOTP() {
   const [mobile, setMobile] = useState('');
   const [otp, setOtp] = useState('');
@@ -44,7 +44,9 @@ export default function CardlessWithdrawOTP() {
   };
 
   return (
+    
     <div className="otp-container" id="cardless-otp-page">
+      <CardlessSideNavbar/>     
       <h2 className="otp-title">Cardless Withdraw - OTP Verification</h2>
       
       {!otpSent ? (

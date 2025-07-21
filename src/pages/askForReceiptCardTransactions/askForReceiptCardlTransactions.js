@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import './askForReceiptCardTransactions.css';
+import CardSideNavbar from '../../components/cardNavbar/cardNavbar';
+
 
 export default function AskCard() {
   const navigate = useNavigate();
@@ -15,6 +17,7 @@ export default function AskCard() {
 
   return (
     <div className="ask-card-container" id="ask-card-page">
+      <CardSideNavbar/>
       <SessionTimeout timeoutDuration={500000} />
       <h2 className="ask-card-title">Do you want a receipt for this Card transaction?</h2>
       <div className="ask-card-buttons">

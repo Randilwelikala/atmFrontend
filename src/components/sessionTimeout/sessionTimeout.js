@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './sessionTimeout.css'
 
 export default function SessionTimeout({ timeoutDuration = 5000, confirmDuration = 10000 }) {
   const navigate = useNavigate();
@@ -88,9 +89,9 @@ export default function SessionTimeout({ timeoutDuration = 5000, confirmDuration
   return (
     <>
       {showPrompt && (
-        <div style={modalStyle}>
-          <div style={modalContentStyle}>
-            <p>Session is about to expire. Do you want more time?</p>
+        <div className="session-modal">
+          <div className="session-modal-content">
+            <p>Do you want more time?</p>
             <button onClick={() => handleUserResponse('yes')}>Yes</button>
             <button onClick={() => handleUserResponse('no')}>No</button>
           </div>

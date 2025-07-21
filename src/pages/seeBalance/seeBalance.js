@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import './seeBalance.css';
+import CardSideNavbar from '../../components/cardNavbar/cardNavbar';
+
 
 export default function SeeBalance() {
   const [searchParams] = useSearchParams();
@@ -22,8 +24,12 @@ export default function SeeBalance() {
   if (!user) return <p className="loading-message">Loading user details...</p>;
 
   return (
+    <>
+    <CardSideNavbar/>
     <div className="balance-container">
+      
       <SessionTimeout timeoutDuration={5000000} />
+      
       <h2 className="balance-title">Account Details</h2>
       <div className="balance-details">
         <p><strong>Name:</strong> {user.name}</p>
@@ -33,5 +39,6 @@ export default function SeeBalance() {
         <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
       </div>
     </div>
+    </>
   );
 }

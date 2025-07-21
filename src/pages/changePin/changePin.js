@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './changePin.css';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
+import CardSideNavbar from '../../components/cardNavbar/cardNavbar';
 
 export default function ChangePin() {
   const [accountNumber, setAccountNumber] = useState('');
@@ -42,7 +43,10 @@ export default function ChangePin() {
   };
 
   return (
+    <>
+    <CardSideNavbar/>
     <div className="change-pin-container">
+      
       <SessionTimeout timeoutDuration={5000000} />
       <h2 className="change-pin-title">Change Debit Card PIN</h2>
       <form onSubmit={handleChangePin} className="change-pin-form">
@@ -105,5 +109,6 @@ export default function ChangePin() {
       {message && <p className="change-pin-message success">{message}</p>}
       {error && <p className="change-pin-message error">{error}</p>}
     </div>
+    </>
   );
 }

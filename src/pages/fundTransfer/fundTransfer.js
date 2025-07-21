@@ -5,6 +5,7 @@ import { Document, Packer, Paragraph } from "docx";
 import { saveAs } from "file-saver";
 import { useNavigate } from 'react-router-dom';
 import './fundTransfer.css';
+import CardSideNavbar from '../../components/cardNavbar/cardNavbar';
 
 function FundTransfer() {
   const [sender, setSender] = useState('');
@@ -90,6 +91,8 @@ function FundTransfer() {
   };
 
   return (
+    <>
+    <CardSideNavbar/>
     <div className="fund-transfer-container">
       <h2 className="fund-transfer-title">Fund Transfer</h2>
 
@@ -188,6 +191,7 @@ function FundTransfer() {
         </div>
       )}
     </div>
+    </>
   );
 }
 
