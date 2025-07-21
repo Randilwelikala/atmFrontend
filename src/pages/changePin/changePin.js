@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './changePin.css';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
-import CardSideNavbar from '../../components/cardNavbar/cardNavbar';
+import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 
 export default function ChangePin() {
   const [accountNumber, setAccountNumber] = useState('');

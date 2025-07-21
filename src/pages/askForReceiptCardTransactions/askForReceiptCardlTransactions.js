@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import './askForReceiptCardTransactions.css';
-import CardSideNavbar from '../../components/cardNavbar/cardNavbar';
+import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 
 
 export default function AskCard() {

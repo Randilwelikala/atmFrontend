@@ -20,7 +20,7 @@ import CancelButton from './components/cancelButton/cancelButton';
 import ClearButton from './components/clearButton/clearButton';
 import LogoutButton from './components/logoutButton/logoutButton';
 import CardlessideNavbar from './components/cardlessSideNavbar/cardlessSideNavbar';
-import CardSideNavbar from './components/cardNavbar/cardNavbar';
+import CardSideNavbar from './components/cardSideNavbar/cardSideNavbar';
 import axios from 'axios';
 import CardlessWithdrawOTP from './pages/cardlessWithdrawOTP/cardlessWithdrawOTP';
 import CardlessDashboard from './pages/cardlessDashboard/cardlessDashboard';

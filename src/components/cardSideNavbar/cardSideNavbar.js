@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useSearchParams } from 'react-router-dom';
-import './cardNavbar.css';
+import './cardSideNavbar.css';
 export default function CardSideNavbar() {
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account') || '';

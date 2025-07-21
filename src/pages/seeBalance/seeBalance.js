@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import './seeBalance.css';
-import CardSideNavbar from '../../components/cardNavbar/cardNavbar';
+import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 
 
 export default function SeeBalance() {

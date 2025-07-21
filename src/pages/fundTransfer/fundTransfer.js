@@ -5,7 +5,7 @@ import { Document, Packer, Paragraph } from "docx";
 import { saveAs } from "file-saver";
 import { useNavigate } from 'react-router-dom';
 import './fundTransfer.css';
-import CardSideNavbar from '../../components/cardNavbar/cardNavbar';
+import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 
 function FundTransfer() {
   const [sender, setSender] = useState('');
