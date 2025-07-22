@@ -1,4 +1,23 @@
-/* sessionTimeout.css */
+:root {
+  --modal-bg-overlay: rgba(0, 0, 0, 0.5);
+  --modal-content-bg: #ffffff;
+  --modal-text-color: #333;
+  --modal-btn-bg: #007bff;
+  --modal-btn-bg-hover: #0056b3;
+  --modal-btn-text: white;
+  --modal-shadow: rgba(0, 0, 0, 0.25);
+}
+
+/* Dark theme overrides */
+.dark-theme {
+  --modal-bg-overlay: rgba(0, 0, 0, 0.7);
+  --modal-content-bg: #2a2a2a;
+  --modal-text-color: #ddd;
+  --modal-btn-bg: #0056b3;
+  --modal-btn-bg-hover: #003f7f;
+  --modal-btn-text: white;
+  --modal-shadow: rgba(255, 255, 255, 0.1);
+}
 
 .session-modal {
   position: fixed;
@@ -6,7 +25,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--modal-bg-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,32 +33,32 @@
 }
 
 .session-modal-content {
-  background-color: #ffffff;
+  background-color: var(--modal-content-bg);
   padding: 25px 30px;
   border-radius: 10px;
   text-align: center;
   max-width: 350px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 12px var(--modal-shadow);
 }
 
 .session-modal-content p {
   font-size: 18px;
   margin-bottom: 20px;
-  color: #333;
+  color: var(--modal-text-color);
 }
 
 .session-modal-content button {
   margin: 0 10px;
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #007bff;
+  background-color: var(--modal-btn-bg);
   border: none;
   border-radius: 6px;
-  color: white;
+  color: var(--modal-btn-text);
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .session-modal-content button:hover {
-  background-color: #0056b3;
+  background-color: var(--modal-btn-bg-hover);
 }
