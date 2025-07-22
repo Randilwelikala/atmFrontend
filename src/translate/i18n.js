@@ -41,6 +41,90 @@ const resources = {
       "Home" : "මුල් පිටුව",
       "Back" : "ආපසු",
       "Deposit Money" : "මුදල් තැන්පත් කරන්න",
+      "Do you want a receipt for this Cardless transaction?" : "මෙම කාඩ්පත් රහිත ගනුදෙනුව සඳහා ඔබට රිසිට්පතක් අවශ්‍යද?",
+      "yes" : "ඔව්",
+      "No" : "නැත",
+      "Cardless Withdraw - OTP Verification" : "කාඩ්පත් රහිත මුදල් ආපසු ගැනීම - OTP සත්‍යාපනය",
+      "Enter Mobile Number:" : "ජංගම දුරකථන අංකය ඇතුලත් කරන්න:",
+      "send OTP" : "OTP යවන්න",
+      "OTP sent to" : "OTP යවන ලදී",
+      "For testing" : "පරීක්ෂණ සඳහා",
+      "OTP is" : "OTP යනු",
+      "Enter OTP" : "OTP ඇතුලත් කරන්න",
+      "Verify OTP" : "OTP තහවුරු කරන්න",
+      "Amount to Withdraw" : "ආපසු ලබාගත යුතු මුදල",
+      "Withdraw" : "ආපසු ගන්න",
+      "Dispensed Cash Breakdown" : "බෙදා හරින ලද මුදල් ",
+      "Withdraw Date" : "ආපසු ගැනීමේ දිනය",
+      "Account" : "ගිණුම් අංකය",
+      "Withdrawed Amount" : "ආපසු ගත් මුදල",
+      "Withdraw ID" : "ආපසු ගැනීමේ අංකය",
+      "Download" : "බාගත කරන්න",
+      "Skip" : "මඟ හරින්න",
+      "Download as PDF" : "PDF ලෙස ඩවුන්ලෝඩ් කරන්න",
+      "Download as DOCX" : "DOCX ලෙස ඩවුන්ලෝඩ් කරන්න",
+      "Enter Account Number" : "ගිණුම් අංකය ඇතුලත් කරන්න",
+      "Enter account number" : "ගිණුම් අංකය ඇතුලත් කරන්න",
+      "Next" : "ඊළඟ",
+      "Re-enter account number" : "ගිණුම් අංකය නැවත ඇතුල් කරන්න",
+      "Confirm" : "තහවුරු කරන්න",
+      "Current Balance" : "වත්මන් ශේෂය",
+      "Amount to Deposit" : "තැන්පත් කළ යුතු මුදල",
+      "Deposit" : "තැන්පත් කිරීමට",
+      "Transaction Receipt" : "ගනුදෙනු රිසිට්පත",
+      "Transaction ID" : "ගනුදෙනු හැඳුනුම්පත",
+      "Transaction Date" : "ගනුදෙනු දිනය",
+      "Deposited Amount" : "තැන්පත් කළ මුදල",
+      "Deposit successful!" : "තැන්පත් කිරීම සාර්ථකයි!",
+      "Skip" : "මඟ හරින්න",
+      "Homagama" : "හෝමාගම",
+      "For Continue" : "දිගටම කරගෙන යාම සඳහා",
+      "Card Number" : "කාඩ්පත් අංකය",
+      "PIN" : "මුරපදය",
+      "View Balance" : "ශේෂය බලන්න",
+      "Change PIN" : "PIN එක වෙනස් කරන්න",
+      "Fund Transfer" : "මුදල් හුවමාරු කිරීමට",
+      "Do you want a receipt for this Card transaction?" : "මෙම කාඩ්පත් ගනුදෙනුව සඳහා ඔබට රිසිට්පතක් අවශ්‍යද?",
+      "Do you want a receipt for this Card Withdraw?" : "මෙම කාඩ්පත ආපසු ගැනීම සඳහා ඔබට රිසිට්පතක් අවශ්‍යද?",
+      "Account Details" : "ගිණුම් විස්තර",
+      "Change Debit Card PIN" : "ඩෙබිට් කාඩ් පතේ PIN අංකය වෙනස් කිරීමට",
+      "Old PIN" : "පැරණි PIN අංකය",
+      "New PIN" : "නව PIN අංකය",      
+      "Confirm New PIN" : "නව PIN අංකය තහවුරු කරන්න",
+      "PIN changed successfully" : "PIN අංකය සාර්ථකව වෙනස් විය",
+      "Same Bank Transfer" : "එකම බැංකු හුවමාරුව",
+      "Other Bank Transfer" : "වෙනත් බැංකු මාරු කිරීම",
+      "Your Account Number" : "ඔබගේ ගිණුම් අංකය",
+      "Recipient Account Number" : "ලබන්නාගේ ගිණුම් අංකය",
+      "Amount" : "මුදල",
+      "Transfer" : "මාරු කරන්න",
+      "From" : "සිට",
+      "To" : "වෙත",
+      "Type" : "බැංකු වර්ගය",
+      "Remaining Balance" : "ඉතිරි ශේෂය",
+      "Dashboard" : "පාලක පුවරුව",
+      "Loading user data" : "පරිශීලක දත්ත පූරණය කරමින්",
+      "" : "",
+      "" : "",
+      "" : "",
+      "" : "",
+      "" : "",
+      "" : "",
+
+      
+
+      
+
+
+
+
+
+
+
+
+
+
+
       
 
     //   "Homagama"
