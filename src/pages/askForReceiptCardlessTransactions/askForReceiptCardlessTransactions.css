@@ -1,16 +1,35 @@
+:root {
+  --ask-bg: #fdfdfd;
+  --ask-text-color: #333;
+  --ask-shadow: rgba(0, 0, 0, 0.15);
+  --ask-btn-bg: #004aad;
+  --ask-btn-bg-hover: #003380;
+  --ask-btn-text: white;
+}
+
+/* Dark theme overrides */
+.dark-theme {
+  --ask-bg: #1e1e1e;
+  --ask-text-color: #ddd;
+  --ask-shadow: rgba(255, 255, 255, 0.1);
+  --ask-btn-bg: #0066ff;
+  --ask-btn-bg-hover: #004aad;
+  --ask-btn-text: white;
+}
+
 .ask-cardless-container {
   max-width: 500px;
   margin: 100px auto;
   padding: 30px;
-  background-color: #fdfdfd;
+  background-color: var(--ask-bg);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px var(--ask-shadow);
   text-align: center;
 }
 
 .ask-cardless-heading {
   font-size: 1.5rem;
-  color: #333;
+  color: var(--ask-text-color);
   margin-bottom: 30px;
 }
 
@@ -25,12 +44,12 @@
   font-size: 1rem;
   border: none;
   border-radius: 8px;
-  background-color: #004aad;
-  color: white;
+  background-color: var(--ask-btn-bg);
+  color: var(--ask-btn-text);
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .ask-btn:hover {
-  background-color: #003380;
+  background-color: var(--ask-btn-bg-hover);
 }
