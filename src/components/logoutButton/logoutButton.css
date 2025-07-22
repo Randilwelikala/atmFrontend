@@ -1,18 +1,30 @@
-/* src/components/logoutButton/LogoutButton.css */
+:root {
+  --logout-btn-bg: #e74c3c;
+  --logout-btn-bg-hover: #c0392b;
+  --logout-btn-text: white;
+}
+
+/* Dark theme overrides */
+.dark-theme {
+  --logout-btn-bg: #b03a33;
+  --logout-btn-bg-hover: #8a2e28;
+  --logout-btn-text: white;
+}
+
 .logout-button {
   padding: 8px 16px;
-  background-color: #e74c3c; /* nice red */
-  color: white;
+  background-color: var(--logout-btn-bg);
+  color: var(--logout-btn-text);
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
   transition: background-color 0.3s ease;
   position: fixed;
-  top:10px ;
+  top: 10px;
   z-index: 1000;
 }
 
 .logout-button:hover {
-  background-color: #c0392b; /* darker red on hover */
+  background-color: var(--logout-btn-bg-hover);
 }
