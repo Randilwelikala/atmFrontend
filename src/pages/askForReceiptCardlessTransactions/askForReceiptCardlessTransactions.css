@@ -7,14 +7,14 @@
   --ask-btn-text: white;
 }
 
-/* Dark theme overrides */
+/* 🔧 Improved Dark Theme */
 .dark-theme {
-  --ask-bg: #1e1e1e;
-  --ask-text-color: #ddd;
-  --ask-shadow: rgba(255, 255, 255, 0.1);
-  --ask-btn-bg: #0066ff;
-  --ask-btn-bg-hover: #004aad;
-  --ask-btn-text: white;
+  --ask-bg: #1e1e1e;                 /* true dark background */
+  --ask-text-color: #f0f0f0;         /* brighter text */
+  --ask-shadow: rgba(255, 255, 255, 0.05);
+  --ask-btn-bg: #1e88e5;             /* brighter blue button */
+  --ask-btn-bg-hover: #1565c0;
+  --ask-btn-text: #ffffff;
 }
 
 .ask-cardless-container {
@@ -25,12 +25,14 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px var(--ask-shadow);
   text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .ask-cardless-heading {
   font-size: 1.5rem;
   color: var(--ask-text-color);
   margin-bottom: 30px;
+  transition: color 0.3s ease;
 }
 
 .ask-cardless-buttons {
@@ -47,9 +49,10 @@
   background-color: var(--ask-btn-bg);
   color: var(--ask-btn-text);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .ask-btn:hover {
   background-color: var(--ask-btn-bg-hover);
+  transform: scale(1.05);
 }

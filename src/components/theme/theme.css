@@ -1,0 +1,50 @@
+/* Base styles for the button */
+#theme-toggle-btn.theme-toggle-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+
+  padding: 10px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+  outline-offset: 2px;
+}
+
+/* Light mode button styles */
+#theme-toggle-btn.theme-toggle-button.light {
+  background-color: #222;
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+#theme-toggle-btn.theme-toggle-button.light:hover,
+#theme-toggle-btn.theme-toggle-button.light:focus {
+  background-color: #444;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.7);
+}
+
+/* Dark mode button styles */
+#theme-toggle-btn.theme-toggle-button.dark {
+  background-color: #f0f0f0;
+  color: #222;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+#theme-toggle-btn.theme-toggle-button.dark:hover,
+#theme-toggle-btn.theme-toggle-button.dark:focus {
+  background-color: #ddd;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+}
+
+/* Optional: focus-visible for accessibility */
+#theme-toggle-btn.theme-toggle-button:focus-visible {
+  outline: 3px solid #4caf50;
+  outline-offset: 4px;
+}

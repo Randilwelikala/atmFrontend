@@ -7,8 +7,11 @@
   top: 0;
   right: 0;
   overflow-y: auto;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
   z-index: 1000;
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  box-shadow: var(--sidebar-shadow);
 }
 
 /* Hidden sidebar on small screens */
@@ -23,12 +26,15 @@
 .main-content {
   margin-right: 220px;
   transition: margin-right 0.3s ease;
+  background-color: var(--main-bg);
+  color: var(--main-text);
 }
 
 .main-content.full-width {
   margin-right: 0;
 }
 
+/* Sidebar list styles */
 .side-navbar ul {
   list-style: none;
   padding: 0;
@@ -44,14 +50,17 @@
   padding: 12px 20px;
   display: block;
   font-weight: 500;
-  transition: background-color 0.3s ease;
   border-radius: 4px;
+  color: var(--sidebar-link);
+  transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
 }
 
 /* Highlight on hover/active */
 .side-navbar ul li a:hover,
 .side-navbar ul li a.active {
   font-weight: 700;
+  background-color: var(--sidebar-link-hover-bg);
+  color: var(--sidebar-link-hover);
 }
 
 /* Hamburger button */
@@ -66,6 +75,9 @@
   cursor: pointer;
   z-index: 1100;
   display: none;
+  background-color: var(--hamburger-bg);
+  color: var(--hamburger-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Responsive */
@@ -99,44 +111,34 @@
   }
 }
 
-/* ===== Theme Support ===== */
+/* ===== Theme Variables and Support ===== */
 
-/* Dark Theme (default) */
-.dark-theme .side-navbar {
-  background-color: #2c3e50;
+/* Light Theme Variables */
+.light-theme {
+  --sidebar-bg: #f4f4f4;
+  --sidebar-text: #2c3e50;
+  --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  --sidebar-link: #2c3e50;
+  --sidebar-link-hover-bg: #d0d0d0;
+  --sidebar-link-hover: #000;
+  --hamburger-bg: #ddd;
+  --hamburger-color: #333;
+
+  --main-bg: #ffffff;
+  --main-text: #333;
 }
 
-.dark-theme .side-navbar ul li a {
-  color: #ecf0f1;
-}
+/* Dark Theme Variables */
+.dark-theme {
+  --sidebar-bg: #2c3e50;
+  --sidebar-text: #ecf0f1;
+  --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.7);
+  --sidebar-link: #ecf0f1;
+  --sidebar-link-hover-bg: #34495e;
+  --sidebar-link-hover: #fff;
+  --hamburger-bg: #2c3e50;
+  --hamburger-color: #fff;
 
-.dark-theme .side-navbar ul li a:hover,
-.dark-theme .side-navbar ul li a.active {
-  background-color: #34495e;
-  color: #fff;
-}
-
-.dark-theme .hamburger-btn {
-  background-color: #2c3e50;
-  color: white;
-}
-
-/* Light Theme */
-.light-theme .side-navbar {
-  background-color: #f4f4f4;
-}
-
-.light-theme .side-navbar ul li a {
-  color: #2c3e50;
-}
-
-.light-theme .side-navbar ul li a:hover,
-.light-theme .side-navbar ul li a.active {
-  background-color: #d0d0d0;
-  color: #000;
-}
-
-.light-theme .hamburger-btn {
-  background-color: #ddd;
-  color: #333;
+  --main-bg: #121212;
+  --main-text: #ddd;
 }
