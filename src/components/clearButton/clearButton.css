@@ -1,23 +1,38 @@
+:root {
+  --clear-btn-bg: #ffa940;
+  --clear-btn-bg-hover: #fa8c16;
+  --clear-btn-text: white;
+  --clear-btn-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme overrides */
+.dark-theme {
+  --clear-btn-bg: #cc7a00;
+  --clear-btn-bg-hover: #a46300;
+  --clear-btn-text: white;
+  --clear-btn-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
 .clear-btn {
   padding: 10px 20px;
-  background-color: #ffa940;
-  color: white;
+  background-color: var(--clear-btn-bg);
+  color: var(--clear-btn-text);
   border: none;
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--clear-btn-shadow);
   animation: fadeIn 0.4s ease;
 
   position: fixed;
   bottom: 20px;
-  left:50px;
-  
+  left: 50px;
+
   transform: translateX(-50%);
   z-index: 1000;
 }
 
 .clear-btn:hover {
-  background-color: #fa8c16;  
+  background-color: var(--clear-btn-bg-hover);
 }
