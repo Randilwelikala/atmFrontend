@@ -126,7 +126,7 @@ function FundTransfer() {
         <input
           id="sender-account"
           type="text"
-          placeholder="Your Account Number"
+          placeholder={t('Your Account Number')}
           value={sender}
           onChange={(e) => setSender(e.target.value)}
           className="fund-transfer-input"
@@ -136,7 +136,7 @@ function FundTransfer() {
         <input
           id="recipient-account"
           type="text"
-          placeholder="Recipient Account Number"
+          placeholder={t('Recipient Account Number')}
           value={recipient}
           onChange={(e) => {
             const value = e.target.value;
@@ -157,7 +157,7 @@ function FundTransfer() {
         <input
           id="transfer-amount"
           type="number"
-          placeholder="Amount"
+          placeholder={t('Amount')}
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           className="fund-transfer-input"
@@ -165,7 +165,7 @@ function FundTransfer() {
           min={1}
         />
         <button type="submit" className="fund-transfer-button">
-          Transfer
+          {t('Transfer')}
         </button>
       </form>
 
@@ -176,16 +176,16 @@ function FundTransfer() {
           <h3 className="receipt-title">{t('Transfer Receipt')}</h3>
           <p><strong>{t('From')}:</strong> {receipt.from}</p>
           <p><strong>{t('To')}:</strong> {receipt.to}</p>
-          <p><strong>{t('Amount')}:</strong> Rs. {receipt.transferred}</p>
+          <p><strong>{t('Amount')}:</strong> {t('Rs')}. {receipt.transferred}</p>
           <p><strong>{t('Type')}:</strong> {receipt.bank}</p>
-          <p><strong>{t('Remaining Balance')}:</strong> Rs. {receipt.senderNewBalance}</p>
+          <p><strong>{t('Remaining Balance')}:</strong> {t('Rs')}. {receipt.senderNewBalance}</p>
 
           <div className="receipt-buttons">
             <button onClick={handleDownloadPDF} className="btn pdf-btn">
-              {t('Download PDF')}
+              {t('Download as PDF')}
             </button>
             <button onClick={handleDownloadDOCX} className="btn docx-btn">
-              {t('Download DOCX')}
+              {t('Download as DOCX')}
             </button>
             <button onClick={handleSkip} className="btn skip-btn">
               {t('Skip')}

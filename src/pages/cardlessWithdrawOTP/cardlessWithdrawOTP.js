@@ -21,7 +21,7 @@ export default function CardlessWithdrawOTP() {
     }
     try {
       const res = await axios.post('http://localhost:3001/send-otp', { mobile });
-      setMessage(`OTP sent to ${mobile}. For testing: OTP is ${res.data.otp}`);
+      setMessage(`${t('OTP sent to')} ${mobile}. ${t('For testing')}: ${t('OTP is')} ${res.data.otp}`);
       setOtpSent(true);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to send OTP');

@@ -125,7 +125,7 @@ function CardlessDeposit() {
       <p><strong>{t('Account Number')}:</strong> {user.accountNumber}</p>
       <p><strong>{t("Branch")}:</strong> {user.branch}</p>
       <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
-      <p><strong>{t('Current Balance')}:</strong> Rs. {user.balance}</p>
+      <p><strong>{t('Current Balance')}:</strong> {t('Rs')}. {user.balance}</p>
 
       <form onSubmit={handleDeposit} className="deposit-form">
         <label htmlFor="amount" className="deposit-label">{t('Amount to Deposit')}:</label>
@@ -152,7 +152,7 @@ function CardlessDeposit() {
             <p><strong>{t('Name')}:</strong> {user.name}</p>
             <p><strong>{t('Branch')}:</strong> {user.branch}</p>
             <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
-            <p><strong>{t('Deposited Amount')}:</strong> Rs. {depositedAmount}</p>
+            <p><strong>{t('Deposited Amount')}:</strong> {t('Rs')}. {depositedAmount}</p>
             <p><strong>{t('New Balance')}:</strong> {t('Rs')}. {user.balance}</p>
             <p className="deposit-success">{t('Deposit successful!')}</p>
 

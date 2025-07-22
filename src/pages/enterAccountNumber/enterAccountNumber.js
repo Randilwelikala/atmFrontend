@@ -50,7 +50,7 @@ export default function EnterAccountNumber() {
           <input
             className="input"
             type="text"
-            placeholder="Enter account number"
+            placeholder={t('Enter account number')}
             value={firstInput}
             onChange={e => setFirstInput(e.target.value)}
             required

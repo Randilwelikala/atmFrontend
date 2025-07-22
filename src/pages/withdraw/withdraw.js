@@ -143,7 +143,7 @@ function Withdraw() {
           <p><strong>{t('Name')}:</strong> {user.name}</p>
           <p><strong>{t('Account Number')}:</strong> {user.accountNumber}</p>
           <p><strong>{t('Branch')}:</strong> {user.branch}</p>
-          <p><strong>{t('Account Type:')}</strong> {user.accountType}</p>
+          <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
           <p><strong>{t('Current Balance')}:</strong> Rs. {user.balance}</p>
           <p><strong>{t('New Balance')}:</strong> Rs. {user.balance}</p>
           {Object.keys(breakdown).length > 0 && (

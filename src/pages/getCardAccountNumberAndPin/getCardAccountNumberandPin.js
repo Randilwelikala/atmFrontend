@@ -57,7 +57,7 @@ export default function GetCardAccountNumberandPin() {
       <form onSubmit={handleLogin} className="card-login-form">
         <input
           type="text"
-          placeholder="Card Number"
+        placeholder={t('Card Number')}
           value={cardNumber}
           onChange={e => setCardNumber(e.target.value)}
           className="card-login-input"

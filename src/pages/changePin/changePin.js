@@ -34,7 +34,7 @@ export default function ChangePin() {
         oldPin,
         newPin,
       });
-      setMessage(res.data.message);
+      setMessage(t(res.data.message));
       setAccountNumber('');
       setOldPin('');
       setNewPin('');
