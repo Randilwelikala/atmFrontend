@@ -3,21 +3,25 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 const resources = {
-  en: {
-    translation: {
-      "Withdraw Money": "Withdraw Money",
-      "Name": "Name",
-      "Account Number": "Account Number",
-      "Branch": "Branch",
-      "Account Type": "Account Type",
-      "Current Balance": "Current Balance",
-      "Amount to Withdraw:": "Amount to Withdraw:",
-      "Withdraw successful!": "Withdraw successful!",
-      "Withdraw Receipt": "Withdraw Receipt",
-      "Homagama":"Homagama",
-      // Add all text keys you want to translate
-    }
-  },
+  // en: {
+  //   translation: {
+  //     "Withdraw Money": "Withdraw Money",
+  //     "Name": "Name",
+  //     "Account Number": "Account Number",
+  //     "Branch": "Branch",
+  //     "Account Type": "Account Type",
+  //     "Current Balance": "Current Balance",
+  //     "Amount to Withdraw:": "Amount to Withdraw:",
+  //     "Withdraw successful!": "Withdraw successful!",
+  //     "Withdraw Receipt": "Withdraw Receipt",
+  //     "Homagama":"Homagama",
+  //     "Welcome" : "Welcome",
+  //     "Cardless Transactions" : "Cardless Transactions",
+  //     // "Proceed" : "Proceed",
+  //     "Card Transactions": "Card Transactions"
+  //     // Add all text keys you want to translate
+  //   }
+  // },
   si: {
     translation: {
       "Withdraw Money": "මුදල් ඉවත් කිරීම",
@@ -29,6 +33,11 @@ const resources = {
       "Amount to Withdraw:": "ඉවත් කිරීමට ඇති මුදල:",
       "Withdraw successful!": "ඉවත් කිරීම සාර්ථකයි!",
       "Withdraw Receipt": "ඉවත් කිරීමේ ලිපිනය",
+      "Welcome" : "සාදරයෙන් පිළිගනිමු",
+      "Cardless Transactions" : "කාඩ්පත් රහිත ගනුදෙනු",
+      "Proceed" : "ඉදිරියට යන්න",
+      "Card Transactions" : "කාඩ්පත් ගනුදෙනු"
+
     //   "Homagama"
       // Add all Sinhala translations similarly
     }

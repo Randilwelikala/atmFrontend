@@ -29,6 +29,8 @@ import CardlessSideNavbar from './components/cardlessSideNavbar/cardlessSideNavb
 import CardlessDeposit from './pages/cardlessDepositMoney/cardlessDepositMoney';
 import CardlessWithdraw from './pages/cardlessWithdraw/cardlessWithdraw';
 import './translate/i18n';
+import LanguageSwitcher from './components/translate/translate';
+
 
 
 
@@ -39,6 +41,8 @@ export default function App() {
   return (
     <Router>
       <LogoutButton onClick={()=>(window.location.href = '/')}/>        
+        <LanguageSwitcher/>
+
       <Routes>
         <>
         <Route path='/cardlessDashboard' element={<CardlessDashboard/>}/>
@@ -73,9 +77,7 @@ export default function App() {
       </Routes>     
       
       <ClearButton onClick={() => (window.location.href = '/')} />
-      <CancelButton onClick={() => window.history.back()} />        
-      
-      
+      <CancelButton onClick={() => window.history.back()} />       
       
       <Outlet />
     </Router>
