@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import './getCardAccountNumberAndPin.css';
+import { useTranslation } from 'react-i18next';
 
 export default function GetCardAccountNumberandPin() {
   const [cardNumber, setCardNumber] = useState('');
   const [pin, setPin] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+
 
   const handleLogin = async e => {
     e.preventDefault();
@@ -50,7 +53,7 @@ export default function GetCardAccountNumberandPin() {
   return (
     <div className="card-login-container" id="card-login-page">
       <SessionTimeout timeoutDuration={5000000} />
-      <h2 className="card-login-title">For Continue</h2>
+      <h2 className="card-login-title">{t('For Continue')}</h2>
       <form onSubmit={handleLogin} className="card-login-form">
         <input
           type="text"
@@ -74,7 +77,7 @@ export default function GetCardAccountNumberandPin() {
           pattern="\d+"
           title="Enter your PIN"
         />
-        <button type="submit" className="card-login-button">Confirm</button>
+        <button type="submit" className="card-login-button">{t('Confirm')}</button>
       </form>
       {error && <p className="card-login-error">{error}</p>}
     </div>

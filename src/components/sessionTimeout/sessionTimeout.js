@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './sessionTimeout.css'
+import { useTranslation } from 'react-i18next';
 
 export default function SessionTimeout({ timeoutDuration = 5000, confirmDuration = 10000 }) {
   const navigate = useNavigate();
   const [showPrompt, setShowPrompt] = useState(false);
+  const { t, i18n } = useTranslation();
+
 
   // Using refs to keep timers stable between renders
   const inactivityTimer = useRef(null);
@@ -91,9 +94,9 @@ export default function SessionTimeout({ timeoutDuration = 5000, confirmDuration
       {showPrompt && (
         <div className="session-modal">
           <div className="session-modal-content">
-            <p>Do you want more time?</p>
-            <button onClick={() => handleUserResponse('yes')}>Yes</button>
-            <button onClick={() => handleUserResponse('no')}>No</button>
+            <p>{t('Do you want more time?')}</p>
+            <button onClick={() => handleUserResponse('yes')}>{t('Yes')}</button>
+            <button onClick={() => handleUserResponse('no')}>{t('No')}</button>
           </div>
         </div>
       )}

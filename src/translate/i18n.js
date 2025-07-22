@@ -36,7 +36,12 @@ const resources = {
       "Welcome" : "සාදරයෙන් පිළිගනිමු",
       "Cardless Transactions" : "කාඩ්පත් රහිත ගනුදෙනු",
       "Proceed" : "ඉදිරියට යන්න",
-      "Card Transactions" : "කාඩ්පත් ගනුදෙනු"
+      "Card Transactions" : "කාඩ්පත් ගනුදෙනු",
+      "Logout" : "පිටවීම",
+      "Home" : "මුල් පිටුව",
+      "Back" : "ආපසු",
+      "Deposit Money" : "මුදල් තැන්පත් කරන්න",
+      
 
     //   "Homagama"
       // Add all Sinhala translations similarly

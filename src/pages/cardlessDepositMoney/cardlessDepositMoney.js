@@ -7,6 +7,7 @@ import autoTable from 'jspdf-autotable';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
 import './cardlessDepositMoney.css';
+import { useTranslation } from 'react-i18next';
 
 function CardlessDeposit() {
   const [searchParams] = useSearchParams();
@@ -19,7 +20,7 @@ function CardlessDeposit() {
   const navigate = useNavigate();
   const [transactionId, setTransactionId] = useState('');
   const [transactionDate, setTransactionDate] = useState('');
-
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -67,7 +68,7 @@ function CardlessDeposit() {
         children: [
           new Paragraph({
             children: [
-              new TextRun({ text: "🧾 Transaction Receipt", bold: true, size: 28 }),
+              new TextRun({ text: "Transaction Receipt", bold: true, size: 28 }),
             ],
           }),
           new Paragraph({ text: "" }),
@@ -114,20 +115,20 @@ function CardlessDeposit() {
   };
 
   if (error) return <p className="deposit-error">{error}</p>;
-  if (!user) return <p className="deposit-loading">Loading user details...</p>;
+  if (!user) return <p className="deposit-loading">{t('Loading user details...')}</p>;
 
   return (
     <div className="deposit-container" id="deposit-page">
       <SessionTimeout timeoutDuration={50000000} />
-      <h2 className="deposit-title">Deposit Money</h2>
-      <p><strong>Name:</strong> {user.name}</p>
-      <p><strong>Account Number:</strong> {user.accountNumber}</p>
-      <p><strong>Branch:</strong> {user.branch}</p>
-      <p><strong>Account Type:</strong> {user.accountType}</p>
-      <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
+      <h2 className="deposit-title">{t('Deposit Money')}</h2>
+      <p><strong>{t('Name')}:</strong> {user.name}</p>
+      <p><strong>{t('Account Number')}:</strong> {user.accountNumber}</p>
+      <p><strong>{t("Branch")}:</strong> {user.branch}</p>
+      <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
+      <p><strong>{t('Current Balance')}:</strong> Rs. {user.balance}</p>
 
       <form onSubmit={handleDeposit} className="deposit-form">
-        <label htmlFor="amount" className="deposit-label">Amount to Deposit:</label>
+        <label htmlFor="amount" className="deposit-label">{t('Amount to Deposit')}:</label>
         <input
           type="number"
           id="amount"
@@ -138,34 +139,34 @@ function CardlessDeposit() {
           step="0.01"
           required
         />
-        <button type="submit" className="deposit-btn">Deposit</button>
+        <button type="submit" className="deposit-btn">{t('Deposit')}</button>
       </form>
 
       {message && (
         localStorage.getItem('wantsReceipt') === 'yes' ? (
           <div className="deposit-receipt-box">
-            <h3>🧾 Transaction Receipt</h3>
-            <p><strong>Transaction ID:</strong> {transactionId}</p>
-            <p><strong>Transaction Date:</strong> {transactionDate}</p>
-            <p><strong>Account:</strong> {user.accountNumber}</p>
-            <p><strong>Name:</strong> {user.name}</p>
-            <p><strong>Branch:</strong> {user.branch}</p>
-            <p><strong>Account Type:</strong> {user.accountType}</p>
-            <p><strong>Deposited Amount:</strong> Rs. {depositedAmount}</p>
-            <p><strong>New Balance:</strong> Rs. {user.balance}</p>
-            <p className="deposit-success">✅ Deposit successful!</p>
+            <h3>{t('Transaction Receipt')}</h3>
+            <p><strong>{t('Transaction ID')}:</strong> {transactionId}</p>
+            <p><strong>{t('Transaction Date')}:</strong> {transactionDate}</p>
+            <p><strong>{t('Account')}:</strong> {user.accountNumber}</p>
+            <p><strong>{t('Name')}:</strong> {user.name}</p>
+            <p><strong>{t('Branch')}:</strong> {user.branch}</p>
+            <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
+            <p><strong>{t('Deposited Amount')}:</strong> Rs. {depositedAmount}</p>
+            <p><strong>{t('New Balance')}:</strong> {t('Rs')}. {user.balance}</p>
+            <p className="deposit-success">{t('Deposit successful!')}</p>
 
             <div className="deposit-dropdown-wrapper" ref={dropdownRef}>
               <button onClick={toggleDropdown} className="deposit-btn download-btn">
-                Download ▼
+                {t('Download')} ▼
               </button>
               {open && (
                 <div className="deposit-dropdown-menu">
                   <button onClick={downloadPDF} className="deposit-dropdown-btn">
-                    Download as PDF
+                    {t('Download as PDF')}
                   </button>
                   <button onClick={downloadDOCX} className="deposit-dropdown-btn">
-                    Download as DOCX
+                    {t('Download as DOCX')}
                   </button>
                 </div>
               )}
@@ -173,7 +174,7 @@ function CardlessDeposit() {
             </div>
           </div>
         ) : (
-          <p className="deposit-success">✅ Deposit successful!</p>
+          <p className="deposit-success">{t('Deposit successful!')}</p>
         )
       )}
 

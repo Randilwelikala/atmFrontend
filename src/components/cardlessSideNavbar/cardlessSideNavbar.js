@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useSearchParams } from 'react-router-dom';
 import './cardlessSideNavbar.css';
+import { useTranslation } from 'react-i18next';
 
 export default function CardlessSideNavbar() {
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account') || '';
   const [open, setOpen] = useState(false);
   const sidebarRef = useRef(null);
+  const { t, i18n } = useTranslation();
+
 
   const toggleSidebar = () => setOpen(!open);
 
@@ -60,7 +63,7 @@ export default function CardlessSideNavbar() {
               // className={({ isActive }) => (isActive ? 'active' : '')}
               onClick={handleLinkClick}
             >
-              Cardless Withdraw
+              {t('Cardless Withdraw')}
             </NavLink>
           </li>
           <li>
@@ -69,7 +72,7 @@ export default function CardlessSideNavbar() {
               // className={({ isActive }) => (isActive ? 'active' : '')}
               onClick={handleLinkClick}
             >
-              Cardless Deposit 
+              {t('Cardless Deposit')} 
             </NavLink>
           </li>
           

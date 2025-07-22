@@ -3,15 +3,16 @@ import Deposit from '../cardDepositMoney/cardDepositMoney';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 import './accountDetails.css';
+import { useTranslation } from 'react-i18next';
 
 export default function AccountActions() {
   const [searchParams] = useSearchParams();
-  const accountNumber = searchParams.get('account');
-
+  const accountNumber = searchParams.get('account');  
   const [transaction, setTransaction] = useState(null);
   const [user, setUser] = useState(null);
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const { t, i18n } = useTranslation();
  
   useEffect(() => {
     if (!accountNumber) return;
@@ -50,17 +51,17 @@ export default function AccountActions() {
 
   return (
     <div >
-      <h2>Make a Transaction</h2>
+      <h2>{t('Make a Transaction')}</h2>
   
      
       {user && (
         <div style={{ marginBottom: 20 }}>
-          <h3>Account Details</h3>
-          <p><strong>Name:</strong> {user.name}</p>
-          <p><strong>Account Number:</strong> {user.accountNumber}</p>
-          <p><strong>Branch:</strong> {user.branch}</p>
-          <p><strong>Account Type:</strong> {user.accountType}</p>
-          <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
+          <h3>{t('Account Details')}</h3>
+          <p><strong>{t('Name')}:</strong> {user.name}</p>
+          <p><strong>{t('Account Number')}:</strong> {user.accountNumber}</p>
+          <p><strong>{t('Branch')}:</strong> {user.branch}</p>
+          <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
+          <p><strong>{t('Current Balance')}:</strong> {t('Rs')}. {user.balance}</p>
         </div>
       )}
   
@@ -71,11 +72,11 @@ export default function AccountActions() {
   
       {transaction && (
         <div style={{ marginTop: 30 }}>
-          <h3>Confirm Deposit</h3>
+          <h3>{t('Confirm Deposit')}</h3>
           <p><strong>Amount to Deposit:</strong> Rs. {transaction.amount}</p>
   
           <button onClick={handleConfirmDeposit} style={{ marginTop: 10 }}>
-            Confirm Deposit
+            {t("Confirm Deposit")}
           </button>
         </div>
       )}

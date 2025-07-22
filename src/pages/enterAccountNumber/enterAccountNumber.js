@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import './enterAccountNumber.css';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
-
+import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 export default function EnterAccountNumber() {
   const [step, setStep] = useState(1);
@@ -11,6 +12,8 @@ export default function EnterAccountNumber() {
   const [secondInput, setSecondInput] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+
 
   const handleFirstSubmit = e => {
     e.preventDefault();
@@ -40,7 +43,7 @@ export default function EnterAccountNumber() {
     <CardlessSideNavbar/>
     <div className="container">
       <SessionTimeout timeoutDuration={5000000} />
-      <h2 className="title">Enter Account Number</h2>
+      <h2 className="title">{t('Enter Account Number')}</h2>
   
       {step === 1 && (
         <form onSubmit={handleFirstSubmit} className="form">
@@ -52,7 +55,7 @@ export default function EnterAccountNumber() {
             onChange={e => setFirstInput(e.target.value)}
             required
           />
-          <button type="submit" className="btn">Next</button>
+          <button type="submit" className="btn">{t('Next')}</button>
         </form>
       )}
   
@@ -66,7 +69,7 @@ export default function EnterAccountNumber() {
             onChange={e => setSecondInput(e.target.value)}
             required
           />
-          <button type="submit" className="btn">Confirm</button>
+          <button type="submit" className="btn">{t('Confirm')}</button>
         </form>
       )}
   

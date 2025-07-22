@@ -2,8 +2,11 @@
 import React from 'react';
 import axios from 'axios';
 import './logoutButton.css';
+import { useTranslation } from 'react-i18next';
 
 export default function LogoutButton({ onLogout }) {
+  const { t, i18n } = useTranslation();
+
   const handleLogout = async () => {
     try {
       await axios.post('http://localhost:5000/logout', {}, { withCredentials: true });
@@ -16,7 +19,7 @@ export default function LogoutButton({ onLogout }) {
 
   return (
     <button onClick={handleLogout} className="logout-button" type="button">
-      Logout
+      {t('Logout')}
     </button>
   );
 }

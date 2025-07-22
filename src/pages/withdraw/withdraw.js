@@ -8,6 +8,7 @@ import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
 import './withdraw.css';
 import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
+import { useTranslation } from 'react-i18next';
 
 
 function Withdraw() {
@@ -24,6 +25,7 @@ function Withdraw() {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const [breakdown, setBreakdown] = useState({});
+  const { t, i18n } = useTranslation();
 
 
   useEffect(() => {
@@ -126,7 +128,8 @@ function Withdraw() {
   };
 
   if (error) return <p>{error}</p>;
-  if (!user) return <p>Loading user details...</p>;
+  if (!user) return <p>{t('Loading user details...')}</p>;
+  
 
   return (
     <>
@@ -134,21 +137,21 @@ function Withdraw() {
       
       <div className="withdraw-container" id="withdraw-page">
         <SessionTimeout timeoutDuration={50000000} />      
-        <h2 className="withdraw-title">Withdraw Money</h2>
+        <h2 className="withdraw-title">{t('Withdraw Money')}</h2>
 
         <div className="withdraw-user-details">
-          <p><strong>Name:</strong> {user.name}</p>
-          <p><strong>Account Number:</strong> {user.accountNumber}</p>
-          <p><strong>Branch:</strong> {user.branch}</p>
-          <p><strong>Account Type:</strong> {user.accountType}</p>
-          <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
-          <p><strong>New Balance:</strong> Rs. {user.balance}</p>
+          <p><strong>{t('Name')}:</strong> {user.name}</p>
+          <p><strong>{t('Account Number')}:</strong> {user.accountNumber}</p>
+          <p><strong>{t('Branch')}:</strong> {user.branch}</p>
+          <p><strong>{t('Account Type:')}</strong> {user.accountType}</p>
+          <p><strong>{t('Current Balance')}:</strong> Rs. {user.balance}</p>
+          <p><strong>{t('New Balance')}:</strong> Rs. {user.balance}</p>
           {Object.keys(breakdown).length > 0 && (
             <>
-              <h4>🪙 Dispensed Cash Breakdown:</h4>
+              <h4>{t('Dispensed Cash Breakdown')}:</h4>
               <ul>
                 {Object.entries(breakdown).map(([note, count]) => (
-                  <li key={note}><strong>Rs. {note} * </strong> {count}</li>
+                  <li key={note}><strong>{t('Rs')}. {note} * </strong> {count}</li>
                 ))}
               </ul>
             </>
@@ -158,44 +161,44 @@ function Withdraw() {
         </div>
 
         <form onSubmit={handleWithdraw} className="withdraw-form">
-          <label className="withdraw-label">Amount to Withdraw:</label>
+          <label className="withdraw-label">{t('Amount to Withdraw')}:</label>
           <input
             type="number"
             value={amount}
             onChange={e => setAmount(e.target.value)}
             className="withdraw-input"
           />
-          <button type="submit" className="withdraw-btn">Withdraw</button>
+          <button type="submit" className="withdraw-btn">{t('Withdraw')}</button>
         </form>
 
         {message && (
           localStorage.getItem('wantsReceipt') === 'yes' ? (
             <div className="withdraw-receipt">
-              <h3>🧾 Withdraw Receipt</h3>    
+              <h3>{t('Withdraw Receipt')}</h3>    
               <br/>
-              <p><strong>Withdraw ID:</strong> {transactionId}</p>
-              <p><strong>Withdraw Date:</strong> {transactionDate}</p>
-              <p><strong>Account:</strong> {user.accountNumber}</p>
-              <p><strong>Name:</strong> {user.name}</p>
-              <p><strong>Branch:</strong> {user.branch}</p>
-              <p><strong>Account Type:</strong> {user.accountType}</p>
-              <p><strong>Withdrawed Amount:</strong> Rs. {depositedAmount}</p>
-              <p><strong>New Balance:</strong> Rs. {user.balance}</p>
-              <p className="withdraw-success">✅ Withdraw successful!</p>
+              <p><strong>{t('Withdraw ID')}:</strong> {transactionId}</p>
+              <p><strong>{t('Withdraw Date')}:</strong> {transactionDate}</p>
+              <p><strong>{t('Account')}:</strong> {user.accountNumber}</p>
+              <p><strong>{t('Name')}:</strong> {user.name}</p>
+              <p><strong>{t('Branch')}:</strong> {user.branch}</p>
+              <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
+              <p><strong>{t('Withdrawed Amount')}:</strong> Rs. {depositedAmount}</p>
+              <p><strong>{t('New Balance')}:</strong> Rs. {user.balance}</p>
+              <p className="withdraw-success">{t('Withdraw successful!')}</p>
 
               <div className="withdraw-download-group" ref={dropdownRef}>
-                <button onClick={toggleDropdown} className="withdraw-btn">Download ▼</button>
+                <button onClick={toggleDropdown} className="withdraw-btn">{t('Download')} ▼</button>
                 {open && (
                   <div className="withdraw-dropdown">
-                    <button onClick={downloadPDF} className="withdraw-dropdown-btn">Download as PDF</button>
-                    <button onClick={downloadDOCX} className="withdraw-dropdown-btn">Download as DOCX</button>
+                    <button onClick={downloadPDF} className="withdraw-dropdown-btn">{t('Download as PDF')}</button>
+                    <button onClick={downloadDOCX} className="withdraw-dropdown-btn">{t('Download as DOCX')}</button>
                   </div>
                 )}
-                <button onClick={handleSkip} className="withdraw-btn secondary">Skip</button>
+                <button onClick={handleSkip} className="withdraw-btn secondary">{t('Skip')}</button>
               </div>
             </div>
           ) : (
-            <p className="withdraw-success">✅ Withdraw successful!</p>
+            <p className="withdraw-success">{t('Withdraw successful!')}</p>
           )
         )}
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import './changePin.css';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
+import { useTranslation } from 'react-i18next';
 
 export default function ChangePin() {
   const [accountNumber, setAccountNumber] = useState('');
@@ -11,6 +12,7 @@ export default function ChangePin() {
   const [confirmPin, setConfirmPin] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const { t, i18n } = useTranslation();
 
   const handleChangePin = async (e) => {
     e.preventDefault();
@@ -48,10 +50,10 @@ export default function ChangePin() {
     <div className="change-pin-container">
       
       <SessionTimeout timeoutDuration={5000000} />
-      <h2 className="change-pin-title">Change Debit Card PIN</h2>
+      <h2 className="change-pin-title">{t('Change Debit Card PIN')}</h2>
       <form onSubmit={handleChangePin} className="change-pin-form">
         <div className="form-group">
-          <label>Account Number:</label>
+          <label>{t('Account Number')}:</label>
           <input
             type="text"
             value={accountNumber}
@@ -62,7 +64,7 @@ export default function ChangePin() {
         </div>
 
         <div className="form-group">
-          <label>Old PIN:</label>
+          <label>{t('Old PIN')}:</label>
           <input
             type="password"
             value={oldPin}
@@ -73,7 +75,7 @@ export default function ChangePin() {
         </div>
 
         <div className="form-group">
-          <label>New PIN:</label>
+          <label>{t('New PIN')}:</label>
           <input
             type="password"
             value={newPin}
@@ -92,7 +94,7 @@ export default function ChangePin() {
         </div>
 
         <div className="form-group">
-          <label>Confirm New PIN:</label>
+          <label>{t('Confirm New PIN')}:</label>
           <input
             type="password"
             value={confirmPin}
@@ -103,7 +105,7 @@ export default function ChangePin() {
           />
         </div>
 
-        <button type="submit" className="change-pin-button">Change PIN</button>
+        <button type="submit" className="change-pin-button">{t('Change PIN')}</button>
       </form>
 
       {message && <p className="change-pin-message success">{message}</p>}

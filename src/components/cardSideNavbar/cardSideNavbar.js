@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useSearchParams } from 'react-router-dom';
 import './cardSideNavbar.css';
+import { useTranslation } from 'react-i18next';
+
 export default function CardSideNavbar() {
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account') || '';
   const [open, setOpen] = useState(false);
   const sidebarRef = useRef(null);
-
+  const { t, i18n } = useTranslation();
   const toggleSidebar = () => setOpen(!open);
 
   // Close sidebar on small screens when clicking outside sidebar or hamburger
@@ -56,7 +58,7 @@ export default function CardSideNavbar() {
               className={({ isActive }) => (isActive ? 'active' : '')}
               onClick={handleLinkClick}
             >
-              Dashboard
+              {t('Dashboard')}
             </NavLink>
           </li>
           <li>
@@ -65,7 +67,7 @@ export default function CardSideNavbar() {
               className={({ isActive }) => (isActive ? 'active' : '')}
               onClick={handleLinkClick}
             >
-              Deposit Money
+              {t('Deposit Money')}
             </NavLink>
           </li>
           <li>
@@ -74,7 +76,7 @@ export default function CardSideNavbar() {
               className={({ isActive }) => (isActive ? 'active' : '')}
               onClick={handleLinkClick}
             >
-              Withdraw Money
+              {t('Withdraw Money')}
             </NavLink>
           </li>
           <li>
@@ -83,7 +85,7 @@ export default function CardSideNavbar() {
               className={({ isActive }) => (isActive ? 'active' : '')}
               onClick={handleLinkClick}
             >
-              View Balance
+              {t('View Balance')}
             </NavLink>
           </li>
           <li>
@@ -92,7 +94,7 @@ export default function CardSideNavbar() {
               className={({ isActive }) => (isActive ? 'active' : '')}
               onClick={handleLinkClick}
             >
-              Change PIN
+              {t('Change PIN')}
             </NavLink>
           </li>
           <li>
@@ -101,7 +103,7 @@ export default function CardSideNavbar() {
               className={({ isActive }) => (isActive ? 'active' : '')}
               onClick={handleLinkClick}
             >
-              Fund Transfer
+              {t('Fund Transfer')}
             </NavLink>
           </li>
         </ul>

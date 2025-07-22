@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 export default function Login({ onLogin }) {
   const [accountNumber, setaccountNumber] = useState('');
   const [pin, setPin] = useState('');
   const [error, setError] = useState('');
+  const { t, i18n } = useTranslation();
+
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -24,15 +27,15 @@ export default function Login({ onLogin }) {
       <h2>ATM Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Account Number:</label><br />
+          <label>{t('Account Number')}:</label><br />
           <input type="text" value={accountNumber} onChange={e => setaccountNumber(e.target.value)} required />
         </div>
         <div>
-          <label>PIN:</label><br />
+          <label>{t('PIN')}:</label><br />
           <input type="password" value={pin} onChange={e => setPin(e.target.value)} required />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit" style={{ marginTop: 10 }}>Login</button>
+        <button type="submit" style={{ marginTop: 10 }}>{t('Login')}</button>
       </form>
     </div>
   );

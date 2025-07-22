@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function CheckPin() {
   const [pin, setPin] = useState('');
@@ -8,6 +9,8 @@ export default function CheckPin() {
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -25,7 +28,7 @@ export default function CheckPin() {
 
   return (
     <div >
-      <h2>Enter PIN for Account {accountNumber}</h2>
+      <h2>{t('Enter PIN for Accoun')}t {accountNumber}</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="password"
@@ -35,7 +38,7 @@ export default function CheckPin() {
           required
         />
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit" style={{ marginTop: 10 }}>Login</button>
+        <button type="submit" style={{ marginTop: 10 }}>{t('Login')}</button>
       </form>
     </div>
   );

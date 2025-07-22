@@ -4,12 +4,12 @@ import { useSearchParams } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import './seeBalance.css';
 import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
-
+import { useTranslation } from 'react-i18next';
 
 export default function SeeBalance() {
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
-
+  const { t, i18n } = useTranslation();
   const [user, setUser] = useState(null);  
   const [error, setError] = useState('');
 
@@ -21,7 +21,7 @@ export default function SeeBalance() {
   }, [accountNumber]);
 
   if (error) return <p className="error-message">{error}</p>;
-  if (!user) return <p className="loading-message">Loading user details...</p>;
+  if (!user) return <p className="loading-message">{t('Loading user details...')}</p>;
 
   return (
     <>
@@ -30,13 +30,13 @@ export default function SeeBalance() {
       
       <SessionTimeout timeoutDuration={5000000} />
       
-      <h2 className="balance-title">Account Details</h2>
+      <h2 className="balance-title">{t('Account Details')}</h2>
       <div className="balance-details">
-        <p><strong>Name:</strong> {user.name}</p>
-        <p><strong>Account Number:</strong> {user.accountNumber}</p>
-        <p><strong>Branch:</strong> {user.branch}</p>
-        <p><strong>Account Type:</strong> {user.accountType}</p>
-        <p><strong>Current Balance:</strong> Rs. {user.balance}</p>
+        <p><strong>{t('Name')}:</strong> {user.name}</p>
+        <p><strong>{t('Account Number')}:</strong> {user.accountNumber}</p>
+        <p><strong>{t('Branch')}:</strong> {user.branch}</p>
+        <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
+        <p><strong>{t('Current Balance')}:</strong> {t('Rs')}. {user.balance}</p>
       </div>
     </div>
     </>

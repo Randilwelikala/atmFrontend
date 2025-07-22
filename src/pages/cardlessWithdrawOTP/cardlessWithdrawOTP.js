@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './cardlessWithdrawOTP.css'; 
 import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
+import { t } from 'i18next';
 export default function CardlessWithdrawOTP() {
   const [mobile, setMobile] = useState('');
   const [otp, setOtp] = useState('');
@@ -47,11 +48,11 @@ export default function CardlessWithdrawOTP() {
     
     <div className="otp-container" id="cardless-otp-page">
       <CardlessSideNavbar/>     
-      <h2 className="otp-title">Cardless Withdraw - OTP Verification</h2>
+      <h2 className="otp-title">{t('Cardless Withdraw - OTP Verification')}</h2>
       
       {!otpSent ? (
         <div className="otp-step">
-          <label className="otp-label">Enter Mobile Number:</label>
+          <label className="otp-label">{t('Enter Mobile Number')}:</label>
           <input
             type="text"
             value={mobile}
@@ -60,12 +61,12 @@ export default function CardlessWithdrawOTP() {
             maxLength={10}
             className="otp-input"
           />
-          <button onClick={sendOtp} className="otp-button">Send OTP</button>
+          <button onClick={sendOtp} className="otp-button">{t('Send OTP')}</button>
         </div>
       ) : (
         <div className="otp-step">
           <p className="otp-message">{message}</p>
-          <label className="otp-label">Enter OTP:</label>
+          <label className="otp-label">{t('Enter OTP')}:</label>
           <input
             type="text"
             value={otp}
@@ -74,7 +75,7 @@ export default function CardlessWithdrawOTP() {
             placeholder="1234"
             className="otp-input"
           />
-          <button onClick={verifyOtp} className="otp-button">Verify OTP</button>
+          <button onClick={verifyOtp} className="otp-button">{t('Verify OTP')}</button>
         </div>
       )}
       

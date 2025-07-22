@@ -6,6 +6,7 @@ import { saveAs } from "file-saver";
 import { useNavigate } from 'react-router-dom';
 import './fundTransfer.css';
 import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
+import { useTranslation } from 'react-i18next';
 
 function FundTransfer() {
   const [sender, setSender] = useState('');
@@ -16,6 +17,8 @@ function FundTransfer() {
   const [error, setError] = useState('');
   const [recipientError, setRecipientError] = useState('');
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+
 
   const handleTransfer = async (e) => {
     e.preventDefault();
@@ -94,7 +97,7 @@ function FundTransfer() {
     <>
     <CardSideNavbar/>
     <div className="fund-transfer-container">
-      <h2 className="fund-transfer-title">Fund Transfer</h2>
+      <h2 className="fund-transfer-title">{t('Fund Transfer')}</h2>
 
       <div className="transfer-type-group">
         <label className="transfer-type-label">
@@ -105,7 +108,7 @@ function FundTransfer() {
             checked={transferType === 'same-bank'}
             onChange={() => setTransferType('same-bank')}
           />
-          <span>Same Bank Transfer</span>
+          <span>{t('Same Bank Transfer')}</span>
         </label>
         <label className="transfer-type-label">
           <input
@@ -115,7 +118,7 @@ function FundTransfer() {
             checked={transferType === 'other-bank'}
             onChange={() => setTransferType('other-bank')}
           />
-          <span>Other Bank Transfer</span>
+          <span>{t('Other Bank Transfer')}</span>
         </label>
       </div>
 
@@ -170,22 +173,22 @@ function FundTransfer() {
 
       {receipt && (
         <div className="receipt-box">
-          <h3 className="receipt-title">Transfer Receipt</h3>
-          <p><strong>From:</strong> {receipt.from}</p>
-          <p><strong>To:</strong> {receipt.to}</p>
-          <p><strong>Amount:</strong> Rs. {receipt.transferred}</p>
-          <p><strong>Type:</strong> {receipt.bank}</p>
-          <p><strong>Remaining Balance:</strong> Rs. {receipt.senderNewBalance}</p>
+          <h3 className="receipt-title">{t('Transfer Receipt')}</h3>
+          <p><strong>{t('From')}:</strong> {receipt.from}</p>
+          <p><strong>{t('To')}:</strong> {receipt.to}</p>
+          <p><strong>{t('Amount')}:</strong> Rs. {receipt.transferred}</p>
+          <p><strong>{t('Type')}:</strong> {receipt.bank}</p>
+          <p><strong>{t('Remaining Balance')}:</strong> Rs. {receipt.senderNewBalance}</p>
 
           <div className="receipt-buttons">
             <button onClick={handleDownloadPDF} className="btn pdf-btn">
-              Download PDF
+              {t('Download PDF')}
             </button>
             <button onClick={handleDownloadDOCX} className="btn docx-btn">
-              Download DOCX
+              {t('Download DOCX')}
             </button>
             <button onClick={handleSkip} className="btn skip-btn">
-              Skip
+              {t('Skip')}
             </button>
           </div>
         </div>
