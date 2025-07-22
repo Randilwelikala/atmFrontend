@@ -1,12 +1,11 @@
-/* src/components/sideNavbar/SideNavbar.css */
+/* Base sidebar styles */
 .side-navbar {
   width: 220px;
   height: 100vh;
-  background-color: #2c3e50;
   padding-top: 20px;
   position: fixed;
   top: 0;
-  right: 0; /* sidebar on right */
+  right: 0;
   overflow-y: auto;
   transition: transform 0.3s ease;
   z-index: 1000;
@@ -14,26 +13,22 @@
 
 /* Hidden sidebar on small screens */
 .side-navbar.closed {
-  transform: translateX(100%); /* slide out to right */
+  transform: translateX(100%);
 }
 
-/* Sidebar visible */
 .side-navbar.open {
   transform: translateX(0);
 }
 
-/* Main content should have right margin on large screens */
 .main-content {
   margin-right: 220px;
   transition: margin-right 0.3s ease;
 }
 
-/* When sidebar hidden, main content full width */
 .main-content.full-width {
   margin-right: 0;
 }
 
-/* Links */
 .side-navbar ul {
   list-style: none;
   padding: 0;
@@ -45,7 +40,6 @@
 }
 
 .side-navbar ul li a {
-  color: #ecf0f1;
   text-decoration: none;
   padding: 12px 20px;
   display: block;
@@ -54,37 +48,31 @@
   border-radius: 4px;
 }
 
+/* Highlight on hover/active */
 .side-navbar ul li a:hover,
 .side-navbar ul li a.active {
-  background-color: #34495e;
-  color: #fff;
   font-weight: 700;
 }
 
-/* Hamburger menu button */
+/* Hamburger button */
 .hamburger-btn {
   position: fixed;
   top: 15px;
-  right: 15px; /* top right */
-  background-color: #2c3e50;
+  right: 15px;
   border: none;
-  color: white;
   font-size: 24px;
   padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
-  z-index: 1100; /* above sidebar */
-  display: none; /* hidden by default */
+  z-index: 1100;
+  display: none;
 }
 
-/* Responsive styles for small screens */
+/* Responsive */
 @media (max-width: 768px) {
   .side-navbar {
     width: 220px;
     height: 100%;
-    top: 0;
-    right: 0;
-    position: fixed;
     transform: translateX(100%);
   }
 
@@ -97,20 +85,58 @@
   }
 
   .hamburger-btn {
-    display: block; /* show hamburger */
+    display: block;
   }
 }
 
-/* Hide hamburger button on large screens */
 @media (min-width: 769px) {
   .hamburger-btn {
     display: none;
   }
-  
-  /* Show sidebar without transform */
+
   .side-navbar {
-    transform: translateX(0) !important; /* force it visible */
-    position: fixed;
+    transform: translateX(0) !important;
   }
 }
 
+/* ===== Theme Support ===== */
+
+/* Dark Theme (default) */
+.dark-theme .side-navbar {
+  background-color: #2c3e50;
+}
+
+.dark-theme .side-navbar ul li a {
+  color: #ecf0f1;
+}
+
+.dark-theme .side-navbar ul li a:hover,
+.dark-theme .side-navbar ul li a.active {
+  background-color: #34495e;
+  color: #fff;
+}
+
+.dark-theme .hamburger-btn {
+  background-color: #2c3e50;
+  color: white;
+}
+
+/* Light Theme */
+.light-theme .side-navbar {
+  background-color: #f4f4f4;
+}
+
+.light-theme .side-navbar ul li a {
+  color: #2c3e50;
+}
+
+.light-theme .side-navbar ul li a:hover,
+.light-theme .side-navbar ul li a.active {
+  background-color: #d0d0d0;
+  color: #000;
+}
+
+.light-theme .hamburger-btn {
+  background-color: #ddd;
+  color: #333;
+}

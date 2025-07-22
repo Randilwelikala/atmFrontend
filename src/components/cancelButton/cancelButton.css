@@ -1,13 +1,28 @@
+:root {
+  --cancel-btn-bg: #ff4d4f;
+  --cancel-btn-bg-hover: #ff1a1a;
+  --cancel-btn-text: white;
+  --cancel-btn-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme overrides */
+.dark-theme {
+  --cancel-btn-bg: #b33435;
+  --cancel-btn-bg-hover: #8a2728;
+  --cancel-btn-text: white;
+  --cancel-btn-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
 .cancel-btn {
   padding: 10px 20px;
-  background-color: #ff4d4f;
-  color: white;
+  background-color: var(--cancel-btn-bg);
+  color: var(--cancel-btn-text);
   border: none;
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--cancel-btn-shadow);
   animation: slideIn 0.4s ease;
 
   position: fixed;
@@ -17,7 +32,7 @@
 }
 
 .cancel-btn:hover {
-  background-color: #ff1a1a;
+  background-color: var(--cancel-btn-bg-hover);
   transform: scale(1.05);
 }
 

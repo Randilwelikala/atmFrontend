@@ -30,6 +30,7 @@ import CardlessDeposit from './pages/cardlessDepositMoney/cardlessDepositMoney';
 import CardlessWithdraw from './pages/cardlessWithdraw/cardlessWithdraw';
 import './translate/i18n';
 import LanguageSwitcher from './components/translate/translate';
+import ThemeToggle from'./components/theme/theme';
 
 
 
@@ -42,6 +43,7 @@ export default function App() {
     <Router>
       <LogoutButton onClick={()=>(window.location.href = '/')}/>        
         <LanguageSwitcher/>
+        <ThemeToggle/>
 
       <Routes>
         <>

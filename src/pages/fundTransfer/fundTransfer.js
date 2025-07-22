@@ -182,6 +182,7 @@ function FundTransfer() {
 
           <div className="receipt-buttons">
             <button onClick={handleDownloadPDF} className="btn pdf-btn">
+              
               {t('Download as PDF')}
             </button>
             <button onClick={handleDownloadDOCX} className="btn docx-btn">
