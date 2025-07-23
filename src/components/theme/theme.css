@@ -1,8 +1,6 @@
-/* Base styles for the button */
 #theme-toggle-btn.theme-toggle-button {
   position: fixed;
-  top: 10px;
-  /* right: 41%; */
+  top: 10px;  
   z-index: 9999;
 
   padding: 10px 18px;
@@ -17,7 +15,6 @@
   outline-offset: 2px;
 }
 
-/* Light mode button styles */
 #theme-toggle-btn.theme-toggle-button.light {
   background-color: #222;
   color: #fff;
@@ -30,7 +27,6 @@
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.7);
 }
 
-/* Dark mode button styles */
 #theme-toggle-btn.theme-toggle-button.dark {
   background-color: #f0f0f0;
   color: #222;
@@ -43,8 +39,8 @@
   box-shadow: 0 5px 12px rgba(0,0,0,0.3);
 }
 
-/* Optional: focus-visible for accessibility */
 #theme-toggle-btn.theme-toggle-button:focus-visible {
   outline: 3px solid #4caf50;
   outline-offset: 4px;
 }
+
