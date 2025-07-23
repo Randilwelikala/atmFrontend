@@ -4,7 +4,6 @@ import { Outlet } from 'react-router-dom';
 import Home from './pages/home/home';
 import CheckPin from './pages/checkPin/checkPin';
 import GetCardAccountNumberandPin from './pages/getCardAccountNumberAndPin/getCardAccountNumberandPin';
-import AccountDetails from './pages/accountDetails/accountDetails';
 import Deposit from './pages/cardDepositMoney/cardDepositMoney';
 import AskCardless from './pages/askForReceiptCardlessTransactions/askForReceiptCardlessTransactions';
 import AskCard from './pages/askForReceiptCardTransactions/askForReceiptCardlTransactions';
@@ -51,7 +50,6 @@ export default function App() {
         <Route path='/cardlessDashboard' element={<CardlessDashboard/>}/>
         <Route path="/" element={<Home />} />
         <Route path="/cardless-deposit" element={<EnterAccountNumber />} />
-        <Route path="/AccountDetails" element={<AccountDetails />} />
         <Route path="/check-pin" element={<CheckPin />} />
         <Route path="/Deposit" element={<Deposit />} />
         <Route path="/GetCardAccountNumberandPin" element={<GetCardAccountNumberandPin />} />        
