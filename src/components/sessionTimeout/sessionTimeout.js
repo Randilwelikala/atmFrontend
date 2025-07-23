@@ -7,16 +7,13 @@ export default function SessionTimeout({ timeoutDuration = 5000, confirmDuration
   const navigate = useNavigate();
   const [showPrompt, setShowPrompt] = useState(false);
   const { t, i18n } = useTranslation();
-
-
-  // Using refs to keep timers stable between renders
   const inactivityTimer = useRef(null);
   const confirmTimer = useRef(null);
   const waitingForResponse = useRef(false);
 
-  // Reset the inactivity timer unless waiting for user response
+
   const resetInactivityTimer = () => {
-    if (waitingForResponse.current) return; // Don't reset if prompt showing
+    if (waitingForResponse.current) return; 
 
     if (inactivityTimer.current) clearTimeout(inactivityTimer.current);
     setShowPrompt(false);
@@ -24,19 +21,17 @@ export default function SessionTimeout({ timeoutDuration = 5000, confirmDuration
     inactivityTimer.current = setTimeout(() => {
       setShowPrompt(true);
       waitingForResponse.current = true;
-
-      // Start confirmation countdown
+      
       confirmTimer.current = setTimeout(() => {
-        // Just hide prompt but DO NOT logout
+        
         setShowPrompt(false);
         waitingForResponse.current = false;
-        resetInactivityTimer(); // Give more time silently
+        resetInactivityTimer(); 
       }, confirmDuration);
 
     }, timeoutDuration);
   };
 
-  // Logout function: clear timers, clear sessionStorage, call backend logout, navigate away
   const handleLogout = async () => {
     sessionStorage.removeItem('userSession');
     if (inactivityTimer.current) clearTimeout(inactivityTimer.current);
@@ -45,11 +40,10 @@ export default function SessionTimeout({ timeoutDuration = 5000, confirmDuration
     setShowPrompt(false);
     waitingForResponse.current = false;
 
-    // Call backend logout to destroy session server side
     try {
       await fetch('http://localhost:3001/logout', {
         method: 'POST',
-        credentials: 'include' // important to send cookies/session info
+        credentials: 'include' 
       });
     } catch (err) {
       console.error('Logout request failed:', err);
@@ -57,15 +51,14 @@ export default function SessionTimeout({ timeoutDuration = 5000, confirmDuration
 
     navigate('/');
   };
-
-  // On user activity, reset timer (unless waiting for prompt answer)
+  
   useEffect(() => {
     const events = ['click', 'keypress', 'mousemove', 'scroll', 'touchstart'];
 
     const activityHandler = () => resetInactivityTimer();
 
     events.forEach(evt => window.addEventListener(evt, activityHandler));
-    resetInactivityTimer(); // start timer on mount
+    resetInactivityTimer(); 
 
     return () => {
       if (inactivityTimer.current) clearTimeout(inactivityTimer.current);
@@ -74,17 +67,14 @@ export default function SessionTimeout({ timeoutDuration = 5000, confirmDuration
     };
   }, []);
 
-  // Handle user clicking Yes or No on the prompt
   const handleUserResponse = (response) => {
     if (confirmTimer.current) clearTimeout(confirmTimer.current);
     waitingForResponse.current = false;
     setShowPrompt(false);
 
-    if (response === 'yes') {
-      // User wants more time, restart inactivity timer
+    if (response === 'yes') {      
       resetInactivityTimer();
-    } else {
-      // User says no, logout immediately
+    } else {      
       handleLogout();
     }
   };
@@ -104,19 +94,4 @@ export default function SessionTimeout({ timeoutDuration = 5000, confirmDuration
   );
 }
 
-const modalStyle = {
-  position: 'fixed',
-  top: 0, left: 0, right: 0, bottom: 0,
-  backgroundColor: 'rgba(0,0,0,0.5)',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  zIndex: 9999,
-};
 
-const modalContentStyle = {
-  backgroundColor: '#fff',
-  padding: 20,
-  borderRadius: 10,
-  textAlign: 'center',
-};
