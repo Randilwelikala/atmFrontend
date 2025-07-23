@@ -1,4 +1,3 @@
-// src/components/logoutButton/LogoutButton.js
 import React from 'react';
 import axios from 'axios';
 import './logoutButton.css';
@@ -10,8 +9,8 @@ export default function LogoutButton({ onLogout }) {
   const handleLogout = async () => {
     try {
       await axios.post('http://localhost:5000/logout', {}, { withCredentials: true });
-      onLogout(null); // remove user from state
-      window.location.href = '/'; // redirect to home/login
+      onLogout(null); 
+      window.location.href = '/'; 
     } catch (err) {
       console.error('Logout failed:', err);
     }
