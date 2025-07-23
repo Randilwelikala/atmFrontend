@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
-import LogoutButton from '../../components/logoutButton/logoutButton';
 import './cardDashboard.css';
 import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 import { useTranslation } from 'react-i18next';
@@ -19,7 +18,7 @@ export default function CardDashboard() {
   }
 
   const handleLogout = () => {
-    navigate('/'); // redirect to home or login page after logout
+    navigate('/'); 
   };
 
   return (
