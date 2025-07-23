@@ -90,7 +90,7 @@ function FundTransfer() {
     setSender('');
     setRecipient('');
     setAmount('');
-    navigate('/'); // or your desired route
+    navigate('/'); 
   };
 
   return (

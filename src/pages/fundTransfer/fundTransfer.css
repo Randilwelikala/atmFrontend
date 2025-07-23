@@ -1,4 +1,3 @@
-/* Light Theme (default) */
 :root {
   --ft-bg: linear-gradient(to left, #fffbe6, #e6f7ff);
   --ft-title-color: #273c75;
@@ -22,7 +21,6 @@
   --ft-btn-skip-hover: #b2bec3;
 }
 
-/* Dark Theme Overrides */
 .dark-theme {
   --ft-bg: linear-gradient(to left, #1e1e1e, #2c2c2c);
   --ft-title-color: #a3b1c6;
@@ -201,7 +199,6 @@
   transform: scale(1.05);
 }
 
-/* Animation */
 @keyframes fadeInScale {
   from {
     opacity: 0;
