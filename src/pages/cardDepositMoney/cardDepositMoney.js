@@ -21,8 +21,6 @@ function Deposit() {
   const [transactionId, setTransactionId] = useState('');
   const [transactionDate, setTransactionDate] = useState('');
   const { t, i18n } = useTranslation();
-
-
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -70,7 +68,7 @@ function Deposit() {
         children: [
           new Paragraph({
             children: [
-              new TextRun({ text: "Transaction Receipt", bold: true, size: 28 }),
+              new TextRun({ text: "Transaction Receipt"}),
             ],
           }),
           new Paragraph({ text: "" }),
