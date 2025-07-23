@@ -10,8 +10,7 @@ export default function CardSideNavbar() {
   const sidebarRef = useRef(null);
   const { t, i18n } = useTranslation();
   const toggleSidebar = () => setOpen(!open);
-
-  // Close sidebar on small screens when clicking outside sidebar or hamburger
+  
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -34,7 +33,7 @@ export default function CardSideNavbar() {
     };
   }, [open]);
 
-  // Close sidebar on link click for small screens
+
   const handleLinkClick = () => {
     if (window.innerWidth <= 768) {
       setOpen(false);
