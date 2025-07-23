@@ -5,7 +5,6 @@
   --clear-btn-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Dark theme overrides */
 .dark-theme {
   --clear-btn-bg: #cc7a00;
   --clear-btn-bg-hover: #a46300;
