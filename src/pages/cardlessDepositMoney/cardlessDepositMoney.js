@@ -68,7 +68,7 @@ function CardlessDeposit() {
         children: [
           new Paragraph({
             children: [
-              new TextRun({ text: "Transaction Receipt", bold: true, size: 28 }),
+              new TextRun({ text: "Transaction Receipt"}),
             ],
           }),
           new Paragraph({ text: "" }),
