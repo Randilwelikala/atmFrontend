@@ -1,44 +1,57 @@
+/* LIGHT THEME (default) */
 :root {
   --body-bg-gradient-start: #f8f9fa;
   --body-bg-gradient-end: #e0f7fa;
-  --container-bg-gradient-start: #f8f9fa;
-  --container-bg-gradient-end: #e0f7fa;
-  --text-color-main: #333;
+
+  --container-bg-gradient-start: #ffffff;
+  --container-bg-gradient-end: #f0f8ff;
+
+  --text-color-main: #222;
   --text-shadow: none;
+
   --card-bg-gradient-start: #fffbe6;
   --card-bg-gradient-end: #e6f7ff;
   --card-shadow: rgba(0, 0, 0, 0.1);
+
   --option-title-color: #444;
+
   --btn-bg: #4caf50;
   --btn-bg-hover: #388e3c;
-  --btn-text: white;
+  --btn-text: #fff;
+
   --transition-speed: 0.3s;
 }
 
+/* DARK THEME */
 .dark-theme {
   --body-bg-gradient-start: #121212;
   --body-bg-gradient-end: #1e1e1e;
-  --container-bg-gradient-start: #121212;
-  --container-bg-gradient-end: #1e1e1e;
-  --text-color-main: #ddd;
-  --text-shadow: 0 0 3px rgba(0,0,0,0.6);
+
+  --container-bg-gradient-start: #1a1a1a;
+  --container-bg-gradient-end: #2a2a2a;
+
+  --text-color-main: #e0e0e0;
+  --text-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+
   --card-bg-gradient-start: #2a2a2a;
   --card-bg-gradient-end: #3a3a3a;
   --card-shadow: rgba(255, 255, 255, 0.1);
-  --option-title-color: #bbb;
-  --btn-bg: #66bb6a; /* lighter green for better contrast */
+
+  --option-title-color: #bbbbbb;
+
+  --btn-bg: #66bb6a;
   --btn-bg-hover: #4caf50;
-  --btn-text: white;
+  --btn-text: #ffffff;
 }
 
-/* Smooth transition on theme change */
-body, 
+/* Smooth transition */
+body,
 .home-page-container,
 .home-title,
 .home-option-card,
 .option-title,
 .home-button {
-  transition: 
+  transition:
     background-color var(--transition-speed) ease,
     color var(--transition-speed) ease,
     box-shadow var(--transition-speed) ease,
@@ -46,12 +59,14 @@ body,
     transform var(--transition-speed) ease;
 }
 
+/* Base Styling */
 body {
   background: linear-gradient(to right, var(--body-bg-gradient-start), var(--body-bg-gradient-end));
   color: var(--text-color-main);
   text-shadow: var(--text-shadow);
 }
 
+/* Home Container */
 .home-page-container {
   padding: 20px;
   text-align: center;
@@ -60,6 +75,7 @@ body {
   animation: fadeInSlide 0.5s ease-in-out;
 }
 
+/* Title */
 .home-title {
   font-size: 48px;
   color: var(--text-color-main);
@@ -68,6 +84,7 @@ body {
   text-shadow: var(--text-shadow);
 }
 
+/* Option Columns */
 .home-option-columns {
   display: flex;
   justify-content: center;
@@ -75,6 +92,7 @@ body {
   flex-wrap: wrap;
 }
 
+/* Option Card */
 .home-option-card {
   background: linear-gradient(to right, var(--card-bg-gradient-start), var(--card-bg-gradient-end));
   padding: 30px 40px;
@@ -91,6 +109,7 @@ body {
   transform: translateY(-10px);
 }
 
+/* Option Title */
 .option-title {
   font-size: 22px;
   margin-bottom: 20px;
@@ -98,6 +117,7 @@ body {
   text-shadow: var(--text-shadow);
 }
 
+/* Button */
 .home-button {
   padding: 12px 24px;
   font-size: 16px;
@@ -114,7 +134,7 @@ body {
   transform: scale(1.05);
 }
 
-/* Animations remain unchanged */
+/* Animations */
 @keyframes fadeInSlide {
   from {
     opacity: 0;
