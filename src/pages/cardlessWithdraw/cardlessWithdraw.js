@@ -149,7 +149,7 @@ function CardlessWithdraw() {
                 <h4>{t('Dispensed Cash Breakdown')}:</h4>
                 <ul>
                 {Object.entries(breakdown).map(([note, count]) => (
-                    <li key={note}><strong>Rs. {note} * </strong> {count}</li>
+                    <li key={note}><strong>{t('Rs')}. {note} * </strong> {count}</li>
                 ))}
                 </ul>
             </>
@@ -166,7 +166,7 @@ function CardlessWithdraw() {
             onChange={e => setAmount(e.target.value)}
             className="withdraw-input"
           />
-          <button type="submit" className="withdraw-btn">Withdraw</button>
+          <button type="submit" className="withdraw-btn">{t('Withdraw')}</button>
         </form>
 
         {message && (
