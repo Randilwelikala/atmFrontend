@@ -1,4 +1,3 @@
-// In CancelButton.js
 import React from 'react';
 import './backButton.css';
 import { useTranslation } from 'react-i18next';
