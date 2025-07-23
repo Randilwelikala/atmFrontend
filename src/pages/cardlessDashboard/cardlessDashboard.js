@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
-import LogoutButton from '../../components/logoutButton/logoutButton'; 
 import './cardlessDashboard.css';
 import '../../components/cardlessSideNavbar/cardlessSideNavbar'
 import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
