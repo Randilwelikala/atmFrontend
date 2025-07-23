@@ -31,6 +31,12 @@ export default function CardlessDashboard() {
           onClick={() => navigate(`/askCardless`)}
         >
           {t('Deposit Money')}
+        </button>
+        <button 
+          className="cardless-download-btn" 
+          onClick={() => navigate(`/downloadHistoryOTP`)}
+        >
+          {t('Deposit Money')}
         </button>        
       </div>
     </div>

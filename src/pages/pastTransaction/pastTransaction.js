@@ -1,19 +1,22 @@
-// ✅ FRONTEND: TransactionHistory.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
-import Docxtemplater from 'docxtemplater';
-import PizZip from 'pizzip';
 
 const TransactionHistory = ({ accountNumber }) => {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
     if (!accountNumber) return;
+    console.log("Fetching transactions for:", accountNumber);
     axios.get(`http://localhost:3001/transactions/${accountNumber}`)
-      .then(res => setTransactions(res.data))
-      .catch(err => console.error(err));
+      .then(res => {
+        console.log("Received transactions:", res.data);
+        setTransactions(res.data);
+      })
+      .catch(err => {
+        console.error("Error fetching transactions:", err);
+      });
   }, [accountNumber]);
 
   const downloadAsJPG = () => {
@@ -24,10 +27,10 @@ const TransactionHistory = ({ accountNumber }) => {
   };
 
   const downloadAsDOCX = () => {
-    const zip = new PizZip();
-    const doc = new Docxtemplater();
     const content = `Transactions:\n\n` +
-      transactions.map((t, i) => `Transaction ${i + 1}:\nType: ${t.type}\nAmount: Rs.${t.amount}\nStatus: Success\nTime: ${new Date(t.timestamp).toLocaleString()}\nBalance After: Rs.${t.balanceAfter || 'N/A'}\n---`).join("\n\n");
+      transactions.map((t, i) =>
+        `Transaction ${i + 1}:\nType: ${t.type}\nAmount: Rs.${t.amount}\nStatus: Success\nTime: ${new Date(t.timestamp).toLocaleString()}\nBalance After: Rs.${t.balanceAfter || 'N/A'}\n---`
+      ).join("\n\n");
 
     const blob = new Blob([content], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
     saveAs(blob, "transaction-history.docx");
@@ -57,7 +60,7 @@ const TransactionHistory = ({ accountNumber }) => {
                   <td>{index + 1}</td>
                   <td>{txn.type}</td>
                   <td>Rs.{txn.amount}</td>
-                  <td>Success</td>
+                  <td>{txn.status || 'Success'}</td>
                   <td>{new Date(txn.timestamp).toLocaleString()}</td>
                   <td>Rs.{txn.balanceAfter || 'N/A'}</td>
                 </tr>

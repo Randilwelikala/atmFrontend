@@ -28,6 +28,8 @@ import CardlessWithdraw from './pages/cardlessWithdraw/cardlessWithdraw';
 import './translate/i18n';
 import LanguageSwitcher from './components/translate/translate';
 import ThemeToggle from'./components/theme/theme';
+import TransactionHistory from './pages/pastTransaction/pastTransaction'
+import DownloadHistoryOTP from './pages/downloadHistoryOTP/downloadHistoryOTP';
 
 
 
@@ -69,6 +71,8 @@ export default function App() {
         <Route path='/cardSideNavbar' element={<CardSideNavbar/>}/>
         <Route path='/cardlessDeposit' element={<CardlessDeposit/>}/>
         <Route path='/cardlessWithdrawto' element={<CardlessWithdraw/>}/>
+        <Route path='/pastTransaction' element={<TransactionHistory/>}/>
+        <Route path='/downloadHistoryOTP' element={<DownloadHistoryOTP/>}/>
         </>
         
             

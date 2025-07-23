@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './cardlessWithdrawOTP.css'; 
+import './downloadHistoryOTP.css'; 
 import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { t } from 'i18next';
-export default function CardlessWithdrawOTP() {
+export default function DownloadHistoryOTP() {
   const [mobile, setMobile] = useState('');
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
@@ -38,7 +38,7 @@ export default function CardlessWithdrawOTP() {
     try {
       const res = await axios.post('http://localhost:3001/verify-otp', { mobile, otp });
       setMessage('OTP verified! Redirecting...');
-      navigate(`/cardlessWithdrawto?account=${res.data.accountNumber}`);
+      navigate(`/pastTransaction?account=${res.data.accountNumber}`);
     } catch (err) {
       setError(err.response?.data?.message || 'OTP verification failed');
     }
