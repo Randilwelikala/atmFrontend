@@ -1,12 +1,45 @@
+/* Light Theme Variables (default) */
+:root {
+  --change-pin-bg: linear-gradient(to left, #fffbe6, #e6f7ff);
+  --change-pin-title-color: #273c75;
+  --change-pin-label-color: #34495e;
+  --change-pin-input-border: #d1d8e0;
+  --change-pin-input-focus-border: #40739e;
+  --change-pin-input-focus-shadow: rgba(64, 115, 158, 0.53);
+  --change-pin-btn-bg: #44bd32;
+  --change-pin-btn-bg-hover: #2ecc71;
+  --change-pin-btn-text: white;
+  --change-pin-msg-success: #27ae60;
+  --change-pin-msg-error: #e74c3c;
+  --change-pin-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Theme Variables */
+.dark-theme {
+  --change-pin-bg: linear-gradient(to left, #1e1e1e, #2c2c2c);
+  --change-pin-title-color: #a3b1c6;
+  --change-pin-label-color: #cbd5e1;
+  --change-pin-input-border: #555a66;
+  --change-pin-input-focus-border: #3b82f6;
+  --change-pin-input-focus-shadow: rgba(59, 130, 246, 0.5);
+  --change-pin-btn-bg: #22c55e;
+  --change-pin-btn-bg-hover: #16a34a;
+  --change-pin-btn-text: white;
+  --change-pin-msg-success: #4ade80;
+  --change-pin-msg-error: #f87171;
+  --change-pin-box-shadow: 0 10px 25px rgba(255, 255, 255, 0.07);
+}
+
 .change-pin-container {
   max-width: 420px;
   margin: 50px auto;
   padding: 30px 35px;
- background: linear-gradient(to left, #fffbe6, #e6f7ff);
+  background: var(--change-pin-bg);
   border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--change-pin-box-shadow);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   animation: fadeInScale 0.5s ease forwards;
+  color: var(--change-pin-label-color);
 }
 
 .change-pin-title {
@@ -14,7 +47,7 @@
   font-weight: 700;
   margin-bottom: 30px;
   text-align: center;
-  color: #273c75;
+  color: var(--change-pin-title-color);
   letter-spacing: 1px;
 }
 
@@ -26,7 +59,7 @@
 
 .form-group label {
   font-weight: 600;
-  color: #34495e;
+  color: var(--change-pin-label-color);
   margin-bottom: 8px;
   display: block;
 }
@@ -35,21 +68,23 @@
   width: 100%;
   padding: 10px 14px;
   font-size: 17px;
-  border: 2px solid #d1d8e0;
+  border: 2px solid var(--change-pin-input-border);
   border-radius: 10px;
   transition: border-color 0.3s ease;
+  background-color: transparent;
+  color: var(--change-pin-label-color);
 }
 
 .change-pin-input:focus {
   outline: none;
-  border-color: #40739e;
-  box-shadow: 0 0 5px #40739e88;
+  border-color: var(--change-pin-input-focus-border);
+  box-shadow: 0 0 5px var(--change-pin-input-focus-shadow);
 }
 
 .change-pin-button {
   padding: 14px 0;
-  background-color: #44bd32;
-  color: white;
+  background-color: var(--change-pin-btn-bg);
+  color: var(--change-pin-btn-text);
   font-size: 20px;
   font-weight: 700;
   border: none;
@@ -60,7 +95,7 @@
 }
 
 .change-pin-button:hover {
-  background-color: #2ecc71;
+  background-color: var(--change-pin-btn-bg-hover);
   transform: scale(1.05);
 }
 
@@ -73,11 +108,11 @@
 }
 
 .change-pin-message.success {
-  color: #27ae60;
+  color: var(--change-pin-msg-success);
 }
 
 .change-pin-message.error {
-  color: #e74c3c;
+  color: var(--change-pin-msg-error);
 }
 
 /* Animation */

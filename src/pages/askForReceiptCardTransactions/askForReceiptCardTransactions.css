@@ -1,22 +1,39 @@
-/* AskCard.css */
+/* Light Theme Variables (default) */
+:root {
+  --ask-card-bg: linear-gradient(to left, #fffbe6, #e6f7ff);
+  --ask-card-text: #2d3a63;
+  --ask-card-btn-bg: #4c6ef5;
+  --ask-card-btn-bg-hover: #3751db;
+  --ask-card-box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+/* Dark Theme Variables */
+.dark-theme {
+  --ask-card-bg: linear-gradient(to left, #1e1e1e, #2c2c2c);
+  --ask-card-text: #cbd5e1;
+  --ask-card-btn-bg: #6a85ff;
+  --ask-card-btn-bg-hover: #4a66db;
+  --ask-card-box-shadow: 0 12px 28px rgba(255, 255, 255, 0.06);
+}
 
 .ask-card-container {
   max-width: 400px;
   margin: 80px auto;
   padding: 30px 25px;
-  background: linear-gradient(to left, #fffbe6, #e6f7ff);
+  background: var(--ask-card-bg);
   border-radius: 14px;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--ask-card-box-shadow);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
   animation: fadeInUp 0.5s ease;
+  color: var(--ask-card-text);
 }
 
 .ask-card-title {
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 25px;
-  color: #2d3a63;
+  color: var(--ask-card-text);
 }
 
 .ask-card-buttons {
@@ -26,7 +43,7 @@
 }
 
 .ask-card-btn {
-  background-color: #4c6ef5;
+  background-color: var(--ask-card-btn-bg);
   color: #fff;
   border: none;
   padding: 14px 30px;
@@ -39,7 +56,7 @@
 }
 
 .ask-card-btn:hover {
-  background-color: #3751db;
+  background-color: var(--ask-card-btn-bg-hover);
   transform: scale(1.1);
 }
 

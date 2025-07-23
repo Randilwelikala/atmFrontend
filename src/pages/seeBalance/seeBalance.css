@@ -1,17 +1,40 @@
+/* Light Theme Variables (default) */
+:root {
+  --balance-bg: linear-gradient(to left, #fffbe6, #e6f7ff);
+  --balance-title-color: #1a1a2e;
+  --balance-text-color: #222f3e;
+  --balance-border-color: #d1d8e0;
+  --balance-error-color: #e74c3c;
+  --balance-loading-color: #34495e;
+  --balance-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Theme Variables */
+.dark-theme {
+  --balance-bg: linear-gradient(to left, #1e1e1e, #2c2c2c);
+  --balance-title-color: #d1d5db;
+  --balance-text-color: #cbd5e1;
+  --balance-border-color: #444c56;
+  --balance-error-color: #f87171;
+  --balance-loading-color: #94a3b8;
+  --balance-box-shadow: 0 10px 25px rgba(255, 255, 255, 0.07);
+}
+
 .balance-container {
   max-width: 450px;
   margin: 60px auto;
   padding: 25px 35px;
-  background: linear-gradient(to left, #fffbe6, #e6f7ff);
+  background: var(--balance-bg);
   border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--balance-box-shadow);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   animation: fadeSlideUp 0.6s ease forwards;
+  color: var(--balance-text-color);
 }
 
 .balance-title {
   font-size: 26px;
-  color: #1a1a2e;
+  color: var(--balance-title-color);
   font-weight: 700;
   margin-bottom: 20px;
   text-align: center;
@@ -21,13 +44,13 @@
 .balance-details p {
   font-size: 18px;
   margin: 10px 0;
-  color: #222f3e;
-  border-bottom: 1px solid #d1d8e0;
+  color: var(--balance-text-color);
+  border-bottom: 1px solid var(--balance-border-color);
   padding-bottom: 8px;
 }
 
 .error-message {
-  color: #e74c3c;
+  color: var(--balance-error-color);
   font-weight: 600;
   text-align: center;
   margin-top: 50px;
@@ -35,7 +58,7 @@
 }
 
 .loading-message {
-  color: #34495e;
+  color: var(--balance-loading-color);
   text-align: center;
   margin-top: 50px;
   font-size: 18px;

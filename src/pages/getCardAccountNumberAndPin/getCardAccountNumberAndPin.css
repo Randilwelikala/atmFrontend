@@ -1,46 +1,76 @@
-/* GetCardAccountNumberAndPin.css */
+/* Light Theme Variables (default) */
+:root {
+  --card-login-bg: linear-gradient(to left, #fffbe6, #e6f7ff);
+  --card-login-text: #223344;
+  --card-login-border: #a0b9ff;
+  --card-login-border-focus: #4c6ef5;
+  --card-login-box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  --card-login-btn-bg: #4c6ef5;
+  --card-login-btn-bg-hover: #3751db;
+  --card-login-error-color: #e74c3c;
+}
 
+/* Dark Theme Variables */
+.dark-theme {
+  --card-login-bg: linear-gradient(to left, #1e1e1e, #2c2c2c);
+  --card-login-text: #d0d8e6;
+  --card-login-border: #556ee6;
+  --card-login-border-focus: #7fa7f7;
+  --card-login-box-shadow: 0 15px 40px rgba(255, 255, 255, 0.05);
+  --card-login-btn-bg: #6a85ff;
+  --card-login-btn-bg-hover: #4a66db;
+  --card-login-error-color: #ff4d4d;
+}
+
+/* Container */
 .card-login-container {
   max-width: 400px;
   margin: 60px auto;
   padding: 30px 25px;
-  background: linear-gradient(to left, #fffbe6, #e6f7ff);
+  background: var(--card-login-bg);
   border-radius: 14px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-login-box-shadow);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   animation: fadeSlideIn 0.5s ease;
+  color: var(--card-login-text);
 }
 
+/* Title */
 .card-login-title {
   font-size: 26px;
-  color: #223344;
+  color: var(--card-login-text);
   text-align: center;
   margin-bottom: 30px;
   font-weight: 600;
 }
 
+/* Form */
 .card-login-form {
   display: flex;
   flex-direction: column;
 }
 
+/* Inputs */
 .card-login-input {
   padding: 12px 15px;
   font-size: 16px;
-  border: 2px solid #a0b9ff;
+  border: 2px solid var(--card-login-border);
   border-radius: 10px;
   margin-bottom: 20px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--card-login-bg);
+  color: var(--card-login-text);
 }
 
 .card-login-input:focus {
-  border-color: #4c6ef5;
+  border-color: var(--card-login-border-focus);
   box-shadow: 0 0 8px rgba(76, 110, 245, 0.5);
   outline: none;
 }
 
+/* Button */
 .card-login-button {
-  background-color: #4c6ef5;
+  background-color: var(--card-login-btn-bg);
   color: white;
   border: none;
   padding: 14px 0;
@@ -52,13 +82,14 @@
 }
 
 .card-login-button:hover {
-  background-color: #3751db;
+  background-color: var(--card-login-btn-bg-hover);
   transform: scale(1.05);
 }
 
+/* Error */
 .card-login-error {
   margin-top: 15px;
-  color: #e74c3c;
+  color: var(--card-login-error-color);
   font-weight: 600;
   text-align: center;
 }

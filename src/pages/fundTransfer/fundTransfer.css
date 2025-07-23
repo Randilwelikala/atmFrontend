@@ -1,12 +1,61 @@
+/* Light Theme (default) */
+:root {
+  --ft-bg: linear-gradient(to left, #fffbe6, #e6f7ff);
+  --ft-title-color: #273c75;
+  --ft-label-color: #34495e;
+  --ft-input-border: #d1d8e0;
+  --ft-input-focus-border: #40739e;
+  --ft-input-focus-shadow: rgba(64, 115, 158, 0.53);
+  --ft-btn-bg: #0984e3;
+  --ft-btn-hover-bg: #74b9ff;
+  --ft-btn-color: white;
+  --ft-error-color: #e74c3c;
+  --ft-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --ft-receipt-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+  --ft-receipt-color: #2d3436;
+  --ft-receipt-title-color: #2c3e50;
+  --ft-btn-pdf: #d63031;
+  --ft-btn-pdf-hover: #e17055;
+  --ft-btn-docx: #00b894;
+  --ft-btn-docx-hover: #55efc4;
+  --ft-btn-skip: #636e72;
+  --ft-btn-skip-hover: #b2bec3;
+}
+
+/* Dark Theme Overrides */
+.dark-theme {
+  --ft-bg: linear-gradient(to left, #1e1e1e, #2c2c2c);
+  --ft-title-color: #a3b1c6;
+  --ft-label-color: #cbd5e1;
+  --ft-input-border: #555a66;
+  --ft-input-focus-border: #3b82f6;
+  --ft-input-focus-shadow: rgba(59, 130, 246, 0.5);
+  --ft-btn-bg: #1d4ed8;
+  --ft-btn-hover-bg: #3b82f6;
+  --ft-btn-color: white;
+  --ft-error-color: #f87171;
+  --ft-box-shadow: 0 10px 25px rgba(255, 255, 255, 0.07);
+  --ft-receipt-box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.1);
+  --ft-receipt-color: #dfe6e9;
+  --ft-receipt-title-color: #ffffff;
+  --ft-btn-pdf: #e74c3c;
+  --ft-btn-pdf-hover: #ff7675;
+  --ft-btn-docx: #00cec9;
+  --ft-btn-docx-hover: #81ecec;
+  --ft-btn-skip: #636e72;
+  --ft-btn-skip-hover: #b2bec3;
+}
+
 .fund-transfer-container {
   max-width: 440px;
   margin: 50px auto;
   padding: 30px 35px;
-  background: linear-gradient(to left, #fffbe6, #e6f7ff);
+  background: var(--ft-bg);
   border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--ft-box-shadow);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   animation: fadeInScale 0.5s ease forwards;
+  color: var(--ft-label-color);
 }
 
 .fund-transfer-title {
@@ -14,7 +63,7 @@
   font-weight: 700;
   margin-bottom: 28px;
   text-align: center;
-  color: #273c75;
+  color: var(--ft-title-color);
   letter-spacing: 1px;
 }
 
@@ -27,7 +76,7 @@
 
 .transfer-type-label {
   font-weight: 600;
-  color: #34495e;
+  color: var(--ft-label-color);
   font-size: 16px;
   display: flex;
   align-items: center;
@@ -46,21 +95,23 @@
   width: 100%;
   padding: 12px 16px;
   font-size: 17px;
-  border: 2px solid #d1d8e0;
+  border: 2px solid var(--ft-input-border);
   border-radius: 10px;
+  background-color: transparent;
+  color: var(--ft-label-color);
   transition: border-color 0.3s ease;
 }
 
 .fund-transfer-input:focus {
   outline: none;
-  border-color: #40739e;
-  box-shadow: 0 0 6px #40739e88;
+  border-color: var(--ft-input-focus-border);
+  box-shadow: 0 0 6px var(--ft-input-focus-shadow);
 }
 
 .fund-transfer-button {
   padding: 14px 0;
-  background-color: #0984e3;
-  color: white;
+  background-color: var(--ft-btn-bg);
+  color: var(--ft-btn-color);
   font-size: 20px;
   font-weight: 700;
   border: none;
@@ -71,12 +122,12 @@
 }
 
 .fund-transfer-button:hover {
-  background-color: #74b9ff;
+  background-color: var(--ft-btn-hover-bg);
   transform: scale(1.05);
 }
 
 .error-message {
-  color: #e74c3c;
+  color: var(--ft-error-color);
   font-size: 14px;
   margin-top: -14px;
   margin-bottom: 10px;
@@ -87,18 +138,18 @@
 .receipt-box {
   margin-top: 32px;
   padding: 25px 25px;
-  background: linear-gradient(to left, #fffbe6, #e6f7ff);
+  background: var(--ft-bg);
   border-radius: 12px;
-  box-shadow: inset 0 0 8px rgba(0,0,0,0.50);
+  box-shadow: var(--ft-receipt-box-shadow);
   font-size: 15px;
-  color: #2d3436;
+  color: var(--ft-receipt-color);
 }
 
 .receipt-title {
   font-weight: 700;
   font-size: 20px;
   margin-bottom: 14px;
-  color: #2c3e50;
+  color: var(--ft-receipt-title-color);
   text-align: center;
 }
 
@@ -119,39 +170,38 @@
   border: none;
   color: white;
   font-size: 14px;
-  
 }
 
 .pdf-btn {
-  background-color: #d63031;
+  background-color: var(--ft-btn-pdf);
 }
 
 .pdf-btn:hover {
-  background-color: #e17055;
+  background-color: var(--ft-btn-pdf-hover);
   transform: scale(1.05);
 }
 
 .docx-btn {
-  background-color: #00b894;
+  background-color: var(--ft-btn-docx);
 }
 
 .docx-btn:hover {
-  background-color: #55efc4;
-  color: #2d3436;
+  background-color: var(--ft-btn-docx-hover);
+  color: var(--ft-receipt-color);
   transform: scale(1.05);
 }
 
 .skip-btn {
-  background-color: #636e72;
+  background-color: var(--ft-btn-skip);
 }
 
 .skip-btn:hover {
-  background-color: #b2bec3;
-  color: #2d3436;
+  background-color: var(--ft-btn-skip-hover);
+  color: var(--ft-receipt-color);
   transform: scale(1.05);
 }
 
-/* Animation for fade-in */
+/* Animation */
 @keyframes fadeInScale {
   from {
     opacity: 0;

@@ -1,20 +1,21 @@
-/* CardlessWithdrawOTP.css */
-
 .otp-container {
   max-width: 400px;
   margin: 60px auto;
   padding: 30px;
-  background: linear-gradient(to left, #fffbe6, #e6f7ff);
+  background: linear-gradient(to left, var(--card-bg-gradient-start), var(--card-bg-gradient-end));
   border-radius: 14px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 30px var(--card-shadow);
   animation: fadeInUp 0.5s ease;
   font-family: 'Segoe UI', sans-serif;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
 }
 
 .otp-title {
   text-align: center;
   font-size: 22px;
-  color: #333;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
   margin-bottom: 25px;
 }
 
@@ -26,7 +27,8 @@
 .otp-label {
   font-size: 14px;
   margin-bottom: 5px;
-  color: #555;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
 }
 
 .otp-input {
@@ -35,7 +37,15 @@
   border-radius: 8px;
   border: 1px solid #ccc;
   margin-bottom: 15px;
-  transition: border-color 0.2s ease;
+  background-color: white;
+  color: #333;
+  transition: border-color 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-theme .otp-input {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  border: 1px solid #555;
 }
 
 .otp-input:focus {
@@ -46,8 +56,8 @@
 .otp-button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -55,14 +65,15 @@
 }
 
 .otp-button:hover {
-  background-color: #0056b3;
+  background-color: var(--btn-bg-hover);
   transform: scale(1.05);
 }
 
 .otp-message {
   font-size: 14px;
   margin-bottom: 12px;
-  color: #333;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
 }
 
 .otp-error {

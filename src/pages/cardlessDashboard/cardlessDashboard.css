@@ -1,66 +1,56 @@
-/* CardlessDashboard.css */
+/* Theme-based CSS Variables (already defined in theme.css)
+   Ensure you import theme.css before this file */
 
 .cardless-dashboard-container {
   padding: 10px;
   min-height: 90vh;
-  background: linear-gradient(to right, #fffbe6, #e6f7ff);
+  background: linear-gradient(to right, var(--card-bg-gradient-start), var(--card-bg-gradient-end));
   display: flex;
   justify-content: center;
   align-items: center;
   animation: fadeSlideUp 0.5s ease;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
 }
 
 .cardless-dashboard-content {
- background: linear-gradient(to right, #e6f0ff, #fef9e7);
+  background: linear-gradient(to right, var(--container-bg-gradient-start), var(--container-bg-gradient-end));
   padding: 40px 50px;
   border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px var(--card-shadow);
   text-align: center;
   animation: popIn 0.6s ease;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
 }
 
 .cardless-title {
   font-size: 28px;
   margin-bottom: 30px;
-  color: #333;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
 }
 
-.cardless-withdraw-btn  {
-  padding: 12px 28px;
-  margin: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 10px;
-  background-color: #00b894;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.cardless-withdraw-btn:hover {
-  background-color: #008f72;
-  transform: scale(1.05);
-}
-
+.cardless-withdraw-btn,
 .cardless-deposit-btn {
   padding: 12px 28px;
   margin: 10px;
   font-size: 16px;
   border: none;
   border-radius: 10px;
-  background-color: #00b894;
-  color: white;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+.cardless-withdraw-btn:hover,
 .cardless-deposit-btn:hover {
-  background-color: #008f72;
+  background-color: var(--btn-bg-hover);
   transform: scale(1.05);
 }
 
 .deposit-btn {
-  
   background-color: #54a0ff;
 }
 

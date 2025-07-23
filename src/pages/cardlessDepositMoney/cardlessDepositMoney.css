@@ -1,25 +1,70 @@
-/* Deposit.css */
+/* Light Theme Variables (default) */
+:root {
+  --deposit-bg: linear-gradient(to left, #fffbe6, #e6f7ff);
+  --deposit-text-main: #223344;
+  --deposit-text-title: #224466;
+  --deposit-border: #a0b9ff;
+  --deposit-border-focus: #4c6ef5;
+  --deposit-box-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
+  --deposit-input-bg: #fff;
+  --deposit-btn-bg: #4c6ef5;
+  --deposit-btn-bg-hover: #3751db;
+  --deposit-dropdown-bg: #fff;
+  --deposit-dropdown-border: #ccc;
+  --deposit-dropdown-hover: #e0e7ff;
+  --deposit-receipt-bg: linear-gradient(to left, #fffbe6, #e6f7ff);
+  --deposit-receipt-text: #1a2935;
+  --deposit-success: #2ecc71;
+  --deposit-error: #e74c3c;
+  --deposit-skip-btn-bg: #9aa3b8;
+  --deposit-skip-btn-bg-hover: #7f859a;
+}
 
+/* Dark Theme Variables */
+.dark-theme {
+  --deposit-bg: linear-gradient(to left, #1e1e1e, #2c2c2c);
+  --deposit-text-main: #d0d8e6;
+  --deposit-text-title: #a8bbd7;
+  --deposit-border: #4a6cd4;
+  --deposit-border-focus: #7fa7f7;
+  --deposit-box-shadow: 0 15px 40px rgba(255, 255, 255, 0.05);
+  --deposit-input-bg: #333;
+  --deposit-btn-bg: #5a86ff;
+  --deposit-btn-bg-hover: #3f64db;
+  --deposit-dropdown-bg: #2a2a2a;
+  --deposit-dropdown-border: #555;
+  --deposit-dropdown-hover: #3a3a3a;
+  --deposit-receipt-bg: linear-gradient(to left, #222222, #333333);
+  --deposit-receipt-text: #c5d1e0;
+  --deposit-success: #66ff66;
+  --deposit-error: #ff4d4d;
+  --deposit-skip-btn-bg: #707788;
+  --deposit-skip-btn-bg-hover: #5a6071;
+}
+
+/* Container */
 .deposit-container {
   max-width: 480px;
   margin: 60px auto;
   padding: 30px 30px;
- background: linear-gradient(to left, #fffbe6, #e6f7ff);
+  background: var(--deposit-bg);
   border-radius: 14px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
+  box-shadow: var(--deposit-box-shadow);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   animation: fadeSlideIn 0.5s ease;
-  color: #223344;
+  color: var(--deposit-text-main);
 }
 
+/* Title */
 .deposit-title {
   font-size: 26px;
   font-weight: 700;
   margin-bottom: 25px;
   text-align: center;
-  color: #224466;
+  color: var(--deposit-text-title);
 }
 
+/* Form */
 .deposit-form {
   display: flex;
   flex-direction: column;
@@ -27,30 +72,36 @@
   margin-bottom: 25px;
 }
 
+/* Labels */
 .deposit-label {
   font-weight: 600;
   font-size: 16px;
+  color: var(--deposit-text-main);
 }
 
+/* Inputs */
 .deposit-input {
   padding: 12px 15px;
   font-size: 16px;
-  border: 2px solid #a0b9ff;
+  border: 2px solid var(--deposit-border);
   border-radius: 12px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--deposit-input-bg);
+  color: var(--deposit-text-main);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .deposit-input:focus {
-  border-color: #4c6ef5;
+  border-color: var(--deposit-border-focus);
   box-shadow: 0 0 8px rgba(76, 110, 245, 0.5);
   outline: none;
 }
 
+/* Button */
 .deposit-btn {
   padding: 14px 0;
   font-size: 18px;
   font-weight: 700;
-  background-color: #4c6ef5;
+  background-color: var(--deposit-btn-bg);
   color: #fff;
   border: none;
   border-radius: 14px;
@@ -60,44 +111,49 @@
 }
 
 .deposit-btn:hover {
-  background-color: #3751db;
+  background-color: var(--deposit-btn-bg-hover);
   transform: scale(1.05);
 }
 
+/* Receipt Box */
 .deposit-receipt-box {
-  background: linear-gradient(to left, #fffbe6, #e6f7ff);
+  background: var(--deposit-receipt-bg);
   border-radius: 12px;
   padding: 20px 25px;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
   margin-top: 15px;
-  color: #1a2935;
+  color: var(--deposit-receipt-text);
   font-weight: 500;
   animation: fadeSlideIn 0.4s ease;
 }
 
+/* Success Message */
 .deposit-success {
-  color: #2ecc71;
+  color: var(--deposit-success);
   font-weight: 700;
   margin-top: 15px;
   text-align: center;
   font-size: 18px;
 }
 
+/* Error Message */
 .deposit-error {
-  color: #e74c3c;
+  color: var(--deposit-error);
   font-weight: 600;
   margin-top: 15px;
   text-align: center;
   font-size: 16px;
 }
 
+/* Loading Text */
 .deposit-loading {
   text-align: center;
   font-size: 18px;
   margin-top: 80px;
-  color: #555;
+  color: var(--deposit-text-main);
 }
 
+/* Dropdown Wrapper */
 .deposit-dropdown-wrapper {
   margin-top: 15px;
   position: relative;
@@ -106,16 +162,18 @@
   align-items: center;
 }
 
+/* Download Button */
 .download-btn {
   min-width: 130px;
 }
 
+/* Dropdown Menu */
 .deposit-dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
-  background: #fff;
-  border: 1px solid #ccc;
+  background: var(--deposit-dropdown-bg);
+  border: 1px solid var(--deposit-dropdown-border);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   z-index: 1000;
@@ -123,6 +181,7 @@
   animation: fadeSlideDown 0.3s ease;
 }
 
+/* Dropdown Buttons */
 .deposit-dropdown-btn {
   display: block;
   width: 100%;
@@ -131,25 +190,31 @@
   border: none;
   text-align: left;
   font-weight: 600;
-  color: #4c6ef5;
+  color: var(--deposit-btn-bg);
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .deposit-dropdown-btn:hover {
-  background-color: #e0e7ff;
+  background-color: var(--deposit-dropdown-hover);
 }
 
+/* Skip Button */
 .skip-btn {
-  background-color: #9aa3b8;
+  background-color: var(--deposit-skip-btn-bg);
   transition: background-color 0.3s ease;
   padding: 15px 50px;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
 }
 
 .skip-btn:hover {
-  background-color: #7f859a;
+  background-color: var(--deposit-skip-btn-bg-hover);
 }
 
+/* Animations */
 @keyframes fadeSlideIn {
   from {
     opacity: 0;

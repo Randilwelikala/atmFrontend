@@ -1,14 +1,33 @@
-/* CardDashboard.css */
+/* Light Theme Variables (default) */
+:root {
+  --card-dashboard-bg: linear-gradient(to left, #fffbe6, #e6f7ff);
+  --card-dashboard-text: #2a3a57;
+  --card-dashboard-btn-bg: #4c6ef5;
+  --card-dashboard-btn-bg-hover: #3751db;
+  --card-dashboard-box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
+  --card-dashboard-loading-text: #555;
+}
+
+/* Dark Theme Variables */
+.dark-theme {
+  --card-dashboard-bg: linear-gradient(to left, #1e1e1e, #2c2c2c);
+  --card-dashboard-text: #cbd5e1;
+  --card-dashboard-btn-bg: #6a85ff;
+  --card-dashboard-btn-bg-hover: #4a66db;
+  --card-dashboard-box-shadow: 0 10px 28px rgba(255, 255, 255, 0.05);
+  --card-dashboard-loading-text: #aaa;
+}
 
 .card-dashboard-container {
   max-width: 480px;
   margin: 50px auto;
   padding: 30px 25px;
-  background: linear-gradient(to left, #fffbe6, #e6f7ff);
+  background: var(--card-dashboard-bg);
   border-radius: 14px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
+  box-shadow: var(--card-dashboard-box-shadow);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   animation: fadeSlideIn 0.4s ease;
+  color: var(--card-dashboard-text);
 }
 
 .card-dashboard-column {
@@ -21,7 +40,7 @@
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 25px;
-  color: #2a3a57;
+  color: var(--card-dashboard-text);
   text-align: center;
 }
 
@@ -29,7 +48,7 @@
   padding: 12px 0;
   font-size: 16px;
   font-weight: 600;
-  background-color: #4c6ef5;
+  background-color: var(--card-dashboard-btn-bg);
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -38,7 +57,7 @@
 }
 
 .dashboard-btn:hover {
-  background-color: #3751db;
+  background-color: var(--card-dashboard-btn-bg-hover);
   transform: scale(1.04);
 }
 
@@ -46,7 +65,7 @@
   text-align: center;
   font-size: 18px;
   margin-top: 80px;
-  color: #555;
+  color: var(--card-dashboard-loading-text);
 }
 
 @keyframes fadeSlideIn {

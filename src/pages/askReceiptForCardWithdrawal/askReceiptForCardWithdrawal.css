@@ -1,18 +1,45 @@
+/* Light Theme Variables (default) */
+:root {
+  --askcard-bg: linear-gradient(to left, #fffbe6, #e6f7ff);
+  --askcard-text: #223366;
+  --askcard-box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+
+  --askcard-yes-bg: #4caf50;
+  --askcard-yes-bg-hover: #3a9d38;
+
+  --askcard-no-bg: #f44336;
+  --askcard-no-bg-hover: #b33027;
+}
+
+/* Dark Theme Variables */
+.dark-theme {
+  --askcard-bg: linear-gradient(to left, #1e1e1e, #2c2c2c);
+  --askcard-text: #cbd5e1;
+  --askcard-box-shadow: 0 8px 20px rgba(255,255,255,0.07);
+
+  --askcard-yes-bg: #66bb6a;
+  --askcard-yes-bg-hover: #4a8c44;
+
+  --askcard-no-bg: #e57373;
+  --askcard-no-bg-hover: #b33a3a;
+}
+
 .askcard-container {
   max-width: 400px;
   margin: 50px auto;
   padding: 20px 30px;
-  background: linear-gradient(to left, #fffbe6, #e6f7ff);
+  background: var(--askcard-bg);
   border-radius: 12px;
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  box-shadow: var(--askcard-box-shadow);
+  color: var(--askcard-text);
 }
 
 .askcard-title {
   font-size: 22px;
   margin-bottom: 25px;
-  color: #223366;
+  color: var(--askcard-text);
   font-weight: 600;
 }
 
@@ -31,24 +58,23 @@
   font-weight: 600;
   transition: background-color 0.3s ease, transform 0.2s ease;
   user-select: none;
-}
-
-.yes-btn {
-  background-color: #4caf50;
   color: white;
 }
 
+.yes-btn {
+  background-color: var(--askcard-yes-bg);
+}
+
 .yes-btn:hover {
-  background-color: #3a9d38;
+  background-color: var(--askcard-yes-bg-hover);
   transform: scale(1.05);
 }
 
 .no-btn {
-  background-color: #f44336;
-  color: white;
+  background-color: var(--askcard-no-bg);
 }
 
 .no-btn:hover {
-  background-color: #b33027;
+  background-color: var(--askcard-no-bg-hover);
   transform: scale(1.05);
 }

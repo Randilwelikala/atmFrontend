@@ -1,71 +1,120 @@
-/* Withdraw.css */
+/* Light Theme Variables (default) */
+:root {
+  --withdraw-bg: linear-gradient(to left, #fffbe6, #e6f7ff);
+  --withdraw-text: #2c3e50;
+  --withdraw-border: #ccc;
+  --withdraw-box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  --withdraw-input-bg: #fff;
+  --withdraw-btn-primary: #007bff;
+  --withdraw-btn-primary-hover: #0056b3;
+  --withdraw-btn-secondary: #6c757d;
+  --withdraw-dropdown-bg: #fff;
+  --withdraw-dropdown-border: #ccc;
+  --withdraw-dropdown-hover: #f0f0f0;
+  --withdraw-receipt-border: #ddd;
+  --withdraw-success: green;
+  --withdraw-error: red;
+}
 
+/* Dark Theme Variables */
+.dark-theme {
+  --withdraw-bg: linear-gradient(to left, #1e1e1e, #2c2c2c);
+  --withdraw-text: #e0e0e0;
+  --withdraw-border: #555;
+  --withdraw-box-shadow: 0 12px 25px rgba(255, 255, 255, 0.05);
+  --withdraw-input-bg: #333;
+  --withdraw-btn-primary: #3399ff;
+  --withdraw-btn-primary-hover: #1a73e8;
+  --withdraw-btn-secondary: #888;
+  --withdraw-dropdown-bg: #2a2a2a;
+  --withdraw-dropdown-border: #555;
+  --withdraw-dropdown-hover: #3a3a3a;
+  --withdraw-receipt-border: #444;
+  --withdraw-success: #66ff66;
+  --withdraw-error: #ff4d4d;
+}
+
+/* Container */
 .withdraw-container {
   max-width: 600px;
   margin: 50px auto;
   padding: 30px;
- background: linear-gradient(to left, #fffbe6, #e6f7ff);
+  background: var(--withdraw-bg);
   border-radius: 14px;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--withdraw-box-shadow);
   font-family: 'Segoe UI', sans-serif;
   animation: fadeIn 0.4s ease;
+  color: var(--withdraw-text);
 }
 
+/* Title */
 .withdraw-title {
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
-  color: #2c3e50;
+  color: var(--withdraw-text);
 }
 
+/* User Details */
 .withdraw-user-details p {
   margin: 6px 0;
   font-size: 15px;
+  color: var(--withdraw-text);
 }
 
+/* Form */
 .withdraw-form {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
 }
 
+/* Labels */
 .withdraw-label {
   font-size: 14px;
   margin-bottom: 6px;
+  color: var(--withdraw-text);
 }
 
+/* Input */
 .withdraw-input {
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--withdraw-border);
   margin-bottom: 15px;
   font-size: 15px;
+  background-color: var(--withdraw-input-bg);
+  color: var(--withdraw-text);
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Button */
 .withdraw-btn {
-  background-color: #007bff;
+  background-color: var(--withdraw-btn-primary);
   color: white;
   border: none;
   padding: 10px 18px;
   font-size: 16px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .withdraw-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--withdraw-btn-primary-hover);
   transform: scale(1.03);
 }
 
+/* Secondary Button */
 .withdraw-btn.secondary {
-  background-color: #6c757d;
+  background-color: var(--withdraw-btn-secondary);
   margin-left: 10px;
 }
 
+/* Receipt Section */
 .withdraw-receipt {
   margin-top: 25px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--withdraw-receipt-border);
   padding-top: 20px;
 }
 
@@ -73,20 +122,23 @@
   margin-bottom: 15px;
   font-size: 18px;
   text-align: center;
+  color: var(--withdraw-text);
 }
 
+/* Messages */
 .withdraw-success {
-  color: green;
+  color: var(--withdraw-success);
   font-weight: bold;
   margin-top: 15px;
 }
 
 .withdraw-error {
-  color: red;
+  color: var(--withdraw-error);
   margin-top: 15px;
   font-weight: bold;
 }
 
+/* Download group */
 .withdraw-download-group {
   display: flex;
   align-items: center;
@@ -95,12 +147,13 @@
   position: relative;
 }
 
+/* Dropdown */
 .withdraw-dropdown {
   position: absolute;
   top: 40px;
   left: 0;
-  background: white;
-  border: 1px solid #ccc;
+  background: var(--withdraw-dropdown-bg);
+  border: 1px solid var(--withdraw-dropdown-border);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   border-radius: 6px;
   min-width: 160px;
@@ -109,6 +162,7 @@
   flex-direction: column;
 }
 
+/* Dropdown buttons */
 .withdraw-dropdown-btn {
   background: none;
   border: none;
@@ -116,12 +170,14 @@
   text-align: left;
   cursor: pointer;
   font-size: 14px;
+  color: var(--withdraw-text);
 }
 
 .withdraw-dropdown-btn:hover {
-  background-color: #f0f0f0;
+  background-color: var(--withdraw-dropdown-hover);
 }
 
+/* Animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }

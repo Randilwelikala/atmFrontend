@@ -1,45 +1,75 @@
-/* enterAccountNumber.css */
+/* Light Theme Variables (default) */
+:root {
+  --enter-bg: linear-gradient(to left, #fffbe6, #e6f7ff);
+  --enter-text: #333;
+  --enter-border: #ccc;
+  --enter-border-focus: #007bff;
+  --enter-btn-bg: #007bff;
+  --enter-btn-bg-hover: #0056b3;
+  --enter-error-color: red;
+  --enter-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
 
+/* Dark Theme Variables */
+.dark-theme {
+  --enter-bg: linear-gradient(to left, #1e1e1e, #2c2c2c);
+  --enter-text: #ddd;
+  --enter-border: #555;
+  --enter-border-focus: #3399ff;
+  --enter-btn-bg: #3399ff;
+  --enter-btn-bg-hover: #1a73e8;
+  --enter-error-color: #ff4d4d;
+  --enter-box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+/* Container */
 .container {
   max-width: 400px;
   margin: 80px auto;
   padding: 30px;
-  background: linear-gradient(to left, #fffbe6, #e6f7ff);
+  background: var(--enter-bg);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--enter-box-shadow);
   text-align: center;
   font-family: Arial, sans-serif;
+  color: var(--enter-text);
 }
 
+/* Title */
 .title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 25px;
-  color: #333;
+  color: var(--enter-text);
 }
 
+/* Form */
 .form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
+/* Input */
 .input {
   padding: 10px 15px;
   font-size: 16px;
-  border: 2px solid #ccc;
+  border: 2px solid var(--enter-border);
   border-radius: 8px;
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--enter-bg);
+  color: var(--enter-text);
 }
 
 .input:focus {
-  border-color: #007bff;
+  border-color: var(--enter-border-focus);
 }
 
+/* Button */
 .btn {
   padding: 10px;
-  background-color: #007bff;
+  background-color: var(--enter-btn-bg);
   color: white;
   border: none;
   font-size: 16px;
@@ -49,11 +79,12 @@
 }
 
 .btn:hover {
-  background-color: #0056b3;
+  background-color: var(--enter-btn-bg-hover);
 }
 
+/* Error Message */
 .error {
-  color: red;
+  color: var(--enter-error-color);
   margin-top: 15px;
   font-size: 14px;
 }
