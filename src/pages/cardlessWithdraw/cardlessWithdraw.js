@@ -144,7 +144,6 @@ function CardlessWithdraw() {
           <p><strong>{t('Branch')}:</strong> {user.branch}</p>
           <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
           <p><strong>{t('New Balance')}:</strong> Rs. {user.balance}</p>
-          {/* <p><strong>{t('New Balance')}:</strong> Rs. {user.balance}</p> */}
           {Object.keys(breakdown).length > 0 && (
             <>
                 <h4>{t('Dispensed Cash Breakdown')}:</h4>
