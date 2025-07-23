@@ -12,8 +12,7 @@ export default function CardlessSideNavbar() {
 
 
   const toggleSidebar = () => setOpen(!open);
-
-  // Close sidebar on small screens when clicking outside sidebar or hamburger
+ 
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -35,8 +34,7 @@ export default function CardlessSideNavbar() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [open]);
-
-  // Close sidebar on link click for small screens
+ 
   const handleLinkClick = () => {
     if (window.innerWidth <= 768) {
       setOpen(false);
@@ -60,7 +58,7 @@ export default function CardlessSideNavbar() {
             
             <NavLink
               to={`/askReceiptforCardlessWithdraw`}
-              // className={({ isActive }) => (isActive ? 'active' : '')}
+              
               onClick={handleLinkClick}
             >
               {t('Cardless Withdraw')}
@@ -69,7 +67,7 @@ export default function CardlessSideNavbar() {
           <li>
             <NavLink
               to={`/cardless-deposit`}
-              // className={({ isActive }) => (isActive ? 'active' : '')}
+              
               onClick={handleLinkClick}
             >
               {t('Cardless Deposit')} 
