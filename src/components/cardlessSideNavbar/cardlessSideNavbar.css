@@ -1,4 +1,62 @@
-/* Base sidebar styles */
+/* ===== Global Theme Variables ===== */
+
+/* Light Theme */
+:root {
+  --bg-gradient-start: #fffbe6;
+  --bg-gradient-end: #e6f7ff;
+  --title-color: #1a1a2e;
+  --text-color: #222f3e;
+  --border-color: #d1d8e0;
+  --error-color: #e74c3c;
+  --loading-color: #34495e;
+
+  --cancel-btn-bg: #ff4d4f;
+  --cancel-btn-bg-hover: #ff1a1a;
+  --cancel-btn-text: white;
+  --cancel-btn-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  --sidebar-bg: #f4f4f4;
+  --sidebar-text: #2c3e50;
+  --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  --sidebar-link: #2c3e50;
+  --sidebar-link-hover-bg: #d0d0d0;
+  --sidebar-link-hover: #000;
+  --hamburger-bg: #ddd;
+  --hamburger-color: #333;
+
+  --main-bg: #ffffff;
+  --main-text: #333;
+}
+
+/* Dark Theme Overrides */
+.dark-theme {
+  --bg-gradient-start: #1e1e2f;
+  --bg-gradient-end: #2a2a3d;
+  --title-color: #ffffff;
+  --text-color: #f0f0f0;
+  --border-color: #44475a;
+  --error-color: #ff6b6b;
+  --loading-color: #bdc3c7;
+
+  --cancel-btn-bg: #b33435;
+  --cancel-btn-bg-hover: #8a2728;
+  --cancel-btn-text: white;
+  --cancel-btn-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+
+  --sidebar-bg: #2c3e50;
+  --sidebar-text: #ecf0f1;
+  --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.7);
+  --sidebar-link: #ecf0f1;
+  --sidebar-link-hover-bg: #34495e;
+  --sidebar-link-hover: #fff;
+  --hamburger-bg: #2c3e50;
+  --hamburger-color: #fff;
+
+  --main-bg: #121212;
+  --main-text: #ddd;
+}
+
+/* ===== Sidebar Styles ===== */
 .side-navbar {
   width: 220px;
   height: 100vh;
@@ -14,7 +72,6 @@
   box-shadow: var(--sidebar-shadow);
 }
 
-/* Hidden sidebar on small screens */
 .side-navbar.closed {
   transform: translateX(100%);
 }
@@ -23,18 +80,6 @@
   transform: translateX(0);
 }
 
-.main-content {
-  margin-right: 220px;
-  transition: margin-right 0.3s ease;
-  background-color: var(--main-bg);
-  color: var(--main-text);
-}
-
-.main-content.full-width {
-  margin-right: 0;
-}
-
-/* Sidebar list styles */
 .side-navbar ul {
   list-style: none;
   padding: 0;
@@ -55,7 +100,6 @@
   transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
 }
 
-/* Highlight on hover/active */
 .side-navbar ul li a:hover,
 .side-navbar ul li a.active {
   font-weight: 700;
@@ -63,7 +107,21 @@
   color: var(--sidebar-link-hover);
 }
 
-/* Hamburger button */
+/* ===== Main Content Styles ===== */
+.main-content {
+  margin-right: 220px;
+  transition: margin-right 0.3s ease;
+  background-color: var(--main-bg);
+  color: var(--main-text);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.main-content.full-width {
+  margin-right: 0;
+}
+
+/* ===== Hamburger Button ===== */
 .hamburger-btn {
   position: fixed;
   top: 15px;
@@ -111,34 +169,36 @@
   }
 }
 
-/* ===== Theme Variables and Support ===== */
-
-/* Light Theme Variables */
-.light-theme {
-  --sidebar-bg: #f4f4f4;
-  --sidebar-text: #2c3e50;
-  --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-  --sidebar-link: #2c3e50;
-  --sidebar-link-hover-bg: #d0d0d0;
-  --sidebar-link-hover: #000;
-  --hamburger-bg: #ddd;
-  --hamburger-color: #333;
-
-  --main-bg: #ffffff;
-  --main-text: #333;
+/* ===== Cancel Button ===== */
+.cancel-btn {
+  padding: 10px 20px;
+  background-color: var(--cancel-btn-bg);
+  color: var(--cancel-btn-text);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: var(--cancel-btn-shadow);
+  animation: slideIn 0.4s ease;
+  position: fixed;
+  bottom: 20px;
+  left: 110px;
+  z-index: 1000;
 }
 
-/* Dark Theme Variables */
-.dark-theme {
-  --sidebar-bg: #2c3e50;
-  --sidebar-text: #ecf0f1;
-  --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.7);
-  --sidebar-link: #ecf0f1;
-  --sidebar-link-hover-bg: #34495e;
-  --sidebar-link-hover: #fff;
-  --hamburger-bg: #2c3e50;
-  --hamburger-color: #fff;
+.cancel-btn:hover {
+  background-color: var(--cancel-btn-bg-hover);
+  transform: scale(1.05);
+}
 
-  --main-bg: #121212;
-  --main-text: #ddd;
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

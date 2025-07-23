@@ -1,3 +1,4 @@
+/* Light theme variables */
 :root {
   --modal-bg-overlay: rgba(0, 0, 0, 0.5);
   --modal-content-bg: #ffffff;
@@ -19,6 +20,7 @@
   --modal-shadow: rgba(255, 255, 255, 0.1);
 }
 
+/* Modal overlay */
 .session-modal {
   position: fixed;
   top: 0;
@@ -33,6 +35,7 @@
   transition: background-color 0.3s ease;
 }
 
+/* Modal content container */
 .session-modal-content {
   background-color: var(--modal-content-bg);
   padding: 25px 30px;
@@ -44,12 +47,14 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Modal message text */
 .session-modal-content p {
   font-size: 18px;
   margin-bottom: 20px;
   color: var(--modal-text-color);
 }
 
+/* Modal buttons */
 .session-modal-content button {
   margin: 0 10px;
   padding: 10px 20px;
@@ -62,6 +67,7 @@
   transition: background-color 0.3s ease;
 }
 
+/* Button hover effect */
 .session-modal-content button:hover {
   background-color: var(--modal-btn-bg-hover);
 }
