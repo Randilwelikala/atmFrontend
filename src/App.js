@@ -41,7 +41,9 @@ export default function App() {
 
   return (
     <Router>
-      <LogoutButton onClick={()=>(window.location.href = '/')}/>        
+      <LogoutButton onClick={()=>(window.location.href = '/')}/>      
+        <ClearButton onClick={() => (window.location.href = '/')} />
+        <CancelButton onClick={() => window.history.back()} />    
         <LanguageSwitcher/>
         <ThemeToggle/>
 
@@ -78,8 +80,7 @@ export default function App() {
             
       </Routes>     
       
-      <ClearButton onClick={() => (window.location.href = '/')} />
-      <CancelButton onClick={() => window.history.back()} />       
+           
       
       <Outlet />
     </Router>

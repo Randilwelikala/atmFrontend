@@ -1,7 +1,7 @@
 #language-toggle-btn.language-toggle-button {
   position: fixed;
-  top: 60px; /* Adjust as needed */
-  right: 20px;
+  top: 10px; /* Adjust as needed */
+  left:150px;
   z-index: 10000;
 
   padding: 8px 16px;

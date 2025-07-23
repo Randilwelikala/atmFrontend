@@ -1,8 +1,8 @@
 /* Base styles for the button */
 #theme-toggle-btn.theme-toggle-button {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  /* right: 41%; */
   z-index: 9999;
 
   padding: 10px 18px;
