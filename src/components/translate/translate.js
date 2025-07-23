@@ -4,20 +4,18 @@ import './translate.css';
 
 const LanguageToggle = () => {
   const { i18n } = useTranslation();
-
-  // Initialize language state from i18n current language
+  
   const [currentLang, setCurrentLang] = useState(i18n.language || 'en');
 
   useEffect(() => {
     i18n.changeLanguage(currentLang);
   }, [currentLang, i18n]);
 
-  // Toggle language between 'en' and 'si'
+  
   const toggleLanguage = () => {
     setCurrentLang(prev => (prev === 'en' ? 'si' : 'en'));
   };
-
-  // Button label depending on current language
+  
   const buttonLabel = currentLang === 'en' ? 'සිං' : 'EN';
 
   return (
