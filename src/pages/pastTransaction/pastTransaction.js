@@ -2,17 +2,22 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
+import { useLocation } from 'react-router-dom';
 
-const TransactionHistory = ({ accountNumber }) => {
+const TransactionHistory = () => {
   const [transactions, setTransactions] = useState([]);
+  const location = useLocation();
+
+  // Get the account number from query param
+  const queryParams = new URLSearchParams(location.search);
+  const accountNumber = queryParams.get('account');
 
   useEffect(() => {
     if (!accountNumber) return;
-    console.log("Fetching transactions for:", accountNumber);
+
     axios.get(`http://localhost:3001/transactions/${accountNumber}`)
       .then(res => {
-        console.log("Received transactions:", res.data);
-        setTransactions(res.data);
+        setTransactions(res.data); // no need to filter, backend already returns filtered
       })
       .catch(err => {
         console.error("Error fetching transactions:", err);
