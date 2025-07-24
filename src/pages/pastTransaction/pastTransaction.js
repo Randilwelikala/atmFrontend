@@ -17,31 +17,25 @@ const TransactionHistory = () => {
 
     axios.get(`http://localhost:3001/transactions/${accountNumber}`)
       .then(res => {
-        const allTxns = res.data;
+      const allTxns = res.data;
+      
+      const filteredTxns = allTxns.filter(txn => {
+        if (!txn || !txn.type) return false;
+        
+        if (txn.accountNumber === accountNumber) {
+          return true;
+        }
 
-        // Filter transactions to show only those relevant for this account:
-        // Show transactions where accountNumber === accountNumber,
-        // but exclude 'transfer-in' (incoming transfers) from sender's account view,
-        // and do NOT include transactions where accountNumber !== accountNumber
-        const filteredTxns = allTxns.filter(txn => {
-          if (!txn || !txn.type || !txn.accountNumber) return false;
+        
+        if (txn.type === 'transfer-in' && txn.to === accountNumber) {
+          return true;
+        }
 
-          if (txn.accountNumber === accountNumber) {
-            // Sender's view – show all except 'transfer-in'
-            return txn.type !== 'transfer-in';
-          } else if (txn.type === 'transfer-in' && txn.to === accountNumber) {
-            // Receiver's view – show transfer-in only
-            return true;
-          }
+        return false;
+      });
 
-          return false;
-        });
-
-
-
-        setTransactions(filteredTxns);
-
-      })
+      setTransactions(filteredTxns);
+    })
       .catch(err => {
         console.error("Error fetching transactions:", err);
       });
