@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { saveAs } from 'file-saver';
+import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { useLocation } from 'react-router-dom';
 
 const TransactionHistory = () => {
   const [transactions, setTransactions] = useState([]);
   const location = useLocation();
 
-  // Get the account number from query param
   const queryParams = new URLSearchParams(location.search);
   const accountNumber = queryParams.get('account');
 
@@ -17,38 +18,70 @@ const TransactionHistory = () => {
 
     axios.get(`http://localhost:3001/transactions/${accountNumber}`)
       .then(res => {
-        setTransactions(res.data); // no need to filter, backend already returns filtered
+        setTransactions(res.data);
       })
       .catch(err => {
         console.error("Error fetching transactions:", err);
       });
-  }, [accountNumber]);
+  }, [accountNumber]);  
 
-  const downloadAsJPG = () => {
+  const downloadAsPDF = () => {
     const element = document.getElementById("transaction-history");
     html2canvas(element).then(canvas => {
-      canvas.toBlob(blob => saveAs(blob, "transaction-history.jpg"));
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save("transaction-history.pdf");
     });
   };
 
-  const downloadAsDOCX = () => {
-    const content = `Transactions:\n\n` +
-      transactions.map((t, i) =>
-        `Transaction ${i + 1}:\nType: ${t.type}\nAmount: Rs.${t.amount}\nStatus: Success\nTime: ${new Date(t.timestamp).toLocaleString()}\nBalance After: Rs.${t.balanceAfter || 'N/A'}\n---`
-      ).join("\n\n");
+const downloadAsDOCX = (transactions) => {
+  if (!transactions || transactions.length === 0) {
+    alert("No transactions to download.");
+    return;
+  }
 
-    const blob = new Blob([content], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
-    saveAs(blob, "transaction-history.docx");
-  };
+  const doc = new Document({
+    sections: [
+      {
+        children: transactions.map((tx) => {
+          return new Paragraph(
+            `Date: ${tx.date}, Type: ${tx.type}, Amount: ${tx.amount}`
+          );
+        }),
+      },
+    ],
+  });
+
+  Packer.toBlob(doc).then((blob) => {
+    const fileName = "transactions.docx";
+  
+    try {
+      const file = new window.File([blob], fileName);
+      const url = URL.createObjectURL(file);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Download error:", err);
+    }
+  });
+};
 
   return (
     <div>
       <h2>Transaction History</h2>
-      <div id="transaction-history" style={{ padding: '20px', background: '#fff', border: '1px solid #ccc' }}>
+
+      <div id="transaction-history" >
         {transactions.length === 0 ? (
           <p>No transactions yet.</p>
         ) : (
-          <table>
+          <table >
             <thead>
               <tr>
                 <th>#</th>
@@ -74,8 +107,13 @@ const TransactionHistory = () => {
           </table>
         )}
       </div>
-      <button onClick={downloadAsJPG}>Download as JPG</button>
-      <button onClick={downloadAsDOCX}>Download as DOCX</button>
+
+      <div >
+        
+        <button onClick={downloadAsPDF}>Download as PDF</button>
+       <button onClick={() => downloadAsDOCX(transactions)}>Download as DOCX</button>
+
+      </div>
     </div>
   );
 };

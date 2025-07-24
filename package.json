@@ -11,6 +11,7 @@
     "docx": "^9.5.1",
     "docxtemplater": "^3.65.2",
     "file-saver": "^2.0.5",
+    "html2canvas": "^1.4.1",
     "i18next": "^25.3.2",
     "i18next-browser-languagedetector": "^8.2.0",
     "jspdf": "^3.0.1",
