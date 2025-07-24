@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { saveAs } from 'file-saver';
-import { Document, Packer, Paragraph, TextRun } from 'docx';
+import { Document, Packer, Paragraph } from 'docx';
 import { useLocation } from 'react-router-dom';
 
 const TransactionHistory = () => {
@@ -18,12 +17,35 @@ const TransactionHistory = () => {
 
     axios.get(`http://localhost:3001/transactions/${accountNumber}`)
       .then(res => {
-        setTransactions(res.data);
+        const allTxns = res.data;
+
+        // Filter transactions to show only those relevant for this account:
+        // Show transactions where accountNumber === accountNumber,
+        // but exclude 'transfer-in' (incoming transfers) from sender's account view,
+        // and do NOT include transactions where accountNumber !== accountNumber
+        const filteredTxns = allTxns.filter(txn => {
+          if (!txn || !txn.type || !txn.accountNumber) return false;
+
+          if (txn.accountNumber === accountNumber) {
+            // Sender's view – show all except 'transfer-in'
+            return txn.type !== 'transfer-in';
+          } else if (txn.type === 'transfer-in' && txn.to === accountNumber) {
+            // Receiver's view – show transfer-in only
+            return true;
+          }
+
+          return false;
+        });
+
+
+
+        setTransactions(filteredTxns);
+
       })
       .catch(err => {
         console.error("Error fetching transactions:", err);
       });
-  }, [accountNumber]);  
+  }, [accountNumber]);
 
   const downloadAsPDF = () => {
     const element = document.getElementById("transaction-history");
@@ -38,40 +60,40 @@ const TransactionHistory = () => {
     });
   };
 
-const downloadAsDOCX = (transactions) => {
-  if (!transactions || transactions.length === 0) {
-    alert("No transactions to download.");
-    return;
-  }
-
-  const doc = new Document({
-    sections: [
-      {
-        children: transactions.map((tx) => {
-          return new Paragraph(
-            `Date: ${tx.date}, Type: ${tx.type}, Amount: ${tx.amount}`
-          );
-        }),
-      },
-    ],
-  });
-
-  Packer.toBlob(doc).then((blob) => {
-    const fileName = "transactions.docx";
-  
-    try {
-      const file = new window.File([blob], fileName);
-      const url = URL.createObjectURL(file);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = fileName;
-      a.click();
-      URL.revokeObjectURL(url);
-    } catch (err) {
-      console.error("Download error:", err);
+  const downloadAsDOCX = (transactions) => {
+    if (!transactions || transactions.length === 0) {
+      alert("No transactions to download.");
+      return;
     }
-  });
-};
+
+    const doc = new Document({
+      sections: [
+        {
+          children: transactions.map((tx) => {
+            return new Paragraph(
+              `Date: ${new Date(tx.timestamp).toLocaleString()}, Type: ${tx.type}, Amount: Rs.${tx.amount}`
+            );
+          }),
+        },
+      ],
+    });
+
+    Packer.toBlob(doc).then((blob) => {
+      const fileName = "transactions.docx";
+
+      try {
+        const file = new window.File([blob], fileName);
+        const url = URL.createObjectURL(file);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        URL.revokeObjectURL(url);
+      } catch (err) {
+        console.error("Download error:", err);
+      }
+    });
+  };
 
   return (
     <div>
@@ -100,7 +122,7 @@ const downloadAsDOCX = (transactions) => {
                   <td>Rs.{txn.amount}</td>
                   <td>{txn.status || 'Success'}</td>
                   <td>{new Date(txn.timestamp).toLocaleString()}</td>
-                  <td>Rs.{txn.balanceAfter || 'N/A'}</td>
+                  <td>Rs.{txn.balanceAfter ?? 'N/A'}</td>
                 </tr>
               ))}
             </tbody>
@@ -109,10 +131,8 @@ const downloadAsDOCX = (transactions) => {
       </div>
 
       <div >
-        
         <button onClick={downloadAsPDF}>Download as PDF</button>
-       <button onClick={() => downloadAsDOCX(transactions)}>Download as DOCX</button>
-
+        <button onClick={() => downloadAsDOCX(transactions)}>Download as DOCX</button>
       </div>
     </div>
   );
