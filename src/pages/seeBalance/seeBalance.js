@@ -15,7 +15,16 @@ export default function SeeBalance() {
 
   useEffect(() => {
     if (!accountNumber) return;
-    axios.get(`http://localhost:3001/user/${accountNumber}`)
+    const token = localStorage.getItem('jwtToken');
+
+    axios.get(`http://localhost:3001/user/${accountNumber}`,
+      {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+
+
+  })
       .then(res => setUser(res.data))
       .catch(() => setError('User not found'));
   }, [accountNumber]);
