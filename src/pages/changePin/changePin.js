@@ -29,11 +29,16 @@ export default function ChangePin() {
     }
 
     try {
+      const token = localStorage.getItem('jwtToken');
       const res = await axios.post('http://localhost:3001/changepin', {
         accountNumber,
         oldPin,
         newPin,
-      });
+      },
+      {headers: {
+          Authorization: `Bearer ${token}`
+      }
+    });
       setMessage(t(res.data.message));
       setAccountNumber('');
       setOldPin('');
