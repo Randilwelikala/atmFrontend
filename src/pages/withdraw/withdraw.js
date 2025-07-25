@@ -29,7 +29,14 @@ function Withdraw() {
 
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/user/${accountNumber}`)
+    const token = localStorage.getItem('jwtToken');
+    axios.get(`http://localhost:3001/user/${accountNumber}`,
+      {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+
+  })
       .then(res => setUser(res.data))
       .catch(() => setError('User not found'));
   }, [accountNumber]);
@@ -105,10 +112,17 @@ function Withdraw() {
     setError('');
 
     try {
+      const token = localStorage.getItem('jwtToken');
       const res = await axios.post('http://localhost:3001/withdraw', {
         accountNumber,
         amount: parseFloat(amount),
-      });
+      },
+      {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+    );
       setMessage(res.data.message || `Withdraw successful!`);
       setBreakdown(res.data.breakdown || {});
       setUser(prev => ({ ...prev, balance: res.data.balance }));
