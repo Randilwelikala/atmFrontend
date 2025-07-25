@@ -19,8 +19,20 @@ export default function CardlessWithdrawOTP() {
       setError('Enter a valid mobile number starting with 07');
       return;
     }
+    const token = localStorage.getItem('jwtToken');
+    if (!token) {
+      setError('User not authenticated');
+      return;
+    }
     try {
-      const res = await axios.post('http://localhost:3001/send-otp', { mobile });
+      const res = await axios.post('http://localhost:3001/send-otp', { mobile },
+        {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+
+      );
       setMessage(`${t('OTP sent to')} ${mobile}. ${t('For testing')}: ${t('OTP is')} ${res.data.otp}`);
       setOtpSent(true);
     } catch (err) {
@@ -35,8 +47,17 @@ export default function CardlessWithdrawOTP() {
       setError('Enter the 4-digit OTP');
       return;
     }
+    const token = localStorage.getItem('jwtToken');
     try {
-      const res = await axios.post('http://localhost:3001/verify-otp', { mobile, otp });
+      const res = await axios.post('http://localhost:3001/verify-otp', { mobile, otp },
+        {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+
+
+      );
        localStorage.setItem('jwtToken', res.data.token);
       setMessage('OTP verified! Redirecting...');
       navigate(`/cardlessWithdrawto?account=${res.data.accountNumber}`);
