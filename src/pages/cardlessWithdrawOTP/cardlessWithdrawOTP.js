@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './cardlessWithdrawOTP.css'; 
 import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { t } from 'i18next';
+import axios from 'axios';
+
 export default function CardlessWithdrawOTP() {
   const [mobile, setMobile] = useState('');
   const [otp, setOtp] = useState('');
@@ -15,24 +16,20 @@ export default function CardlessWithdrawOTP() {
   const sendOtp = async () => {
     setMessage('');
     setError('');
+
     if (!mobile.match(/^07\d{8}$/)) {
       setError('Enter a valid mobile number starting with 07');
       return;
     }
-    const token = localStorage.getItem('jwtToken');
-    if (!token) {
-      setError('User not authenticated');
-      return;
-    }
-    try {
-      const res = await axios.post('http://localhost:3001/send-otp', { mobile },
-        {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
 
+    
+    try {
+      const res = await axios.post(
+        'http://localhost:3001/send-otp',
+        { mobile },
+        
       );
+
       setMessage(`${t('OTP sent to')} ${mobile}. ${t('For testing')}: ${t('OTP is')} ${res.data.otp}`);
       setOtpSent(true);
     } catch (err) {
@@ -43,22 +40,23 @@ export default function CardlessWithdrawOTP() {
   const verifyOtp = async () => {
     setMessage('');
     setError('');
+
     if (otp.length !== 4) {
       setError('Enter the 4-digit OTP');
       return;
-    }
-    const token = localStorage.getItem('jwtToken');
+    }    
+
     try {
-      const res = await axios.post('http://localhost:3001/verify-otp', { mobile, otp },
-        {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+      const res = await axios.post(
+        'http://localhost:3001/verify-otp',
+        { mobile, otp },
+        
+      );
+
+      if (res.data.token) {
+        localStorage.setItem('jwtToken', res.data.token);
       }
 
-
-      );
-       localStorage.setItem('jwtToken', res.data.token);
       setMessage('OTP verified! Redirecting...');
       navigate(`/cardlessWithdrawto?account=${res.data.accountNumber}`);
     } catch (err) {
@@ -67,11 +65,10 @@ export default function CardlessWithdrawOTP() {
   };
 
   return (
-    
     <div className="otp-container" id="cardless-otp-page">
-      <CardlessSideNavbar/>     
+      <CardlessSideNavbar />
       <h2 className="otp-title">{t('Cardless Withdraw - OTP Verification')}</h2>
-      
+
       {!otpSent ? (
         <div className="otp-step">
           <label className="otp-label">{t('Enter Mobile Number')}:</label>
@@ -100,7 +97,7 @@ export default function CardlessWithdrawOTP() {
           <button onClick={verifyOtp} className="otp-button">{t('Verify OTP')}</button>
         </div>
       )}
-      
+
       {error && <p className="otp-error">{error}</p>}
     </div>
   );
