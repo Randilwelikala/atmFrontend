@@ -37,11 +37,18 @@ function FundTransfer() {
       : 'http://localhost:3001/transfer-other-bank';
 
     try {
+      const token = localStorage.getItem('jwtToken'); 
       const res = await axios.post(url, {
         from: sender,
         to: recipient,
         amount: parseFloat(amount),
-      });
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      }
+    );
       setReceipt(res.data);
     } catch (err) {
       setError(err.response?.data?.error || 'An error occurred');
