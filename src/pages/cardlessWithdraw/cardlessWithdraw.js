@@ -29,9 +29,25 @@ function CardlessWithdraw() {
 
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/user/${accountNumber}`)
+  //   const token = localStorage.getItem('jwtToken');
+  //   axios.get(`http://localhost:3001/user/${accountNumber}`)
+  //     .then(res => setUser(res.data))
+  //     .catch(() => setError('User not found'));
+  // }, [accountNumber]);
+
+
+    const token = localStorage.getItem('jwtToken'); 
+
+    axios.get(`http://localhost:3001/user/${accountNumber}`, {
+      headers: {
+        Authorization: `Bearer ${token}`, 
+      },
+    })
       .then(res => setUser(res.data))
-      .catch(() => setError('User not found'));
+      .catch(err => {
+        console.error(err);
+        setError('User not found or unauthorized');
+      });
   }, [accountNumber]);
 
   useEffect(() => {
@@ -101,13 +117,17 @@ function CardlessWithdraw() {
 
   const handleWithdraw = async e => {
     e.preventDefault();
+    console.log('Withdraw clicked');
     setMessage('');
     setError('');
 
     try {
+      const token = localStorage.getItem('jwtToken');
       const res = await axios.post('http://localhost:3001/withdraw', {
         accountNumber,
-        amount: parseFloat(amount),
+        amount: parseFloat(amount),},
+        {headers: { Authorization: `Bearer ${token}`}
+        
       });
       setMessage(res.data.message || `Withdraw successful!`);
       setBreakdown(res.data.breakdown || {});

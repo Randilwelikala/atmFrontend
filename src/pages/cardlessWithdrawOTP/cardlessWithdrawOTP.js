@@ -37,6 +37,7 @@ export default function CardlessWithdrawOTP() {
     }
     try {
       const res = await axios.post('http://localhost:3001/verify-otp', { mobile, otp });
+       localStorage.setItem('jwtToken', res.data.token);
       setMessage('OTP verified! Redirecting...');
       navigate(`/cardlessWithdrawto?account=${res.data.accountNumber}`);
     } catch (err) {
