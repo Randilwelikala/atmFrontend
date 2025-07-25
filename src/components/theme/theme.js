@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './theme.css';
+import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
+
+
 
 const ThemeToggle = () => {
   const [isDark, setIsDark] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
   });
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (isDark) {
@@ -22,6 +28,7 @@ const ThemeToggle = () => {
   };
 
   return (
+    
     <button
       id="theme-toggle-btn"
       className={`theme-toggle-button ${isDark ? 'dark' : 'light'}`}
@@ -29,7 +36,7 @@ const ThemeToggle = () => {
       aria-label="Toggle theme"
       title="Toggle light/dark mode"
     >
-      {isDark ? 'Light Mode' : 'Dark Mode'}
+      {isDark ? t('Light Mode') : t('Dark Mode')}
     </button>
   );
 };
