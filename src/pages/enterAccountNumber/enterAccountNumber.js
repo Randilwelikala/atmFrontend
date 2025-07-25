@@ -5,6 +5,9 @@ import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
+import { setToken } from '../../utils/auth';
+import axios from 'axios';
+
 
 export default function EnterAccountNumber() {
   const [step, setStep] = useState(1);
@@ -25,18 +28,34 @@ export default function EnterAccountNumber() {
     setStep(2);
   };
 
-  const handleSecondSubmit = e => {
-    e.preventDefault();
-    setError('');
-    if (secondInput !== firstInput) {
-      setError('Account numbers do not match!');
-      setStep(1); 
-      setFirstInput('');
-      setSecondInput('');
-      return;
+ const handleSecondSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
+
+  if (secondInput !== firstInput) {
+    setError('Account numbers do not match!');
+    setStep(1);
+    setFirstInput('');
+    setSecondInput('');
+    return;
+  }
+
+  try {
+    const response = await axios.post('http://localhost:3001/auth', {
+      accountNumber: firstInput,
+    });
+
+    if (response.data.token) {
+      setToken(response.data.token);
+      navigate(`/cardlessDeposit?account=${firstInput}`);
+    } else {
+      setError('Token not received from server');
     }
-    navigate(`/cardlessDeposit?account=${firstInput}`);
-  };
+  } catch (err) {
+    setError('Failed to get token');
+  }
+};
+
 
   return (
     <>

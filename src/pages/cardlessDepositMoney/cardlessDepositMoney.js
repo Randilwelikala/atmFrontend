@@ -8,6 +8,7 @@ import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
 import './cardlessDepositMoney.css';
 import { useTranslation } from 'react-i18next';
+import { getToken, removeToken } from '../../utils/auth';
 
 function CardlessDeposit() {
   const [searchParams] = useSearchParams();
@@ -23,12 +24,43 @@ function CardlessDeposit() {
   const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [data, setData] = useState('');
 
-  useEffect(() => {
-    axios.get(`http://localhost:3001/user/${accountNumber}`)
-      .then(res => setUser(res.data))
-      .catch(() => setError('User not found'));
+  // useEffect(() => {
+  //   axios.get(`http://localhost:3001/user/${accountNumber}`)
+  //     .then(res => setUser(res.data))
+  //     .catch(() => setError('User not found'));
+  // }, [accountNumber]);
+    useEffect(() => {
+    const fetchProtectedData = async () => {
+      try {
+        const token = getToken();
+        if (!token) {
+          setError('No token found, please login.');
+          return;
+        }
+
+        const res = await axios.get(`http://localhost:3001/user/${accountNumber}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUser(res.data);
+
+      } catch (err) {
+        if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+          setError('Unauthorized, please login again.');
+          removeToken();
+        } else {
+          setError('Failed to fetch data');
+        }
+      }
+    };
+
+    fetchProtectedData();
   }, [accountNumber]);
+
+
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -99,10 +131,21 @@ function CardlessDeposit() {
     setError('');
 
     try {
+      const token = getToken();
+      if (!token) {
+      setError('No token found, please login again.');
+      return;
+    }
       const res = await axios.post('http://localhost:3001/deposit', {
         accountNumber,
         amount: parseFloat(amount),
-      });
+      },
+       {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
       setMessage(res.data.message || `Deposit successful!`);
       setUser(prev => ({ ...prev, balance: res.data.balance }));
       setDepositedAmount(amount);
