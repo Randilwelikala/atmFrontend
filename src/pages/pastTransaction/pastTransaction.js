@@ -14,8 +14,13 @@ const TransactionHistory = () => {
 
   useEffect(() => {
     if (!accountNumber) return;
+    const token = localStorage.getItem('jwtToken');
 
-    axios.get(`http://localhost:3001/transactions/${accountNumber}`)
+    axios.get(`http://localhost:3001/transactions/${accountNumber}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
       .then(res => {
       const allTxns = res.data;
       
