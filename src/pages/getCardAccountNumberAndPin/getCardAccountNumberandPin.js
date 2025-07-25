@@ -33,12 +33,15 @@ export default function GetCardAccountNumberandPin() {
     }
 
     try {
+
+      
       const res = await axios.post('http://localhost:3001/cardLogin', {
         cardNumber,
         pin
       });
 
       if (res.data.success) {
+        localStorage.setItem('jwtToken', res.data.token);
         navigate(`/cardDashboard?account=${res.data.accountNumber}`);
       }
     } catch (error) {
