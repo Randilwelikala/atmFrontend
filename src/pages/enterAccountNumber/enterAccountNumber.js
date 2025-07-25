@@ -4,10 +4,7 @@ import './enterAccountNumber.css';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { t } from 'i18next';
-import axios from 'axios';
 import { useTranslation } from 'react-i18next';
-import { getToken, removeToken } from '../../utils/auth';
-
 
 export default function EnterAccountNumber() {
   const [step, setStep] = useState(1);
@@ -28,7 +25,7 @@ export default function EnterAccountNumber() {
     setStep(2);
   };
 
-  const handleSecondSubmit = async (e) => {
+  const handleSecondSubmit = e => {
     e.preventDefault();
     setError('');
     if (secondInput !== firstInput) {
@@ -38,28 +35,8 @@ export default function EnterAccountNumber() {
       setSecondInput('');
       return;
     }
-      try {
-        const token = getToken(); // get token from storage
-        const response = await axios.post(
-          'http://localhost:3001/api/verifyAccount', // use your real endpoint
-          { accountNumber: firstInput },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (response.data.success) {
-          navigate(`/cardlessDeposit?account=${firstInput}`);
-        } else {
-          setError('Invalid account number. Please try again.');
-        }
-      } catch (err) {
-        console.error(err);
-        setError('Something went wrong. Please try again later.');
-      }
-      };
+    navigate(`/cardlessDeposit?account=${firstInput}`);
+  };
 
   return (
     <>

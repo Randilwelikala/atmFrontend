@@ -8,8 +8,6 @@ import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
 import './cardlessDepositMoney.css';
 import { useTranslation } from 'react-i18next';
-import { getToken, removeToken } from '../../utils/auth';
-
 
 function CardlessDeposit() {
   const [searchParams] = useSearchParams();
@@ -25,39 +23,6 @@ function CardlessDeposit() {
   const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
-
-
-
-  useEffect(() => {
-    async function verifyToken() {
-      const token = getToken();
-      if (!token) {
-        navigate('/'); // no token, redirect
-        return;
-      }
-
-      try {
-        const res = await axios.post('http://localhost:3001/verify-token', {}, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-
-        if (!res.data.success) {
-          removeToken();
-          navigate('/');
-        }
-      } catch (err) {
-        removeToken();
-        navigate('/');
-      }
-    }
-
-    verifyToken();
-  }, [navigate]);
-
-
-  
 
   useEffect(() => {
     axios.get(`http://localhost:3001/user/${accountNumber}`)
