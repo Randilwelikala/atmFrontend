@@ -30,6 +30,7 @@ import LanguageSwitcher from './components/translate/translate';
 import ThemeToggle from'./components/theme/theme';
 import TransactionHistory from './pages/pastTransaction/pastTransaction'
 import DownloadHistoryOTP from './pages/downloadHistoryOTP/downloadHistoryOTP';
+import ProtectedRoute from './components/protectedRoutes/protectedRoutes';
 
 
 
@@ -50,7 +51,7 @@ export default function App() {
         <>
         <Route path='/cardlessDashboard' element={<CardlessDashboard/>}/>
         <Route path="/" element={<Home />} />
-        <Route path="/cardless-deposit" element={<EnterAccountNumber />} />
+        <Route path="/cardless-deposit" element={<EnterAccountNumber />}/>
         <Route path="/Deposit" element={<Deposit />} />
         <Route path="/GetCardAccountNumberandPin" element={<GetCardAccountNumberandPin />} />        
         <Route path="/SeeBalance" element={<SeeBalance />} />
@@ -69,7 +70,7 @@ export default function App() {
         <Route path="/fundTransfer" element={<FundTransfer />} />
         <Route path='/cardlessSideNavbar' element={<CardlessSideNavbar/>}/>
         <Route path='/cardSideNavbar' element={<CardSideNavbar/>}/>
-        <Route path='/cardlessDeposit' element={<CardlessDeposit/>}/>
+        <Route path='/cardlessDeposit' element={<ProtectedRoute><CardlessDeposit/></ProtectedRoute>}/>
         <Route path='/cardlessWithdrawto' element={<CardlessWithdraw/>}/>
         <Route path='/pastTransaction' element={<TransactionHistory/>}/>
         <Route path='/downloadHistoryOTP' element={<DownloadHistoryOTP/>}/>

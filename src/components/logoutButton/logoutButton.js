@@ -1,19 +1,16 @@
 import React from 'react';
-import axios from 'axios';
 import './logoutButton.css';
 import { useTranslation } from 'react-i18next';
 
 export default function LogoutButton({ onLogout }) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
-  const handleLogout = async () => {
-    try {
-      await axios.post('http://localhost:5000/logout', {}, { withCredentials: true });
-      onLogout(null); 
-      window.location.href = '/'; 
-    } catch (err) {
-      console.error('Logout failed:', err);
-    }
+  const handleLogout = () => {
+    localStorage.removeItem('jwtToken');
+    
+    if (onLogout) onLogout(null);
+    
+    window.location.href = '/';
   };
 
   return (
