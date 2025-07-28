@@ -4,6 +4,8 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { Document, Packer, Paragraph } from 'docx';
 import { useLocation } from 'react-router-dom';
+import './pastTransaction.css'
+import { FaDownload } from 'react-icons/fa';
 
 const TransactionHistory = () => {
   const [transactions, setTransactions] = useState([]);
@@ -94,47 +96,61 @@ const TransactionHistory = () => {
     });
   };
 
-  return (
-    <div>
-      <h2>Transaction History</h2>
+return (
+  <div className="transaction-container">
+    <h2 className="transaction-title">Transaction History</h2>
 
-      <div id="transaction-history" >
-        {transactions.length === 0 ? (
-          <p>No transactions yet.</p>
-        ) : (
-          <table >
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Type</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Time</th>
-                <th>Balance After</th>
+    <div id="transaction-history">
+      {transactions.length === 0 ? (
+        <p>No transactions yet.</p>
+      ) : (
+        <table className="transaction-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Time</th>
+              <th>Balance After</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactions.map((txn, index) => (
+              <tr key={txn.id || index}>
+                <td>{index + 1}</td>
+                <td>{txn.type}</td>
+                <td>Rs.{txn.amount}</td>
+                <td>{txn.status || 'Success'}</td>
+                <td>{new Date(txn.timestamp).toLocaleString()}</td>
+                <td>Rs.{txn.balanceAfter ?? 'N/A'}</td>
               </tr>
-            </thead>
-            <tbody>
-              {transactions.map((txn, index) => (
-                <tr key={txn.id || index}>
-                  <td>{index + 1}</td>
-                  <td>{txn.type}</td>
-                  <td>Rs.{txn.amount}</td>
-                  <td>{txn.status || 'Success'}</td>
-                  <td>{new Date(txn.timestamp).toLocaleString()}</td>
-                  <td>Rs.{txn.balanceAfter ?? 'N/A'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
 
-      <div >
+    {/* <div className="transaction-buttons">
+      <button onClick={downloadAsPDF}>Download as PDF</button>
+      <button onClick={() => downloadAsDOCX(transactions)}>Download as DOCX</button>
+    </div> */}
+    <div className="download-button-wrapper">
+      <button className="btn btn-primary">
+        <FaDownload />
+      </button>
+      <div className="download-options">
         <button onClick={downloadAsPDF}>Download as PDF</button>
         <button onClick={() => downloadAsDOCX(transactions)}>Download as DOCX</button>
+
       </div>
     </div>
-  );
+
+
+
+  </div>
+);
+
 };
 
 export default TransactionHistory;

@@ -26,7 +26,6 @@ function CardlessWithdraw() {
   const [breakdown, setBreakdown] = useState({});
   const { t } = useTranslation();
 
-  // 🧾 New state for denominations
   const [selectedDenominations, setSelectedDenominations] = useState([]);
 
   const denominations = [5000, 1000, 500, 100];
