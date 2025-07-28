@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import './fundTransfer.css';
 import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 import { useTranslation } from 'react-i18next';
+import { FaDownload } from 'react-icons/fa';
 
 function FundTransfer() {
   const [sender, setSender] = useState('');
@@ -189,7 +190,7 @@ function FundTransfer() {
 
          <div className="receipt-buttons">
           <div className="download-dropdown">
-            <button className="btn download-btn">
+            <button className="btn download-btn"><FaDownload />
               
             </button>
             <div className="dropdown-menu">
