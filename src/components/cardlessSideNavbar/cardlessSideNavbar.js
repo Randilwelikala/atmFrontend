@@ -2,18 +2,17 @@ import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaBars } from 'react-icons/fa';
-import './cardlessSideNavbar.css';  // Make sure this path is correct
+import './cardlessSideNavbar.css';  
 
 export default function CardlessSideNavbar() {
   const { t } = useTranslation();
-  const [isOpen, setIsOpen] = useState(false);  // Sidebar closed initially
+  const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef(null);
 
   const toggleNavbar = () => {
     setIsOpen(prev => !prev);
   };
-
-  // Close sidebar if clicking outside of it or hamburger button
+  
   useEffect(() => {
     function handleClickOutside(event) {
       if (

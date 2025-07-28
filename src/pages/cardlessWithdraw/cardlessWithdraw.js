@@ -9,6 +9,12 @@ import { saveAs } from 'file-saver';
 import './cardlessWithdraw.css';
 import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { useTranslation } from 'react-i18next';
+import Table from '@mui/material/Table';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+
+
+
 
 function CardlessWithdraw() {
   const [searchParams] = useSearchParams();
@@ -25,6 +31,8 @@ function CardlessWithdraw() {
   const navigate = useNavigate();
   const [breakdown, setBreakdown] = useState({});
   const { t } = useTranslation();
+  const [transactions, setTransactions] = useState([]);
+
 
   const [selectedDenominations, setSelectedDenominations] = useState([]);
 
@@ -55,52 +63,165 @@ function CardlessWithdraw() {
 
   const toggleDropdown = () => setOpen(prev => !prev);
 
-  const downloadPDF = () => {
-    setOpen(false);
-    const doc = new jsPDF();
-    autoTable(doc, {
-      head: [['Field', 'Value']],
-      body: [
-        ['Withdraw ID', transactionId],
-        ['Withdraw Date', transactionDate],
-        ['Account Number', user.accountNumber],
-        ['Name', user.name],
-        ['Branch', user.branch],
-        ['Account Type', user.accountType],
-        ['Withdrawed Amount', `Rs. ${depositedAmount}`],
-        ['New Balance', `Rs. ${user.balance}`],
-      ],
-    });
-    doc.save('Withdraw_receipt.pdf');
-  };
+  // const downloadPDF = () => {
+  //   setOpen(false);
+  //   const doc = new jsPDF();
+  //   autoTable(doc, {
+  //     head: [['Field', 'Value']],
+  //     body: [
+  //       ['Withdraw ID', transactionId],
+  //       ['Withdraw Date', transactionDate],
+  //       ['Account Number', user.accountNumber],
+  //       ['Name', user.name],
+  //       ['Branch', user.branch],
+  //       ['Account Type', user.accountType],
+  //       ['Withdrawed Amount', `Rs. ${depositedAmount}`],
+  //       ['New Balance', `Rs. ${user.balance}`],
+  //     ],
+  //   });
+  //   doc.save('Withdraw_receipt.pdf');
+  // };
+  const downloadAsPDF = () => {
+  setOpen(false);
+  const doc = new jsPDF();
 
-  const downloadDOCX = async () => {
-    setOpen(false);
-    const doc = new Document({
-      sections: [
-        {
-          children: [
-            new Paragraph({
-              children: [
-                new TextRun({ text: 'Withdraw Receipt', bold: true, size: 28 }),
-              ],
-            }),
-            new Paragraph({ text: '' }),
-            new Paragraph({ text: `Withdraw ID: ${transactionId}` }),
-            new Paragraph({ text: `Withdraw Date: ${transactionDate}` }),
-            new Paragraph({ text: `Account Number: ${user.accountNumber}` }),
-            new Paragraph({ text: `Name: ${user.name}` }),
-            new Paragraph({ text: `Branch: ${user.branch}` }),
-            new Paragraph({ text: `Account Type: ${user.accountType}` }),
-            new Paragraph({ text: `Withdrawed Amount: Rs. ${depositedAmount}` }),
-            new Paragraph({ text: `New Balance: Rs. ${user.balance}` }),
-          ],
-        },
-      ],
+  // Title
+  doc.setFontSize(18);
+  doc.text(`${user?.bankName || 'Bank Name'}`, 14, 20);
+
+  // First table: Receipt details
+  autoTable(doc, {
+    startY: 30,
+    head: [['Field', 'Value']],
+    body: [
+      ['Withdraw ID', transactionId],
+      ['Withdraw Date', transactionDate],
+      ['Account Number', user.accountNumber],
+      ['Name', user.name],
+      ['Branch', user.branch],
+      ['Account Type', user.accountType],
+      ['Withdrawed Amount', `Rs. ${depositedAmount}`],
+      ['New Balance', `Rs. ${user.balance}`],
+    ],
+    styles: {
+      fontSize: 11,
+      cellPadding: 3,
+    },
+    headStyles: {
+      fillColor: [0, 123, 255],
+      textColor: 255,
+    },
+    margin: { top: 30 },
+  });
+
+  // Optional second table: Recent transactions
+  if (transactions && transactions.length > 0) {
+    autoTable(doc, {
+      startY: doc.lastAutoTable.finalY + 10,
+      head: [['Name', 'Amount', 'Date']],
+      body: transactions.map((txn) => [txn.name, txn.amount, txn.date]),
+      styles: {
+        fontSize: 10,
+      },
+      headStyles: {
+        fillColor: [40, 167, 69],
+        textColor: 255,
+      },
     });
-    const blob = await Packer.toBlob(doc);
-    saveAs(blob, 'Withdraw_receipt.docx');
-  };
+  }
+
+  // Save file
+  doc.save('Withdraw_receipt.pdf');
+};
+
+
+  // const downloadDOCX = async () => {
+  //   setOpen(false);
+  //   const doc = new Document({
+  //     sections: [
+  //       {
+  //         children: [
+  //           new Paragraph({
+  //             children: [
+  //               new TextRun({ text: 'Withdraw Receipt', bold: true, size: 28 }),
+  //             ],
+  //           }),
+  //           new Paragraph({ text: '' }),
+  //           new Paragraph({ text: `Withdraw ID: ${transactionId}` }),
+  //           new Paragraph({ text: `Withdraw Date: ${transactionDate}` }),
+  //           new Paragraph({ text: `Account Number: ${user.accountNumber}` }),
+  //           new Paragraph({ text: `Name: ${user.name}` }),
+  //           new Paragraph({ text: `Branch: ${user.branch}` }),
+  //           new Paragraph({ text: `Account Type: ${user.accountType}` }),
+  //           new Paragraph({ text: `Withdrawed Amount: Rs. ${depositedAmount}` }),
+  //           new Paragraph({ text: `New Balance: Rs. ${user.balance}` }),
+  //         ],
+  //       },
+  //     ],
+  //   });
+  //   const blob = await Packer.toBlob(doc);
+  //   saveAs(blob, 'Withdraw_receipt.docx');
+  // };
+    const downloadAsDOCX = () => {
+      const doc = new Document();
+
+      const bankHeader = new Paragraph({
+        children: [
+          new TextRun({
+            text: "OpenAI Bank",
+            bold: true,
+            size: 28,
+          }),
+        ],
+        alignment: "center",
+      });
+
+      const branchInfo = new Paragraph({
+        text: `Branch: ${user?.branch}`,
+        alignment: "center",
+      });
+
+      const accountInfo = new Paragraph({
+        text: `Account Number: ${user?.accountNumber}`,
+        alignment: "center",
+        spacing: { after: 300 },
+      });
+
+      const tableRows = transactions.map((txn) => [
+        new Paragraph(txn.name),
+        new Paragraph(txn.amount.toString()),
+        new Paragraph(txn.date),
+      ]);
+
+      const table = new Table({
+        rows: [
+          new TableRow({
+            children: ['Name', 'Amount', 'Date'].map(header =>
+              new TableCell({
+                children: [new Paragraph({ text: header, bold: true })],
+              })
+            ),
+          }),
+          ...tableRows.map(row =>
+            new TableRow({
+              children: row.map(cell =>
+                new TableCell({ children: [cell] })
+              ),
+            })
+          ),
+        ],
+        width: { size: 100, type: "pct" },
+      });
+
+      const docContent = [bankHeader, branchInfo, accountInfo, table];
+
+      const document = new Document({ sections: [{ children: docContent }] });
+
+      Packer.toBlob(document).then((blob) => {
+        saveAs(blob, 'receipt.docx');
+      });
+    };
+
 
   const generateTransactionId = () => {
     return `TXN${Date.now()}${Math.floor(1000 + Math.random() * 9000)}`;
@@ -221,24 +342,25 @@ function CardlessWithdraw() {
         {message && (
           localStorage.getItem('wantsReceipt') === 'yes' ? (
             <div className="withdraw-receipt">
-              <h3>{t('Withdraw Receipt')}</h3>
-              <br />
-              <p><strong>{t('Withdraw ID')}:</strong> {transactionId}</p>
-              <p><strong>{t('Withdraw Date')}:</strong> {transactionDate}</p>
-              <p><strong>{t('Account')}:</strong> {user.accountNumber}</p>
-              <p><strong>{t('Name')}:</strong> {user.name}</p>
-              <p><strong>{t('Branch')}:</strong> {user.branch}</p>
-              <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
-              <p><strong>{t('Withdrawed Amount')}:</strong> Rs. {depositedAmount}</p>
-              <p><strong>{t('New Balance')}:</strong> Rs. {user.balance}</p>
-              <p className="withdraw-success">{t('Withdraw successful!')}</p>
+              <h3 className="receipt-header">{user.bankName}</h3>
+              <h4 className="receipt-subheader">Branch: {user.branch}</h4>
+
+              <div className="receipt-content">
+                <div><strong>Withdraw ID:</strong> {transactionId}</div>
+                <div><strong>Withdraw Date:</strong> {transactionDate}</div>
+                <div><strong>Account Number:</strong> {user.accountNumber}</div>
+                <div><strong>Name:</strong> {user.name}</div>
+                <div><strong>Account Type:</strong> {user.accountType}</div>
+                <div><strong>Withdrawed Amount:</strong> Rs. {depositedAmount}</div>
+                <div><strong>New Balance:</strong> Rs. {user.balance}</div>
+              </div>
 
               <div className="withdraw-download-group" ref={dropdownRef}>
                 <button onClick={toggleDropdown} className="withdraw-btn">{t('Download')} ▼</button>
                 {open && (
                   <div className="withdraw-dropdown">
-                    <button onClick={downloadPDF} className="withdraw-dropdown-btn">{t('Download as PDF')}</button>
-                    <button onClick={downloadDOCX} className="withdraw-dropdown-btn">{t('Download as DOCX')}</button>
+                    <button onClick={downloadAsPDF} className="withdraw-dropdown-btn">{t('Download as PDF')}</button>
+                    <button onClick={downloadAsDOCX} className="withdraw-dropdown-btn">{t('Download as DOCX')}</button>
                   </div>
                 )}
                 <button onClick={handleSkip} className="withdraw-btn secondary">{t('Skip')}</button>

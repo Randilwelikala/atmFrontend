@@ -7,7 +7,6 @@
   --sidebar-link-hover-bg: #eee;
 }
 
-/* Container for navbar and button */
 .navbar-container {
   position: fixed;
   top: 15px;
@@ -15,7 +14,6 @@
   z-index: 1100;
 }
 
-/* Hamburger button always visible */
 .hamburger-btn {
   font-size: 28px;
   border: none;
@@ -28,11 +26,10 @@
   position: relative;
 }
 
-/* Sidebar styles */
 .side-navbar {
   position: fixed;
   top: 0;
-  right: -250px; /* hidden offscreen */
+  right: -250px;
   width: 250px;
   height: 100vh;
   background-color: var(--sidebar-bg);
@@ -43,25 +40,21 @@
   overflow-y: auto;
 }
 
-/* Show sidebar when open */
 .side-navbar.open {
   right: 0;
 }
 
-/* Remove default list styling */
 .side-navbar ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* Sidebar list items */
 .side-navbar li {
   padding: 16px 20px;
   border-bottom: 1px solid #eee;
 }
 
-/* Links styling */
 .side-navbar a {
   text-decoration: none;
   color: var(--sidebar-link-color);
@@ -70,7 +63,6 @@
   transition: background-color 0.2s ease;
 }
 
-/* Hover effect on links */
 .side-navbar a:hover,
 .side-navbar a.active {
   background-color: var(--sidebar-link-hover-bg);
