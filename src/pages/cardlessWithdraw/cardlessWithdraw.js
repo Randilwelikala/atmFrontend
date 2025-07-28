@@ -4,15 +4,16 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { Document, Packer, Paragraph, TextRun } from 'docx';
-import { saveAs } from 'file-saver';
+// import { Document, Packer, Paragraph, TextRun } from 'docx';
+// import { saveAs } from 'file-saver';
 import './cardlessWithdraw.css';
 import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { useTranslation } from 'react-i18next';
-import Table from '@mui/material/Table';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
-
+// import Table from '@mui/material/Table';
+// import TableRow from '@mui/material/TableRow';
+// import TableCell from '@mui/material/TableCell';
+import { Document, Packer, Paragraph, Table, TableRow, TableCell, TextRun, WidthType } from "docx";
+import { saveAs } from "file-saver";
 
 
 
@@ -162,66 +163,107 @@ function CardlessWithdraw() {
   //   const blob = await Packer.toBlob(doc);
   //   saveAs(blob, 'Withdraw_receipt.docx');
   // };
-    const downloadAsDOCX = () => {
-      const doc = new Document();
+   const downloadAsDOCX = async () => {
+  setOpen(false);
 
-      const bankHeader = new Paragraph({
+  const doc = new Document({
+    sections: [
+      {
+        properties: {},
         children: [
-          new TextRun({
-            text: "OpenAI Bank",
-            bold: true,
-            size: 28,
+          // Bank Name (Blue, Centered)
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: user?.bankName || "Bank Name",
+                bold: true,
+                color: "1F4E79", // blue
+                size: 32,
+                font: "Arial",
+              }),
+            ],
+            alignment: "center",
+            spacing: { after: 200 },
           }),
-        ],
-        alignment: "center",
-      });
 
-      const branchInfo = new Paragraph({
-        text: `Branch: ${user?.branch}`,
-        alignment: "center",
-      });
+          // Branch Info
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: `Branch: ${user?.branch}`,
+                size: 24,
+                color: "666666",
+              }),
+            ],
+            alignment: "center",
+          }),
 
-      const accountInfo = new Paragraph({
-        text: `Account Number: ${user?.accountNumber}`,
-        alignment: "center",
-        spacing: { after: 300 },
-      });
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: `Account Number: ${user?.accountNumber}`,
+                size: 24,
+                color: "666666",
+              }),
+            ],
+            alignment: "center",
+            spacing: { after: 300 },
+          }),
 
-      const tableRows = transactions.map((txn) => [
-        new Paragraph(txn.name),
-        new Paragraph(txn.amount.toString()),
-        new Paragraph(txn.date),
-      ]);
+          // Receipt Title
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: "Withdraw Receipt",
+                bold: true,
+                size: 28,
+                color: "FFFFFF",
+              }),
+            ],
+            alignment: "center",
+            shading: {
+              type: "clear",
+              color: "auto",
+              fill: "1F4E79", // dark blue background
+            },
+            spacing: { after: 300 },
+          }),
 
-      const table = new Table({
-        rows: [
-          new TableRow({
-            children: ['Name', 'Amount', 'Date'].map(header =>
-              new TableCell({
-                children: [new Paragraph({ text: header, bold: true })],
+          // Styled Transaction Details in a Table
+          new Table({
+            rows: [
+              ["Withdraw ID", transactionId],
+              ["Withdraw Date", transactionDate],
+              ["Name", user?.name],
+              ["Account Type", user?.accountType],
+              ["Withdrawed Amount", `Rs. ${depositedAmount}`],
+              ["New Balance", `Rs. ${user?.balance}`],
+            ].map(([label, value]) => 
+              new TableRow({
+                children: [
+                  new TableCell({
+                    children: [new Paragraph({ text: label, bold: true })],
+                    shading: { fill: "D9E1F2" }, // light blue
+                  }),
+                  new TableCell({
+                    children: [new Paragraph({ text: value })],
+                  }),
+                ],
               })
             ),
+            width: {
+              size: 100,
+              type: "pct",
+            },
           }),
-          ...tableRows.map(row =>
-            new TableRow({
-              children: row.map(cell =>
-                new TableCell({ children: [cell] })
-              ),
-            })
-          ),
         ],
-        width: { size: 100, type: "pct" },
-      });
+      },
+    ],
+  });
 
-      const docContent = [bankHeader, branchInfo, accountInfo, table];
-
-      const document = new Document({ sections: [{ children: docContent }] });
-
-      Packer.toBlob(document).then((blob) => {
-        saveAs(blob, 'receipt.docx');
-      });
-    };
-
+  const blob = await Packer.toBlob(doc);
+  saveAs(blob, "Withdraw_receipt.docx");
+};
 
   const generateTransactionId = () => {
     return `TXN${Date.now()}${Math.floor(1000 + Math.random() * 9000)}`;
