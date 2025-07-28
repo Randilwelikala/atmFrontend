@@ -9,7 +9,7 @@ import { saveAs } from 'file-saver';
 import './withdraw.css';
 import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { useTranslation } from 'react-i18next';
-
+import { Table, TableRow, TableCell, WidthType } from "docx";
 
 function Withdraw() {
   const [searchParams] = useSearchParams();
@@ -26,6 +26,11 @@ function Withdraw() {
   const navigate = useNavigate();
   const [breakdown, setBreakdown] = useState({});
   const { t, i18n } = useTranslation();
+  const [transactions, setTransactions] = useState([]);
+  const [selectedDenominations, setSelectedDenominations] = useState([]);
+  const denominations = [5000, 1000, 500, 100];
+
+  
 
 
   useEffect(() => {
@@ -53,10 +58,17 @@ function Withdraw() {
 
   const toggleDropdown = () => setOpen(prev => !prev);
 
-  const downloadPDF = () => {
+    const downloadPDF = () => {
     setOpen(false);
     const doc = new jsPDF();
+  
+    // Title
+    doc.setFontSize(18);
+    doc.text(`${user?.bankName || 'Bank Name'}`, 14, 20);
+  
+    // First table: Receipt details
     autoTable(doc, {
+      startY: 30,
       head: [['Field', 'Value']],
       body: [
         ['Withdraw ID', transactionId],
@@ -68,32 +80,135 @@ function Withdraw() {
         ['Withdrawed Amount', `Rs. ${depositedAmount}`],
         ['New Balance', `Rs. ${user.balance}`],
       ],
+      styles: {
+        fontSize: 11,
+        cellPadding: 3,
+      },
+      headStyles: {
+        fillColor: [0, 123, 255],
+        textColor: 255,
+      },
+      margin: { top: 30 },
     });
+  
+    // Optional second table: Recent transactions
+    if (transactions && transactions.length > 0) {
+      autoTable(doc, {
+        startY: doc.lastAutoTable.finalY + 10,
+        head: [['Name', 'Amount', 'Date']],
+        body: transactions.map((txn) => [txn.name, txn.amount, txn.date]),
+        styles: {
+          fontSize: 10,
+        },
+        headStyles: {
+          fillColor: [40, 167, 69],
+          textColor: 255,
+        },
+      });
+    }
+  
+    // Save file
     doc.save('Withdraw_receipt.pdf');
   };
 
-  const downloadDOCX = async () => {
+     const downloadDOCX = async () => {
     setOpen(false);
+  
     const doc = new Document({
-      sections: [{
-        children: [
-          new Paragraph({
-            children: [
-              new TextRun({ text: "Withdraw Receipt"}),
-            ],
-          }),
-          new Paragraph({ text: "" }),
-          new Paragraph({ text: `Withdraw ID: ${transactionId}` }),
-          new Paragraph({ text: `Withdraw Date: ${transactionDate}` }),
-          new Paragraph({ text: `Account Number: ${user.accountNumber}` }),
-          new Paragraph({ text: `Name: ${user.name}` }),
-          new Paragraph({ text: `Branch: ${user.branch}` }),
-          new Paragraph({ text: `Account Type: ${user.accountType}` }),
-          new Paragraph({ text: `Withdrawed Amount: Rs. ${depositedAmount}` }),
-          new Paragraph({ text: `New Balance: Rs. ${user.balance}` }),
-        ],
-      }],
+      sections: [
+        {
+          properties: {},
+          children: [
+            // Bank Name (Blue, Centered)
+            new Paragraph({
+              children: [
+                new TextRun({
+                  text: user?.bankName || "Bank Name",
+                  bold: true,
+                  color: "1F4E79", // blue
+                  size: 32,
+                  font: "Arial",
+                }),
+              ],
+              alignment: "center",
+              spacing: { after: 200 },
+            }),
+  
+            // Branch Info
+            new Paragraph({
+              children: [
+                new TextRun({
+                  text: `Branch: ${user?.branch}`,
+                  size: 24,
+                  color: "666666",
+                }),
+              ],
+              alignment: "center",
+            }),
+  
+            new Paragraph({
+              children: [
+                new TextRun({
+                  text: `Account Number: ${user?.accountNumber}`,
+                  size: 24,
+                  color: "666666",
+                }),
+              ],
+              alignment: "center",
+              spacing: { after: 300 },
+            }),
+  
+            // Receipt Title
+            new Paragraph({
+              children: [
+                new TextRun({
+                  text: "Withdraw Receipt",
+                  bold: true,
+                  size: 28,
+                  color: "FFFFFF",
+                }),
+              ],
+              alignment: "center",
+              shading: {
+                type: "clear",
+                color: "auto",
+                fill: "1F4E79", // dark blue background
+              },
+              spacing: { after: 300 },
+            }),
+  
+            // Styled Transaction Details in a Table
+            new Table({
+              rows: [
+                ["Withdraw ID", transactionId],
+                ["Withdraw Date", transactionDate],
+                ["Name", user?.name],
+                ["Account Type", user?.accountType],
+                ["Withdrawed Amount", `Rs. ${depositedAmount}`],
+                ["New Balance", `Rs. ${user?.balance}`],
+              ].map(([label, value]) => 
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      children: [new Paragraph({ text: label, bold: true })],
+                      shading: { fill: "D9E1F2" }, // light blue
+                    }),
+                    new TableCell({
+                      children: [new Paragraph({ text: value })],
+                    }),
+                  ],
+                })
+              ),
+              width: {
+                size: 100,
+                type: "pct",
+              },
+            }),
+          ],
+        },
+      ],
     });
+  
     const blob = await Packer.toBlob(doc);
     saveAs(blob, "Withdraw_receipt.docx");
   };
@@ -106,16 +221,32 @@ function Withdraw() {
     navigate('/cardDashboard?account=' + accountNumber);
   };
 
+  const handleDenominationChange = (denomination) => {
+    setSelectedDenominations(prev =>
+      prev.includes(denomination)
+        ? prev.filter(d => d !== denomination)
+        : [...prev, denomination]
+    );
+  };
+
+
   const handleWithdraw = async e => {
     e.preventDefault();
     setMessage('');
     setError('');
+    
+    if (!selectedDenominations.length) {
+      setError('Please select at least one denomination.');
+      return;
+    }
+
 
     try {
       const token = localStorage.getItem('jwtToken');
       const res = await axios.post('http://localhost:3001/withdraw', {
         accountNumber,
         amount: parseFloat(amount),
+        denominations: selectedDenominations,
       },
       {
       headers: {
@@ -128,6 +259,7 @@ function Withdraw() {
       setUser(prev => ({ ...prev, balance: res.data.balance }));
       setDepositedAmount(amount);
       setAmount('');
+      setSelectedDenominations([]); 
       const newTxnId = generateTransactionId();
       setTransactionId(newTxnId);
       const now = new Date();
@@ -182,6 +314,26 @@ function Withdraw() {
             onChange={e => setAmount(e.target.value)}
             className="withdraw-input"
           />
+
+
+          <div className="withdraw-denominations">
+            <label className="withdraw-label">{t('Select Denominations')}:</label>
+            <div className="denomination-options">
+              {denominations.map(denom => (
+                <label key={denom} style={{ marginRight: '10px' }}>
+                  <input
+                    type="checkbox"
+                    value={denom}
+                    checked={selectedDenominations.includes(denom)}
+                    onChange={() => handleDenominationChange(denom)}
+                  />{' '}
+                  Rs. {denom}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          
           <button type="submit" className="withdraw-btn">{t('Withdraw')}</button>
         </form>
 

@@ -33,10 +33,7 @@ function CardlessWithdraw() {
   const [breakdown, setBreakdown] = useState({});
   const { t } = useTranslation();
   const [transactions, setTransactions] = useState([]);
-
-
   const [selectedDenominations, setSelectedDenominations] = useState([]);
-
   const denominations = [5000, 1000, 500, 100];
 
   useEffect(() => {
