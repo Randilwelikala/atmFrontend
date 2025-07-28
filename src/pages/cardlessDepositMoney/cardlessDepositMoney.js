@@ -9,6 +9,7 @@ import { saveAs } from 'file-saver';
 import './cardlessDepositMoney.css';
 import { useTranslation } from 'react-i18next';
 import { getToken, removeToken } from '../../utils/auth';
+import { FaDownload } from 'react-icons/fa';
 
 function CardlessDeposit() {
   const [searchParams] = useSearchParams();
@@ -254,7 +255,7 @@ function CardlessDeposit() {
 
             <div className="deposit-dropdown-wrapper" ref={dropdownRef}>
               <button onClick={toggleDropdown} className="deposit-btn download-btn">
-                {t('Download')} ▼
+                <FaDownload />
               </button>
               {open && (
                 <div className="deposit-dropdown-menu">
