@@ -9,6 +9,7 @@ import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { useTranslation } from 'react-i18next';
 import { Document, Packer, Paragraph, Table, TableRow, TableCell, TextRun, WidthType } from "docx";
 import { saveAs } from "file-saver";
+import { FaDownload } from 'react-icons/fa';
 
 
 
@@ -344,7 +345,7 @@ function CardlessWithdraw() {
               </div>
 
               <div className="withdraw-download-group" ref={dropdownRef}>
-                <button onClick={toggleDropdown} className="withdraw-btn">{t('Download')} ▼</button>
+                <button onClick={toggleDropdown} className="withdraw-btn"><FaDownload /></button>
                 {open && (
                   <div className="withdraw-dropdown">
                     <button onClick={downloadAsPDF} className="withdraw-dropdown-btn">{t('Download as PDF')}</button>
