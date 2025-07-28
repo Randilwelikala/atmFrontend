@@ -9,6 +9,8 @@ import { saveAs } from 'file-saver';
 import './cardlessDepositMoney.css';
 import { useTranslation } from 'react-i18next';
 import { getToken, removeToken } from '../../utils/auth';
+import { Table,TableRow,TableCell,WidthType} from "docx";
+
 
 function CardlessDeposit() {
   const [searchParams] = useSearchParams();
@@ -77,7 +79,14 @@ function CardlessDeposit() {
   const downloadPDF = () => {
     setOpen(false);
     const doc = new jsPDF();
+    const bankName = user.bankName || "Bank Name"; // fallback if no bankName
+    doc.setFontSize(18);
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const textWidth = doc.getTextWidth(bankName);
+    const x = (pageWidth - textWidth) / 2;
+    doc.text(bankName, x, 15); // y=15 is some padding from top
     autoTable(doc, {
+      startY: 25,
       head: [['Field', 'Value']],
       body: [
         ['Transaction ID', transactionId],
@@ -93,31 +102,92 @@ function CardlessDeposit() {
     doc.save('transaction_receipt.pdf');
   };
 
-  const downloadDOCX = async () => {
-    setOpen(false);
-    const doc = new Document({
-      sections: [{
+ const downloadDOCX = async () => {
+  setOpen(false);
+
+  const tableRows = [
+    ["Transaction ID", transactionId],
+    ["Transaction Date", transactionDate],
+    ["Account Number", user.accountNumber],
+    ["Name", user.name],
+    ["Branch", user.branch],
+    ["Account Type", user.accountType],
+    ["Deposited Amount", `Rs. ${depositedAmount}`],
+    ["New Balance", `Rs. ${user.balance}`],
+  ];
+
+  const table = new Table({
+    rows: [
+      new TableRow({
         children: [
-          new Paragraph({
-            children: [
-              new TextRun({ text: "Transaction Receipt"}),
-            ],
+          new TableCell({
+            children: [new Paragraph({ text: "Field", bold: true })],
+            shading: { fill: "1F4E79" },
           }),
-          new Paragraph({ text: "" }),
-          new Paragraph({ text: `Transaction ID: ${transactionId}` }),
-          new Paragraph({ text: `Transaction Date: ${transactionDate}` }),
-          new Paragraph({ text: `Account Number: ${user.accountNumber}` }),
-          new Paragraph({ text: `Name: ${user.name}` }),
-          new Paragraph({ text: `Branch: ${user.branch}` }),
-          new Paragraph({ text: `Account Type: ${user.accountType}` }),
-          new Paragraph({ text: `Deposited Amount: Rs. ${depositedAmount}` }),
-          new Paragraph({ text: `New Balance: Rs. ${user.balance}` }),
+          new TableCell({
+            children: [new Paragraph({ text: "Value", bold: true })],
+            shading: { fill: "1F4E79" },
+          }),
         ],
-      }],
-    });
-    const blob = await Packer.toBlob(doc);
-    saveAs(blob, "transaction_receipt.docx");
-  };
+      }),
+      ...tableRows.map(([key, value]) =>
+        new TableRow({
+          children: [
+            new TableCell({
+              children: [new Paragraph({ text: key, bold: true })],
+              shading: { fill: "D9E1F2" },
+            }),
+            new TableCell({
+              children: [new Paragraph(value)],
+            }),
+          ],
+        })
+      ),
+    ],
+    width: {
+      size: 100,
+      type: "pct",
+    },
+  });
+
+  const doc = new Document({
+    sections: [{
+      properties: {},
+      children: [
+        new Paragraph({
+          children: [
+            new TextRun({
+              text: `${user.bankName} Transaction Receipt`,
+              bold: true,
+              size: 32,
+              color: "1F4E79",
+            }),
+          ],
+          alignment: "center",
+          spacing: { after: 300 },
+        }),
+        table,
+        new Paragraph({
+          children: [
+            new TextRun({
+              text: "Thank you for banking with us.",
+              italics: true,
+              size: 22,
+              color: "888888",
+            }),
+          ],
+          alignment: "center",
+          spacing: { before: 400 },
+        }),
+      ],
+    }],
+  });
+
+  const blob = await Packer.toBlob(doc);
+  saveAs(blob, "transaction_receipt.docx");
+};
+
+
 
   const generateTransactionId = () => `TXN${Date.now()}${Math.floor(1000 + Math.random() * 9000)}`;
 

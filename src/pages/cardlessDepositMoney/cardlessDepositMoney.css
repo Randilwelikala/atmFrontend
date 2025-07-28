@@ -108,14 +108,33 @@
 }
 
 .deposit-receipt-box {
-  background: var(--deposit-receipt-bg);
+ background: #f0f6ff;
+  border: 2px solid #1f4e79;
+  padding: 20px;
   border-radius: 12px;
-  padding: 20px 25px;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
-  margin-top: 15px;
-  color: var(--deposit-receipt-text);
-  font-weight: 500;
-  animation: fadeSlideIn 0.4s ease;
+  box-shadow: 0 0 10px rgba(31, 78, 121, 0.2);
+  margin-top: 20px;
+  color: #333;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.deposit-receipt-box h3 {
+  text-align: center;
+  color: #1f4e79;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.deposit-receipt-box p {
+  font-size: 16px;
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.deposit-receipt-box strong {
+  color: #1f4e79;
 }
 
 .deposit-success {
@@ -150,37 +169,44 @@
 }
 
 .download-btn {
-  min-width: 130px;
+  background-color: #1f4e79;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+
+.download-btn:hover {
+  background-color: #15385b;
 }
 
 .deposit-dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: 1px solid #ccc;
   position: absolute;
-  top: 100%;
-  left: 0;
-  background: var(--deposit-dropdown-bg);
-  border: 1px solid var(--deposit-dropdown-border);
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  z-index: 1000;
-  min-width: 150px;
-  animation: fadeSlideDown 0.3s ease;
+  margin-top: 5px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  z-index: 2;
 }
 
 .deposit-dropdown-btn {
-  display: block;
-  width: 100%;
-  padding: 10px 15px;
-  background: none;
+ background: none;
   border: none;
+  padding: 10px 20px;
   text-align: left;
-  font-weight: 600;
-  color: var(--deposit-btn-bg);
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  color: #1f4e79;
 }
 
 .deposit-dropdown-btn:hover {
-  background-color: var(--deposit-dropdown-hover);
+  background-color: #f0f6ff;
 }
 
 .skip-btn {
