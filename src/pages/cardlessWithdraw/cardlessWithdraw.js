@@ -148,6 +148,7 @@ function CardlessWithdraw() {
       setUser(prev => ({ ...prev, balance: res.data.balance }));
       setDepositedAmount(amount);
       setAmount('');
+      setSelectedDenominations([]); 
       const newTxnId = generateTransactionId();
       setTransactionId(newTxnId);
       const now = new Date();
