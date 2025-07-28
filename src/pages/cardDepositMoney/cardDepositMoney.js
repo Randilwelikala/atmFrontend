@@ -3,8 +3,9 @@ import axios from 'axios';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import jsPDF from 'jspdf';
+import { Packer, Paragraph, TextRun, Table, TableRow, TableCell } from 'docx';
 import autoTable from 'jspdf-autotable';
-import { Document, Packer, Paragraph, TextRun } from 'docx';
+import { Document, } from 'docx';
 import { saveAs } from 'file-saver';
 import './cardDepositMoney.css';
 import { useTranslation } from 'react-i18next';
@@ -48,48 +49,113 @@ function Deposit() {
   const toggleDropdown = () => setOpen(prev => !prev);
 
   const downloadPDF = () => {
-    setOpen(false);
-    const doc = new jsPDF();
-    autoTable(doc, {
-      head: [['Field', 'Value']],
-      body: [
-        ['Transaction ID', transactionId],
-        ['Transaction Date', transactionDate],
-        ['Account Number', user.accountNumber],
-        ['Name', user.name],
-        ['Branch', user.branch],
-        ['Account Type', user.accountType],
-        ['Deposited Amount', `Rs. ${depositedAmount}`],
-        ['New Balance', `Rs. ${user.balance}`],
-      ],
-    });
-    doc.save('transaction_receipt.pdf');
-  };
+      setOpen(false);
+      const doc = new jsPDF();
+      const bankName = user?.bankName || "Bank Name";
+      doc.setFontSize(18);
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const textWidth = doc.getTextWidth(bankName);
+      const x = (pageWidth - textWidth) / 2;
+      doc.text(bankName, x, 15);
+      autoTable(doc, {
+        startY: 25,
+        head: [['Field', 'Value']],
+        body: [
+          ['Transaction ID', transactionId],
+          ['Transaction Date', transactionDate],
+          ['Account Number', user.accountNumber],
+          ['Name', user.name],
+          ['Branch', user.branch],
+          ['Account Type', user.accountType],
+          ['Deposited Amount', `Rs. ${depositedAmount}`],
+          ['New Balance', `Rs. ${user.balance}`],
+        ],
+      });
+      doc.save('Deposit.pdf');
+    };
+  
 
   const downloadDOCX = async () => {
     setOpen(false);
+    const tableRows = [
+      ["Transaction ID", transactionId],
+      ["Transaction Date", transactionDate],
+      ["Account Number", user.accountNumber],
+      ["Name", user.name],
+      ["Branch", user.branch],
+      ["Account Type", user.accountType],
+      ["Deposited Amount", `Rs. ${depositedAmount}`],
+      ["New Balance", `Rs. ${user.balance}`],
+    ];
+
+    const table = new Table({
+      rows: [
+        new TableRow({
+          children: [
+            new TableCell({
+              children: [new Paragraph({ text: "Field", bold: true })],
+              shading: { fill: "1F4E79" },
+            }),
+            new TableCell({
+              children: [new Paragraph({ text: "Value", bold: true })],
+              shading: { fill: "1F4E79" },
+            }),
+          ],
+        }),
+        ...tableRows.map(([key, value]) =>
+          new TableRow({
+            children: [
+              new TableCell({
+                children: [new Paragraph({ text: key, bold: true })],
+                shading: { fill: "D9E1F2" },
+              }),
+              new TableCell({
+                children: [new Paragraph(value)],
+              }),
+            ],
+          })
+        ),
+      ],
+      width: {
+        size: 100,
+        type: "pct",
+      },
+    });
+
     const doc = new Document({
       sections: [{
         children: [
           new Paragraph({
             children: [
-              new TextRun({ text: "Transaction Receipt"}),
+              new TextRun({
+                text: `${user.bankName} Transaction Receipt`,
+                bold: true,
+                size: 32,
+                color: "1F4E79",
+              }),
             ],
+            alignment: "center",
+            spacing: { after: 300 },
           }),
-          new Paragraph({ text: "" }),
-          new Paragraph({ text: `Transaction ID: ${transactionId}` }),
-          new Paragraph({ text: `Transaction Date: ${transactionDate}` }),
-          new Paragraph({ text: `Account Number: ${user.accountNumber}` }),
-          new Paragraph({ text: `Name: ${user.name}` }),
-          new Paragraph({ text: `Branch: ${user.branch}` }),
-          new Paragraph({ text: `Account Type: ${user.accountType}` }),
-          new Paragraph({ text: `Deposited Amount: Rs. ${depositedAmount}` }),
-          new Paragraph({ text: `New Balance: Rs. ${user.balance}` }),
+          table,
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: "Thank you for banking with us.",
+                italics: true,
+                size: 22,
+                color: "888888",
+              }),
+            ],
+            alignment: "center",
+            spacing: { before: 400 },
+          }),
         ],
       }],
     });
+
     const blob = await Packer.toBlob(doc);
-    saveAs(blob, "transaction_receipt.docx");
+    saveAs(blob, "Deposit.docx");
   };
 
   const generateTransactionId = () => `TXN${Date.now()}${Math.floor(1000 + Math.random() * 9000)}`;
