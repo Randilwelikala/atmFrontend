@@ -16,7 +16,7 @@ const LanguageToggle = () => {
     setCurrentLang(prev => (prev === 'en' ? 'si' : 'en'));
   };
   
-  const buttonLabel = currentLang === 'en' ? 'සිං' : 'EN';
+  const buttonLabel = currentLang === 'en' ? 'සිංහල' : 'English';
 
   return (
     <button

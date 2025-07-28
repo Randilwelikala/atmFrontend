@@ -85,10 +85,9 @@
   animation: slideIn 0.4s ease;
 
   position: fixed;
-  bottom: 110px;
-  left: 50%;
-  width: 160px; 
-  margin-left: -80px; 
+  bottom: 60px;
+  left: 50%;  
+  /* margin-left: -px;  */
   z-index: 1000;
 }
 
