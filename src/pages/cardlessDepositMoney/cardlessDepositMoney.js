@@ -4,13 +4,11 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { Document, Packer, Paragraph, TextRun } from 'docx';
+import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell } from 'docx';
 import { saveAs } from 'file-saver';
 import './cardlessDepositMoney.css';
 import { useTranslation } from 'react-i18next';
 import { getToken, removeToken } from '../../utils/auth';
-import { Table,TableRow,TableCell,WidthType} from "docx";
-
 
 function CardlessDeposit() {
   const [searchParams] = useSearchParams();
@@ -23,17 +21,11 @@ function CardlessDeposit() {
   const navigate = useNavigate();
   const [transactionId, setTransactionId] = useState('');
   const [transactionDate, setTransactionDate] = useState('');
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const [data, setData] = useState('');
 
-  // useEffect(() => {
-  //   axios.get(`http://localhost:3001/user/${accountNumber}`)
-  //     .then(res => setUser(res.data))
-  //     .catch(() => setError('User not found'));
-  // }, [accountNumber]);
-    useEffect(() => {
+  useEffect(() => {
     const fetchProtectedData = async () => {
       try {
         const token = getToken();
@@ -41,28 +33,23 @@ function CardlessDeposit() {
           setError('No token found, please login.');
           return;
         }
-
         const res = await axios.get(`http://localhost:3001/user/${accountNumber}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         setUser(res.data);
-
       } catch (err) {
-        if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+        if (err.response?.status === 401 || err.response?.status === 403) {
           setError('Unauthorized, please login again.');
           removeToken();
         } else {
-          setError('Failed to fetch data');
+          setError('Failed to fetch user data.');
         }
       }
     };
-
     fetchProtectedData();
   }, [accountNumber]);
-
-
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -79,12 +66,12 @@ function CardlessDeposit() {
   const downloadPDF = () => {
     setOpen(false);
     const doc = new jsPDF();
-    const bankName = user.bankName || "Bank Name"; // fallback if no bankName
+    const bankName = user?.bankName || "Bank Name";
     doc.setFontSize(18);
     const pageWidth = doc.internal.pageSize.getWidth();
     const textWidth = doc.getTextWidth(bankName);
     const x = (pageWidth - textWidth) / 2;
-    doc.text(bankName, x, 15); // y=15 is some padding from top
+    doc.text(bankName, x, 15);
     autoTable(doc, {
       startY: 25,
       head: [['Field', 'Value']],
@@ -102,92 +89,88 @@ function CardlessDeposit() {
     doc.save('transaction_receipt.pdf');
   };
 
- const downloadDOCX = async () => {
-  setOpen(false);
+  const downloadDOCX = async () => {
+    setOpen(false);
+    const tableRows = [
+      ["Transaction ID", transactionId],
+      ["Transaction Date", transactionDate],
+      ["Account Number", user.accountNumber],
+      ["Name", user.name],
+      ["Branch", user.branch],
+      ["Account Type", user.accountType],
+      ["Deposited Amount", `Rs. ${depositedAmount}`],
+      ["New Balance", `Rs. ${user.balance}`],
+    ];
 
-  const tableRows = [
-    ["Transaction ID", transactionId],
-    ["Transaction Date", transactionDate],
-    ["Account Number", user.accountNumber],
-    ["Name", user.name],
-    ["Branch", user.branch],
-    ["Account Type", user.accountType],
-    ["Deposited Amount", `Rs. ${depositedAmount}`],
-    ["New Balance", `Rs. ${user.balance}`],
-  ];
-
-  const table = new Table({
-    rows: [
-      new TableRow({
-        children: [
-          new TableCell({
-            children: [new Paragraph({ text: "Field", bold: true })],
-            shading: { fill: "1F4E79" },
-          }),
-          new TableCell({
-            children: [new Paragraph({ text: "Value", bold: true })],
-            shading: { fill: "1F4E79" },
-          }),
-        ],
-      }),
-      ...tableRows.map(([key, value]) =>
+    const table = new Table({
+      rows: [
         new TableRow({
           children: [
             new TableCell({
-              children: [new Paragraph({ text: key, bold: true })],
-              shading: { fill: "D9E1F2" },
+              children: [new Paragraph({ text: "Field", bold: true })],
+              shading: { fill: "1F4E79" },
             }),
             new TableCell({
-              children: [new Paragraph(value)],
+              children: [new Paragraph({ text: "Value", bold: true })],
+              shading: { fill: "1F4E79" },
             }),
           ],
-        })
-      ),
-    ],
-    width: {
-      size: 100,
-      type: "pct",
-    },
-  });
-
-  const doc = new Document({
-    sections: [{
-      properties: {},
-      children: [
-        new Paragraph({
-          children: [
-            new TextRun({
-              text: `${user.bankName} Transaction Receipt`,
-              bold: true,
-              size: 32,
-              color: "1F4E79",
-            }),
-          ],
-          alignment: "center",
-          spacing: { after: 300 },
         }),
-        table,
-        new Paragraph({
-          children: [
-            new TextRun({
-              text: "Thank you for banking with us.",
-              italics: true,
-              size: 22,
-              color: "888888",
-            }),
-          ],
-          alignment: "center",
-          spacing: { before: 400 },
-        }),
+        ...tableRows.map(([key, value]) =>
+          new TableRow({
+            children: [
+              new TableCell({
+                children: [new Paragraph({ text: key, bold: true })],
+                shading: { fill: "D9E1F2" },
+              }),
+              new TableCell({
+                children: [new Paragraph(value)],
+              }),
+            ],
+          })
+        ),
       ],
-    }],
-  });
+      width: {
+        size: 100,
+        type: "pct",
+      },
+    });
 
-  const blob = await Packer.toBlob(doc);
-  saveAs(blob, "transaction_receipt.docx");
-};
+    const doc = new Document({
+      sections: [{
+        children: [
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: `${user.bankName} Transaction Receipt`,
+                bold: true,
+                size: 32,
+                color: "1F4E79",
+              }),
+            ],
+            alignment: "center",
+            spacing: { after: 300 },
+          }),
+          table,
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: "Thank you for banking with us.",
+                italics: true,
+                size: 22,
+                color: "888888",
+              }),
+            ],
+            alignment: "center",
+            spacing: { before: 400 },
+          }),
+        ],
+      }],
+    });
 
-
+    const blob = await Packer.toBlob(doc);
+    saveAs(blob, "transaction_receipt.docx");
+  };
 
   const generateTransactionId = () => `TXN${Date.now()}${Math.floor(1000 + Math.random() * 9000)}`;
 
@@ -203,20 +186,20 @@ function CardlessDeposit() {
     try {
       const token = getToken();
       if (!token) {
-      setError('No token found, please login again.');
-      return;
-    }
+        setError('No token found, please login again.');
+        return;
+      }
+
       const res = await axios.post('http://localhost:3001/deposit', {
         accountNumber,
         amount: parseFloat(amount),
-      },
-       {
+      }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
-    );
-      setMessage(res.data.message || `Deposit successful!`);
+      });
+
+      setMessage(res.data.message || 'Deposit successful!');
       setUser(prev => ({ ...prev, balance: res.data.balance }));
       setDepositedAmount(amount);
       setAmount('');
@@ -238,7 +221,7 @@ function CardlessDeposit() {
       <p><strong>{t('Account Number')}:</strong> {user.accountNumber}</p>
       <p><strong>{t("Branch")}:</strong> {user.branch}</p>
       <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
-      <p><strong>{t('Current Balance')}:</strong> {t('Rs')}. {user.balance}</p>
+      <p><strong>{t('Current Balance')}:</strong> Rs. {user.balance}</p>
 
       <form onSubmit={handleDeposit} className="deposit-form">
         <label htmlFor="amount" className="deposit-label">{t('Amount to Deposit')}:</label>
@@ -265,8 +248,8 @@ function CardlessDeposit() {
             <p><strong>{t('Name')}:</strong> {user.name}</p>
             <p><strong>{t('Branch')}:</strong> {user.branch}</p>
             <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
-            <p><strong>{t('Deposited Amount')}:</strong> {t('Rs')}. {depositedAmount}</p>
-            <p><strong>{t('New Balance')}:</strong> {t('Rs')}. {user.balance}</p>
+            <p><strong>{t('Deposited Amount')}:</strong> Rs. {depositedAmount}</p>
+            <p><strong>{t('New Balance')}:</strong> Rs. {user.balance}</p>
             <p className="deposit-success">{t('Deposit successful!')}</p>
 
             <div className="deposit-dropdown-wrapper" ref={dropdownRef}>
@@ -290,8 +273,6 @@ function CardlessDeposit() {
           <p className="deposit-success">{t('Deposit successful!')}</p>
         )
       )}
-
-      {error && <p className="deposit-error">{error}</p>}
     </div>
   );
 }
