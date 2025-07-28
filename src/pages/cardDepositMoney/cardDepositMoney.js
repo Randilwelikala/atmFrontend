@@ -9,6 +9,7 @@ import { Document, } from 'docx';
 import { saveAs } from 'file-saver';
 import './cardDepositMoney.css';
 import { useTranslation } from 'react-i18next';
+import { FaDownload } from 'react-icons/fa';
 
 function Deposit() {
   const [searchParams] = useSearchParams();
@@ -235,7 +236,7 @@ function Deposit() {
 
             <div className="deposit-dropdown-wrapper" ref={dropdownRef}>
               <button onClick={toggleDropdown} className="deposit-btn download-btn">
-                {t('Download')} ▼
+                <FaDownload />
               </button>
               {open && (
                 <div className="deposit-dropdown-menu">

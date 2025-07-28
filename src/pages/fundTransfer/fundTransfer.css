@@ -209,3 +209,41 @@
     transform: scale(1);
   }
 }
+.download-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.download-btn {
+  position: relative;
+  z-index: 2;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 3;
+  min-width: 160px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.dropdown-menu button {
+  width: 100%;
+  padding: 10px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f0f0f0;
+}
+
+.download-dropdown:hover .dropdown-menu {
+  display: block;
+}

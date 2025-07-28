@@ -4,14 +4,9 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-// import { Document, Packer, Paragraph, TextRun } from 'docx';
-// import { saveAs } from 'file-saver';
 import './cardlessWithdraw.css';
 import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { useTranslation } from 'react-i18next';
-// import Table from '@mui/material/Table';
-// import TableRow from '@mui/material/TableRow';
-// import TableCell from '@mui/material/TableCell';
 import { Document, Packer, Paragraph, Table, TableRow, TableCell, TextRun, WidthType } from "docx";
 import { saveAs } from "file-saver";
 
@@ -60,34 +55,16 @@ function CardlessWithdraw() {
   }, []);
 
   const toggleDropdown = () => setOpen(prev => !prev);
-
-  // const downloadPDF = () => {
-  //   setOpen(false);
-  //   const doc = new jsPDF();
-  //   autoTable(doc, {
-  //     head: [['Field', 'Value']],
-  //     body: [
-  //       ['Withdraw ID', transactionId],
-  //       ['Withdraw Date', transactionDate],
-  //       ['Account Number', user.accountNumber],
-  //       ['Name', user.name],
-  //       ['Branch', user.branch],
-  //       ['Account Type', user.accountType],
-  //       ['Withdrawed Amount', `Rs. ${depositedAmount}`],
-  //       ['New Balance', `Rs. ${user.balance}`],
-  //     ],
-  //   });
-  //   doc.save('Withdraw_receipt.pdf');
-  // };
+ 
   const downloadAsPDF = () => {
   setOpen(false);
   const doc = new jsPDF();
 
-  // Title
+
   doc.setFontSize(18);
   doc.text(`${user?.bankName || 'Bank Name'}`, 14, 20);
 
-  // First table: Receipt details
+ 
   autoTable(doc, {
     startY: 30,
     head: [['Field', 'Value']],
@@ -112,7 +89,7 @@ function CardlessWithdraw() {
     margin: { top: 30 },
   });
 
-  // Optional second table: Recent transactions
+
   if (transactions && transactions.length > 0) {
     autoTable(doc, {
       startY: doc.lastAutoTable.finalY + 10,
@@ -128,38 +105,10 @@ function CardlessWithdraw() {
     });
   }
 
-  // Save file
+
   doc.save('Withdraw_receipt.pdf');
 };
 
-
-  // const downloadDOCX = async () => {
-  //   setOpen(false);
-  //   const doc = new Document({
-  //     sections: [
-  //       {
-  //         children: [
-  //           new Paragraph({
-  //             children: [
-  //               new TextRun({ text: 'Withdraw Receipt', bold: true, size: 28 }),
-  //             ],
-  //           }),
-  //           new Paragraph({ text: '' }),
-  //           new Paragraph({ text: `Withdraw ID: ${transactionId}` }),
-  //           new Paragraph({ text: `Withdraw Date: ${transactionDate}` }),
-  //           new Paragraph({ text: `Account Number: ${user.accountNumber}` }),
-  //           new Paragraph({ text: `Name: ${user.name}` }),
-  //           new Paragraph({ text: `Branch: ${user.branch}` }),
-  //           new Paragraph({ text: `Account Type: ${user.accountType}` }),
-  //           new Paragraph({ text: `Withdrawed Amount: Rs. ${depositedAmount}` }),
-  //           new Paragraph({ text: `New Balance: Rs. ${user.balance}` }),
-  //         ],
-  //       },
-  //     ],
-  //   });
-  //   const blob = await Packer.toBlob(doc);
-  //   saveAs(blob, 'Withdraw_receipt.docx');
-  // };
    const downloadAsDOCX = async () => {
   setOpen(false);
 
@@ -168,13 +117,13 @@ function CardlessWithdraw() {
       {
         properties: {},
         children: [
-          // Bank Name (Blue, Centered)
+        
           new Paragraph({
             children: [
               new TextRun({
                 text: user?.bankName || "Bank Name",
                 bold: true,
-                color: "1F4E79", // blue
+                color: "1F4E79", 
                 size: 32,
                 font: "Arial",
               }),
@@ -183,7 +132,7 @@ function CardlessWithdraw() {
             spacing: { after: 200 },
           }),
 
-          // Branch Info
+        
           new Paragraph({
             children: [
               new TextRun({
@@ -207,7 +156,7 @@ function CardlessWithdraw() {
             spacing: { after: 300 },
           }),
 
-          // Receipt Title
+        
           new Paragraph({
             children: [
               new TextRun({
@@ -221,12 +170,12 @@ function CardlessWithdraw() {
             shading: {
               type: "clear",
               color: "auto",
-              fill: "1F4E79", // dark blue background
+              fill: "1F4E79", 
             },
             spacing: { after: 300 },
           }),
 
-          // Styled Transaction Details in a Table
+          
           new Table({
             rows: [
               ["Withdraw ID", transactionId],
@@ -240,7 +189,7 @@ function CardlessWithdraw() {
                 children: [
                   new TableCell({
                     children: [new Paragraph({ text: label, bold: true })],
-                    shading: { fill: "D9E1F2" }, // light blue
+                    shading: { fill: "D9E1F2" }, 
                   }),
                   new TableCell({
                     children: [new Paragraph({ text: value })],

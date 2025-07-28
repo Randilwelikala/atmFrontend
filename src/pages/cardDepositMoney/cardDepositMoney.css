@@ -55,7 +55,9 @@
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
   user-select: none;
+  
 }
+
 
 .deposit-btn:hover {
   background-color: #3751db;
@@ -106,6 +108,7 @@
 
 .download-btn {
   min-width: 130px;
+  padding: 10px 20px;
 }
 
 .deposit-dropdown-menu {

@@ -187,18 +187,21 @@ function FundTransfer() {
           <p><strong>{t('Type')}:</strong> {receipt.bank}</p>
           <p><strong>{t('Remaining Balance')}:</strong> {t('Rs')}. {receipt.senderNewBalance}</p>
 
-          <div className="receipt-buttons">
-            <button onClick={handleDownloadPDF} className="btn pdf-btn">
+         <div className="receipt-buttons">
+          <div className="download-dropdown">
+            <button className="btn download-btn">
               
-              {t('Download as PDF')}
             </button>
-            <button onClick={handleDownloadDOCX} className="btn docx-btn">
-              {t('Download as DOCX')}
-            </button>
-            <button onClick={handleSkip} className="btn skip-btn">
-              {t('Skip')}
-            </button>
+            <div className="dropdown-menu">
+              <button onClick={handleDownloadPDF}>{t('Download as PDF')}</button>
+              <button onClick={handleDownloadDOCX}>{t('Download as DOCX')}</button>
+            </div>
           </div>
+          <button onClick={handleSkip} className="btn skip-btn">
+            {t('Skip')}
+          </button>
+          </div>
+
         </div>
       )}
     </div>
