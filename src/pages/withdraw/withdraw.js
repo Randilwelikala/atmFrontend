@@ -10,6 +10,7 @@ import './withdraw.css';
 import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { useTranslation } from 'react-i18next';
 import { Table, TableRow, TableCell, WidthType } from "docx";
+import { FaDownload } from 'react-icons/fa';
 
 function Withdraw() {
   const [searchParams] = useSearchParams();
@@ -353,7 +354,7 @@ function Withdraw() {
               <p className="withdraw-success">{t('Withdraw successful!')}</p>
 
               <div className="withdraw-download-group" ref={dropdownRef}>
-                <button onClick={toggleDropdown} className="withdraw-btn">{t('Download')} ▼</button>
+                <button onClick={toggleDropdown} className="withdraw-btn"><FaDownload /></button>
                 {open && (
                   <div className="withdraw-dropdown">
                     <button onClick={downloadPDF} className="withdraw-dropdown-btn">{t('Download as PDF')}</button>
