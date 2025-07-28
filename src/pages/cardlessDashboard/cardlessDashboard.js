@@ -33,10 +33,10 @@ export default function CardlessDashboard() {
           {t('Deposit Money')}
         </button>
         <button 
-          className="cardless-download-btn" 
+          className="cardless-deposit-btn" 
           onClick={() => navigate(`/downloadHistoryOTP`)}
         >
-          {t('Deposit Money')}
+          {t('Download History')}
         </button>        
       </div>
     </div>
