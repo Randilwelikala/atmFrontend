@@ -1,195 +1,78 @@
 :root {
-  --bg-gradient-start: #fffbe6;
-  --bg-gradient-end: #e6f7ff;
-  --title-color: #1a1a2e;
-  --text-color: #222f3e;
-  --border-color: #d1d8e0;
-  --error-color: #e74c3c;
-  --loading-color: #34495e;
-
-  --cancel-btn-bg: #ff4d4f;
-  --cancel-btn-bg-hover: #ff1a1a;
-  --cancel-btn-text: white;
-  --cancel-btn-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
-  --sidebar-bg: #f4f4f4;
-  --sidebar-text: #2c3e50;
-  --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-  --sidebar-link: #2c3e50;
-  --sidebar-link-hover-bg: #d0d0d0;
-  --sidebar-link-hover: #000;
-  --hamburger-bg: #ddd;
+  --hamburger-bg: #f0f0f0;
   --hamburger-color: #333;
-
-  --main-bg: #ffffff;
-  --main-text: #333;
+  --sidebar-bg: #fff;
+  --sidebar-shadow: rgba(0, 0, 0, 0.1);
+  --sidebar-link-color: #333;
+  --sidebar-link-hover-bg: #eee;
 }
 
-.dark-theme {
-  --bg-gradient-start: #1e1e2f;
-  --bg-gradient-end: #2a2a3d;
-  --title-color: #ffffff;
-  --text-color: #f0f0f0;
-  --border-color: #44475a;
-  --error-color: #ff6b6b;
-  --loading-color: #bdc3c7;
-
-  --cancel-btn-bg: #b33435;
-  --cancel-btn-bg-hover: #8a2728;
-  --cancel-btn-text: white;
-  --cancel-btn-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-
-  --sidebar-bg: #2c3e50;
-  --sidebar-text: #ecf0f1;
-  --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.7);
-  --sidebar-link: #ecf0f1;
-  --sidebar-link-hover-bg: #34495e;
-  --sidebar-link-hover: #fff;
-  --hamburger-bg: #2c3e50;
-  --hamburger-color: #fff;
-
-  --main-bg: #121212;
-  --main-text: #ddd;
-}
-
-.side-navbar {
-  width: 220px;
-  height: 100vh;
-  padding-top: 20px;
-  position: fixed;
-  top: 0;
-  right: 0;
-  overflow-y: auto;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-  z-index: 1000;
-  background-color: var(--sidebar-bg);
-  color: var(--sidebar-text);
-  box-shadow: var(--sidebar-shadow);
-}
-
-.side-navbar.closed {
-  transform: translateX(100%);
-}
-
-.side-navbar.open {
-  transform: translateX(0);
-}
-
-.side-navbar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.side-navbar ul li {
-  margin: 15px 0;
-}
-
-.side-navbar ul li a {
-  text-decoration: none;
-  padding: 12px 20px;
-  display: block;
-  font-weight: 500;
-  border-radius: 4px;
-  color: var(--sidebar-link);
-  transition: background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease;
-}
-
-.side-navbar ul li a:hover,
-.side-navbar ul li a.active {
-  font-weight: 700;
-  background-color: var(--sidebar-link-hover-bg);
-  color: var(--sidebar-link-hover);
-}
-
-.main-content {
-  margin-right: 220px;
-  transition: margin-right 0.3s ease;
-  background-color: var(--main-bg);
-  color: var(--main-text);
-  min-height: 100vh;
-  padding: 20px;
-}
-
-.main-content.full-width {
-  margin-right: 0;
-}
-
-.hamburger-btn {
+/* Container for navbar and button */
+.navbar-container {
   position: fixed;
   top: 15px;
   right: 15px;
-  border: none;
-  font-size: 24px;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
   z-index: 1100;
-  display: none;
-  background-color: var(--hamburger-bg);
-  color: var(--hamburger-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .side-navbar {
-    width: 220px;
-    height: 100%;
-    transform: translateX(100%);
-  }
-
-  .side-navbar.open {
-    transform: translateX(0);
-  }
-
-  .main-content {
-    margin-right: 0;
-  }
-
-  .hamburger-btn {
-    display: block;
-  }
-}
-
-@media (min-width: 769px) {
-  .hamburger-btn {
-    display: none;
-  }
-
-  .side-navbar {
-    transform: translateX(0) !important;
-  }
-}
-
-.cancel-btn {
-  padding: 10px 20px;
-  background-color: var(--cancel-btn-bg);
-  color: var(--cancel-btn-text);
+/* Hamburger button always visible */
+.hamburger-btn {
+  font-size: 28px;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  background-color: var(--hamburger-bg);
+  padding: 8px 12px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: var(--cancel-btn-shadow);
-  animation: slideIn 0.4s ease;
+  color: var(--hamburger-color);
+  z-index: 1200;
+  position: relative;
+}
+
+/* Sidebar styles */
+.side-navbar {
   position: fixed;
-  bottom: 20px;
-  left: 110px;
-  z-index: 1000;
+  top: 0;
+  right: -250px; /* hidden offscreen */
+  width: 250px;
+  height: 100vh;
+  background-color: var(--sidebar-bg);
+  box-shadow: -2px 0 5px var(--sidebar-shadow);
+  transition: right 0.3s ease;
+  padding-top: 60px;
+  z-index: 1150;
+  overflow-y: auto;
 }
 
-.cancel-btn:hover {
-  background-color: var(--cancel-btn-bg-hover);
-  transform: scale(1.05);
+/* Show sidebar when open */
+.side-navbar.open {
+  right: 0;
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Remove default list styling */
+.side-navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Sidebar list items */
+.side-navbar li {
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Links styling */
+.side-navbar a {
+  text-decoration: none;
+  color: var(--sidebar-link-color);
+  font-weight: 500;
+  display: block;
+  transition: background-color 0.2s ease;
+}
+
+/* Hover effect on links */
+.side-navbar a:hover,
+.side-navbar a.active {
+  background-color: var(--sidebar-link-hover-bg);
+  font-weight: 700;
 }

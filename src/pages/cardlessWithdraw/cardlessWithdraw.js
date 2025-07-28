@@ -10,7 +10,6 @@ import './cardlessWithdraw.css';
 import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { useTranslation } from 'react-i18next';
 
-
 function CardlessWithdraw() {
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
@@ -25,24 +24,19 @@ function CardlessWithdraw() {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const [breakdown, setBreakdown] = useState({});
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
+  // 🧾 New state for denominations
+  const [selectedDenominations, setSelectedDenominations] = useState([]);
+
+  const denominations = [5000, 1000, 500, 100];
 
   useEffect(() => {
-  //   const token = localStorage.getItem('jwtToken');
-  //   axios.get(`http://localhost:3001/user/${accountNumber}`)
-  //     .then(res => setUser(res.data))
-  //     .catch(() => setError('User not found'));
-  // }, [accountNumber]);
-
-
-    const token = localStorage.getItem('jwtToken'); 
-
-    axios.get(`http://localhost:3001/user/${accountNumber}`, {
-      headers: {
-        Authorization: `Bearer ${token}`, 
-      },
-    })
+    const token = localStorage.getItem('jwtToken');
+    axios
+      .get(`http://localhost:3001/user/${accountNumber}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then(res => setUser(res.data))
       .catch(err => {
         console.error(err);
@@ -84,27 +78,29 @@ function CardlessWithdraw() {
   const downloadDOCX = async () => {
     setOpen(false);
     const doc = new Document({
-      sections: [{
-        children: [
-          new Paragraph({
-            children: [
-              new TextRun({ text: "Withdraw Receipt", bold: true, size: 28 }),
-            ],
-          }),
-          new Paragraph({ text: "" }),
-          new Paragraph({ text: `Withdraw ID: ${transactionId}` }),
-          new Paragraph({ text: `Withdraw Date: ${transactionDate}` }),
-          new Paragraph({ text: `Account Number: ${user.accountNumber}` }),
-          new Paragraph({ text: `Name: ${user.name}` }),
-          new Paragraph({ text: `Branch: ${user.branch}` }),
-          new Paragraph({ text: `Account Type: ${user.accountType}` }),
-          new Paragraph({ text: `Withdrawed Amount: Rs. ${depositedAmount}` }),
-          new Paragraph({ text: `New Balance: Rs. ${user.balance}` }),
-        ],
-      }],
+      sections: [
+        {
+          children: [
+            new Paragraph({
+              children: [
+                new TextRun({ text: 'Withdraw Receipt', bold: true, size: 28 }),
+              ],
+            }),
+            new Paragraph({ text: '' }),
+            new Paragraph({ text: `Withdraw ID: ${transactionId}` }),
+            new Paragraph({ text: `Withdraw Date: ${transactionDate}` }),
+            new Paragraph({ text: `Account Number: ${user.accountNumber}` }),
+            new Paragraph({ text: `Name: ${user.name}` }),
+            new Paragraph({ text: `Branch: ${user.branch}` }),
+            new Paragraph({ text: `Account Type: ${user.accountType}` }),
+            new Paragraph({ text: `Withdrawed Amount: Rs. ${depositedAmount}` }),
+            new Paragraph({ text: `New Balance: Rs. ${user.balance}` }),
+          ],
+        },
+      ],
     });
     const blob = await Packer.toBlob(doc);
-    saveAs(blob, "Withdraw_receipt.docx");
+    saveAs(blob, 'Withdraw_receipt.docx');
   };
 
   const generateTransactionId = () => {
@@ -115,20 +111,38 @@ function CardlessWithdraw() {
     navigate('/cardlessDashboard');
   };
 
+  const handleDenominationChange = (denomination) => {
+    setSelectedDenominations(prev =>
+      prev.includes(denomination)
+        ? prev.filter(d => d !== denomination)
+        : [...prev, denomination]
+    );
+  };
+
   const handleWithdraw = async e => {
     e.preventDefault();
-    console.log('Withdraw clicked');
     setMessage('');
     setError('');
 
+    if (!selectedDenominations.length) {
+      setError('Please select at least one denomination.');
+      return;
+    }
+
     try {
       const token = localStorage.getItem('jwtToken');
-      const res = await axios.post('http://localhost:3001/withdraw', {
-        accountNumber,
-        amount: parseFloat(amount),},
-        {headers: { Authorization: `Bearer ${token}`}
-        
-      });
+      const res = await axios.post(
+        'http://localhost:3001/withdraw',
+        {
+          accountNumber,
+          amount: parseFloat(amount),
+          denominations: selectedDenominations,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
       setMessage(res.data.message || `Withdraw successful!`);
       setBreakdown(res.data.breakdown || {});
       setUser(prev => ({ ...prev, balance: res.data.balance }));
@@ -152,10 +166,9 @@ function CardlessWithdraw() {
 
   return (
     <>
-    <SideNavbar/>
-      
+      <SideNavbar />
       <div className="withdraw-container" id="withdraw-page">
-        <SessionTimeout timeoutDuration={50000000} />      
+        <SessionTimeout timeoutDuration={50000000} />
         <h2 className="withdraw-title">{t('Withdraw Money')}</h2>
 
         <div className="withdraw-user-details">
@@ -166,16 +179,14 @@ function CardlessWithdraw() {
           <p><strong>{t('New Balance')}:</strong> Rs. {user.balance}</p>
           {Object.keys(breakdown).length > 0 && (
             <>
-                <h4>{t('Dispensed Cash Breakdown')}:</h4>
-                <ul>
+              <h4>{t('Dispensed Cash Breakdown')}:</h4>
+              <ul>
                 {Object.entries(breakdown).map(([note, count]) => (
-                    <li key={note}><strong>{t('Rs')}. {note} * </strong> {count}</li>
+                  <li key={note}><strong>{t('Rs')}. {note} * </strong> {count}</li>
                 ))}
-                </ul>
+              </ul>
             </>
-            )}
-
-
+          )}
         </div>
 
         <form onSubmit={handleWithdraw} className="withdraw-form">
@@ -186,22 +197,40 @@ function CardlessWithdraw() {
             onChange={e => setAmount(e.target.value)}
             className="withdraw-input"
           />
+
+          <div className="withdraw-denominations">
+            <label className="withdraw-label">{t('Select Denominations')}:</label>
+            <div className="denomination-options">
+              {denominations.map(denom => (
+                <label key={denom} style={{ marginRight: '10px' }}>
+                  <input
+                    type="checkbox"
+                    value={denom}
+                    checked={selectedDenominations.includes(denom)}
+                    onChange={() => handleDenominationChange(denom)}
+                  />{' '}
+                  Rs. {denom}
+                </label>
+              ))}
+            </div>
+          </div>
+
           <button type="submit" className="withdraw-btn">{t('Withdraw')}</button>
         </form>
 
         {message && (
           localStorage.getItem('wantsReceipt') === 'yes' ? (
             <div className="withdraw-receipt">
-              <h3>{t('Withdraw Receipt')}</h3>    
-              <br/>
+              <h3>{t('Withdraw Receipt')}</h3>
+              <br />
               <p><strong>{t('Withdraw ID')}:</strong> {transactionId}</p>
               <p><strong>{t('Withdraw Date')}:</strong> {transactionDate}</p>
               <p><strong>{t('Account')}:</strong> {user.accountNumber}</p>
               <p><strong>{t('Name')}:</strong> {user.name}</p>
               <p><strong>{t('Branch')}:</strong> {user.branch}</p>
               <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
-              <p><strong>{t('Withdrawed Amount')}:</strong> {t('Rs')}. {depositedAmount}</p>
-              <p><strong>{t('New Balance')}:</strong> {t('Rs')}. {user.balance}</p>
+              <p><strong>{t('Withdrawed Amount')}:</strong> Rs. {depositedAmount}</p>
+              <p><strong>{t('New Balance')}:</strong> Rs. {user.balance}</p>
               <p className="withdraw-success">{t('Withdraw successful!')}</p>
 
               <div className="withdraw-download-group" ref={dropdownRef}>
@@ -221,7 +250,7 @@ function CardlessWithdraw() {
         )}
 
         {error && <p className="withdraw-error">{error}</p>}
-      </div>     
+      </div>
     </>
   );
 }

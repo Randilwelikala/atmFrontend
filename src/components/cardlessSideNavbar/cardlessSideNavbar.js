@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, useSearchParams } from 'react-router-dom';
-import './cardlessSideNavbar.css';
+import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { FaBars } from 'react-icons/fa';
+import './cardlessSideNavbar.css';  // Make sure this path is correct
 
 export default function CardlessSideNavbar() {
-  const [searchParams] = useSearchParams();
-  const accountNumber = searchParams.get('account') || '';
-  const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);  // Sidebar closed initially
   const sidebarRef = useRef(null);
-  const { t, i18n } = useTranslation();
 
+  const toggleNavbar = () => {
+    setIsOpen(prev => !prev);
+  };
 
-  const toggleSidebar = () => setOpen(!open);
- 
+  // Close sidebar if clicking outside of it or hamburger button
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -20,63 +21,39 @@ export default function CardlessSideNavbar() {
         !sidebarRef.current.contains(event.target) &&
         !event.target.classList.contains('hamburger-btn')
       ) {
-        setOpen(false);
+        setIsOpen(false);
       }
     }
 
-    if (open) {
+    if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [open]);
- 
-  const handleLinkClick = () => {
-    if (window.innerWidth <= 768) {
-      setOpen(false);
-    }
-  };
+  }, [isOpen]);
 
   return (
-    <>
-      <button className="hamburger-btn" onClick={toggleSidebar}>
-        ☰       
+    <div className="navbar-container">
+      <button className="hamburger-btn" onClick={toggleNavbar}>
+        <FaBars />
       </button>
-      
-      <nav
-        ref={sidebarRef}
-        className={`side-navbar ${open ? 'open' : 'closed'}`}
-      >
-        
+
+      <nav ref={sidebarRef} className={`side-navbar ${isOpen ? 'open' : ''}`}>
         <ul>
-          
           <li>
-            
-            <NavLink
-              to={`/askReceiptforCardlessWithdraw`}
-              
-              onClick={handleLinkClick}
-            >
+            <NavLink to="/askReceiptforCardlessWithdraw" onClick={() => setIsOpen(false)}>
               {t('Cardless Withdraw')}
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to={`/cardless-deposit`}
-              
-              onClick={handleLinkClick}
-            >
-              {t('Cardless Deposit')} 
+            <NavLink to="/cardless-deposit" onClick={() => setIsOpen(false)}>
+              {t('Cardless Deposit')}
             </NavLink>
           </li>
-          
-          
         </ul>
       </nav>
-    </>
+    </div>
   );
 }
