@@ -5,7 +5,7 @@ import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import './cardlessWithdraw.css';
-// import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
+import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { useTranslation } from 'react-i18next';
 import { Document, Packer, Paragraph, Table, TableRow, TableCell, TextRun, WidthType } from "docx";
 import { saveAs } from "file-saver";
@@ -276,7 +276,7 @@ function CardlessWithdraw() {
 
   return (
     <>
-      {/* <SideNavbar /> */}
+      <SideNavbar />
       <div className="withdraw-container" id="withdraw-page">
         <SessionTimeout timeoutDuration={50000000} />
         <h2 className="withdraw-title">{t('Withdraw Money')}</h2>

@@ -7,6 +7,7 @@ import { useLocation } from 'react-router-dom';
 import './pastTransaction.css';
 import { FaDownload } from 'react-icons/fa';
 import { saveAs } from 'file-saver';
+import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 
 const TransactionHistory = () => {
   const [transactions, setTransactions] = useState([]);
@@ -189,6 +190,7 @@ const TransactionHistory = () => {
 
   return (
     <div className="transaction-container">
+    <CardlessSideNavbar/>
       <h2 className="transaction-title">Transaction History</h2>
 
       <div id="transaction-history">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './cardSideNavbar.css';
+import './cardlessSideNavbar.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function CardlessSideNavbar() {

@@ -10,6 +10,7 @@ import './cardlessDepositMoney.css';
 import { useTranslation } from 'react-i18next';
 import { getToken, removeToken } from '../../utils/auth';
 import { FaDownload } from 'react-icons/fa';
+import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 
 function CardlessDeposit() {
   const [searchParams] = useSearchParams();
@@ -217,6 +218,7 @@ function CardlessDeposit() {
   return (
     <div className="deposit-container" id="deposit-page">
       <SessionTimeout timeoutDuration={50000000} />
+      <CardlessSideNavbar/>
       <h2 className="deposit-title">{t('Deposit Money')}</h2>
       <p><strong>{t('Name')}:</strong> {user.name}</p>
       <p><strong>{t('Account Number')}:</strong> {user.accountNumber}</p>

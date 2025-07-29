@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './enterAccountNumber.css';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
-// import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
+import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { setToken } from '../../utils/auth';
@@ -59,7 +59,7 @@ export default function EnterAccountNumber() {
 
   return (
     <>
-    {/* <CardlessSideNavbar/> */}
+    <CardlessSideNavbar/>
     <div className="container">
       <SessionTimeout timeoutDuration={5000000} />
       <h2 className="title">{t('Enter Account Number')}</h2>

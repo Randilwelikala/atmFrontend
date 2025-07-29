@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './cardlessWithdrawOTP.css'; 
-// import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
+import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { t } from 'i18next';
 import axios from 'axios';
 
@@ -66,7 +66,7 @@ export default function CardlessWithdrawOTP() {
 
   return (
     <div className="otp-container" id="cardless-otp-page">
-      {/* <CardlessSideNavbar /> */}
+      <CardlessSideNavbar />
       <h2 className="otp-title">{t('Cardless Withdraw - OTP Verification')}</h2>
 
       {!otpSent ? (
