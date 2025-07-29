@@ -64,7 +64,7 @@ export default function ForeignFundTransfer() {
   const doc = new jsPDF();
 
  
-  doc.setFillColor(25, 118, 210); // Blue
+  doc.setFillColor(25, 118, 210); 
   doc.rect(0, 0, 210, 30, 'F');   
   doc.setTextColor(255, 255, 255); 
   doc.setFontSize(10);
@@ -75,34 +75,34 @@ export default function ForeignFundTransfer() {
 
   const labelStyle = () => {
     doc.setFont('helvetica', 'bold');
-    doc.setTextColor(33, 37, 41); // Dark gray for labels
+    doc.setTextColor(33, 37, 41); 
   };
 
   const valueStyle = () => {
     doc.setFont('helvetica', 'normal');
-    doc.setTextColor(66, 66, 66); // Medium gray for values
+    doc.setTextColor(66, 66, 66); 
   };
 
-  // Sender Info
+  
   labelStyle();
   doc.text('Sender Details', 20, y);
   y += 10;
 
   labelStyle(); doc.text('Name:', 20, y); 
-  valueStyle(); doc.text(sender.name || '', 100, y);
-  y += 10;
+  valueStyle(); doc.text(sender.name || '', 60, y);
+  y += 5;
 
   labelStyle(); doc.text('Bank:', 20, y);
-  valueStyle(); doc.text(sender.bank || '', 100, y);
-  y += 10;
+  valueStyle(); doc.text(sender.bank || '', 60, y);
+  y += 5;
 
   labelStyle(); doc.text('Branch:', 20, y);
-  valueStyle(); doc.text(sender.branch || '', 100, y);
-  y += 10;
+  valueStyle(); doc.text(sender.branch || '', 60, y);
+  y += 5;
 
   labelStyle(); doc.text('Account Number:', 20, y);
-  valueStyle(); doc.text(sender.accountNumber || '', 100, y);
-  y += 15;
+  valueStyle(); doc.text(sender.accountNumber || '', 60, y);
+  y += 5;
 
   // Receiver Info
   labelStyle();
@@ -110,46 +110,46 @@ export default function ForeignFundTransfer() {
   y += 10;
 
   labelStyle(); doc.text('Name:', 20, y);
-  valueStyle(); doc.text(receiver.name || '', 100, y);
-  y += 10;
+  valueStyle(); doc.text(receiver.name || '', 60, y);
+  y += 5;
 
   labelStyle(); doc.text('Bank:', 20, y);
-  valueStyle(); doc.text(receiver.bank || '', 100, y);
-  y += 10;
+  valueStyle(); doc.text(receiver.bank || '', 60, y);
+  y += 5;
 
   labelStyle(); doc.text('Branch:', 20, y);
-  valueStyle(); doc.text(receiver.branch || '', 100, y);
-  y += 10;
+  valueStyle(); doc.text(receiver.branch || '', 60, y);
+  y += 5;
 
   labelStyle(); doc.text('Account Number:', 20, y);
-  valueStyle(); doc.text(receiver.accountNumber || '', 100, y);
-  y += 15;
+  valueStyle(); doc.text(receiver.accountNumber || '', 60, y);
+  y += 5;
 
   // Transaction Info
   labelStyle();
-  doc.text('Transaction Details', 20, y);
+  doc.text('Transaction Details', 60, y);
   y += 10;
 
   labelStyle(); doc.text('Currency:', 20, y);
-  valueStyle(); doc.text(transaction.currency || '', 100, y);
-  y += 10;
+  valueStyle(); doc.text(transaction.currency || '', 60, y);
+  y += 5;
 
   labelStyle(); doc.text('Amount Sent:', 20, y);
-  valueStyle(); doc.text(`${transaction.currency || ''} ${transaction.amount || ''}`, 100, y);
-  y += 10;
+  valueStyle(); doc.text(`${transaction.currency || ''} ${transaction.amount || ''}`, 60, y);
+  y += 5;
 
   labelStyle(); doc.text('Required LKR Deposit:', 20, y);
-  valueStyle(); doc.text(`Rs.${transaction.requiredLKR || ''}`, 100, y);
-  y += 10;
+  valueStyle(); doc.text(`Rs.${transaction.requiredLKR || ''}`, 60, y);
+  y += 5;
 
   labelStyle(); doc.text('Status:', 20, y);
-  valueStyle(); doc.text(transaction.status || '', 100, y);
-  y += 10;
+  valueStyle(); doc.text(transaction.status || '', 60, y);
+  y += 5;
 
   labelStyle(); doc.text('Date:', 20, y);
-  valueStyle(); doc.text(new Date(transaction.timestamp).toLocaleString(), 100, y);
+  valueStyle(); doc.text(new Date(transaction.timestamp).toLocaleString(), 60, y);
 
-  // Save PDF
+ 
   doc.save('foreign-fund-transfer-receipt.pdf');
 };
 
