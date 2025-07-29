@@ -1,0 +1,71 @@
+.fixed-toggle-btn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  padding: 10px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.fixed-toggle-btn:hover {
+  background-color: var(--btn-bg-hover);
+  transform: scale(1.05);
+}
+
+.right-navbar {
+  position: fixed;
+  top: 0;
+  right: -220px;
+  width: 200px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--container-bg-gradient-start),
+    var(--container-bg-gradient-end)
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  transition: right var(--transition-speed) ease;
+  z-index: 999;
+  box-shadow: 0 0 10px var(--card-shadow);
+}
+
+.right-navbar.open {
+  right: 0;
+}
+
+.right-navbar button {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.right-navbar button:hover {
+  background-color: var(--btn-bg-hover);
+  transform: translateX(-5px);
+}
+
+.navbar-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 60px;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
+}
