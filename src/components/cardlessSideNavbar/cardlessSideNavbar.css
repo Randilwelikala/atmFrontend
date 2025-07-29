@@ -6,7 +6,7 @@
   background: var(--btn-bg);
   color: var(--btn-text);
   border: none;
-  padding: 10px 14px;
+  padding: 1px 14px;
   border-radius: 5px;
   cursor: pointer;
   z-index: 1000;
