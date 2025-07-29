@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './downloadHistoryOTP.css'; 
-import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
+// import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { t } from 'i18next';
 export default function DownloadHistoryOTP() {
   const [mobile, setMobile] = useState('');
@@ -48,7 +48,7 @@ export default function DownloadHistoryOTP() {
   return (
     
     <div className="otp-container" id="cardless-otp-page">
-      <CardlessSideNavbar/>     
+      {/* <CardlessSideNavbar/>      */}
       <h2 className="otp-title">{t('Cardless Withdraw - OTP Verification')}</h2>
       
       {!otpSent ? (

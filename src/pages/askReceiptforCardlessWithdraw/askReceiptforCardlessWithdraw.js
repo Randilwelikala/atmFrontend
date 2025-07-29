@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import './askReceiptforCardlessWithraw.css';
-import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
+// import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { useTranslation } from 'react-i18next';
 
 export default function AskCardlessWithdraw() {
@@ -19,7 +19,7 @@ export default function AskCardlessWithdraw() {
 
   return (
     <>
-    <CardlessSideNavbar/>
+    {/* <CardlessSideNavbar/> */}
     <div className="ask-cardless-container" id="ask-cardless-receipt">
       <SessionTimeout timeoutDuration={5000000} />
       <h2 className="ask-cardless-title">

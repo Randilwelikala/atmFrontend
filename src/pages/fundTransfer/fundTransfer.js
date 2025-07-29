@@ -5,7 +5,7 @@ import { Document, Packer, Paragraph } from "docx";
 import { saveAs } from "file-saver";
 import { useNavigate } from 'react-router-dom';
 import './fundTransfer.css';
-import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
+// import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 import { useTranslation } from 'react-i18next';
 import { FaDownload } from 'react-icons/fa';
 import { TextRun } from "docx";
@@ -174,7 +174,7 @@ const handleDownloadDOCX = () => {
 
   return (
     <>
-    <CardSideNavbar/>
+    {/* <CardSideNavbar/> */}
     <div className="fund-transfer-container">
       <h2 className="fund-transfer-title">{t('Fund Transfer')}</h2>
 

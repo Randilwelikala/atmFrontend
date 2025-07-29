@@ -7,7 +7,7 @@ import autoTable from 'jspdf-autotable';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
 import './withdraw.css';
-import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
+// import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { useTranslation } from 'react-i18next';
 import { Table, TableRow, TableCell, WidthType } from "docx";
 import { FaDownload } from 'react-icons/fa';
@@ -280,7 +280,7 @@ function Withdraw() {
 
   return (
     <>
-    <SideNavbar/>
+    {/* <SideNavbar/> */}
       
       <div className="withdraw-container" id="withdraw-page">
         <SessionTimeout timeoutDuration={50000000} />      

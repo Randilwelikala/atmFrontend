@@ -16,13 +16,13 @@ import Withdraw from './pages/withdraw/withdraw';
 import CancelButton from './components/backButton/backButton';
 import ClearButton from './components/homeButton/homeButton';
 import LogoutButton from './components/logoutButton/logoutButton';
-import CardSideNavbar from './components/cardSideNavbar/cardSideNavbar';
+// import CardSideNavbar from './components/cardSideNavbar/cardSideNavbar';
 import axios from 'axios';
 import CardlessWithdrawOTP from './pages/cardlessWithdrawOTP/cardlessWithdrawOTP';
 import CardlessDashboard from './pages/cardlessDashboard/cardlessDashboard';
 import AskCardlessWithdraw from './pages/askReceiptforCardlessWithdraw/askReceiptforCardlessWithdraw';
 import FundTransfer from '../src/pages/fundTransfer/fundTransfer'
-import CardlessSideNavbar from './components/cardlessSideNavbar/cardlessSideNavbar';
+// import CardlessSideNavbar from './components/cardlessSideNavbar/cardlessSideNavbar';
 import CardlessDeposit from './pages/cardlessDepositMoney/cardlessDepositMoney';
 import CardlessWithdraw from './pages/cardlessWithdraw/cardlessWithdraw';
 import './translate/i18n';
@@ -67,8 +67,8 @@ export default function App() {
         <Route path="/cardlessWithdraw" element={<CardlessWithdrawOTP />} />
         <Route path="/askReceiptforCardlessWithdraw" element={<AskCardlessWithdraw />} />
         <Route path="/fundTransfer" element={<FundTransfer />} />
-        <Route path='/cardlessSideNavbar' element={<CardlessSideNavbar/>}/>
-        <Route path='/cardSideNavbar' element={<CardSideNavbar/>}/>
+        {/* <Route path='/cardlessSideNavbar' element={<CardlessSideNavbar/>}/> */}
+        {/* <Route path='/cardSideNavbar' element={<CardSideNavbar/>}/> */}
         <Route path='/cardlessDeposit' element={<CardlessDeposit/>}/>
         <Route path='/cardlessWithdrawto' element={<CardlessWithdraw/>}/>
         <Route path='/pastTransaction' element={<TransactionHistory/>}/>

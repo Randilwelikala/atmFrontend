@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import './seeBalance.css';
-import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
+// import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 import { useTranslation } from 'react-i18next';
 
 export default function SeeBalance() {
@@ -34,7 +34,7 @@ export default function SeeBalance() {
 
   return (
     <>
-    <CardSideNavbar/>
+    {/* <CardSideNavbar/> */}
     <div className="balance-container">
       
       <SessionTimeout timeoutDuration={5000000} />
