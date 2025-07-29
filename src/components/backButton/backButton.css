@@ -22,8 +22,8 @@
   --error-color: #ff6b6b;
   --loading-color: #bdc3c7;
 
-  --cancel-btn-bg: #b33435;
-  --cancel-btn-bg-hover: #8a2728;
+  --cancel-btn-bg: #2c8a35;
+  --cancel-btn-bg-hover: #176613;
   --cancel-btn-text: white;
   --cancel-btn-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
