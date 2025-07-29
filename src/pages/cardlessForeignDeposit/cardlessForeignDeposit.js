@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './foreignFundTransfer.css';
+import './cardlessForeignDeposit.css';
 import { jsPDF } from 'jspdf';
 import { saveAs } from 'file-saver';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 
-export default function ForeignFundTransfer() {
+export default function CardlessForeignDeposit() {
   const [fromAccount, setFromAccount] = useState('');
   const [toAccount, setToAccount] = useState('');
   const [currency, setCurrency] = useState('USD');

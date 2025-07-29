@@ -1,0 +1,95 @@
+.otp-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  background: linear-gradient(to left, var(--card-bg-gradient-start), var(--card-bg-gradient-end));
+  border-radius: 14px;
+  box-shadow: 0 12px 30px var(--card-shadow);
+  animation: fadeInUp 0.5s ease;
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
+}
+
+.otp-title {
+  text-align: center;
+  font-size: 22px;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
+  margin-bottom: 25px;
+}
+
+.otp-step {
+  display: flex;
+  flex-direction: column;
+}
+
+.otp-label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
+}
+
+.otp-input {
+  padding: 10px 12px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  background-color: white;
+  color: #333;
+  transition: border-color 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-theme .otp-input {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  border: 1px solid #555;
+}
+
+.otp-input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.otp-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.otp-button:hover {
+  background-color: var(--btn-bg-hover);
+  transform: scale(1.05);
+}
+
+.otp-message {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
+}
+
+.otp-error {
+  margin-top: 15px;
+  color: #e74c3c;
+  font-size: 14px;
+  text-align: center;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

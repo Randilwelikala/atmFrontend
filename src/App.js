@@ -30,7 +30,9 @@ import LanguageSwitcher from './components/translate/translate';
 import ThemeToggle from'./components/theme/theme';
 import TransactionHistory from './pages/pastTransaction/pastTransaction'
 import DownloadHistoryOTP from './pages/downloadHistoryOTP/downloadHistoryOTP';
-import ForeignFundTransfer from './pages/foreignFundTransfer/foreignFundTransfer'
+import CardlessForeignDeposit from './pages/cardlessForeignDeposit/cardlessForeignDeposit'
+import CardlessForeignDepositOTP from './pages/cardlessForeignDepositOTP/cardlessForeignDepositOTP';
+
 
  
 
@@ -74,11 +76,13 @@ export default function App() {
         <Route path='/cardlessWithdrawto' element={<CardlessWithdraw/>}/>
         <Route path='/pastTransaction' element={<TransactionHistory/>}/>
         <Route path='/downloadHistoryOTP' element={<DownloadHistoryOTP/>}/>
-        <Route path='/foreignFundTransfer' element={<ForeignFundTransfer/>}/>
+        <Route path='/cardlessForeignDeposit' element={<CardlessForeignDeposit/>}/>
+        <Route path='/cardlessForeignDepositOTP' element={<CardlessForeignDepositOTP/>}/>
+
         </>
         
             
-      </Routes>     
+      </Routes>    
       
            
       

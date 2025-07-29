@@ -34,7 +34,7 @@ export default function CardlessDashboard() {
         </button>
         <button 
           className="cardless-deposit-btn" 
-          onClick={() => navigate(`/foreignFundTransfer`)}
+          onClick={() => navigate(`/cardlessForeignDepositOTP`)}
         >
           {t('Foreign Fund Transfer')}
         </button>
