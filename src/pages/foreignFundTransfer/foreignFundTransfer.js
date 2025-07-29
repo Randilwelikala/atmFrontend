@@ -58,33 +58,101 @@ export default function ForeignFundTransfer() {
   };
 
   const downloadPDF = () => {
-    if (!transactionData) return;
+  if (!transactionData) return;
 
-    const { sender, receiver, transaction } = transactionData;
-    const doc = new jsPDF();
-    doc.setFontSize(16);
-    doc.text('Cardless Foreign Fund Transfer Receipt', 20, 20);
+  const { sender, receiver, transaction } = transactionData;
+  const doc = new jsPDF();
 
-    doc.setFontSize(12);
-    doc.text(`Sender Name: ${sender.name}`, 20, 40);
-    doc.text(`Sender Bank: ${sender.bank}`, 20, 50);
-    doc.text(`Sender Branch: ${sender.branch}`, 20, 60);
-    doc.text(`Sender Account: ${sender.accountNumber}`, 20, 70);
+ 
+  doc.setFillColor(25, 118, 210); // Blue
+  doc.rect(0, 0, 210, 30, 'F');   
+  doc.setTextColor(255, 255, 255); 
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Cardless Foreign Fund Transfer Receipt', 105, 20, { align: 'center' });
 
-    doc.text(`Receiver Name: ${receiver.name}`, 20, 90);
-    doc.text(`Receiver Bank: ${receiver.bank}`, 20, 100);
-    doc.text(`Receiver Branch: ${receiver.branch}`, 20, 110);
-    doc.text(`Receiver Account: ${receiver.accountNumber}`, 20, 120);
+  let y = 40;
 
-    doc.text(`Currency: ${transaction.currency}`, 20, 140);
-    doc.text(`Foreign Amount Sent: ${transaction.currency} ${transaction.amount}`, 20, 150);
-    doc.text(`Required LKR Deposit: Rs.${transaction.requiredLKR}`, 20, 160);
-
-    doc.text(`Transaction Status: ${transaction.status}`, 20, 180);
-    doc.text(`Date: ${new Date(transaction.timestamp).toLocaleString()}`, 20, 190);
-
-    doc.save('foreign-fund-transfer-receipt.pdf');
+  const labelStyle = () => {
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(33, 37, 41); // Dark gray for labels
   };
+
+  const valueStyle = () => {
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(66, 66, 66); // Medium gray for values
+  };
+
+  // Sender Info
+  labelStyle();
+  doc.text('Sender Details', 20, y);
+  y += 10;
+
+  labelStyle(); doc.text('Name:', 20, y); 
+  valueStyle(); doc.text(sender.name || '', 100, y);
+  y += 10;
+
+  labelStyle(); doc.text('Bank:', 20, y);
+  valueStyle(); doc.text(sender.bank || '', 100, y);
+  y += 10;
+
+  labelStyle(); doc.text('Branch:', 20, y);
+  valueStyle(); doc.text(sender.branch || '', 100, y);
+  y += 10;
+
+  labelStyle(); doc.text('Account Number:', 20, y);
+  valueStyle(); doc.text(sender.accountNumber || '', 100, y);
+  y += 15;
+
+  // Receiver Info
+  labelStyle();
+  doc.text('Receiver Details', 20, y);
+  y += 10;
+
+  labelStyle(); doc.text('Name:', 20, y);
+  valueStyle(); doc.text(receiver.name || '', 100, y);
+  y += 10;
+
+  labelStyle(); doc.text('Bank:', 20, y);
+  valueStyle(); doc.text(receiver.bank || '', 100, y);
+  y += 10;
+
+  labelStyle(); doc.text('Branch:', 20, y);
+  valueStyle(); doc.text(receiver.branch || '', 100, y);
+  y += 10;
+
+  labelStyle(); doc.text('Account Number:', 20, y);
+  valueStyle(); doc.text(receiver.accountNumber || '', 100, y);
+  y += 15;
+
+  // Transaction Info
+  labelStyle();
+  doc.text('Transaction Details', 20, y);
+  y += 10;
+
+  labelStyle(); doc.text('Currency:', 20, y);
+  valueStyle(); doc.text(transaction.currency || '', 100, y);
+  y += 10;
+
+  labelStyle(); doc.text('Amount Sent:', 20, y);
+  valueStyle(); doc.text(`${transaction.currency || ''} ${transaction.amount || ''}`, 100, y);
+  y += 10;
+
+  labelStyle(); doc.text('Required LKR Deposit:', 20, y);
+  valueStyle(); doc.text(`Rs.${transaction.requiredLKR || ''}`, 100, y);
+  y += 10;
+
+  labelStyle(); doc.text('Status:', 20, y);
+  valueStyle(); doc.text(transaction.status || '', 100, y);
+  y += 10;
+
+  labelStyle(); doc.text('Date:', 20, y);
+  valueStyle(); doc.text(new Date(transaction.timestamp).toLocaleString(), 100, y);
+
+  // Save PDF
+  doc.save('foreign-fund-transfer-receipt.pdf');
+};
+
 
   const downloadDOCX = async () => {
   if (!transactionData) return;
@@ -167,39 +235,57 @@ return (
         <button type="submit" className="submit-btn">Deposit & Transfer</button>
       </form>
     ) : (
-      <div className="summary">
-        <h2>Transaction Summary</h2>
-        <p><strong>Sender Name:</strong> {transactionData.sender.name}</p>
-        <p><strong>Sender Bank:</strong> {transactionData.sender.bankName}</p>
-        <p><strong>Sender Branch:</strong> {transactionData.sender.branch}</p>
-        <p><strong>Sender Account Number:</strong> {transactionData.sender.accountNumber}</p>
+     <div className="summary">
+  <h2>Transaction Summary</h2>
 
-        <p><strong>Receiver Name:</strong> {transactionData.receiver.name}</p>
-        <p><strong>Receiver Bank:</strong> {transactionData.receiver.bankName}</p>
-        <p><strong>Receiver Branch:</strong> {transactionData.receiver.branch}</p>
-        <p><strong>Receiver Account Number:</strong> {transactionData.receiver.accountNumber}</p>
+  <div className="summary-section">
+    <h3>Sender Details</h3>
+    <div className="summary-grid">
+      <p><strong>Name:</strong> {transactionData.sender.name}</p>
+      <p><strong>Bank:</strong> {transactionData.sender.bankName}</p>
+      <p><strong>Branch:</strong> {transactionData.sender.branch}</p>
+      <p><strong>Account No:</strong> {transactionData.sender.accountNumber}</p>
+    </div>
+  </div>
 
-        <p><strong>Currency Sent:</strong> {transactionData.transaction.currency} {transactionData.transaction.amount}</p>
-        <p><strong>Required LKR Deposited:</strong> Rs.{transactionData.transaction.requiredLKR}</p>
+  <div className="summary-section">
+    <h3>Receiver Details</h3>
+    <div className="summary-grid">
+      <p><strong>Name:</strong> {transactionData.receiver.name}</p>
+      <p><strong>Bank:</strong> {transactionData.receiver.bankName}</p>
+      <p><strong>Branch:</strong> {transactionData.receiver.branch}</p>
+      <p><strong>Account No:</strong> {transactionData.receiver.accountNumber}</p>
+    </div>
+  </div>
 
-        <h3 className='success-text'>Transaction Successful!</h3>
+  <div className="summary-section">
+    <h3>Transaction Details</h3>
+    <div className="summary-grid">
+      <p><strong>Currency:</strong> {transactionData.transaction.currency}</p>
+      <p><strong>Amount Sent:</strong> {transactionData.transaction.amount}</p>
+      <p><strong>LKR Deposit:</strong> Rs.{transactionData.transaction.requiredLKR}</p>
+      <p><strong>Status:</strong> {transactionData.transaction.status}</p>
+    </div>
+    <p style={{ marginTop: '10px' }}><strong>Date:</strong> {new Date(transactionData.transaction.timestamp).toLocaleString()}</p>
+  </div>
 
-        <div
-          className="download-wrapper"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
-          <button className="download-button">
-            Download Receipt
-          </button>
-          {hovered && (
-            <div className="download-popup">
-              <p onClick={downloadPDF}>Download as PDF</p>
-              <p onClick={downloadDOCX}>Download as DOCX</p>
-            </div>
-          )}
-        </div>
-      </div>
+  <h3 className="success-text">Transaction Successful!</h3>
+
+  <div
+    className="download-wrapper"
+    onMouseEnter={() => setHovered(true)}
+    onMouseLeave={() => setHovered(false)}
+  >
+    <div className="download-button">Download Receipt</div>
+    <div className={`download-popup ${hovered ? 'visible' : ''}`}>
+      <p onClick={downloadPDF}>Download as PDF</p>
+      <p onClick={downloadDOCX}>Download as DOCX</p>
+    </div>
+  </div>
+
+
+</div>
+
     )}
   </div>
 );
