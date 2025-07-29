@@ -7,7 +7,7 @@ import autoTable from 'jspdf-autotable';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
 import './withdraw.css';
-// import SideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
+import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 import { useTranslation } from 'react-i18next';
 import { Table, TableRow, TableCell, WidthType } from "docx";
 import { FaDownload } from 'react-icons/fa';
@@ -63,11 +63,11 @@ function Withdraw() {
     setOpen(false);
     const doc = new jsPDF();
   
-    // Title
+    
     doc.setFontSize(18);
     doc.text(`${user?.bankName || 'Bank Name'}`, 14, 20);
   
-    // First table: Receipt details
+    
     autoTable(doc, {
       startY: 30,
       head: [['Field', 'Value']],
@@ -92,8 +92,7 @@ function Withdraw() {
       margin: { top: 30 },
     });
   
-    // Optional second table: Recent transactions
-    if (transactions && transactions.length > 0) {
+   if (transactions && transactions.length > 0) {
       autoTable(doc, {
         startY: doc.lastAutoTable.finalY + 10,
         head: [['Name', 'Amount', 'Date']],
@@ -108,7 +107,7 @@ function Withdraw() {
       });
     }
   
-    // Save file
+   
     doc.save('Withdraw_receipt.pdf');
   };
 
@@ -120,13 +119,13 @@ function Withdraw() {
         {
           properties: {},
           children: [
-            // Bank Name (Blue, Centered)
+            
             new Paragraph({
               children: [
                 new TextRun({
                   text: user?.bankName || "Bank Name",
                   bold: true,
-                  color: "1F4E79", // blue
+                  color: "1F4E79", 
                   size: 32,
                   font: "Arial",
                 }),
@@ -135,7 +134,7 @@ function Withdraw() {
               spacing: { after: 200 },
             }),
   
-            // Branch Info
+            
             new Paragraph({
               children: [
                 new TextRun({
@@ -159,7 +158,7 @@ function Withdraw() {
               spacing: { after: 300 },
             }),
   
-            // Receipt Title
+            
             new Paragraph({
               children: [
                 new TextRun({
@@ -173,12 +172,12 @@ function Withdraw() {
               shading: {
                 type: "clear",
                 color: "auto",
-                fill: "1F4E79", // dark blue background
+                fill: "1F4E79", 
               },
               spacing: { after: 300 },
             }),
   
-            // Styled Transaction Details in a Table
+            
             new Table({
               rows: [
                 ["Withdraw ID", transactionId],
@@ -280,7 +279,7 @@ function Withdraw() {
 
   return (
     <>
-    {/* <SideNavbar/> */}
+    <CardSideNavbar/>
       
       <div className="withdraw-container" id="withdraw-page">
         <SessionTimeout timeoutDuration={50000000} />      

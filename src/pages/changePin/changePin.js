@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './changePin.css';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
-// import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
+import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 import { useTranslation } from 'react-i18next';
 
 export default function ChangePin() {
@@ -51,7 +51,7 @@ export default function ChangePin() {
 
   return (
     <>
-    {/* <CardSideNavbar/> */}
+    <CardSideNavbar/>
     <div className="change-pin-container">
       
       <SessionTimeout timeoutDuration={5000000} />

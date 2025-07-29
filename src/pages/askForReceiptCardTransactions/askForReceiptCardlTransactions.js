@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import './askForReceiptCardTransactions.css';
-// import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
+import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 import { useTranslation } from 'react-i18next';
 
 export default function AskCard() {
@@ -18,7 +18,7 @@ export default function AskCard() {
 
   return (
     <div className="ask-card-container" id="ask-card-page">
-      {/* <CardSideNavbar/> */}
+      <CardSideNavbar/>
       <SessionTimeout timeoutDuration={500000} />
       <h2 className="ask-card-title">{t('Do you want a receipt for this Card transaction?')}</h2>
       <div className="ask-card-buttons">

@@ -10,6 +10,7 @@ import { saveAs } from 'file-saver';
 import './cardDepositMoney.css';
 import { useTranslation } from 'react-i18next';
 import { FaDownload } from 'react-icons/fa';
+import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 
 function Deposit() {
   const [searchParams] = useSearchParams();
@@ -198,6 +199,7 @@ function Deposit() {
   return (
     <div className="deposit-container" id="deposit-page">
       <SessionTimeout timeoutDuration={50000000} />
+      <CardSideNavbar/>
       <h2 className="deposit-title">{t('Deposit Money')}</h2>
       <p><strong>{t('Name')}:</strong> {user.name}</p>
       <p><strong>{t('Account Number')}:</strong> {user.accountNumber}</p>
