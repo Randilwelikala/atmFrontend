@@ -2,13 +2,13 @@
   --bg-gradient-start: #fffbe6;
   --bg-gradient-end: #e6f7ff;
   --title-color: #1a1a2e;
-  --text-color: #222f3e;
+  /* --text-color: #222f3e; */
   --border-color: #d1d8e0;
   --error-color: #e74c3c;
   --loading-color: #34495e;
 
-  --cancel-btn-bg: #ff4d4f;
-  --cancel-btn-bg-hover: #ff1a1a;
+  --cancel-btn-bg: #2c8a35;
+  --cancel-btn-bg-hover: #176613;
   --cancel-btn-text: white;
   --cancel-btn-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -87,7 +87,6 @@
   position: fixed;
   bottom: 60px;
   left: 50%;  
-  /* margin-left: -px;  */
   z-index: 1000;
 }
 
