@@ -289,8 +289,7 @@ function Withdraw() {
           <p><strong>{t('Name')}:</strong> {user.name}</p>
           <p><strong>{t('Account Number')}:</strong> {user.accountNumber}</p>
           <p><strong>{t('Branch')}:</strong> {user.branch}</p>
-          <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
-          <p><strong>{t('Current Balance')}:</strong> Rs. {user.balance}</p>
+          <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>          
           <p><strong>{t('New Balance')}:</strong> Rs. {user.balance}</p>
           {Object.keys(breakdown).length > 0 && (
             <>
@@ -340,11 +339,13 @@ function Withdraw() {
         {message && (
           localStorage.getItem('wantsReceipt') === 'yes' ? (
             <div className="withdraw-receipt">
-              <h3>{t('Withdraw Receipt')}</h3>    
+              <h3>{t('Withdraw Receipt')}</h3>
+              <h3 className="receipt-header">{user.bankName}</h3>
+              <h4 className="receipt-subheader">Branch: {user.branch}</h4>                 
               <br/>
               <p><strong>{t('Withdraw ID')}:</strong> {transactionId}</p>
               <p><strong>{t('Withdraw Date')}:</strong> {transactionDate}</p>
-              <p><strong>{t('Account')}:</strong> {user.accountNumber}</p>
+              <p><strong>{t('Account Number')}:</strong> {user.accountNumber}</p>
               <p><strong>{t('Name')}:</strong> {user.name}</p>
               <p><strong>{t('Branch')}:</strong> {user.branch}</p>
               <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>

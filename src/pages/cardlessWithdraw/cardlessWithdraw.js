@@ -331,17 +331,21 @@ function CardlessWithdraw() {
         {message && (
           localStorage.getItem('wantsReceipt') === 'yes' ? (
             <div className="withdraw-receipt">
+              <h3>{t('Withdraw Receipt')}</h3> 
               <h3 className="receipt-header">{user.bankName}</h3>
               <h4 className="receipt-subheader">Branch: {user.branch}</h4>
+                <br/>
 
               <div className="receipt-content">
                 <div><strong>Withdraw ID:</strong> {transactionId}</div>
                 <div><strong>Withdraw Date:</strong> {transactionDate}</div>
                 <div><strong>Account Number:</strong> {user.accountNumber}</div>
                 <div><strong>Name:</strong> {user.name}</div>
+                <div><strong>Branch:</strong> {user.branch}</div>
                 <div><strong>Account Type:</strong> {user.accountType}</div>
                 <div><strong>Withdrawed Amount:</strong> Rs. {depositedAmount}</div>
                 <div><strong>New Balance:</strong> Rs. {user.balance}</div>
+                <p className="withdraw-success">{t('Withdraw successful!')}</p>
               </div>
 
               <div className="withdraw-download-group" ref={dropdownRef}>
