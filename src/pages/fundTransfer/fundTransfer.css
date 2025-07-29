@@ -134,27 +134,44 @@
 }
 
 .receipt-box {
-  margin-top: 32px;
-  padding: 25px 25px;
-  background: var(--ft-bg);
+  background-color: #f9f9ff;
+  border: 2px solid #4a90e2;
   border-radius: 12px;
-  box-shadow: var(--ft-receipt-box-shadow);
-  font-size: 15px;
-  color: var(--ft-receipt-color);
+  padding: 24px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2);
+  font-family: 'Segoe UI', sans-serif;
+  transition: all 0.3s ease-in-out;
 }
 
 .receipt-title {
-  font-weight: 700;
-  font-size: 20px;
-  margin-bottom: 14px;
-  color: var(--ft-receipt-title-color);
+  color: #2a2a72;
+  font-size: 22px;
+  margin-bottom: 15px;
   text-align: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
 }
 
+.receipt-box p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.receipt-box strong {
+  color: #1d3557;
+  font-weight: 600;
+}
+
+
+
 .receipt-buttons {
+  margin-top: 20px;
   display: flex;
-  gap: 14px;
-  margin-top: 18px;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .btn {
@@ -170,6 +187,24 @@
   font-size: 14px;
 }
 
+.download-btn,
+.skip-btn {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.download-btn:hover,
+.skip-btn:hover {
+  background-color: #357ABD;
+}
+
+
 .pdf-btn {
   background-color: var(--ft-btn-pdf);
 }
@@ -179,6 +214,10 @@
   transform: scale(1.05);
 }
 
+
+.download-dropdown {
+  position: relative;
+}
 .docx-btn {
   background-color: var(--ft-btn-docx);
 }
@@ -212,6 +251,39 @@
 .download-dropdown {
   position: relative;
   display: inline-block;
+}
+
+.download-dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 6px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  min-width: 160px;
+}
+
+.download-dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f0f0f0;
 }
 
 .download-btn {

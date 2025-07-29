@@ -8,6 +8,9 @@ import './fundTransfer.css';
 import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 import { useTranslation } from 'react-i18next';
 import { FaDownload } from 'react-icons/fa';
+import { TextRun } from "docx";
+
+
 
 function FundTransfer() {
   const [sender, setSender] = useState('');
@@ -57,44 +60,108 @@ function FundTransfer() {
   };
 
   const handleDownloadPDF = () => {
-    if (!receipt) return;
-    const doc = new jsPDF();
-    doc.setFontSize(18);
-    doc.text("Fund Transfer Receipt", 20, 20);
-    doc.text(`Sender Bank: ${receipt.senderBankName}`, 20, 90);
-    doc.text(`Recipient Bank: ${receipt.recipientBankName}`, 20, 100);
-    doc.setFontSize(12);
-    doc.text(`From: ${receipt.from}`, 20, 40);
-    doc.text(`To: ${receipt.to}`, 20, 50);
-    doc.text(`Amount: Rs. ${receipt.transferred}`, 20, 60);
-    doc.text(`Type: ${receipt.bank}`, 20, 70);
-    doc.text(`Remaining Balance: Rs. ${receipt.senderNewBalance}`, 20, 80);
-    doc.save(`Transfer_Receipt_${receipt.transactionId || Date.now()}.pdf`);
+  if (!receipt) return;
+
+  const doc = new jsPDF();
+  doc.setFontSize(22);
+  doc.setTextColor(40, 73, 122);
+  doc.text("Fund Transfer Receipt", 20, 20);
+
+  doc.setDrawColor(74, 144, 226); 
+  doc.setLineWidth(0.5);
+  doc.rect(15, 30, 180, 85); 
+
+  doc.setFontSize(12);
+  doc.setTextColor(0, 0, 0);
+
+  const lineSpacing = 10;
+  let y = 40;
+
+  const entries = [
+    [`Sender Bank:`, receipt.senderBankName],
+    [`Recipient Bank:`, receipt.recipientBankName],
+    [`From:`, receipt.from],
+    [`To:`, receipt.to],
+    [`Amount:`, `Rs. ${receipt.transferred}`],
+    [`Type:`, receipt.bank],
+    [`Remaining Balance:`, `Rs. ${receipt.senderNewBalance}`],
+    [`Status:`, `Successfull`],
+  ];
+
+  entries.forEach(([label, value]) => {
+    doc.setTextColor(40, 40, 40);
+    doc.text(`${label}`, 25, y);
+    doc.setTextColor(74, 144, 226);
+    doc.text(`${value}`, 80, y);
+    y += lineSpacing;
+  });
+
+  doc.save(`Transfer_Receipt_${receipt.transactionId || Date.now()}.pdf`);
+};
+
+
+
+const handleDownloadDOCX = () => {
+  if (!receipt) return;
+
+  const headingStyle = {
+    size: 28,
+    bold: true,
+    color: "2A2A72",
   };
 
-  const handleDownloadDOCX = () => {
-    if (!receipt) return;
-
-    const doc = new Document({
-      sections: [{
-        properties: {},
-        children: [
-          new Paragraph({ text: "Fund Transfer Receipt", heading: "Heading1" }),
-          new Paragraph({ text: `Sender Bank: ${receipt.senderBankName}` }),
-          new Paragraph({ text: `Recipient Bank: ${receipt.recipientBankName}` }),
-          new Paragraph({ text: `From: ${receipt.from}` }),
-          new Paragraph({ text: `To: ${receipt.to}` }),
-          new Paragraph({ text: `Amount: Rs. ${receipt.transferred}` }),
-          new Paragraph({ text: `Type: ${receipt.bank}` }),
-          new Paragraph({ text: `Remaining Balance: Rs. ${receipt.senderNewBalance}` }),
-        ],
-      }],
-    });
-
-    Packer.toBlob(doc).then(blob => {
-      saveAs(blob, `Transfer_Receipt_${receipt.transactionId || Date.now()}.docx`);
-    });
+  const labelStyle = {
+    bold: true,
+    color: "4A90E2",
   };
+
+  const valueStyle = {
+    color: "000000",
+  };
+
+  const styledParagraph = (label, value) =>
+  new Paragraph({
+    children: [
+      new TextRun({
+        text: label + " ",
+        bold: true,
+        color: "4A90E2",
+      }),
+      new TextRun({
+        text: value,
+        color: "000000",
+      }),
+    ],
+  });
+
+
+  const doc = new Document({
+    sections: [{
+      properties: {},
+      children: [
+        new Paragraph({
+          text: "Fund Transfer Receipt",
+          heading: "Heading1",
+        }),
+        new Paragraph({ text: "" }),
+
+        styledParagraph("Sender Bank:", receipt.senderBankName),
+        styledParagraph("Recipient Bank:", receipt.recipientBankName),
+        styledParagraph("From:", receipt.from),
+        styledParagraph("To:", receipt.to),
+        styledParagraph("Amount:", `Rs. ${receipt.transferred}`),
+        styledParagraph("Type:", receipt.bank),
+        styledParagraph("Remaining Balance:", `Rs. ${receipt.senderNewBalance}`),
+        styledParagraph("Status:", "Successfull"),
+      ],
+    }],
+  });
+
+  Packer.toBlob(doc).then(blob => {
+    saveAs(blob, `Transfer_Receipt_${receipt.transactionId || Date.now()}.docx`);
+  });
+};
+
 
   const handleSkip = () => {
     setReceipt(null);
@@ -194,6 +261,7 @@ function FundTransfer() {
           <p><strong>{t('Amount')}:</strong> {t('Rs')}. {receipt.transferred}</p>
           <p><strong>{t('Type')}:</strong> {receipt.bank}</p>
           <p><strong>{t('Remaining Balance')}:</strong> {t('Rs')}. {receipt.senderNewBalance}</p>
+          <p><strong>{t('Status')}:</strong> {t('Successfull')}</p>
 
          <div className="receipt-buttons">
           <div className="download-dropdown">
