@@ -63,10 +63,8 @@ export default function GetCardAccountNumberandPin() {
         placeholder={t('Card Number')}
           value={cardNumber}
           onChange={e => setCardNumber(e.target.value)}
-          className="card-login-input"
-          maxLength={16}
-          inputMode="numeric"
-          pattern="\d{16}"
+          className="card-login-input"         
+          inputMode="numeric"          
           title="Enter 16 digit card number"
         />
         <input
