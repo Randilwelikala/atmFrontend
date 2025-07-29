@@ -61,6 +61,8 @@ function FundTransfer() {
     const doc = new jsPDF();
     doc.setFontSize(18);
     doc.text("Fund Transfer Receipt", 20, 20);
+    doc.text(`Sender Bank: ${receipt.senderBankName}`, 20, 90);
+    doc.text(`Recipient Bank: ${receipt.recipientBankName}`, 20, 100);
     doc.setFontSize(12);
     doc.text(`From: ${receipt.from}`, 20, 40);
     doc.text(`To: ${receipt.to}`, 20, 50);
@@ -78,6 +80,8 @@ function FundTransfer() {
         properties: {},
         children: [
           new Paragraph({ text: "Fund Transfer Receipt", heading: "Heading1" }),
+          new Paragraph({ text: `Sender Bank: ${receipt.senderBankName}` }),
+          new Paragraph({ text: `Recipient Bank: ${receipt.recipientBankName}` }),
           new Paragraph({ text: `From: ${receipt.from}` }),
           new Paragraph({ text: `To: ${receipt.to}` }),
           new Paragraph({ text: `Amount: Rs. ${receipt.transferred}` }),
@@ -182,6 +186,9 @@ function FundTransfer() {
       {receipt && (
         <div className="receipt-box">
           <h3 className="receipt-title">{t('Transfer Receipt')}</h3>
+          <p><strong>{t('Type')}:</strong> {receipt.bank}</p>
+          <p><strong>{t('Sender Bank')}:</strong> {receipt.senderBankName}</p>
+          <p><strong>{t('Recipient Bank')}:</strong> {receipt.recipientBankName}</p>
           <p><strong>{t('From')}:</strong> {receipt.from}</p>
           <p><strong>{t('To')}:</strong> {receipt.to}</p>
           <p><strong>{t('Amount')}:</strong> {t('Rs')}. {receipt.transferred}</p>
