@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import SessionTimeout from '../../components/sessionTimeout/sessionTimeout';
 import './cardDashboard.css';
-// import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
+import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 import { useTranslation } from 'react-i18next';
 
 
@@ -24,7 +24,7 @@ export default function CardDashboard() {
   return (
     <div className="card-dashboard-container" id="card-dashboard-page">
       <SessionTimeout timeoutDuration={500000} />
-      {/* <CardSideNavbar/> */}
+      <CardSideNavbar/>
       <div className="card-dashboard-column">
         <h2 className="dashboard-title">{t('Card Transactions')}</h2>
         <button onClick={() => navigate(`/AskCard?account=${accountNumber}`)} className="dashboard-btn">

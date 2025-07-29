@@ -16,7 +16,7 @@ import Withdraw from './pages/withdraw/withdraw';
 import CancelButton from './components/backButton/backButton';
 import ClearButton from './components/homeButton/homeButton';
 import LogoutButton from './components/logoutButton/logoutButton';
-// import CardSideNavbar from './components/cardSideNavbar/cardSideNavbar';
+import CardSideNavbar from './components/cardSideNavbar/cardSideNavbar';
 import axios from 'axios';
 import CardlessWithdrawOTP from './pages/cardlessWithdrawOTP/cardlessWithdrawOTP';
 import CardlessDashboard from './pages/cardlessDashboard/cardlessDashboard';
@@ -68,7 +68,7 @@ export default function App() {
         <Route path="/askReceiptforCardlessWithdraw" element={<AskCardlessWithdraw />} />
         <Route path="/fundTransfer" element={<FundTransfer />} />
         {/* <Route path='/cardlessSideNavbar' element={<CardlessSideNavbar/>}/> */}
-        {/* <Route path='/cardSideNavbar' element={<CardSideNavbar/>}/> */}
+        <Route path='/cardSideNavbar' element={<CardSideNavbar/>}/>
         <Route path='/cardlessDeposit' element={<CardlessDeposit/>}/>
         <Route path='/cardlessWithdrawto' element={<CardlessWithdraw/>}/>
         <Route path='/pastTransaction' element={<TransactionHistory/>}/>
