@@ -1,121 +1,222 @@
+/* Container: Centered, comfortable padding, soft background for low eye strain */
 .foreign-transfer-container {
-  max-width: 550px;
-  margin: 50px auto;
-  background: #fdfdfd;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', sans-serif;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px 35px;
+  background: #f0f4f8; /* light, neutral blue */
+  border-radius: 18px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  color: #102a43; /* dark blue text for readability */
 }
 
-.transfer-form {
+/* Page Title: Clear, centered, uppercase for emphasis */
+h2 {
+  text-align: center;
+  margin-bottom: 35px;
+  font-weight: 700;
+  color: #0b3954; /* stronger dark blue */
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Forms and Summary layout: vertical stack, generous spacing */
+.transfer-form,
+.summary {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 22px;
 }
 
-.transfer-form input,
-.transfer-form select {
-  padding: 10px 14px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.calculation {
-  color: #444;
+/* Inputs and selects: large tap targets, subtle shadow for depth */
+input[type="text"],
+input[type="number"],
+select {
+  padding: 14px 18px;
+  font-size: 17px;
+  border-radius: 12px;
+  border: 1.8px solid #bcccdc; /* softer border */
+  outline-offset: 3px;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
   font-weight: 500;
-  margin-top: -5px;
+  background-color: #fff;
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.05);
+  color: #334e68;
 }
 
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: #0077b6;
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 119, 182, 0.5);
+}
+
+/* Required LKR info: prominent but not aggressive */
+.required-lkr {
+  font-size: 19px;
+  color: #334e68;
+  font-weight: 700;
+  text-align: center;
+  margin-top: -8px;
+}
+
+/* Error messages: red and bold for quick recognition */
+.error-msg {
+  color: #d62828;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center;
+  margin-bottom: -10px;
+}
+
+/* Submit button: bold, accessible color, clear affordance */
 .submit-btn {
-  background-color: #0d6efd;
+  padding: 16px;
+  background-color: #0077b6;
   color: white;
-  padding: 12px;
-  font-size: 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: 14px;
+  font-size: 19px;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+  box-shadow: 0 6px 12px rgba(0, 119, 182, 0.4);
 }
 
-.submit-btn:hover {
-  background-color: #084ec4;
+.submit-btn:hover,
+.submit-btn:focus {
+  background-color: #005f86;
+  outline: none;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 95, 134, 0.6);
 }
 
-.result-card {
-  background: #fff;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 10px 22px rgba(0,0,0,0.08);
-  animation: fadeIn 0.4s ease-in-out;
+/* Summary box: clear feedback with soft accent background */
+.summary {
+  background-color: #d0e8f2; /* very light blue */
+  padding: 30px 35px;
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(0, 119, 182, 0.25);
+  color: #0b3954;
 }
 
-.success-msg {
+.summary h2 {
+  margin-bottom: 25px;
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.summary p {
+  font-size: 17px;
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
+.summary strong {
+  color: #073b4c;
+}
+
+/* Download buttons: grouped, clear hover and focus states */
+button {
+  margin-top: 25px;
+  padding: 14px 26px;
+  font-weight: 600;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  background-color: #0096c7;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+  box-shadow: 0 6px 14px rgba(0, 150, 199, 0.35);
+}
+
+button:hover,
+button:focus {
+  background-color: #0077b6;
+  outline: none;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 119, 182, 0.55);
+}
+
+button + button {
+  margin-left: 18px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .foreign-transfer-container {
+    padding: 20px 20px;
+    margin: 20px auto;
+  }
+
+  .transfer-form,
+  .summary {
+    gap: 18px;
+  }
+
+  button,
+  input[type="text"],
+  input[type="number"],
+  select {
+    font-size: 15px;
+    padding: 12px 14px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+}
+
+.success-text {
+  text-align: center;
   color: green;
   font-weight: bold;
   margin-top: 15px;
+  font-size: 18px;
 }
 
 .download-wrapper {
-  margin-top: 25px;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: inline-block;
+  margin-top: 20px;
 }
-
-.download-btn {
-  background-color: #28a745;
+.download-button {
+  padding: 10px 20px;
+  background-color: #007bff;
   color: white;
-  padding: 10px 14px;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 15px;
+  font-size: 16px;
+  transition: background 0.3s ease;
 }
 
-.skip-btn {
-  background: #6c757d;
-  color: white;
-  padding: 10px 14px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 15px;
+.download-button:hover {
+  background-color: #0056b3;
 }
 
-.dropdown-menu {
+.download-popup {
   position: absolute;
-  top: 45px;
+  top: 110%;
   left: 0;
-  background: white;
+  background-color: white;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-  width: 150px;
-  display: flex;
-  flex-direction: column;
-  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 10;
+  border-radius: 4px;
+  width: 180px;
 }
 
-.dropdown-menu button {
-  background: none;
-  border: none;
+download-popup p {
+  margin: 0;
   padding: 10px;
-  text-align: left;
-  font-size: 14px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
-.dropdown-menu button:hover {
+.download-popup p:hover {
   background-color: #f0f0f0;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
 }
