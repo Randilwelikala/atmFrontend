@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './cardlessForeignDeposit.css';
 import { jsPDF } from 'jspdf';
 import { saveAs } from 'file-saver';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
+import { useLocation } from 'react-router-dom';
+
 
 export default function CardlessForeignDeposit() {
   const [fromAccount, setFromAccount] = useState('');
@@ -14,6 +16,16 @@ export default function CardlessForeignDeposit() {
   const [bank, setBank] = useState('');
   const [branch, setBranch] = useState('');
   const [hovered, setHovered] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+  const queryParams = new URLSearchParams(location.search);
+  const accountParam = queryParams.get('account');
+  if (accountParam) {
+    setFromAccount(accountParam);
+  }
+}, [location.search]);
+
 
 
 
@@ -86,7 +98,7 @@ export default function CardlessForeignDeposit() {
   
   labelStyle();
   doc.text('Sender Details', 20, y);
-  y += 10;
+  y += 7;
 
   labelStyle(); doc.text('Name:', 20, y); 
   valueStyle(); doc.text(sender.name || '', 60, y);
@@ -102,12 +114,12 @@ export default function CardlessForeignDeposit() {
 
   labelStyle(); doc.text('Account Number:', 20, y);
   valueStyle(); doc.text(sender.accountNumber || '', 60, y);
-  y += 5;
+  y += 10;
 
-  // Receiver Info
+
   labelStyle();
   doc.text('Receiver Details', 20, y);
-  y += 10;
+  y += 7;
 
   labelStyle(); doc.text('Name:', 20, y);
   valueStyle(); doc.text(receiver.name || '', 60, y);
@@ -123,12 +135,12 @@ export default function CardlessForeignDeposit() {
 
   labelStyle(); doc.text('Account Number:', 20, y);
   valueStyle(); doc.text(receiver.accountNumber || '', 60, y);
-  y += 5;
+  y += 10;
 
-  // Transaction Info
+
   labelStyle();
   doc.text('Transaction Details', 60, y);
-  y += 10;
+  y += 7;
 
   labelStyle(); doc.text('Currency:', 20, y);
   valueStyle(); doc.text(transaction.currency || '', 60, y);
@@ -204,8 +216,8 @@ return (
           type="text"
           placeholder="Sender Account Number"
           value={fromAccount}
-          onChange={(e) => setFromAccount(e.target.value)}
-          required
+          readOnly
+          className="readonly-input"
         />
         <input
           type="text"

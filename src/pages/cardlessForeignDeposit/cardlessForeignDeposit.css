@@ -260,3 +260,9 @@ select:focus {
   from { opacity: 0; transform: translateY(-5px); }
   to { opacity: 1; transform: translateY(0); }
 }
+.readonly-input {
+  background-color: #f9f9f9;
+  color: #555;
+  border: 1px solid #ccc;
+  cursor: not-allowed;
+}
