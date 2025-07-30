@@ -81,7 +81,7 @@ const downloadPDF = () => {
     filename: 'foreign-fund-transfer-receipt.pdf',
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 2 },
-    jsPDF: { unit: 'mm', format: [80, 200], orientation: 'portrait' } // 80mm wide
+    jsPDF: { unit: 'mm', format: [150, 225], orientation: 'portrait' } // 80mm wide
   }).from(element).save();
 };
 
@@ -167,56 +167,74 @@ return (
         <button type="submit" className="submit-btn">Deposit & Transfer</button>
       </form>
     ) : (
+      <>
+
+
+
      <div className="summary" id="html-receipt">
-  <h2>Foreign Transfer Summary</h2>
 
-  <div className="summary-section" >
-    <h3>Sender Details</h3>
-    <div className="summary-grid">
-      <p><strong>Name:</strong> {transactionData.sender.name}</p>
-      <p><strong>Bank:</strong> {transactionData.sender.bankName}</p>
-      <p><strong>Branch:</strong> {transactionData.sender.branch}</p>
-      <p><strong>Account No:</strong> {transactionData.sender.accountNumber}</p>
-    </div>
-  </div>
+      <h2>Foreign Money Deposit</h2>
+      <div className="summary-section" >
+        <h3>Sender Details</h3>
+        <div className="summary-grid">
+          <p><strong>Name:</strong> {transactionData.sender.name}</p>
+          <p><strong>Bank:</strong> {transactionData.sender.bankName}</p>
+          <p><strong>Branch:</strong> {transactionData.sender.branch}</p>
+          <p><strong>Account No:</strong> {transactionData.sender.accountNumber}</p>
+        </div>
+      </div>
 
-  <div className="summary-section">
-    <h3>Receiver Details</h3>
-    <div className="summary-grid">
-      <p><strong>Name:</strong> {transactionData.receiver.name}</p>
-      <p><strong>Bank:</strong> {transactionData.receiver.bankName}</p>
-      <p><strong>Branch:</strong> {transactionData.receiver.branch}</p>
-      <p><strong>Account No:</strong> {transactionData.receiver.accountNumber}</p>
-    </div>
-  </div>
+      <div className="summary-section">
+        <h3>Receiver Details</h3>
+        <div className="summary-grid">
+          <p><strong>Name:</strong> {transactionData.receiver.name}</p>
+          <p><strong>Bank:</strong> {transactionData.receiver.bankName}</p>
+          <p><strong>Branch:</strong> {transactionData.receiver.branch}</p>
+          <p><strong>Account No:</strong> {transactionData.receiver.accountNumber}</p>
+        </div>
+      </div>
 
-  <div className="summary-section">
-    <h3>Transaction Details</h3>
-    <div className="summary-grid">
-      <p><strong>Currency:</strong> {transactionData.transaction.currency}</p>
-      <p><strong>Amount Sent:</strong> {transactionData.transaction.amount}</p>
-      <p><strong>LKR Deposit:</strong> Rs.{transactionData.transaction.requiredLKR}</p>
-      <p><strong>Status:</strong> {transactionData.transaction.status}</p>
-    </div>
-    <p style={{ marginTop: '10px' }}><strong>Date:</strong> {new Date(transactionData.transaction.timestamp).toLocaleString()}</p>
-  </div>
+      <div className="summary-section">
+        <h3>Transaction Details</h3>
+        <div className="summary-grid">
+          <p><strong>Currency:</strong> {transactionData.transaction.currency}</p>
+          <p><strong>Amount Sent:</strong> {transactionData.transaction.amount}</p>
+          <p><strong>LKR Deposit:</strong> Rs.{transactionData.transaction.requiredLKR}</p>
+          <p><strong>Status:</strong> {transactionData.transaction.status}</p>
+          <p><strong>Date & Time:</strong> {new Date(transactionData.transaction.timestamp).toLocaleString()}</p>
+          
+        </div>
+        
+      </div>
 
-  <h3 className="success-text">Transaction Successful!</h3>
+      <h3 className="success-text">Transaction Successful!</h3>
 
-  <div
-    className="download-wrapper"
-    onMouseEnter={() => setHovered(true)}
-    onMouseLeave={() => setHovered(false)}
-  >
-    <div className="download-button"><FaDownload /></div>
-    <div className={`download-popup ${hovered ? 'visible' : ''}`}>
-      <p onClick={downloadPDF}>Download as PDF</p>
-      <p onClick={downloadDOCX}>Download as DOCX</p>
-    </div>
-  </div>
+      {/* <div
+        className="download-wrapper"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <div className="download-button"><FaDownload /></div>
+        <div className={`download-popup ${hovered ? 'visible' : ''}`}>
+          <p onClick={downloadPDF}>Download as PDF</p>
+          <p onClick={downloadDOCX}>Download as DOCX</p>
+        </div>
+      </div> */}
 
 
 </div>
+
+<div
+        className="download-wrapper"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <div className="download-button"><FaDownload /></div>
+        <div className={`download-popup ${hovered ? 'visible' : ''}`}>
+          <p onClick={downloadPDF}>Download as PDF</p>
+          <p onClick={downloadDOCX}>Download as DOCX</p>
+        </div>
+      </div></>
 
     )}
   </div>
