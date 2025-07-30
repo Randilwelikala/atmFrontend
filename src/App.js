@@ -32,7 +32,7 @@ import TransactionHistory from './pages/pastTransaction/pastTransaction'
 import DownloadHistoryOTP from './pages/downloadHistoryOTP/downloadHistoryOTP';
 import CardlessForeignDeposit from './pages/cardlessForeignDeposit/cardlessForeignDeposit'
 import CardlessForeignDepositOTP from './pages/cardlessForeignDepositOTP/cardlessForeignDepositOTP';
-import ATMReceipt from './components/Receipt/Receipt';
+import ReceiptTemplate from './components/receiptTemplate/receiptTemplate';
 
 
  
@@ -79,7 +79,7 @@ export default function App() {
         <Route path='/downloadHistoryOTP' element={<DownloadHistoryOTP/>}/>
         <Route path='/cardlessForeignDeposit' element={<CardlessForeignDeposit/>}/>
         <Route path='/cardlessForeignDepositOTP' element={<CardlessForeignDepositOTP/>}/>
-        <Route path='/receipt' element={< ATMReceipt/>}/>
+        <Route path='/receipt' element={< ReceiptTemplate/>}/>
 
         </>
         
