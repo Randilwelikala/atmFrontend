@@ -12,6 +12,8 @@ import { useTranslation } from 'react-i18next';
 import { FaDownload } from 'react-icons/fa';
 import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 import DepositTemplate from '../../components/depositReceiptTemplate/depositReceiptTemplate';
+import html2pdf from 'html2pdf.js';
+
 
 
 function Deposit() {
@@ -29,6 +31,8 @@ function Deposit() {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
   const [receiptData, setReceiptData] = useState(null);
+  const receiptRef = useRef();
+
 
 
   useEffect(() => {
@@ -55,30 +59,21 @@ function Deposit() {
   const toggleDropdown = () => setOpen(prev => !prev);
 
   const downloadPDF = () => {
-      setOpen(false);
-      const doc = new jsPDF();
-      const bankName = user?.bankName || "Bank Name";
-      doc.setFontSize(18);
-      const pageWidth = doc.internal.pageSize.getWidth();
-      const textWidth = doc.getTextWidth(bankName);
-      const x = (pageWidth - textWidth) / 2;
-      doc.text(bankName, x, 15);
-      autoTable(doc, {
-        startY: 25,
-        head: [['Field', 'Value']],
-        body: [
-          ['Transaction ID', transactionId],
-          ['Transaction Date', transactionDate],
-          ['Account Number', user.accountNumber],
-          ['Name', user.name],
-          ['Branch', user.branch],
-          ['Account Type', user.accountType],
-          ['Deposited Amount', `Rs. ${depositedAmount}`],
-          ['New Balance', `Rs. ${user.balance}`],
-        ],
-      });
-      doc.save('Deposit.pdf');
-    };
+  setOpen(false);
+
+  const element = receiptRef.current;
+
+  const opt = {
+    margin: 0.5,
+    filename: 'DepositReceipt.pdf', 
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+  };
+
+  html2pdf().set(opt).from(element).save();
+};
+
   
 
   const downloadDOCX = async () => {
@@ -188,7 +183,7 @@ function Deposit() {
       });
       setMessage(res.data.message || `Deposit successful!`);
       setUser(prev => ({ ...prev, balance: res.data.balance }));
-      setDepositedAmount(amount);
+     const depositedAmountNum = parseFloat(amount);
       setAmount('');
       setTransactionId(generateTransactionId());
       setTransactionDate(new Date().toLocaleString());
@@ -201,13 +196,14 @@ function Deposit() {
         },
         transaction: {
           currency: 'LKR',
-          amount: parseFloat(amount),
+          amount: depositedAmountNum,
           requiredLKR: res.data.balance,
           status: 'Successful',
           timestamp: Date.now(),
         },
       };
       setReceiptData(transactionData);
+      setDepositedAmount(depositedAmountNum);
     } catch (error) {
       setError(error.response?.data?.message || 'Something went wrong');
     }
@@ -220,6 +216,8 @@ function Deposit() {
     <div className="deposit-container" id="deposit-page">
       <SessionTimeout timeoutDuration={50000000} />
       <CardSideNavbar/>
+      
+
       <h2 className="deposit-title">{t('Deposit Money')}</h2>
       <p><strong>{t('Name')}:</strong> {user.name}</p>
       <p><strong>{t('Account Number')}:</strong> {user.accountNumber}</p>
@@ -280,7 +278,7 @@ function Deposit() {
 
       {message && localStorage.getItem('wantsReceipt') === 'yes' ? (
         <>
-          <DepositTemplate transactionData={receiptData} />
+          <DepositTemplate transactionData={receiptData} ref={receiptRef} />
           <div className="deposit-dropdown-wrapper" ref={dropdownRef}>
             <button onClick={toggleDropdown} className="deposit-btn download-btn">
               <FaDownload />
