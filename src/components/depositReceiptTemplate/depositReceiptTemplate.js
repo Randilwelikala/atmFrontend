@@ -1,12 +1,12 @@
 import React from 'react';
-import './receiptTemplate.css';
+import './depositReceiptTemplate.css';
 
-const ReceiptTemplate = ({ transactionData }) => {
+const DepositTemplate = ({ transactionData }) => {
   if (!transactionData) return null;
 
   return (
     <div className="summary" id="html-receipt">
-      <h2>Foreign Money Deposit</h2>
+      <h2>Deposit Receipt</h2>
 
       <div className="summary-section">
         <h3>Sender Details</h3>
@@ -49,4 +49,4 @@ const ReceiptTemplate = ({ transactionData }) => {
   );
 };
 
-export default ReceiptTemplate;
+export default DepositTemplate;

@@ -11,6 +11,8 @@ import './cardDepositMoney.css';
 import { useTranslation } from 'react-i18next';
 import { FaDownload } from 'react-icons/fa';
 import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
+import DepositTemplate from '../../components/depositReceiptTemplate/depositReceiptTemplate';
+
 
 function Deposit() {
   const [searchParams] = useSearchParams();
@@ -26,6 +28,8 @@ function Deposit() {
   const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [receiptData, setReceiptData] = useState(null);
+
 
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
@@ -188,6 +192,22 @@ function Deposit() {
       setAmount('');
       setTransactionId(generateTransactionId());
       setTransactionDate(new Date().toLocaleString());
+      const transactionData = {
+        sender: {
+          name: user.name,
+          bankName: user.bankName || 'N/A',
+          branch: user.branch,
+          accountNumber: user.accountNumber,
+        },
+        transaction: {
+          currency: 'LKR',
+          amount: parseFloat(amount),
+          requiredLKR: res.data.balance,
+          status: 'Successful',
+          timestamp: Date.now(),
+        },
+      };
+      setReceiptData(transactionData);
     } catch (error) {
       setError(error.response?.data?.message || 'Something went wrong');
     }
@@ -221,7 +241,7 @@ function Deposit() {
         />
         <button type="submit" className="deposit-btn">{t('Deposit')}</button>
       </form>
-
+{/* 
       {message && (
         localStorage.getItem('wantsReceipt') === 'yes' ? (
           <div className="deposit-receipt-box">
@@ -256,7 +276,32 @@ function Deposit() {
         ) : (
           <p className="deposit-success">{t('Deposit successful!')}</p>
         )
+      )} */}
+
+      {message && localStorage.getItem('wantsReceipt') === 'yes' ? (
+        <>
+          <DepositTemplate transactionData={receiptData} />
+          <div className="deposit-dropdown-wrapper" ref={dropdownRef}>
+            <button onClick={toggleDropdown} className="deposit-btn download-btn">
+              <FaDownload />
+            </button>
+            {open && (
+              <div className="deposit-dropdown-menu">
+                <button onClick={downloadPDF} className="deposit-dropdown-btn">
+                  {t('Download as PDF')}
+                </button>
+                <button onClick={downloadDOCX} className="deposit-dropdown-btn">
+                  {t('Download as DOCX')}
+                </button>
+              </div>
+            )}
+            <button onClick={handleSkip} className="deposit-btn skip-btn">{t('Skip')}</button>
+          </div>
+        </>
+      ) : (
+        <p className="deposit-success">{t('Deposit successful!')}</p>
       )}
+
 
       {error && <p className="deposit-error">{error}</p>}
     </div>

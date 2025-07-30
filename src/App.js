@@ -32,7 +32,7 @@ import TransactionHistory from './pages/pastTransaction/pastTransaction'
 import DownloadHistoryOTP from './pages/downloadHistoryOTP/downloadHistoryOTP';
 import CardlessForeignDeposit from './pages/cardlessForeignDeposit/cardlessForeignDeposit'
 import CardlessForeignDepositOTP from './pages/cardlessForeignDepositOTP/cardlessForeignDepositOTP';
-import ReceiptTemplate from './components/receiptTemplate/receiptTemplate';
+import ReceiptTemplate from './components/depositReceiptTemplate/depositReceiptTemplate';
 
 
  

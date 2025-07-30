@@ -16,8 +16,8 @@ import {
   AlignmentType,
   BorderStyle,
 } from 'docx';
-import ReceiptTemplate from '../../components/receiptTemplate/receiptTemplate';
-import '../../components/receiptTemplate/receiptTemplate.css';
+import '../../components/foreignDepositReceiptTemplate/foreignDepositReceiptTemplate.css';
+import ReceiptTemplate from '../../components/foreignDepositReceiptTemplate/foreignDepositReceiptTemplate';
 
 export default function CardlessForeignDeposit() {
   const location = useLocation();
