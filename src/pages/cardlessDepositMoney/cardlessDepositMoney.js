@@ -244,16 +244,41 @@ function CardlessDeposit() {
       {message && (
         localStorage.getItem('wantsReceipt') === 'yes' ? (
           <div className="deposit-receipt-box">
-            <h3>{t('Transaction Receipt')}</h3>
-            <p><strong>{t('Transaction ID')}:</strong> {transactionId}</p>
-            <p><strong>{t('Transaction Date')}:</strong> {transactionDate}</p>
-            <p><strong>{t('Account')}:</strong> {user.accountNumber}</p>
-            <p><strong>{t('Name')}:</strong> {user.name}</p>
-            <p><strong>{t('Branch')}:</strong> {user.branch}</p>
-            <p><strong>{t('Account Type')}:</strong> {user.accountType}</p>
-            <p><strong>{t('Deposited Amount')}:</strong> Rs. {depositedAmount}</p>
-            <p><strong>{t('New Balance')}:</strong> Rs. {user.balance}</p>
-            <p className="deposit-success">{t('Deposit successful!')}</p>
+            <h3>{t('Cardless Deposit Receipt')}</h3>
+            <div className="receipt-row">
+              <span className="receipt-label">{t('Transaction ID')}:</span>
+              <span className="receipt-value">{transactionId}</span>
+            </div>
+            <div className="receipt-row">
+              <span className="receipt-label">{t('Transaction Date')}:</span>
+              <span className="receipt-value">{transactionDate}</span>
+            </div>
+            <div className="receipt-row">
+              <span className="receipt-label">{t('Account')}:</span>
+              <span className="receipt-value">{user.accountNumber}</span>
+            </div>
+            <div className="receipt-row">
+              <span className="receipt-label">{t('Name')}:</span>
+              <span className="receipt-value">{user.name}</span>
+            </div>
+            <div className="receipt-row">
+              <span className="receipt-label">{t('Branch')}:</span>
+              <span className="receipt-value">{user.branch}</span>
+            </div>
+            <div className="receipt-row">
+              <span className="receipt-label">{t('Account Type')}:</span>
+              <span className="receipt-value">{user.accountType}</span>
+            </div>
+            <div className="receipt-row">
+              <span className="receipt-label">{t('Deposit Amount')}:</span>
+              <span className="receipt-value">Rs. {depositedAmount}</span>
+            </div>
+            <div className="receipt-row">
+              <span className="receipt-label">{t('New Balance')}:</span>
+              <span className="receipt-value">Rs. {user.balance}</span>
+            </div>
+
+            <p className="deposit-success-me" id='su'>{t('Deposit successful!')}</p>
 
             <div className="deposit-dropdown-wrapper" ref={dropdownRef}>
               <button onClick={toggleDropdown} className="deposit-btn download-btn">

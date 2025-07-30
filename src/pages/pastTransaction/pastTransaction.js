@@ -15,6 +15,8 @@ const TransactionHistory = () => {
   const [bankName, setBankName] = useState('');
   const [accountNum, setAccountNum] = useState('');
   const [userName, setUserName] = useState('');
+  const [filterType, setFilterType] = useState('last15');
+
 
   const queryParams = new URLSearchParams(location.search);
   const accountNumber = queryParams.get('account');
@@ -41,6 +43,7 @@ const TransactionHistory = () => {
           if (txn.type === 'transfer-in' && txn.to === accountNumber) return true;
           return false;
         });
+        filteredTxns.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
         setTransactions(filteredTxns);
       })
@@ -188,9 +191,53 @@ const TransactionHistory = () => {
     });
   };
 
+  const getFilteredTransactions = () => {
+  const now = new Date();
+  if (filterType === 'last15') {
+    return transactions.slice(0, 15);
+  } else if (filterType === 'last1Month') {
+    return transactions.filter(txn => {
+      const txnDate = new Date(txn.timestamp);
+      const oneMonthAgo = new Date(now);
+      oneMonthAgo.setMonth(now.getMonth() - 1);
+      return txnDate >= oneMonthAgo;
+    });
+  } else if (filterType === 'last3Months') {
+    return transactions.filter(txn => {
+      const txnDate = new Date(txn.timestamp);
+      const threeMonthsAgo = new Date(now);
+      threeMonthsAgo.setMonth(now.getMonth() - 3);
+      return txnDate >= threeMonthsAgo;
+    });
+  } else {
+    return transactions;
+  }
+};
+
+const filteredTransactions = getFilteredTransactions();
+
+
   return (
+    <>
+
+
+    
+
+
+    
     <div className="transaction-container">
+      
+
     <CardlessSideNavbar/>
+    <div className="filter-container">
+      <label htmlFor="filter">Filter: </label>
+      <select id="filter" value={filterType} onChange={(e) => setFilterType(e.target.value)}>
+        <option value="last15">Last 15 Transactions</option>
+        <option value="last1Month">Last 1 Month</option>
+        <option value="last3Months">Last 3 Months</option>
+        <option value="all">All Transactions</option>
+      </select>
+    </div>
       <h2 className="transaction-title">Transaction History</h2>
 
       <div id="transaction-history">
@@ -209,7 +256,7 @@ const TransactionHistory = () => {
               </tr>
             </thead>
             <tbody>
-              {transactions.map((txn, index) => (
+              {filteredTransactions.map((txn, index) => (
                 <tr key={txn.id || index}>
                   <td>{index + 1}</td>
                   <td>{txn.type}</td>
@@ -234,6 +281,7 @@ const TransactionHistory = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
