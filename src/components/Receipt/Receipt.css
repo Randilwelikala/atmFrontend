@@ -1,0 +1,45 @@
+.receipt-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  font-family: 'Courier New', monospace;
+}
+
+.receipt {
+  width: 300px;
+  background-color: #fefefe;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  width: 80px;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+
+.center {
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.success {
+  color: green;
+}
+
+.download-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007e33;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

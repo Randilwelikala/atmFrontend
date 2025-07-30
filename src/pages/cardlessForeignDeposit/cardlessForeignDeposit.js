@@ -4,6 +4,9 @@ import { jsPDF } from 'jspdf';
 import { saveAs } from 'file-saver';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { useLocation } from 'react-router-dom';
+import { FaDownload } from 'react-icons/fa';
+import html2pdf from 'html2pdf.js';
+
 
 
 export default function CardlessForeignDeposit() {
@@ -69,100 +72,17 @@ export default function CardlessForeignDeposit() {
     }
   };
 
-  const downloadPDF = () => {
-  if (!transactionData) return;
+const downloadPDF = () => {
+  const element = document.getElementById('html-receipt');
+  if (!element) return;
 
-  const { sender, receiver, transaction } = transactionData;
-  const doc = new jsPDF();
-
- 
-  doc.setFillColor(25, 118, 210); 
-  doc.rect(0, 0, 210, 30, 'F');   
-  doc.setTextColor(255, 255, 255); 
-  doc.setFontSize(10);
-  doc.setFont('helvetica', 'bold');
-  doc.text('Cardless Foreign Fund Transfer Receipt', 105, 20, { align: 'center' });
-
-  let y = 40;
-
-  const labelStyle = () => {
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(33, 37, 41); 
-  };
-
-  const valueStyle = () => {
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(66, 66, 66); 
-  };
-
-  
-  labelStyle();
-  doc.text('Sender Details', 20, y);
-  y += 7;
-
-  labelStyle(); doc.text('Name:', 20, y); 
-  valueStyle(); doc.text(sender.name || '', 60, y);
-  y += 5;
-
-  labelStyle(); doc.text('Bank:', 20, y);
-  valueStyle(); doc.text(sender.bank || '', 60, y);
-  y += 5;
-
-  labelStyle(); doc.text('Branch:', 20, y);
-  valueStyle(); doc.text(sender.branch || '', 60, y);
-  y += 5;
-
-  labelStyle(); doc.text('Account Number:', 20, y);
-  valueStyle(); doc.text(sender.accountNumber || '', 60, y);
-  y += 10;
-
-
-  labelStyle();
-  doc.text('Receiver Details', 20, y);
-  y += 7;
-
-  labelStyle(); doc.text('Name:', 20, y);
-  valueStyle(); doc.text(receiver.name || '', 60, y);
-  y += 5;
-
-  labelStyle(); doc.text('Bank:', 20, y);
-  valueStyle(); doc.text(receiver.bank || '', 60, y);
-  y += 5;
-
-  labelStyle(); doc.text('Branch:', 20, y);
-  valueStyle(); doc.text(receiver.branch || '', 60, y);
-  y += 5;
-
-  labelStyle(); doc.text('Account Number:', 20, y);
-  valueStyle(); doc.text(receiver.accountNumber || '', 60, y);
-  y += 10;
-
-
-  labelStyle();
-  doc.text('Transaction Details', 60, y);
-  y += 7;
-
-  labelStyle(); doc.text('Currency:', 20, y);
-  valueStyle(); doc.text(transaction.currency || '', 60, y);
-  y += 5;
-
-  labelStyle(); doc.text('Amount Sent:', 20, y);
-  valueStyle(); doc.text(`${transaction.currency || ''} ${transaction.amount || ''}`, 60, y);
-  y += 5;
-
-  labelStyle(); doc.text('Required LKR Deposit:', 20, y);
-  valueStyle(); doc.text(`Rs.${transaction.requiredLKR || ''}`, 60, y);
-  y += 5;
-
-  labelStyle(); doc.text('Status:', 20, y);
-  valueStyle(); doc.text(transaction.status || '', 60, y);
-  y += 5;
-
-  labelStyle(); doc.text('Date:', 20, y);
-  valueStyle(); doc.text(new Date(transaction.timestamp).toLocaleString(), 60, y);
-
- 
-  doc.save('foreign-fund-transfer-receipt.pdf');
+  html2pdf().set({
+    margin: 0,
+    filename: 'foreign-fund-transfer-receipt.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'mm', format: [80, 200], orientation: 'portrait' } // 80mm wide
+  }).from(element).save();
 };
 
 
@@ -247,10 +167,10 @@ return (
         <button type="submit" className="submit-btn">Deposit & Transfer</button>
       </form>
     ) : (
-     <div className="summary">
-  <h2>Transaction Summary</h2>
+     <div className="summary" id="html-receipt">
+  <h2>Foreign Transfer Summary</h2>
 
-  <div className="summary-section">
+  <div className="summary-section" >
     <h3>Sender Details</h3>
     <div className="summary-grid">
       <p><strong>Name:</strong> {transactionData.sender.name}</p>
@@ -288,7 +208,7 @@ return (
     onMouseEnter={() => setHovered(true)}
     onMouseLeave={() => setHovered(false)}
   >
-    <div className="download-button">Download Receipt</div>
+    <div className="download-button"><FaDownload /></div>
     <div className={`download-popup ${hovered ? 'visible' : ''}`}>
       <p onClick={downloadPDF}>Download as PDF</p>
       <p onClick={downloadDOCX}>Download as DOCX</p>
