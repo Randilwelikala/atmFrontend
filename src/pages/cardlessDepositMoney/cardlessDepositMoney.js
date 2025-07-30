@@ -11,6 +11,8 @@ import { useTranslation } from 'react-i18next';
 import { getToken, removeToken } from '../../utils/auth';
 import { FaDownload } from 'react-icons/fa';
 import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
+import DepositTemplate from '../../components/depositReceiptTemplate/depositReceiptTemplate';
+import html2pdf from 'html2pdf.js';
 
 function CardlessDeposit() {
   const [searchParams] = useSearchParams();
@@ -26,6 +28,24 @@ function CardlessDeposit() {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const receiptRef = useRef(null);
+
+const transactionData = {
+  sender: {
+    name: user?.name,
+    bankName: user?.bankName,
+    branch: user?.branch,
+    accountNumber: user?.accountNumber,
+  },
+  transaction: {
+    currency: 'LKR',
+    amount: depositedAmount,
+    requiredLKR: user?.balance,
+    status: 'Successful',
+    timestamp: transactionDate,
+  },
+};
+
 
   useEffect(() => {
     const fetchProtectedData = async () => {
@@ -67,29 +87,20 @@ function CardlessDeposit() {
 
   const downloadPDF = () => {
     setOpen(false);
-    const doc = new jsPDF();
-    const bankName = user?.bankName || "Bank Name";
-    doc.setFontSize(18);
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const textWidth = doc.getTextWidth(bankName);
-    const x = (pageWidth - textWidth) / 2;
-    doc.text(bankName, x, 15);
-    autoTable(doc, {
-      startY: 25,
-      head: [['Field', 'Value']],
-      body: [
-        ['Transaction ID', transactionId],
-        ['Transaction Date', transactionDate],
-        ['Account Number', user.accountNumber],
-        ['Name', user.name],
-        ['Branch', user.branch],
-        ['Account Type', user.accountType],
-        ['Deposited Amount', `Rs. ${depositedAmount}`],
-        ['New Balance', `Rs. ${user.balance}`],
-      ],
-    });
-    doc.save('transaction_receipt.pdf');
+    const element = receiptRef.current;
+    if (!element) return;
+
+    const opt = {
+      margin: 0.5,
+      filename: 'deposit_receipt.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+    };
+
+    html2pdf().set(opt).from(element).save();
   };
+
 
   const downloadDOCX = async () => {
     setOpen(false);
@@ -241,7 +252,7 @@ function CardlessDeposit() {
         <button type="submit" className="deposit-btn">{t('Deposit')}</button>
       </form>
 
-      {message && (
+      {/* {message && (
         localStorage.getItem('wantsReceipt') === 'yes' ? (
           <div className="deposit-receipt-box">
             <h3>{t('Cardless Deposit Receipt')}</h3>
@@ -300,7 +311,36 @@ function CardlessDeposit() {
         ) : (
           <p className="deposit-success">{t('Deposit successful!')}</p>
         )
+      )} */}
+      {message && (
+        localStorage.getItem('wantsReceipt') === 'yes' ? (
+          <>
+            <div className="deposit-receipt-box">
+              <DepositTemplate transactionData={transactionData} ref={receiptRef} />
+
+              <div className="deposit-dropdown-wrapper" ref={dropdownRef}>
+                <button onClick={toggleDropdown} className="deposit-btn download-btn">
+                  <FaDownload />
+                </button>
+                {open && (
+                  <div className="deposit-dropdown-menu">
+                    <button onClick={downloadPDF} className="deposit-dropdown-btn">
+                      {t('Download as PDF')}
+                    </button>
+                    <button onClick={downloadDOCX} className="deposit-dropdown-btn">
+                      {t('Download as DOCX')}
+                    </button>
+                  </div>
+                )}
+                <button onClick={handleSkip} className="deposit-btn skip-btn">Skip</button>
+              </div>
+            </div>
+          </>
+        ) : (
+          <p className="deposit-success">{t('Deposit successful!')}</p>
+        )
       )}
+
     </div>
   );
 }
