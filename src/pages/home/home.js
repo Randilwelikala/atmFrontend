@@ -31,6 +31,16 @@ export default function Home({ onActionSelect }) {
             {t('Proceed')}
           </button>         
         </div>
+        <div className="home-option-card cardless-option" id="cardless-section">
+          <h2 className="option-title">{t('Admin')}</h2>
+          <button 
+            className="home-button cardless-btn"
+            onClick={() => navigate('/adminDashboard')}
+          >
+            {t('Proceed')}
+          </button>
+        </div>
+        
       </div>
     </div>
   );

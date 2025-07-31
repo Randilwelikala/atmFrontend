@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/admin.css';
+import './adminDashboard.css';
 
 function AdminDashboard() {
   const [atmCash, setAtmCash] = useState({});
   const [denomination, setDenomination] = useState('');
   const [count, setCount] = useState('');
+  const API_BASE_URL = 'http://localhost:3001';
 
   const fetchCash = async () => {
-    const res = await fetch('http://localhost:5000/api/atm-cash');
+    const res = await fetch(`${API_BASE_URL}/atm-cash`);
     const data = await res.json();
     setAtmCash(data);
   };
@@ -18,7 +19,7 @@ function AdminDashboard() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch('http://localhost:5000/api/atm-cash/update', {
+    const res = await fetch(`${API_BASE_URL}/atm-cash/update`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ denomination, count }),
