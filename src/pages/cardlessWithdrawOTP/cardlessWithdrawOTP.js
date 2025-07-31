@@ -30,9 +30,12 @@ export default function CardlessWithdrawOTP() {
         { email  },
         
       );
+      if (res.data.message === 'OTP sent successfully to email') {
+        setMessage(`${t('OTP sent to')} ${email}. ${t('For testing')}: ${t('OTP is')} ${res.data.otp}`);
+        setOtpSent(true);  
+      }
 
-      setMessage(`${t('OTP sent to')} ${email}. ${t('For testing')}: ${t('OTP is')} ${res.data.otp}`);
-      setOtpSent(true);
+      
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to send OTP');
     }
