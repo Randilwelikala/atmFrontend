@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import './downloadHistoryOTP.css'; 
 import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
 import { t } from 'i18next';
+
 export default function DownloadHistoryOTP() {
-  const [mobile, setMobile] = useState('');
+  const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [message, setMessage] = useState('');
@@ -15,13 +16,13 @@ export default function DownloadHistoryOTP() {
   const sendOtp = async () => {
     setMessage('');
     setError('');
-    if (!mobile.match(/^07\d{8}$/)) {
-      setError('Enter a valid mobile number starting with 07');
+    if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      setError('Enter a valid email address');
       return;
     }
     try {
-      const res = await axios.post('http://localhost:3001/send-otp', { mobile });
-      setMessage(`${t('OTP sent to')} ${mobile}. ${t('For testing')}: ${t('OTP is')} ${res.data.otp}`);
+      const res = await axios.post('http://localhost:3001/send-otp', { email });
+      setMessage(`${t('OTP sent to')} ${email}. ${t('For testing')}: ${t('OTP is')} ${res.data.otp}`);
       setOtpSent(true);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to send OTP');
@@ -36,7 +37,7 @@ export default function DownloadHistoryOTP() {
       return;
     }
     try {
-      const res = await axios.post('http://localhost:3001/verify-otp', { mobile, otp });
+      const res = await axios.post('http://localhost:3001/verify-otp', { email, otp });
       localStorage.setItem('jwtToken', res.data.token);
       setMessage('OTP verified! Redirecting...');
       navigate(`/pastTransaction?account=${res.data.accountNumber}`);
@@ -55,11 +56,10 @@ export default function DownloadHistoryOTP() {
         <div className="otp-step">
           <label className="otp-label">{t('Enter Mobile Number')}:</label>
           <input
-            type="text"
-            value={mobile}
-            onChange={e => setMobile(e.target.value)}
-            placeholder="07XXXXXXXX"
-            maxLength={10}
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            placeholder="youremail@gmail.com"
             className="otp-input"
           />
           <button onClick={sendOtp} className="otp-button">{t('Send OTP')}</button>
