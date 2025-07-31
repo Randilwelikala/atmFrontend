@@ -35,7 +35,7 @@ export default function Home({ onActionSelect }) {
           <h2 className="option-title">{t('Admin')}</h2>
           <button 
             className="home-button cardless-btn"
-            onClick={() => navigate('/adminDashboard')}
+            onClick={() => navigate('/adminLogin')}
           >
             {t('Proceed')}
           </button>

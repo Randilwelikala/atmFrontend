@@ -9,14 +9,14 @@ function AdminLogin() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await fetch('http://localhost:5000/api/admin/login', {
+    const res = await fetch('http://localhost:3001/admin/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, password }),
     });
     const data = await res.json();
     if (res.ok) {
-      navigate('/dashboard');
+      navigate('/adminDashboard');
     } else {
       alert(data.message);
     }

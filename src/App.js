@@ -33,6 +33,7 @@ import CardlessForeignDeposit from './pages/cardlessForeignDeposit/cardlessForei
 import CardlessForeignDepositOTP from './pages/cardlessForeignDepositOTP/cardlessForeignDepositOTP';
 import ReceiptTemplate from './components/depositReceiptTemplate/depositReceiptTemplate';
 import AdminLogin from './pages/adminLogin/adminLogin';
+import AdminAddMoney from './pages/adminAddMoney/adminAddMoney';
 import AdminDashboard from './pages/adminDashboard/adminDashboard';
 
 
@@ -82,6 +83,7 @@ export default function App() {
         <Route path='/cardlessForeignDepositOTP' element={<CardlessForeignDepositOTP/>}/>
         <Route path='/receipt' element={< ReceiptTemplate/>}/>
         <Route path='/adminLogin' element={< AdminLogin/>}/>
+        <Route path='/adminAddMoney' element={< AdminAddMoney />}/>
         <Route path='/adminDashboard' element={< AdminDashboard />}/>
 
         </>

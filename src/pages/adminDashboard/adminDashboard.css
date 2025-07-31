@@ -1,63 +1,67 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f7f7f7;
-  margin: 0;
-  padding: 0;
+.admin-dashboard-container {
+  padding: 10px;
+  min-height: 90vh;
+  background: linear-gradient(to right, var(--card-bg-gradient-start), var(--card-bg-gradient-end));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeSlideUp 0.5s ease;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
 }
 
-.login-container,
-.dashboard-container {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 2rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  padding-bottom: 100px;
-}
-
-h2, h3 {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-form {
+.admin-dashboard-content {
   display: flex;
   flex-direction: column;
-}
-
-label {
-  margin: 8px 0 4px;
-}
-
-input, select {
-  padding: 8px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  padding: 10px;
-  background-color: #2196f3;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #1976d2;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-th, td {
-  padding: 8px;
-  border: 1px solid #ddd;
+  align-items: center;
+  background: linear-gradient(to right, var(--container-bg-gradient-start), var(--container-bg-gradient-end));
+  padding: 40px 50px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px var(--card-shadow);
   text-align: center;
+  animation: popIn 0.6s ease;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
 }
+
+.admin-title {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);}
+
+.admin-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.admin-withdraw-btn,
+.admin-deposit-btn {
+  width: 240px; /* Ensures equal button width */
+  padding: 12px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-bottom: 20px; /* consistent spacing */
+}
+
+.admin-withdraw-btn:hover,
+.admin-deposit-btn:hover {
+  background-color: var(--btn-bg-hover);
+  transform: scale(1.05);
+}
+
+.deposit-btn {
+  background-color: #54a0ff;
+}
+
+.deposit-btn:hover {
+  background-color: #3b8bef;
+}
+
