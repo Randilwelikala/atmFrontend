@@ -22,7 +22,6 @@ import CardlessWithdrawOTP from './pages/cardlessWithdrawOTP/cardlessWithdrawOTP
 import CardlessDashboard from './pages/cardlessDashboard/cardlessDashboard';
 import AskCardlessWithdraw from './pages/askReceiptforCardlessWithdraw/askReceiptforCardlessWithdraw';
 import FundTransfer from '../src/pages/fundTransfer/fundTransfer'
-// import CardlessSideNavbar from './components/cardlessSideNavbar/cardlessSideNavbar';
 import CardlessDeposit from './pages/cardlessDepositMoney/cardlessDepositMoney';
 import CardlessWithdraw from './pages/cardlessWithdraw/cardlessWithdraw';
 import './translate/i18n';
@@ -33,6 +32,7 @@ import DownloadHistoryOTP from './pages/downloadHistoryOTP/downloadHistoryOTP';
 import CardlessForeignDeposit from './pages/cardlessForeignDeposit/cardlessForeignDeposit'
 import CardlessForeignDepositOTP from './pages/cardlessForeignDepositOTP/cardlessForeignDepositOTP';
 import ReceiptTemplate from './components/depositReceiptTemplate/depositReceiptTemplate';
+import AdminLogin from './pages/adminLogin/adminLogin';
 
 
  
@@ -80,6 +80,8 @@ export default function App() {
         <Route path='/cardlessForeignDeposit' element={<CardlessForeignDeposit/>}/>
         <Route path='/cardlessForeignDepositOTP' element={<CardlessForeignDepositOTP/>}/>
         <Route path='/receipt' element={< ReceiptTemplate/>}/>
+        <Route path='/adminLogin' element={< AdminLogin/>}/>
+        {/* <Route path='/adminDashboard' element={< AdminDashboard />}/> */}
 
         </>
         
