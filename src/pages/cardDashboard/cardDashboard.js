@@ -39,7 +39,7 @@ export default function CardDashboard() {
         <button onClick={() => navigate(`/change-pin?account=${accountNumber}`)} className="dashboard-btn">
           {t('Change PIN')}
         </button>
-        <button onClick={() => navigate(`/fundTransfer`)} className="dashboard-btn">
+        <button onClick={() => navigate(`/fundTransfer?account=${accountNumber}`)} className="dashboard-btn">
           {t('Fund Transfer')}
         </button>
         

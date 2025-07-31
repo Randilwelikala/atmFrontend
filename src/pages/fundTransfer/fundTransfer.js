@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect  } from 'react';
 import axios from 'axios';
 import { jsPDF } from "jspdf";
 import { Document, Packer, Paragraph } from "docx";
 import { saveAs } from "file-saver";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation  } from 'react-router-dom';
 import './fundTransfer.css';
 import CardSideNavbar from '../../components/cardSideNavbar/cardSideNavbar';
 import { useTranslation } from 'react-i18next';
@@ -22,6 +22,20 @@ function FundTransfer() {
   const [recipientError, setRecipientError] = useState('');
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const location = useLocation();
+
+  useEffect(() => {
+    const query = new URLSearchParams(location.search);
+    const accountNumberFromUrl = query.get('account');
+
+    if (accountNumberFromUrl) {
+      setSender(accountNumberFromUrl);
+    } else {
+      // fallback to localStorage if URL param not present
+      const savedAccountNumber = localStorage.getItem('accountNumber') || '';
+      setSender(savedAccountNumber);
+    }
+  }, [location]);
 
 
   const handleTransfer = async (e) => {
@@ -207,7 +221,8 @@ const handleDownloadDOCX = () => {
           type="text"
           placeholder={t('Your Account Number')}
           value={sender}
-          onChange={(e) => setSender(e.target.value)}
+          readOnly
+          // onChange={(e) => setSender(e.target.value)}
           className="fund-transfer-input"
           required
           maxLength={12}
