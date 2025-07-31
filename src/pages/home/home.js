@@ -37,7 +37,7 @@ export default function Home({ onActionSelect }) {
             className="home-button cardless-btn"
             onClick={() => navigate('/adminLogin')}
           >
-            {t('Proceed')}
+            {t('Login')}
           </button>
         </div>
         

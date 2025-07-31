@@ -6,7 +6,7 @@ import { t } from 'i18next';
 import axios from 'axios';
 
 export default function CardlessWithdrawOTP() {
-  const [mobile, setMobile] = useState('');
+  const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [message, setMessage] = useState('');
@@ -17,20 +17,21 @@ export default function CardlessWithdrawOTP() {
     setMessage('');
     setError('');
 
-    if (!mobile.match(/^07\d{8}$/)) {
-      setError('Enter a valid mobile number starting with 07');
+     if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      setError('Enter a valid email address');
       return;
     }
+
 
     
     try {
       const res = await axios.post(
         'http://localhost:3001/send-otp',
-        { mobile },
+        { email  },
         
       );
 
-      setMessage(`${t('OTP sent to')} ${mobile}. ${t('For testing')}: ${t('OTP is')} ${res.data.otp}`);
+      setMessage(`${t('OTP sent to')} ${email}. ${t('For testing')}: ${t('OTP is')} ${res.data.otp}`);
       setOtpSent(true);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to send OTP');
@@ -49,7 +50,7 @@ export default function CardlessWithdrawOTP() {
     try {
       const res = await axios.post(
         'http://localhost:3001/verify-otp',
-        { mobile, otp },
+        { email, otp },
         
       );
 
@@ -71,13 +72,12 @@ export default function CardlessWithdrawOTP() {
 
       {!otpSent ? (
         <div className="otp-step">
-          <label className="otp-label">{t('Enter Mobile Number')}:</label>
+          <label className="otp-label">{t('Enter Email Address')}:</label>
           <input
-            type="text"
-            value={mobile}
-            onChange={e => setMobile(e.target.value)}
-            placeholder="07XXXXXXXX"
-            maxLength={10}
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            placeholder="you@example.com"
             className="otp-input"
           />
           <button onClick={sendOtp} className="otp-button">{t('Send OTP')}</button>
