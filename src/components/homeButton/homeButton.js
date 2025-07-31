@@ -7,8 +7,8 @@ const ClearButton = ({ onClick }) => {
   const { t, i18n } = useTranslation();
 
   return (
-    <button onClick={onClick} className="clear-btn"><FaHome />
-      {/* {t('Home')} */}
+    <button onClick={onClick} className="clear-btn" title={t('Home')}><FaHome />
+      
     </button>
   );
 };

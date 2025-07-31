@@ -15,7 +15,7 @@ export default function LogoutButton({ onLogout }) {
   };
 
   return (
-    <button onClick={handleLogout} className="logout-button" type="button"><FaSignOutAlt  />
+    <button onClick={handleLogout} className="logout-button" type="button" title={t('Logout')}><FaSignOutAlt  />
       {/* {t('Logout')} */}
     </button>
   );

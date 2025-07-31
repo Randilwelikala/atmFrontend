@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './cardSideNavbar.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 
 export default function CardSideNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navbarRef = useRef(null);
   const [searchParams] = useSearchParams();
   const accountNumber = searchParams.get('account');
+  const { t, i18n } = useTranslation();
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -29,7 +32,7 @@ export default function CardSideNavbar() {
 
   return (
     <>
-      <button className="fixed-toggle-btn" onClick={toggleNavbar}>
+      <button className="fixed-toggle-btn" onClick={toggleNavbar} title={t('Menu')}>
         ☰
       </button>
 
