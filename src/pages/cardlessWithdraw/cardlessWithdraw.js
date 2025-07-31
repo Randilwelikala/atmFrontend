@@ -333,18 +333,18 @@ function CardlessWithdraw() {
             <div className="withdraw-receipt">
               <h3>{t('Withdraw Receipt')}</h3> 
               <h3 className="receipt-header">{user.bankName}</h3>
-              <h4 className="receipt-subheader">Branch: {user.branch}</h4>
+            <h4 className="receipt-subheader">Branch: {user.branch}</h4>
                 <br/>
 
               <div className="receipt-content">
-                <div><strong>Withdraw ID:</strong> {transactionId}</div>
-                <div><strong>Withdraw Date:</strong> {transactionDate}</div>
-                <div><strong>Account Number:</strong> {user.accountNumber}</div>
-                <div><strong>Name:</strong> {user.name}</div>
-                <div><strong>Branch:</strong> {user.branch}</div>
-                <div><strong>Account Type:</strong> {user.accountType}</div>
-                <div><strong>Withdrawed Amount:</strong> Rs. {depositedAmount}</div>
-                <div><strong>New Balance:</strong> Rs. {user.balance}</div>
+                <div><strong>{t('Withdraw ID')}:</strong> {transactionId}</div>
+                <div><strong>{t('Withdraw Date')}:</strong> {transactionDate}</div>
+                <div><strong>{t('Account Number')}:</strong> {user.accountNumber}</div>
+                <div><strong>{t('Name')}:</strong> {t(`${user.name}`)}</div>
+                <div><strong>{t('Branch')}:</strong> {t(`${user.branch}`)}</div>
+                <div><strong>{t('Account Type')}:</strong> {user.accountType}</div>
+                <div><strong>{t('Withdrawed Amount')}:</strong> {t('Rs')}. {depositedAmount}</div>
+                <div><strong>{t('New Balance')}:</strong> {t('Rs')}. {user.balance}</div>
                 <p className="withdraw-success">{t('Withdraw successful!')}</p>
               </div>
 

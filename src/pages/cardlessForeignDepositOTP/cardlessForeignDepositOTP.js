@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './cardlessForeignDepositOTP.css'; 
 import CardlessSideNavbar from '../../components/cardlessSideNavbar/cardlessSideNavbar';
-import { t } from 'i18next';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 export default function CardlessForeignDepositOTP() {
   const [email, setEmail] = useState('');
@@ -11,6 +11,7 @@ export default function CardlessForeignDepositOTP() {
   const [otpSent, setOtpSent] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   const sendOtp = async () => {

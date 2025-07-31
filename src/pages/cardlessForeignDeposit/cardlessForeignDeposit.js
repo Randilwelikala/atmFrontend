@@ -18,6 +18,7 @@ import {
 } from 'docx';
 import '../../components/foreignDepositReceiptTemplate/foreignDepositReceiptTemplate.css';
 import ReceiptTemplate from '../../components/foreignDepositReceiptTemplate/foreignDepositReceiptTemplate';
+import { t } from 'i18next';
 
 export default function CardlessForeignDeposit() {
   const location = useLocation();
@@ -231,7 +232,7 @@ export default function CardlessForeignDeposit() {
 
   return (
     <div className="foreign-transfer-container">
-      <h2>Cardless Foreign Fund Transfer</h2>
+      <h2>{t('Cardless Foreign Money Transfer')}</h2>
 
       {!transactionData ? (
         <form onSubmit={handleSubmit} className="transfer-form">
@@ -244,14 +245,14 @@ export default function CardlessForeignDeposit() {
           />
           <input
             type="text"
-            placeholder="Receiver Account Number"
+            placeholder={t('Receiver Account Number')}
             value={toAccount}
             onChange={(e) => setToAccount(e.target.value)}
             required
           />
           <input
             type="number"
-            placeholder="Foreign Amount"
+            placeholder={t('Foreign Amount')}
             min="0"
             step="0.01"
             value={foreignAmount}
@@ -266,13 +267,13 @@ export default function CardlessForeignDeposit() {
             ))}
           </select>
           <p className="required-lkr">
-            You must deposit: <strong>Rs. {requiredLKR}</strong>
+            {t('You must deposit')}: <strong>{t('Rs')}. {requiredLKR}</strong>
           </p>
 
           {error && <p className="error-msg">{error}</p>}
 
           <button type="submit" className="submit-btn">
-            Deposit & Transfer
+            {t('Deposit & Transfer')}
           </button>
         </form>
       ) : (
@@ -286,8 +287,8 @@ export default function CardlessForeignDeposit() {
               <FaDownload />
             </div>
             <div className={`download-popup ${hovered ? 'visible' : ''}`}>
-              <p onClick={downloadPDF}>Download as PDF</p>
-              <p onClick={() => downloadDOCX(transactionData)}>Download as DOCX</p>
+              <p onClick={downloadPDF}>{t('Download as PDF')}</p>
+              <p onClick={() => downloadDOCX(transactionData)}>{t('Download as DOCX')}</p>
             </div>
           </div>
         </>
