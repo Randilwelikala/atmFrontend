@@ -37,6 +37,10 @@ import AdminAddMoney from './pages/adminAddMoney/adminAddMoney';
 import AdminDashboard from './pages/adminDashboard/adminDashboard';
 import HardwareCheck from './components/hardwareCheck/hardwareCheck';
 import AdminFullTransaction from './pages/adminFullTransaction/adminFullTransaction';
+import AuditLogin from './pages/auditLogin/auditLogin';
+import AuditDashboard from './pages/auditDashboard/auditDashboard';
+import AuditAllDetails from './pages/auditAllDetails/auditAllDetails';
+
 
  
 
@@ -89,6 +93,9 @@ export default function App() {
         <Route path='/adminDashboard' element={< AdminDashboard />}/>
         <Route path='/hardwareCheck' element={< HardwareCheck />}/>
         <Route path='/adminFullTransaction' element={< AdminFullTransaction />}/>
+        <Route path='/auditLogin' element={< AuditLogin />}/>
+        <Route path='/auditDashboard' element={< AuditDashboard />}/>
+        <Route path='/auditAllDetails' element={< AuditAllDetails />}/>
 
 
         </>

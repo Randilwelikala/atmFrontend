@@ -1,0 +1,67 @@
+.audit-dashboard-container {
+  padding: 10px;
+  min-height: 90vh;
+  background: linear-gradient(to right, var(--card-bg-gradient-start), var(--card-bg-gradient-end));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeSlideUp 0.5s ease;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
+}
+
+.audit-dashboard-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to right, var(--container-bg-gradient-start), var(--container-bg-gradient-end));
+  padding: 40px 50px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px var(--card-shadow);
+  text-align: center;
+  animation: popIn 0.6s ease;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);
+}
+
+.audit-title {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: var(--text-color-main);
+  text-shadow: var(--text-shadow);}
+
+.audit-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.audit-withdraw-btn,
+.audit-deposit-btn {
+  width: 240px; 
+  padding: 12px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.audit-withdraw-btn:hover,
+.audit-deposit-btn:hover {
+  background-color: var(--btn-bg-hover);
+  transform: scale(1.05);
+}
+
+.deposit-btn {
+  background-color: #54a0ff;
+}
+
+.deposit-btn:hover {
+  background-color: #3b8bef;
+}
+
