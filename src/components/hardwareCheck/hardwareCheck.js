@@ -27,7 +27,7 @@ function HardwareCheck () {
 
   return (
     <div>
-      {hardwareError && <div className="popup">{hardwareError}</div>}
+      {hardwareError && <div className="hardwarePopup">{hardwareError}</div>}
      
     </div>
   );
