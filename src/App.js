@@ -35,7 +35,7 @@ import ReceiptTemplate from './components/depositReceiptTemplate/depositReceiptT
 import AdminLogin from './pages/adminLogin/adminLogin';
 import AdminAddMoney from './pages/adminAddMoney/adminAddMoney';
 import AdminDashboard from './pages/adminDashboard/adminDashboard';
-
+import HardwareCheck from './components/hardwareCheck/hardwareCheck';
 
  
 
@@ -51,6 +51,7 @@ export default function App() {
         <CancelButton onClick={() => window.history.back()} />    
         <LanguageSwitcher/>
         <ThemeToggle/>
+        <HardwareCheck/>
 
       <Routes>
         <>
@@ -85,6 +86,7 @@ export default function App() {
         <Route path='/adminLogin' element={< AdminLogin/>}/>
         <Route path='/adminAddMoney' element={< AdminAddMoney />}/>
         <Route path='/adminDashboard' element={< AdminDashboard />}/>
+        <Route path='/hardwareCheck' element={< HardwareCheck />}/>
 
         </>
         
