@@ -36,6 +36,7 @@ import AdminLogin from './pages/adminLogin/adminLogin';
 import AdminAddMoney from './pages/adminAddMoney/adminAddMoney';
 import AdminDashboard from './pages/adminDashboard/adminDashboard';
 import HardwareCheck from './components/hardwareCheck/hardwareCheck';
+import AdminFullTransaction from './pages/adminFullTransaction/adminFullTransaction';
 
  
 
@@ -87,6 +88,8 @@ export default function App() {
         <Route path='/adminAddMoney' element={< AdminAddMoney />}/>
         <Route path='/adminDashboard' element={< AdminDashboard />}/>
         <Route path='/hardwareCheck' element={< HardwareCheck />}/>
+        <Route path='/adminFullTransaction' element={< AdminFullTransaction />}/>
+
 
         </>
         

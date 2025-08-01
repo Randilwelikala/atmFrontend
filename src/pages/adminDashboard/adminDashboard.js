@@ -25,9 +25,18 @@ export default function AdminDashboard() {
           onClick={() => navigate(`/adminAddMoney`)}
         >
           {t('Add Money')}
-        </button>
-        
+        </button> 
+
+        <button 
+          className="admin-withdraw-btn" 
+          onClick={() => navigate(`/adminFullTransaction`)}
+        >
+          {t('See All Transactions')}
+      </button>          
       </div>
+
+      
+
     </div>
     </>
   );
