@@ -1,36 +1,122 @@
+/* auditAllDetails.css */
+
 .dashboard-container {
-  padding: 2rem;
-  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 30px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0 15px;
+  color: #222;
 }
 
 h1 {
-  margin-bottom: 1rem;
-  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2a4d69;
 }
 
 .filters {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+  justify-content: center;
 }
 
-.filters input, .filters button {
-  padding: 0.5rem;
+.filters input,
+.filters select,
+.filters button {
+  padding: 10px 15px;
   font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+.filters input:focus,
+.filters select:focus {
+  outline: none;
+  border-color: #2a4d69;
+  box-shadow: 0 0 5px #2a4d69;
+}
+
+.filters button {
+  cursor: pointer;
+  background-color: #2a4d69;
+  color: white;
+  border: none;
+  min-width: 130px;
+}
+
+.filters button:hover {
+  background-color: #1e3550;
 }
 
 .audit-table {
   width: 100%;
   border-collapse: collapse;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
 
-.audit-table th, .audit-table td {
+.audit-table thead {
+  background-color: #2a4d69;
+  color: white;
+}
+
+.audit-table th,
+.audit-table td {
+  padding: 12px 15px;
   border: 1px solid #ddd;
-  padding: 0.75rem;
+  vertical-align: top;
   text-align: left;
 }
 
-.audit-table th {
-  background-color: #f4f4f4;
+.audit-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.audit-table tbody tr:hover {
+  background-color: #e0e7ef;
+}
+
+.json-details {
+  background: #f4f6f8;
+  padding: 8px;
+  border-radius: 5px;
+  font-family: monospace;
+  max-height: 250px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.date-filters {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.date-filters label {
+  font-weight: 600;
+  color: #444;
+}
+
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+  }
+  
+  .filters input,
+  .filters select,
+  .filters button {
+    width: 100%;
+  }
+}
+.details-container {
+  font-size: 0.9rem;
   color: #333;
+  line-height: 1.4;
+}
+
+.details-container div {
+  margin-bottom: 4px;
 }
