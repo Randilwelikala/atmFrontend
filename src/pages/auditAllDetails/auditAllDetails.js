@@ -93,7 +93,7 @@ export default function AuditAllDetails() {
             <th>Timestamp</th>
             <th>Type</th>
             <th>Performed By</th>
-            <th>Details (JSON)</th>
+            <th>Details</th>
           </tr>
         </thead>
         <tbody>
@@ -112,7 +112,7 @@ export default function AuditAllDetails() {
               <td>{audit.performedBy || 'N/A'}</td>
               <td>
                 <details>
-                  <summary style={{ cursor: 'pointer', color: '#2a4d69' }}>View JSON</summary>
+                  <summary style={{ cursor: 'pointer', color: '#2a4d69' }}>View </summary>
                   <pre className="json-details">
                     {JSON.stringify(audit, null, 2)}
                   </pre>

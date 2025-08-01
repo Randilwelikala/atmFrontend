@@ -18,8 +18,8 @@ const AdminFullTransaction = () => {
   }, []);
 
 
-  const filteredTxns = transactions.filter(txn => {
-  return (
+  const filteredTxns = transactions
+  .filter(txn =>
     (!filterBank || (txn.bankName && txn.bankName.toLowerCase().includes(filterBank.toLowerCase()))) &&
     (!filterType || (txn.type && txn.type.toLowerCase().includes(filterType.toLowerCase()))) &&
     (
@@ -28,8 +28,8 @@ const AdminFullTransaction = () => {
       (txn.from && txn.from.includes(filterAccount)) || 
       (txn.to && txn.to.includes(filterAccount))
     )
-  );
-});
+  )
+  .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
   return (
     <div className="admin-transactions-container">
