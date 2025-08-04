@@ -39,10 +39,7 @@ import HardwareCheck from './components/hardwareCheck/hardwareCheck';
 import AdminFullTransaction from './pages/adminFullTransaction/adminFullTransaction';
 import AuditLogin from './pages/auditLogin/auditLogin';
 import AuditDashboard from './pages/auditDashboard/auditDashboard';
-import AuditAllDetails from './pages/auditAllDetails/auditAllDetails';
-
-
- 
+import AuditAllDetails from './pages/auditAllDetails/auditAllDetails'; 
 
 
 export default function App() {
@@ -96,8 +93,6 @@ export default function App() {
         <Route path='/auditLogin' element={< AuditLogin />}/>
         <Route path='/auditDashboard' element={< AuditDashboard />}/>
         <Route path='/auditAllDetails' element={< AuditAllDetails />}/>
-
-
         </>
         
             
