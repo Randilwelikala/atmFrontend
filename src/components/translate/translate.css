@@ -2,7 +2,7 @@
   position: fixed;
   top: 10px; 
   left:150px;
-  z-index: 10000;
+  z-index: 9999;
 
   padding: 8px 16px;
   font-size: 16px;
