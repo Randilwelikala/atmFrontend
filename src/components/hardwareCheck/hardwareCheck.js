@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './hardwareCheck.css'
+import './hardwareCheck.css';
 
-function HardwareCheck () {
+function HardwareCheck() {
   const [hardwareError, setHardwareError] = useState(null);
 
   useEffect(() => {
@@ -10,10 +10,10 @@ function HardwareCheck () {
       try {
         await axios.get('http://localhost:3001/check-hardware-status');
 
+        // Clear error if previously set
         if (hardwareError) {
-            const timer = setTimeout(() => setHardwareError(null), 5000);
-            return () => clearTimeout(timer);
-  }
+          setHardwareError(null);
+        }
       } catch (error) {
         if (error.response?.status === 500) {
           setHardwareError(error.response.data.message);
@@ -21,15 +21,22 @@ function HardwareCheck () {
       }
     };
 
-    const interval = setInterval(checkHardware, 5000); 
+    const interval = setInterval(checkHardware, 5000);
     return () => clearInterval(interval);
   }, [hardwareError]);
 
   return (
-    <div>
-      {hardwareError && <div className="hardwarePopup">{hardwareError}</div>}
-     
-    </div>
+    <>
+      {hardwareError && (
+        <div className="hardwareOverlay">
+          <div className="hardwareOverlayContent">
+            <h2>Hardware Error Detected</h2>
+            <p>{hardwareError}</p>
+            <p>The system is temporarily unavailable. Please contact support.</p>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
